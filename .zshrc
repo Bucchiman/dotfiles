@@ -56,27 +56,28 @@ precmd () {
         done
 
         # check if branch is master or not
-        if [[ `echo ${vcs_info_msg_0_} | grep -c "master"` > 0 ]]; then
-            branch="m"
-        else
-            branch="s"
-        fi
+#        if [[ `echo ${vcs_info_msg_0_} | grep -c "master"` > 0 ]]; then
+#            branch="m"
+#        else
+#            branch="s"
+#        fi
 
         # make prompt each git status
         if [[ $git_check -eq 0 ]]; then
                 st=`git status 2> /dev/null`
                 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-                        git_prompt=" [${branch}%1(v|%F{green}%1v%f|)]"
+                        git_prompt=" [%1(v|%K{green}%1v%k|)]"
                 elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-                        git_prompt=" [${branch}%1(v|%F{yellow}%1v%f|)]"
+                        git_prompt=" [%1(v|%K{yellow}%1v%k|)]"
                 else [[ -n `echo "$st" | grep "^# Untracked"` ]];
-                        git_prompt=" [${branch}%1(v|%F{red}%1v%f|)]"
+                        git_prompt=" [%1(v|%K{red}%1v%k|)]"
                 fi
         else
                 git_prompt=""
         fi
-        git_prompt=`printf '%s%s%s' "$(tput blink)" "${git_prompt}" "$(tput sgr0)"`
-        
+#        git_prompt=`printf '%s%s%s' "$(tput blink)" "${git_prompt}" "$(tput sgr0)"`
+
+
         # env version
         if [[ `\ls -1 | grep -c "\.py$"` > 0 ]]; then
             PYTHON_VERSION_STRING=" py:"$(python --version | sed "s/Python //")
@@ -90,22 +91,22 @@ precmd () {
         #     TERRAFORM_VERSION_STRING=" tf:"$(terraform --version | grep "Terraform" | sed "s/Terraform v//")
         # fi
 
-        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
+#        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
+#        env_prompt="%{${fg[yellow]}%}${PYTHON_VERSION_STRING}${PYTHON_VIRTUAL_ENV_STRING}%{${fg[default]}%}"
+        env_prompt="%K{blue}${PYTHON_VIRTUAL_ENV_STRING}%k"
 
-        if [[ -n `jobs | grep "suspended"` ]]; then
-            name_color=${fg[blue]}
-        else
-            name_color=${fg[cyan]}
-        fi
-        if type "kube_ps1" > /dev/null 2>&1; then
-            kube=" $(kube_ps1)"
-        else
-            kube=""
-        fi
+
+#        if [[ -n `jobs | grep "suspended"` ]]; then
+#            name_color=${fg[blue]}
+#        else
+#            name_color=${fg[cyan]}
+#        fi
+#        if type "kube_ps1" > /dev/null 2>&1; then
+#            kube=" $(kube_ps1)"
+#        else
+#            kube=""
+#        fi
         
-#        PS1="%{${fg[yellow]}%}Bucchiman%{${fg[default]}%} [%m]${env_prompt}${git_prompt} ${path_prompt}${kube}%% "
-#        tmp=`printf '%s%s%s%s' "$(tput setaf 192)" "$(tput blink)" "Bucchiman" "$(tput sgr0)"`
-#        tmp2=`printf '%s' "${env_prompt}${git_prompt} ${path_prompt}${kube}"`
         PS1="%{${fg[yellow]}%}Bucchiman%{${fg[default]}%}${path_prompt}${env_prompt}${git_prompt}%% "
 
         PYTHON_VERSION_STRING=""
