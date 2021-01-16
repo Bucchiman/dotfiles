@@ -1,10 +1,10 @@
 # coding
 
-[[plugins]] # Codic
-repo = 'koron/codic-vim'
-on_cmd = 'Codic'
+#[[plugins]] # Codic
+#repo = 'koron/codic-vim'
+#on_cmd = 'Codic'
 
-[[plugins]] # Emmet
+[[plugins]] # Emmet 
 repo = 'mattn/emmet-vim'
 on_i = 1
 hook_source = '''
@@ -19,21 +19,45 @@ hook_source = '''
         \}
 '''
 
-[[plugins]] # EditorConfig
+[[plugins]] # EditorConfig # 開発の際config統一
 repo = 'editorconfig/editorconfig-vim'
 on_path = '.*'
 
+[[plagins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+    let g:openbrowser_browser_commands = [ {'name': 'google-chrome-stable',  'args': ['{browser}', '{uri}']} ]
+'''
+
 [[plugins]] # markdown viewer
-repo = 'iamcco/markdown-preview.vim'
-on_ft = ['markdown', 'mkd']
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app & yarn install" '
+
+
 
 [[plugins]] # 括弧
 repo  = 'cohama/lexima.vim'
 on_i = 1
 
 # fzf
+
+[[plugins]]
+repo = 'junegunn/fzf'
+
 [[plugins]]
 repo = 'junegunn/fzf.vim'
+on_cmd = [
+    'Files',
+    'ProjectFiles',
+    'Buffers',
+    'BLines',
+    'History',
+    'Tags',
+    'BTags',
+    'GFiles',
+    'Ag',
+]
 
 # [[plugins]]
 # repo = 'w0rp/ale'

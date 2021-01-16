@@ -128,6 +128,7 @@ nmap <C-g><C-h> :Commits<CR>
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME " XDG_CACHE_HOME変数が存在すればcache扱い、そうでない場合ホームディレクトリ以下に.cacheを作る
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
 let g:python_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 
 " macのcliboardとyankを統一
 set clipboard=unnamed
@@ -140,8 +141,6 @@ augroup MyAutoCmd
 autocmd!
 augroup END
 
-
-let g:python3_host_prog = expand('~/.pyenv/shims/python3')
 
 " ~/.cache/dein/repos/github.com/Shougo/dein.vimをrtpに追加
 if &runtimepath !~# '/dein.vim'
@@ -184,4 +183,8 @@ if len(s:removed_plugins) > 0
 endif
 " }}}
 
-
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none 
