@@ -26,7 +26,6 @@ zstyle ':vcs_info:git:*' actionformats '%b|%a'
 precmd () {
         # dir path
         path_prompt="[%{${fg[green]}%}%~%{${fg[default]}%}]" 
-
         # vcs_info
         psvar=()
         LANG=en_US.UTF-8 vcs_info
@@ -38,15 +37,16 @@ precmd () {
             BEGIN{
                 split(pwd, A, "/")
                 A[length(A)+1]=" "
-                printf "%s", pwd
             }
             END{
-                for (i=length(A); i>2; i--){
-                    sub("/"A[i], "", pwd)
+                for (i=length(A); i>1; i--){
+                    sub("/"A[i]"$", "", pwd)
                     printf " %s", pwd
                 }
             }
         ' | read -A dir_list
+
+
         for dir in $dir_list
         do
             if [[ -n `\ls -a $dir | grep "^\.git$"` ]]
@@ -54,7 +54,7 @@ precmd () {
                 git_check=0
             fi
         done
-
+        dir=""
         # check if branch is master or not
 #        if [[ `echo ${vcs_info_msg_0_} | grep -c "master"` > 0 ]]; then
 #            branch="m"
@@ -93,7 +93,7 @@ precmd () {
 
 #        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
 #        env_prompt="%{${fg[yellow]}%}${PYTHON_VERSION_STRING}${PYTHON_VIRTUAL_ENV_STRING}%{${fg[default]}%}"
-        env_prompt="%K{blue}${PYTHON_VIRTUAL_ENV_STRING}%k"
+        env_prompt="%K{blue}%F{8}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
 
 
 #        if [[ -n `jobs | grep "suspended"` ]]; then
@@ -174,7 +174,6 @@ setopt AUTO_MENU
 setopt AUTO_NAME_DIRS   # 変数をディレクトリパスとして利用する 
 setopt LIST_PACKED # 補完候補を詰めて表示
 setopt LIST_ROWS_FIRST # 補完候補をそーとかして表示
-#setopt MENU_COMPLETE
 setopt CDABLE_VARS
 setopt AUTO_PUSHD   # cdコマンドで自動的にpushd
 #setopt PUSHD_TO_HOME
@@ -213,7 +212,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # omit the the '/' character.
 
 # to use terminalizer #
 if [ -d ${HOME}/node_modules/.bin ]; then
-    export PATH=${PATH}:${HOME}/node_modules/.bin
+    export PATH=${HOME}/node_modules/.bin:${PATH}
 fi
 
 
