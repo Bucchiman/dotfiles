@@ -46,6 +46,10 @@ precmd () {
             }
         ' | read -A dir_list
 
+#        for d in $dir_list
+#        do
+#            echo $d
+#        done
 
         for dir in $dir_list
         do
@@ -66,11 +70,11 @@ precmd () {
         if [[ $git_check -eq 0 ]]; then
                 st=`git status 2> /dev/null`
                 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-                        git_prompt=" [%1(v|%K{green}%1v%k|)]"
+                        git_prompt=" %1(v|%K{green}[%1v]%k|)"
                 elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-                        git_prompt=" [%1(v|%K{yellow}%1v%k|)]"
+                        git_prompt=" %1(v|%K{yellow}[%1v]%k|)"
                 else [[ -n `echo "$st" | grep "^# Untracked"` ]];
-                        git_prompt=" [%1(v|%K{red}%1v%k|)]"
+                        git_prompt=" %1(v|%K{red}[%1v]%k|)"
                 fi
         else
                 git_prompt=""
