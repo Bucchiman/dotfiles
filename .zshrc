@@ -230,11 +230,6 @@ export MPLBACKEND="module://itermplot"
 # autoload ${mypath[1]}/*(:t)
 
 
-# mail config
-#MAILPATH="/var/mail/$USER?${fg_bold[red]}NEW mail in \$_."
-#MAILCHECK=3600
-
-export PATH=${HOME}/jdk-11.0.7/bin:$PATH
 # カーソル位置で補完する。
 setopt complete_in_word
 # Move cursor to the end of a completed word.
