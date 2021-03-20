@@ -2,6 +2,18 @@ _has() {
     return $( whence $1 &>/dev/null )
 }
 
+fresh_col() {
+    names=(`pyenv versions | awk '$1 ~ "^py" {print $1}'`)
+    for name in $names
+    do
+        py_arr[$name]=$((RANDOM%256))
+    done
+}
+
+fresh_col_with_pypmt() {
+    py_arr[`pyenv version-name`]=$((RANDOM%256))
+}
+
 
 # setting prompt
 autoload -Uz vcs_info
@@ -9,6 +21,9 @@ autoload -U colors       # Set PROMPT colors
 colors
 setopt prompt_subst
 
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # :vcs_info:git:*とするとgitの時のみの設定
 # ローカルで変更を加えた時に通知するかを設定
@@ -22,6 +37,15 @@ zstyle ':vcs_info:git:*' formats "%b%c%u"
 # 異常状態(conflict, rebase状態)
 zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
+
+declare -A py_arr
+py_arr[system]=5
+names=(`pyenv versions | awk '$1 ~ "^py" {print $1}'`)
+for name in $names
+do
+    py_arr[$name]=$((RANDOM%256))
+done
+
 # コマンドを打つたびに呼び出される
 precmd () {
         # dir path
@@ -33,23 +57,18 @@ precmd () {
 
         # check if version control by git is done
         git_check=1
-        echo $PWD | awk -v pwd=$PWD '
-            BEGIN{
-                split(pwd, A, "/")
-                A[length(A)+1]=" "
-            }
-            END{
-                for (i=length(A); i>1; i--){
-                    sub("/"A[i]"$", "", pwd)
-                    printf " %s", pwd
-                }
-            }
-        ' | read -A dir_list
 
-#        for d in $dir_list
-#        do
-#            echo $d
-#        done
+        echo $PWD | awk '{
+            split($0, A, "/")
+            for (i=2; i<=length(A); i++){
+                A[i] = A[i-1]"/"A[i]
+            }
+        }
+        END{
+            for (i=length(A); i>1; i--){
+                printf " %s", A[i]
+            }
+        }' | read -A dir_list
 
         for dir in $dir_list
         do
@@ -83,21 +102,19 @@ precmd () {
 
 
         # env version
-        if [[ `\ls -1 | grep -c "\.py$"` > 0 ]]; then
-            PYTHON_VERSION_STRING=" py:"$(python --version | sed "s/Python //")
-            PYTHON_VIRTUAL_ENV_STRING=""
-            if [ -n "$VIRTUAL_ENV" ]; then
-                PYTHON_VIRTUAL_ENV_STRING="$(pyenv version-name)"
-            fi
-        fi
-        # RUBY_VERSION_STRING=" rb:"$(ruby --version | sed "s/ruby \(.*\) (.*$/\1/")
-        # if [[ `ls -1 | grep -c "\.tf$"` > 0 ]]; then
-        #     TERRAFORM_VERSION_STRING=" tf:"$(terraform --version | grep "Terraform" | sed "s/Terraform v//")
-        # fi
+#        if [[ `\ls -1 | grep -c "\.py$"` > 0 ]]; then
+#            PYTHON_VERSION_STRING=" py:"$(python --version | sed "s/Python //")
+#            PYTHON_VIRTUAL_ENV_STRING=""
+#            if [ -n "$VIRTUAL_ENV" ]; then
+#                PYTHON_VIRTUAL_ENV_STRING="$(pyenv version-name)"
+#            fi
+#        fi
+        PYTHON_VIRTUAL_ENV_STRING=`pyenv version-name`
+        com_col=${py_arr[$PYTHON_VIRTUAL_ENV_STRING]}
 
 #        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
 #        env_prompt="%{${fg[yellow]}%}${PYTHON_VERSION_STRING}${PYTHON_VIRTUAL_ENV_STRING}%{${fg[default]}%}"
-        env_prompt="%K{blue}%F{8}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
+        env_prompt="%K{$com_col}%F{11}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
 
 
 #        if [[ -n `jobs | grep "suspended"` ]]; then
@@ -115,6 +132,7 @@ precmd () {
 
         PYTHON_VERSION_STRING=""
         PYTHON_VIRTUAL_ENV_STRING=""
+        com_col=""
         # TERRAFORM_VERSION_STRING=""
 }
 
@@ -215,13 +233,10 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # omit the the '/' character.
 
 
 # to use terminalizer #
-if [ -d ${HOME}/node_modules/.bin ]; then
-    export PATH=${HOME}/node_modules/.bin:${PATH}
-fi
+#if [ -d ${HOME}/node_modules/.bin ]; then
+#    export PATH=${HOME}/node_modules/.bin:${PATH}
+#fi
 
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # itemplot バックエンドに図を表示
 export MPLBACKEND="module://itermplot"
@@ -236,3 +251,6 @@ setopt complete_in_word
 setopt always_to_end
 # プロンプトを保持したままファイル名一覧を順次その場で表示(default=on)
 setopt always_last_prompt
+
+
+
