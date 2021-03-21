@@ -114,7 +114,7 @@ precmd () {
 
 #        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
 #        env_prompt="%{${fg[yellow]}%}${PYTHON_VERSION_STRING}${PYTHON_VIRTUAL_ENV_STRING}%{${fg[default]}%}"
-        env_prompt="%K{$com_col}%F{11}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
+        env_prompt="%K{$com_col}%F{255}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
 
 
 #        if [[ -n `jobs | grep "suspended"` ]]; then
