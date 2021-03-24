@@ -58,7 +58,7 @@ precmd () {
         # check if version control by git is done
         git_check=1
 
-        echo $PWD | awk '{
+        eval `echo $PWD | awk '{
             split($0, A, "/")
             for (i=2; i<=length(A); i++){
                 A[i] = A[i-1]"/"A[i]
@@ -66,9 +66,9 @@ precmd () {
         }
         END{
             for (i=length(A); i>1; i--){
-                printf " %s", A[i]
+                printf "dir_list[%d]=\042%s\042\n", length(A)+1-i, A[i]
             }
-        }' | read -A dir_list
+        }'`
 
         for dir in $dir_list
         do
@@ -89,11 +89,11 @@ precmd () {
         if [[ $git_check -eq 0 ]]; then
                 st=`git status 2> /dev/null`
                 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-                        git_prompt=" %1(v|%K{green}[%1v]%k|)"
+                        git_prompt=" %1(v|%K{green}%F{255}[%1v]%f%k|)"
                 elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-                        git_prompt=" %1(v|%K{yellow}[%1v]%k|)"
+                        git_prompt=" %1(v|%K{yellow}%F{255}[%1v]%f%k|)"
                 else [[ -n `echo "$st" | grep "^# Untracked"` ]];
-                        git_prompt=" %1(v|%K{red}[%1v]%k|)"
+                        git_prompt=" %1(v|%K{red}%F{255}[%1v]%f%k|)"
                 fi
         else
                 git_prompt=""
@@ -253,4 +253,8 @@ setopt always_to_end
 setopt always_last_prompt
 
 
+export LDFLAGS="-L/opt/local/lib/"
+export CPPFLAGS="-I/opt/local/include -L/opt/local/lib"
+export C_INCLUDE_PATH="/opt/local/include"
+export LIBRARY_PATH="/opt/local/lib"
 
