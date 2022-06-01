@@ -91,16 +91,6 @@ nnoremap tw <C-w>
 tnoremap <silent> <ESC> <C-\><C-n>
 
 
-function! Min(...)
-    " a:xxxで引数アクセスを表す
-    if a:1 < a:2
-        let smaller = a:1
-    else
-        let smaller = a:2
-    endif
-    return smaller
-endfunction
-
 "" Insert timestamp after 'LastModified: '
 function! LastModified()
     if &modified
@@ -127,8 +117,12 @@ nmap <C-g><C-h> :Commits<CR>
 
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME " XDG_CACHE_HOME変数が存在すればcache扱い、そうでない場合ホームディレクトリ以下に.cacheを作る
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
-let g:python_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
-let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+"let g:python_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+"let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+
+
+
+let g:python3_host_prog = '/usr/bin/python3'
 
 " macのcliboardとyankを統一
 set clipboard=unnamed
