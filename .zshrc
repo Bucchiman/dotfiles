@@ -62,13 +62,23 @@ zstyle ':vcs_info:git:*' actionformats '%b|%a'
 #             $4 [foreground color(text)]
 #             $5 [background color(right triangle)]
 #             $6 [text]
+# LEFT_SEGMENT_SEPARATOR \ue0b0 
+# RIGHT_SEGMENT_SEPARATOR \ue0b2
+# PLUS_MINUS \u00b1
+# GIT_BRANCH \ue0a0
+# LIGHTNING  \u26a1
+# SETTINGS   \u2699"
+
 function create_item() {
-    if [[ $1 == "lboth" ]]
+    if [[ $1 == "litem" ]]
     then
         echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k"
-    elif [[ $1 == "lmost_right" ]]
+    elif [[ $1 == "litem_right" ]]
     then
         echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k%F{$3}\ue0b0%f"
+    elif [[ $1 == "ritem" ]]
+    then
+        echo "%F{$2}%K{$3}\ue0b2%k%f%K{$3}%F{$4}$5%f%k"
     fi
 }
 
@@ -84,32 +94,31 @@ function lprompt() {
             machine_icon=""
             ;;
     esac
-    machine_prompt=`create_item lboth 237 008 255 $machine_icon`
-    name_prompt=`create_item lboth 008 001 255 8ucchiman`
-    pwd_prompt=`create_item lmost_right 001 004 255 %~`
+    machine_prompt=`create_item litem 237 000 255 $machine_icon`
+    name_prompt=`create_item litem 000 001 255 8ucchiman`
+    pwd_prompt=`create_item litem_right 001 008 255 %~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
 
 
 function rprompt() {
-    #git_prompt=""
+    git_prompt=""
 
-    #git_check=`git status > /dev/null 2>&1; echo $?`
-    #if [[ $git_check != 0 ]]
-    #then
-    #    echo $git_prompt
-    #fi
+    git_check=`git status > /dev/null 2>&1; echo $?`
+    if [[ $git_check != 0 ]]
+    then
+        echo $git_prompt
+    fi
 
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
     st=`git status 2> /dev/null`
     if [[ -n `echo "$st" | grep "^nothing to"` ]]
     then
         git_prompt=" %1(v|%K{green}%F{255}[%1v]%f%k|)"
+        #git_prompt="%1"(v|`create_item ritem 001 008 255 %1v`"|)"
     elif [[ -n `echo "$st" | grep "^nothing added"` ]]
     then
         git_prompt=" %1(v|%K{yellow}%F{255}[%1v]%f%k|)"
+        #git_prompt="%1"(v|`create_item ritem 002 008 255 %1v`"|)"
     else [[ -n `echo "$st" | grep "^# Untracked"` ]];
         git_prompt=" %1(v|%K{red}%F{255}[%1v]%f%k|)"
     fi
@@ -119,7 +128,10 @@ function rprompt() {
 
 # コマンドを打つたびに呼び出される
 precmd () {
-    PS1=`lprompt`
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
+    PS1=`lprompt`" "
     RPS1=`rprompt`
 }
 
@@ -199,15 +211,6 @@ switch.net6() {
 }
 
 
-#---------------#
-#    特殊変数   #
-#---------------#
-# LEFT_SEGMENT_SEPARATOR \ue0b0 
-# RIGHT_SEGMENT_SEPARATOR \ue0b2
-# PLUS_MINUS \u00b1
-# GIT_BRANCH \ue0a0
-# LIGHTNING  \u26a1
-# SETTINGS   \u2699"
 
 
 
@@ -226,4 +229,15 @@ fi
 
 alias f="fzf --preview 'batcat --color=always {}'"
 alias F="fzf --height 100% --preview 'batcat --color=always {}'"
+
+#---------------#
+#   ls setting  #
+#---------------#
+export LS_COLORS='fi=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:'
+LS_COLORS+='pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32'
+LS_COLORS+=':no=38;5;248'
+
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+#LS_COLORS=$LS_COLORS:'di=5;97' ; export LS_COLORS
+hash -d w=/mnt/c/Users/bucchiman
 
