@@ -15,6 +15,17 @@ colorlist() {
     done
 }
 
+function open() {
+    if [ $# != 1 ]; then
+        explorer.exe .
+    else
+        if [ -e $1 ]; then
+            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
+        else
+            echo "open: $1 : No such file or directory" 
+        fi
+    fi
+}
 
 #---------------#
 #  completion   #
@@ -95,8 +106,8 @@ function lprompt() {
             ;;
     esac
     machine_prompt=`create_item litem 237 000 255 $machine_icon`
-    name_prompt=`create_item litem 000 001 255 8ucchiman`
-    pwd_prompt=`create_item litem_right 001 008 255 %~`
+    name_prompt=`create_item litem 000 003 255 8ucchiman`
+    pwd_prompt=`create_item litem_right 003 008 255 %~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
 
@@ -218,6 +229,16 @@ switch.net6() {
 #   fzf & ag    #
 #---------------#
 # fzf から the_silver_searcher (ag) を呼び出すことで高速化
+# fzf の キーバインド
+if [ -e /opt/local/share/fzf/shell/key-bindings.zsh ]; then
+    source /opt/local/share/fzf/shell/key-bindings.zsh
+fi
+
+# fzf の 補完設定
+if [ -e /opt/local/share/fzf/shell/completion.zsh ]; then
+    source /opt/local/share/fzf/shell/completion.zsh
+fi
+
 if _has fzf && _has ag; then
     export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -241,3 +262,61 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 #LS_COLORS=$LS_COLORS:'di=5;97' ; export LS_COLORS
 hash -d w=/mnt/c/Users/bucchiman
 
+
+
+
+# カーソル位置で補完する。
+setopt complete_in_word
+# Move cursor to the end of a completed word.
+setopt always_to_end
+# プロンプトを保持したままファイル名一覧を順次その場で表示(default=on)
+setopt always_last_prompt
+
+
+export LDFLAGS="-L/opt/local/lib/"
+export CPPFLAGS="-I/opt/local/include -L/opt/local/lib"
+export C_INCLUDE_PATH="/opt/local/include"
+export LIBRARY_PATH="/opt/local/lib"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rust path
+export PATH="${HOME}/bin:${PATH}"
+export PATH=$HOME/.cargo/bin:$PATH
+
+# ruby path
+export PATH=$HOME/.rbenv/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+
+
+#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export DISPLAY=`hostname`.mshome.net:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
+# ----------------------------------------------------------------------
+export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
+# ----------------------------------------------------------------------
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent -s`
+    expect -c "
+        set timeout 1
+        spawn ssh-add
+        expect \"password:\"
+        send \"Cinemashkachikachika.17\n\"
+        interact"
+fi
+
+export PATH="$HOME/.luarocks/bin:$PATH"
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+return
