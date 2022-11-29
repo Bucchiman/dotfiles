@@ -2,29 +2,46 @@ _has() {
     return $( whence $1 &>/dev/null )
 }
 
-fresh_col() {
-    names=(`pyenv versions | awk '$1 ~ "^py" {print $1}'`)
-    for name in $names
-    do
-        py_arr[$name]=$((RANDOM%256))
+colorlist() {
+    for color in {000..015}; do
+        print -nP "%F{$color}$color %f"
+    done
+    printf "\n"
+    for color in {016..255}; do
+        print -nP "%F{$color}$color %f"
+        if [ $(($((color-16))%6)) -eq 5 ]; then
+            printf "\n"
+        fi
     done
 }
 
-fresh_col_with_pypmt() {
-    py_arr[`pyenv version-name`]=$((RANDOM%256))
-}
 
+#---------------#
+#  completion   #
+#---------------#
+autoload -Uz compinit     # Enable a function of complementation
+compinit -u
 
-# setting prompt
-autoload -Uz vcs_info
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Ignore whether the character is a capital letter or not.
+eval `dircolors`
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey -e
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+#---------------#
+#    prompt     #
+#---------------#
+autoload -Uz add-zsh-hook vcs_info lprompt rprompt
 autoload -U colors       # Set PROMPT colors
 colors
-setopt prompt_subst
+setopt prompt_subst   # プロンプトの文字列を変えられる
 
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
+add-zsh-hook precmd vcs_info
 # :vcs_info:git:*とするとgitの時のみの設定
 # ローカルで変更を加えた時に通知するかを設定
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -38,156 +55,103 @@ zstyle ':vcs_info:git:*' formats "%b%c%u"
 zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
 
-declare -A py_arr
-py_arr[system]=5
-names=(`pyenv versions | awk '$1 ~ "^py" {print $1}'`)
-for name in $names
-do
-    py_arr[$name]=$((RANDOM%256))
-done
+
+# create_item $1 [kind] 
+#             $2 [foreground color(left triangle)] 
+#             $3 [background color(left triangle+text)]
+#             $4 [foreground color(text)]
+#             $5 [background color(right triangle)]
+#             $6 [text]
+# LEFT_SEGMENT_SEPARATOR \ue0b0 
+# RIGHT_SEGMENT_SEPARATOR \ue0b2
+# PLUS_MINUS \u00b1
+# GIT_BRANCH \ue0a0
+# LIGHTNING  \u26a1
+# SETTINGS   \u2699"
+
+function create_item() {
+    if [[ $1 == "litem" ]]
+    then
+        echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k"
+    elif [[ $1 == "litem_right" ]]
+    then
+        echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k%F{$3}\ue0b0%f"
+    elif [[ $1 == "ritem" ]]
+    then
+        echo "%F{$2}%K{$3}\ue0b2%k%f%K{$3}%F{$4}$5%f%k"
+    fi
+}
+
+function lprompt() {
+    case `uname` in 
+        "Linux" )
+            machine_icon=" \uF17C "
+            ;;
+        "Apple" )
+            machine_icon=" \uF179 "
+            ;;
+        * )
+            machine_icon=""
+            ;;
+    esac
+    machine_prompt=`create_item litem 237 000 255 $machine_icon`
+    name_prompt=`create_item litem 000 001 255 8ucchiman`
+    pwd_prompt=`create_item litem_right 001 008 255 %~`
+    echo $machine_prompt$name_prompt$pwd_prompt
+}
+
+
+function rprompt() {
+    git_prompt=""
+
+    git_check=`git status > /dev/null 2>&1; echo $?`
+    if [[ $git_check != 0 ]]
+    then
+        echo $git_prompt
+    fi
+
+    st=`git status 2> /dev/null`
+    if [[ -n `echo "$st" | grep "^nothing to"` ]]
+    then
+        git_prompt=" %1(v|%K{green}%F{255}[%1v]%f%k|)"
+        #git_prompt="%1"(v|`create_item ritem 001 008 255 %1v`"|)"
+    elif [[ -n `echo "$st" | grep "^nothing added"` ]]
+    then
+        git_prompt=" %1(v|%K{yellow}%F{255}[%1v]%f%k|)"
+        #git_prompt="%1"(v|`create_item ritem 002 008 255 %1v`"|)"
+    else [[ -n `echo "$st" | grep "^# Untracked"` ]];
+        git_prompt=" %1(v|%K{red}%F{255}[%1v]%f%k|)"
+    fi
+    echo $git_prompt
+}
+
 
 # コマンドを打つたびに呼び出される
 precmd () {
-        # dir path
-        path_prompt="[%{${fg[green]}%}%~%{${fg[default]}%}]" 
-        # vcs_info
-        psvar=()
-        LANG=en_US.UTF-8 vcs_info
-        [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
-
-        # check if version control by git is done
-        git_check=1
-
-        eval `echo $PWD | awk '{
-            split($0, A, "/")
-            for (i=2; i<=length(A); i++){
-                A[i] = A[i-1]"/"A[i]
-            }
-        }
-        END{
-            for (i=length(A); i>1; i--){
-                printf "dir_list[%d]=\042%s\042\n", length(A)+1-i, A[i]
-            }
-        }'`
-
-        for dir in $dir_list
-        do
-            if [[ -n `\ls -a $dir | grep "^\.git$"` ]]
-            then
-                git_check=0
-            fi
-        done
-        dir=""
-        # check if branch is master or not
-#        if [[ `echo ${vcs_info_msg_0_} | grep -c "master"` > 0 ]]; then
-#            branch="m"
-#        else
-#            branch="s"
-#        fi
-
-        # make prompt each git status
-        if [[ $git_check -eq 0 ]]; then
-                st=`git status 2> /dev/null`
-                if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-                        git_prompt=" %1(v|%K{green}%F{255}[%1v]%f%k|)"
-                elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-                        git_prompt=" %1(v|%K{yellow}%F{255}[%1v]%f%k|)"
-                else [[ -n `echo "$st" | grep "^# Untracked"` ]];
-                        git_prompt=" %1(v|%K{red}%F{255}[%1v]%f%k|)"
-                fi
-        else
-                git_prompt=""
-        fi
-#        git_prompt=`printf '%s%s%s' "$(tput blink)" "${git_prompt}" "$(tput sgr0)"`
-
-
-        # env version
-#        if [[ `\ls -1 | grep -c "\.py$"` > 0 ]]; then
-#            PYTHON_VERSION_STRING=" py:"$(python --version | sed "s/Python //")
-#            PYTHON_VIRTUAL_ENV_STRING=""
-#            if [ -n "$VIRTUAL_ENV" ]; then
-#                PYTHON_VIRTUAL_ENV_STRING="$(pyenv version-name)"
-#            fi
-#        fi
-        PYTHON_VIRTUAL_ENV_STRING=`pyenv version-name`
-        com_col=${py_arr[$PYTHON_VIRTUAL_ENV_STRING]}
-
-#        env_prompt=`printf '%s%s%s%s' "$(tput setab 004)" "$(tput blink)" "${PYTHON_VIRTUAL_ENV_STRING}" "$(tput sgr0)"`
-#        env_prompt="%{${fg[yellow]}%}${PYTHON_VERSION_STRING}${PYTHON_VIRTUAL_ENV_STRING}%{${fg[default]}%}"
-        env_prompt="%K{$com_col}%F{255}${PYTHON_VIRTUAL_ENV_STRING}%f%k"
-
-
-#        if [[ -n `jobs | grep "suspended"` ]]; then
-#            name_color=${fg[blue]}
-#        else
-#            name_color=${fg[cyan]}
-#        fi
-#        if type "kube_ps1" > /dev/null 2>&1; then
-#            kube=" $(kube_ps1)"
-#        else
-#            kube=""
-#        fi
-        
-        PS1="%{${fg[yellow]}%}Bucchiman%{${fg[default]}%}${path_prompt}${env_prompt}${git_prompt}%% "
-
-        PYTHON_VERSION_STRING=""
-        PYTHON_VIRTUAL_ENV_STRING=""
-        com_col=""
-        # TERRAFORM_VERSION_STRING=""
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
+    PS1=`lprompt`" "
+    RPS1=`rprompt`
 }
 
-fpath=(${HOME}/.zsh/func $fpath)
-autoload -U compinit     # Enable a function of complementation
-compinit
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'             # Ignore whether the character is a capital letter or not.
-eval `dircolors`
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# ヒストリーの保存場所を指定
-SAVEHIST=100000           # Preserve the number of histories
-HISTSIZE=100000
-HISTFILE=~/.zhistory     # Set the file which preserves histories
-
-
-# fzf の キーバインド
-if [ -e /opt/local/share/fzf/shell/key-bindings.zsh ]; then
-    source /opt/local/share/fzf/shell/key-bindings.zsh
-fi
-
-# fzf の 補完設定
-if [ -e /opt/local/share/fzf/shell/completion.zsh ]; then
-    source /opt/local/share/fzf/shell/completion.zsh
-fi
-
-# fzf から the_silver_searcher (ag) を呼び出すことで高速化
-if _has fzf && _has ag; then
-    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_COMMON_MYOPTS="--height 40% --layout=reverse --multi"
-    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'bat --color=always {} --style=plain'"
-    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'bat --color=always {}'"
-fi
-
-alias f="fzf --preview 'bat --color=always {}'"
-alias F="fzf --height 100% --preview 'bat --color=always {}'"
-
-# alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I'
-alias reedbush='ssh -l i95007 reedbush.cc.u-tokyo.ac.jp'
-alias pcat='python -m pickle'
-# alias jupyter='jupyter notebook'
-alias bucket2='ssh bucket2'
+#---------------#
+#     alias     #
+#---------------#
 alias ls='ls --color'
 
+#---------------#
+#    setopt     #
+#---------------#
 setopt IGNORE_EOF   # Prevent pc from logout
 setopt NO_CLOBBER   # リダイレクトでの上書き無効
-# setopt CORRECT_ALL
+# setopt CORRECT_ALL  # コマンドのタイプミス訂正 
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS # ヒストリ中に同じコマンドを含まないようにする
-setopt HIST_IGNORE_ALL_DUPS         # Don't produce duplications of the same in history
+setopt HIST_IGNORE_ALL_DUPS # Don't produce duplications of the same in history
 setopt HIST_REDUCE_BLANKS   # コマンド行の余分な余白を詰めてヒストリに加える
 setopt HIST_NO_STORE    # ヒストリにhistoryコマンドを残さない
 setopt HIST_IGNORE_SPACE    # コマンド先頭にスペースがある場合そのコマンドをヒストリに記録しない
@@ -200,61 +164,80 @@ setopt CDABLE_VARS
 setopt AUTO_PUSHD   # cdコマンドで自動的にpushd
 #setopt PUSHD_TO_HOME
 setopt PUSHD_IGNORE_DUPS
-setopt AUTO_RESUME  # サスペンド中のプロセスと同じコマンド名を実行した場合はリジュームする
+setopt AUTO_RESUME  # サスペンド中のプロセスと同じコマンド名の頭文字を実行した場合、呼び出せる
 setopt INTERACTIVE_COMMENTS # コマンドラインでも # 以降をコメントと見なす
 setopt NUMERIC_GLOB_SORT #文字ではなく、数値としてsortする
 setopt NULL_GLOB
 #setopt RM_STAR_WAIT
+setopt COMPLETE_IN_WORD # カーソル位置で補完する。
+setopt ALWAYS_TO_END # Move cursor to the end of a completed word.
+setopt ALWAYS_LAST_PROMPT # プロンプトを保持したままファイル名一覧を順次その場で表示(default=on)
+setopt EXTENDED_GLOB    # ^(否定表現), ~(条件絞り)などの特殊文字を使用できるようにする
 
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey -e
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+#---------------#
+#    特殊変数   #
+#---------------#
+cdpath=(${HOME} /mnt/c/Users/bucchiman /mnt/d)  # auto_cd move directory with cdpath
+fpath=(${HOME}/.zsh/func $HOME/.zsh/completion $fpath)
+#manpath
+#DIRSTACKSIZE=20
+#fignore
+LISTMAX=20      # 補完候補数
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # 単語の一部とみなされる記号文字列のリスト. 設定していない記号文字は区切り文字として認識する.omit the the '/' character.
+
+# ヒストリーの保存場所を指定
+SAVEHIST=100000           # Preserve the number of histories
+HISTSIZE=100000
+HISTFILE=$HOME/.zhistory     # Set the file which preserves histories
+
 
 [ -n "`alias run-help`" ] && unalias run-help
 autoload run-help
 
-
 watch=(all)
 LOGCHECK=20
 
-cdpath=(${HOME})
-# you can move to home directory
-# you can also set the array, which makes you some cdpath.
-DIRSTACKSIZE=10
-# you can set maximum of directories
-#FIGNORE=(.o \~)
-LISTMAX=10
-# you can set maximum of lists
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # omit the the '/' character.
 
 
 
-# to use terminalizer #
-#if [ -d ${HOME}/node_modules/.bin ]; then
-#    export PATH=${HOME}/node_modules/.bin:${PATH}
-#fi
+# dotnet
+switch.net7() {
+    export DOTNET_ROOT=$HOME/.dotnet/dotnet_7.0
+    export PATH=$PATH:$HOME/.dotnet/dotnet_7.0
+}
+switch.net6() {
+    export DOTNET_ROOT=$HOME/.dotnet/dotnet_6.0
+    export PATH=$PATH:$HOME/.dotnet/dotnet_6.0
+}
 
 
-# itemplot バックエンドに図を表示
-export MPLBACKEND="module://itermplot"
-
-# mypath=(~/mypath $mypath)
-# autoload ${mypath[1]}/*(:t)
 
 
-# カーソル位置で補完する。
-setopt complete_in_word
-# Move cursor to the end of a completed word.
-setopt always_to_end
-# プロンプトを保持したままファイル名一覧を順次その場で表示(default=on)
-setopt always_last_prompt
 
+#---------------#
+#   fzf & ag    #
+#---------------#
+# fzf から the_silver_searcher (ag) を呼び出すことで高速化
+if _has fzf && _has ag; then
+    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_COMMON_MYOPTS="--height 40% --layout=reverse --multi"
+    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'bat --color=always {} --style=plain'"
+    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'bat --color=always {}'"
+fi
 
-export LDFLAGS="-L/opt/local/lib/"
-export CPPFLAGS="-I/opt/local/include -L/opt/local/lib"
-export C_INCLUDE_PATH="/opt/local/include"
-export LIBRARY_PATH="/opt/local/lib"
+alias f="fzf --preview 'batcat --color=always {}'"
+alias F="fzf --height 100% --preview 'batcat --color=always {}'"
+
+#---------------#
+#   ls setting  #
+#---------------#
+export LS_COLORS='fi=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:'
+LS_COLORS+='pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32'
+LS_COLORS+=':no=38;5;248'
+
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+#LS_COLORS=$LS_COLORS:'di=5;97' ; export LS_COLORS
+hash -d w=/mnt/c/Users/bucchiman
 
