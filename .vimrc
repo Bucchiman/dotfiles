@@ -22,10 +22,9 @@ set wildmode=list:full " コマンドラインの補完
 " set smartcase " 検索文字列に大文字が含まれている場合は区別して検索する
 set incsearch " 検索文字列入力時に順次対象文字列にヒットさせる
 set wrapscan " 検索時に最後まで行ったら最初に戻る
-
-
-set hidden
-" set showcmd
+set hidden " 保存されていないファイルがあっても別のファイルを開くことができる
+set showcmd " 入力中のコマンドを表示させることができる
+set clipboard=unnamed " macのcliboardとyankを統一
 
 " キーマッピング系
 " カーソルキー使用不可
@@ -62,3 +61,4 @@ nnoremap ts :<C-u>sp<CR>
 nnoremap tv :<C-u>vs<CR>
 nnoremap tt :<C-u>tabnew<CR>
 nnoremap tw <C-w>
+
