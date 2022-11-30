@@ -70,11 +70,6 @@ zstyle ':vcs_info:git:*' formats "%b%c%u"
 zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
 
-function initialize_prompt() {
-    MACHINE_ICON=`get_machine_icon`
-}
-initialize_prompt
-
 # create_item $1 [kind] 
 #             $2 [foreground color(left triangle)] 
 #             $3 [background color(left triangle+text)]
@@ -110,13 +105,19 @@ function get_machine_icon() {
     search_name=("ubuntu"  "apple" )
     for os in ${(k)search_name}
     do
-        grep -H "$os" /etc/*release > /dev/null 2>&1
+        grep -Hi "$os" /etc/*release > /dev/null 2>&1
         if [ $? = 0 ]
         then
             echo "$search_name[$os]"
         fi
     done
 }
+autoload -Uz add-zsh-hook initialize_prompt get_machine_icon
+function initialize_prompt() {
+    MACHINE_ICON=`get_machine_icon`
+}
+initialize_prompt
+
 
 function lprompt() {
     #HOSTNAME=`hostname`
@@ -126,7 +127,11 @@ function lprompt() {
     #fi
     machine_prompt=`create_item litem_left 016 008 255 $MACHINE_ICON`
     name_prompt=`create_item litem 008 003 255 8ucchiman`
-    pwd_prompt=`create_item litem_right 003 012 255 " "%~`
+
+    path_prompt=`echo "$PWD" | awk -v home_dir=$HOME '{sub(home_dir, "", $0); print $0}'`
+    pwd_prompt=`create_item litem_right 003 012 255 $path_prompt" "`
+
+    #pwd_prompt=`create_item litem_right 003 012 255 " "%~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
 
