@@ -61,9 +61,9 @@ add-zsh-hook precmd vcs_info
 # ローカルで変更を加えた時に通知するかを設定
 zstyle ':vcs_info:git:*' check-for-changes true
 # addされた場合(インデックスに追加)+表示
-zstyle ':vcs_info:git:*' stagedstr ":+"
+zstyle ':vcs_info:git:*' stagedstr " "
 # addされていない場合-表示
-zstyle ':vcs_info:git:*' unstagedstr ":-"
+zstyle ':vcs_info:git:*' unstagedstr " "
 # フォーマット表示 %b: branch名 %c: stagestr %u: unstagestr
 zstyle ':vcs_info:git:*' formats "%b%c%u"
 # 異常状態(conflict, rebase状態)
@@ -81,24 +81,23 @@ initialize_prompt
 #             $4 [foreground color(text)]
 #             $5 [background color(right triangle)]
 #             $6 [text]
-# LEFT_SEGMENT_SEPARATOR \ue0b0 
-# RIGHT_SEGMENT_SEPARATOR \ue0b2
-# PLUS_MINUS \u00b1
-# GIT_BRANCH \ue0a0
-# LIGHTNING  \u26a1
-# SETTINGS   \u2699"
+#
+# echo 
+# echo 
+# echo (e0b0)
+# echo 
 
 
 function create_item() {
     if [[ $1 == "litem" ]]
     then
-        echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k"
+        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k"
     elif [[ $1 == "litem_right" ]]
     then
-        echo "%F{$2}%K{$3}\ue0b0%k%f%K{$3}%F{$4}$5%f%k%F{$3}\ue0b0%f"
+        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k%F{$3}%f"
     elif [[ $1 == "ritem" ]]
     then
-        echo "%F{$2}%K{$3}\ue0b2%k%f%K{$3}%F{$4}$5%f%k"
+        echo "%F{$2}%K{$3}%f%k%K{$2}%F{$4}$5%1v%f%k%F{$2}%K{$3}%f%k"
     fi
 }
 
@@ -121,9 +120,9 @@ function lprompt() {
     #then
 
     #fi
-    machine_prompt=`create_item litem 237 018 255 $MACHINE_ICON`
-    name_prompt=`create_item litem 018 003 255 8ucchiman`
-    pwd_prompt=`create_item litem_right 003 008 255 %~`
+    machine_prompt=`create_item litem 016 008 255 $MACHINE_ICON`
+    name_prompt=`create_item litem 008 003 255 8ucchiman`
+    pwd_prompt=`create_item litem_right 003 012 255 %~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
 
@@ -140,14 +139,15 @@ function rprompt() {
     st=`git status 2> /dev/null`
     if [[ -n `echo "$st" | grep "^nothing to"` ]]
     then
-        git_prompt=" %1(v|%K{green}%F{255}[%1v]%f%k|)"
-        #git_prompt="%1"(v|`create_item ritem 001 008 255 %1v`"|)"
+        git_prompt="`create_item ritem 014 016 255 " "`"
+        git_prompt=" %1(v|$git_prompt|)"
     elif [[ -n `echo "$st" | grep "^nothing added"` ]]
     then
-        git_prompt=" %1(v|%K{yellow}%F{255}[%1v]%f%k|)"
-        #git_prompt="%1"(v|`create_item ritem 002 008 255 %1v`"|)"
+        git_prompt="`create_item ritem 002 016 255 " "`"
+        git_prompt=" %1(v|$git_prompt|)"
     else [[ -n `echo "$st" | grep "^# Untracked"` ]];
-        git_prompt=" %1(v|%K{red}%F{255}[%1v]%f%k|)"
+        git_prompt="`create_item ritem 001 016 255 " "`"
+        git_prompt=" %1(v|$git_prompt|)"
     fi
     echo $git_prompt
 }
