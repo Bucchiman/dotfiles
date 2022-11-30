@@ -126,7 +126,7 @@ function lprompt() {
     #fi
     machine_prompt=`create_item litem_left 016 008 255 $MACHINE_ICON`
     name_prompt=`create_item litem 008 003 255 8ucchiman`
-    pwd_prompt=`create_item litem_right 003 012 255 %~`
+    pwd_prompt=`create_item litem_right 003 012 255 " "%~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
 
