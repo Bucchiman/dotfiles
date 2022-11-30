@@ -91,10 +91,14 @@ initialize_prompt
 function create_item() {
     if [[ $1 == "litem" ]]
     then
+        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k"
+    elif [[ $1 == "litem_left" ]]
+    then
         echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k"
+
     elif [[ $1 == "litem_right" ]]
     then
-        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k%F{$3}%f"
+        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k%F{$3}%f"
     elif [[ $1 == "ritem" ]]
     then
         echo "%F{$2}%K{$3}%f%k%K{$2}%F{$4}$5%1v%f%k%F{$2}%K{$3}%f%k"
@@ -120,7 +124,7 @@ function lprompt() {
     #then
 
     #fi
-    machine_prompt=`create_item litem 016 008 255 $MACHINE_ICON`
+    machine_prompt=`create_item litem_left 016 008 255 $MACHINE_ICON`
     name_prompt=`create_item litem 008 003 255 8ucchiman`
     pwd_prompt=`create_item litem_right 003 012 255 %~`
     echo $machine_prompt$name_prompt$pwd_prompt
