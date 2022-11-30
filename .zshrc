@@ -1,4 +1,8 @@
-_has() {
+# ----------------------------------------------------------------------
+export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
+# ----------------------------------------------------------------------
+
+function _has() {
     return $( whence $1 &>/dev/null )
 }
 
@@ -66,6 +70,10 @@ zstyle ':vcs_info:git:*' formats "%b%c%u"
 zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
 
+function initialize_prompt() {
+    MACHINE_ICON=`get_machine_icon`
+}
+initialize_prompt
 
 # create_item $1 [kind] 
 #             $2 [foreground color(left triangle)] 
@@ -80,6 +88,7 @@ zstyle ':vcs_info:git:*' actionformats '%b|%a'
 # LIGHTNING  \u26a1
 # SETTINGS   \u2699"
 
+
 function create_item() {
     if [[ $1 == "litem" ]]
     then
@@ -93,20 +102,27 @@ function create_item() {
     fi
 }
 
+function get_machine_icon() {
+    typeset -A search_name
+    search_name=("ubuntu"  "apple" )
+    for os in ${(k)search_name}
+    do
+        grep -H "$os" /etc/*release > /dev/null 2>&1
+        if [ $? = 0 ]
+        then
+            echo "$search_name[$os]"
+        fi
+    done
+}
+
 function lprompt() {
-    case `uname` in 
-        "Linux" )
-            machine_icon=" \uF17C "
-            ;;
-        "Apple" )
-            machine_icon=" \uF179 "
-            ;;
-        * )
-            machine_icon=""
-            ;;
-    esac
-    machine_prompt=`create_item litem 237 000 255 $machine_icon`
-    name_prompt=`create_item litem 000 003 255 8ucchiman`
+    #HOSTNAME=`hostname`
+    #if [[ $HOSTNAME != $BASE_HOSTNAME ]]
+    #then
+
+    #fi
+    machine_prompt=`create_item litem 237 018 255 $MACHINE_ICON`
+    name_prompt=`create_item litem 018 003 255 8ucchiman`
     pwd_prompt=`create_item litem_right 003 008 255 %~`
     echo $machine_prompt$name_prompt$pwd_prompt
 }
@@ -150,7 +166,8 @@ precmd () {
 #---------------#
 #     alias     #
 #---------------#
-alias ls='ls --color'
+alias ls='exa --icons'
+alias diff='diff --color'
 
 #---------------#
 #    setopt     #
@@ -264,43 +281,6 @@ hash -d w=/mnt/c/Users/bucchiman
 
 
 
-
-# カーソル位置で補完する。
-setopt complete_in_word
-# Move cursor to the end of a completed word.
-setopt always_to_end
-# プロンプトを保持したままファイル名一覧を順次その場で表示(default=on)
-setopt always_last_prompt
-
-
-export LDFLAGS="-L/opt/local/lib/"
-export CPPFLAGS="-I/opt/local/include -L/opt/local/lib"
-export C_INCLUDE_PATH="/opt/local/include"
-export LIBRARY_PATH="/opt/local/lib"
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# rust path
-export PATH="${HOME}/bin:${PATH}"
-export PATH=$HOME/.cargo/bin:$PATH
-
-# ruby path
-export PATH=$HOME/.rbenv/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
-
-
-#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
-#export DISPLAY=`hostname`.mshome.net:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-
-# ----------------------------------------------------------------------
-export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
-# ----------------------------------------------------------------------
-
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`
     expect -c "
@@ -311,12 +291,20 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
         interact"
 fi
 
-export PATH="$HOME/.luarocks/bin:$PATH"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+#---------------#
+#DISPLAY setting#
+#---------------#
+#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export DISPLAY=`hostname`.mshome.net:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
 
 return
