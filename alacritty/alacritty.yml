@@ -1,0 +1,12 @@
+font:
+  normal:
+    family: mononoki Nerd Font Mono
+  size: 20
+
+window:
+  opacity: 0.5
+  dynamic_title: true
+  decorations_theme_variant: None
+
+shell:
+  program: /Windows/System32/wsl.exe ~
