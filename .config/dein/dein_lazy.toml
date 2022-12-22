@@ -31,8 +31,8 @@ hook_add = '''
 
 [[plugins]] # markdown viewer
 repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'sh -c "cd app & yarn install" '
+#on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+#build = 'sh -c "cd app & yarn install" '
 
 
 

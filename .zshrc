@@ -1,5 +1,6 @@
 # ----------------------------------------------------------------------
 export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
+unset -f cd
 # ----------------------------------------------------------------------
 
 function _has() {
@@ -41,6 +42,15 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Ignore whether the charac
 eval `dircolors`
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+source $HOME/.zsh/git_completion/git-prompt.sh
+zstyle ':completion:*:*:git:*' script $HOME/.zsh/git-completion.bash
+autoload -Uz compinit && compinit
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+
+
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -70,6 +80,7 @@ zstyle ':vcs_info:git:*' formats "%b%c%u"
 zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
 
+LANG=en_US.UTF-8 vcs_info
 # create_item $1 [kind] 
 #             $2 [foreground color(left triangle)] 
 #             $3 [background color(left triangle+text)]
@@ -115,6 +126,8 @@ function get_machine_icon() {
 autoload -Uz add-zsh-hook initialize_prompt get_machine_icon
 function initialize_prompt() {
     MACHINE_ICON=`get_machine_icon`
+    machine_prompt=`create_item litem_left 016 008 255 $MACHINE_ICON`
+    name_prompt=`create_item litem 008 003 255 8ucchiman`
 }
 initialize_prompt
 
@@ -125,8 +138,6 @@ function lprompt() {
     #then
 
     #fi
-    machine_prompt=`create_item litem_left 016 008 255 $MACHINE_ICON`
-    name_prompt=`create_item litem 008 003 255 8ucchiman`
 
     path_prompt=`echo "$PWD" | awk -v home_dir=$HOME '{sub(home_dir, "", $0); print $0}'`
     pwd_prompt=`create_item litem_right 003 012 255 $path_prompt" "`
@@ -139,12 +150,11 @@ function lprompt() {
 function rprompt() {
     git_prompt=""
 
-    git_check=`git status > /dev/null 2>&1; echo $?`
-    if [[ $git_check != 0 ]]
-    then
-        echo $git_prompt
-    fi
-
+    #git_check=`git status > /dev/null 2>&1; echo $?`
+    #if [[ $git_check != 0 ]]
+    #then
+    #    echo $git_prompt
+    #fi
     st=`git status 2> /dev/null`
     if [[ -n `echo "$st" | grep "^nothing to"` ]]
     then
@@ -152,12 +162,13 @@ function rprompt() {
         git_prompt=" %1(v|$git_prompt|)"
     elif [[ -n `echo "$st" | grep "^nothing added"` ]]
     then
-        git_prompt="`create_item ritem 002 016 255 " "`"
+        git_prompt="`create_item ritem 003 016 255 " "`"
         git_prompt=" %1(v|$git_prompt|)"
     else [[ -n `echo "$st" | grep "^# Untracked"` ]];
         git_prompt="`create_item ritem 001 016 255 " "`"
         git_prompt=" %1(v|$git_prompt|)"
     fi
+    #git_prompt='%F{red}$(__git_ps1 "%s")%f'
     echo $git_prompt
 }
 
@@ -165,7 +176,6 @@ function rprompt() {
 # コマンドを打つたびに呼び出される
 precmd () {
     psvar=()
-    LANG=en_US.UTF-8 vcs_info
     [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
     PS1=`lprompt`" "
     RPS1=`rprompt`
@@ -177,6 +187,7 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
+alias bat='batcat'
 
 #---------------#
 #    setopt     #
@@ -270,8 +281,8 @@ if _has fzf && _has ag; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_COMMON_MYOPTS="--height 40% --layout=reverse --multi"
-    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'bat --color=always {} --style=plain'"
-    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'bat --color=always {}'"
+    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'batcat --color=always {} --style=plain'"
+    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'batcat --color=always {}'"
 fi
 
 alias f="fzf --preview 'batcat --color=always {}'"
@@ -315,5 +326,24 @@ export DISPLAY=$(ip route list default | awk '{print $3}'):0
 #export DISPLAY=`hostname`.mshome.net:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 
+#source .custom.zsh
+go_flag=0
+function switch_go() {
+    if [[ $go_flag == 0 ]]
+    then
+        unalias go
+        go_flag=1
+    else
+        alias go="/bin/rm -f ./go~; ./go"
+        go_flag=0
+    fi
+}
 
+source <(kubectl completion zsh)
+
+if (which zprof > /dev/null 2>&1) ;then
+  zprof
+fi
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 return

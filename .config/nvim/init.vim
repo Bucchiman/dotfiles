@@ -117,15 +117,8 @@ nmap <C-g><C-h> :Commits<CR>
 
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME " XDG_CACHE_HOME変数が存在すればcache扱い、そうでない場合ホームディレクトリ以下に.cacheを作る
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
-"let g:python_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
-"let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 
-
-
-let g:python3_host_prog = '/usr/bin/python3'
-
-" macのcliboardとyankを統一
-set clipboard=unnamed
+let g:python3_host_prog = '$HOME/bin/python'
 
 " dein
 let s:dein_cache_dir = g:cache_home . '/dein'
@@ -182,3 +175,30 @@ highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none 
+
+
+" WSL clipboard
+"if !empty($WSL_DISTRO_NAME)
+"    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+"    if executable(s:clip)
+"        augroup WSLYank
+"            autocmd!
+"            autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+"        augroup END
+"    endif
+"endif
+
+" guifontを設定しないと文字化けになる。terminalで行ったフォントの設定と同様
+" 公式サイトではLinuxとmacOSの設定が若干異なるが、Linuxの設定でもmacOSで問題なし
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+set encoding=utf-8
+
+" フォルダアイコンを表示
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+
+
