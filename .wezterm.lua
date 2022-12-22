@@ -4,5 +4,12 @@ return {
   color_scheme = 'iceberg-dark',
   font_size = 20,
   default_prog = {"wsl.exe"},
-  window_background_opacity = 0.8
+  window_background_opacity = 0.65,
+  {
+    keys = {
+      key = '"',
+      mods = 'CTRL|SHIFT|ALT',
+      action = wezterm.action.SplitVertical {domain = 'CurrentPaneDomain'},
+    },
+  },
 }
