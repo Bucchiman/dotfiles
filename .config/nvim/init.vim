@@ -118,7 +118,7 @@ nmap <C-g><C-h> :Commits<CR>
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME " XDG_CACHE_HOME変数が存在すればcache扱い、そうでない場合ホームディレクトリ以下に.cacheを作る
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
 
-let g:python3_host_prog = '$HOME/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " dein
 let s:dein_cache_dir = g:cache_home . '/dein'

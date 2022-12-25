@@ -1,4 +1,5 @@
 " 基本設定
+set nocompatible
 set number " 行の表示
 set nobackup " バックアップファイル、スワップファイルの設定(同じディレクトリに配下)
 set noswapfile " バックアップファイル、スワップファイルの設定(同じディレクトリに配下)
