@@ -59,7 +59,7 @@ return {
   color_scheme = 'iceberg-dark',
   default_prog = {"wsl.exe"},
   window_background_opacity = 0.7,
-  leader = {key = 'Space', mods = 'CTRL|SHIFT'},
+  leader = {key = 'Space', mods = 'SHIFT', timeout_milliseconds = 2000},
   keys = {
     {
       key = 'mapped:\'',
