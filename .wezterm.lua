@@ -12,32 +12,32 @@ function(window, pane)
 end)
 
 
---if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
---  table.insert(launch_menu, {
---    label = 'PowerShell',
---    args = { 'powershell.exe', '-NoLogo' },
---  })
---
---  -- Find installed visual studio version(s) and add their compilation
---  -- environment command prompts to the menu
---  for _, vsvers in
---    ipairs(
---      wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
---    )
---  do
---    local year = vsvers:gsub('Microsoft Visual Studio/', '')
---    table.insert(launch_menu, {
---      label = 'x64 Native Tools VS ' .. year,
---      args = {
---        'cmd.exe',
---        '/k',
---        'C:/Program Files (x86)/'
---          .. vsvers
---          .. '/BuildTools/VC/Auxiliary/Build/vcvars64.bat',
---      },
---    })
---  end
---end
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  table.insert(launch_menu, {
+    label = 'PowerShell',
+    args = { 'powershell.exe', '-NoLogo' },
+  })
+
+  -- Find installed visual studio version(s) and add their compilation
+  -- environment command prompts to the menu
+  for _, vsvers in
+    ipairs(
+      wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
+    )
+  do
+    local year = vsvers:gsub('Microsoft Visual Studio/', '')
+    table.insert(launch_menu, {
+      label = 'x64 Native Tools VS ' .. year,
+      args = {
+        'cmd.exe',
+        '/k',
+        'C:/Program Files (x86)/'
+          .. vsvers
+          .. '/BuildTools/VC/Auxiliary/Build/vcvars64.bat',
+      },
+    })
+  end
+end
 
 
 return {
@@ -61,22 +61,32 @@ return {
   window_background_opacity = 0.7,
   leader = {key = 'Space', mods = 'CTRL|SHIFT'},
   keys = {
-      {
-          key = 'r',
-          mods = 'LEADER',
-          action = act.ActivateKeyTable{
-              name = 'resize_pane',
-              one_shot = false,
-          },
+    {
+      key = 'mapped:\'',
+      mods = 'LEADER',
+      action = wezterm.action.SplitVertical {domain = 'CurrentPaneDomain'},
+    },
+    {
+      key = 'mapped:\"',
+      mods = 'LEADER|SHIFT',
+      action = wezterm.action.SplitHorizontal {domain = 'CurrentPaneDomain'},
+    },
+    {
+      key = 'r',
+      mods = 'LEADER',
+      action = act.ActivateKeyTable{
+        name = 'resize_pane',
+        one_shot = false,
       },
-      {
-          key = 'a',
-          mods = 'LEADER',
-          action = act.ActivateKeyTable{
-              name = 'activate_pane',
-              timeout_milliseconds = 1000,
-          },
+    },
+    {
+      key = 'a',
+      mods = 'LEADER',
+      action = act.ActivateKeyTable{
+        name = 'activate_pane',
+        timeout_milliseconds = 1000,
       },
+    },
   },
   key_tables = {
       resize_pane = {
