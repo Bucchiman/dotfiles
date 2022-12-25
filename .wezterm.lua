@@ -64,12 +64,12 @@ return {
     {
       key = 'mapped:\'',
       mods = 'LEADER',
-      action = wezterm.action.SplitVertical {domain = 'CurrentPaneDomain'},
+      action = wezterm.action.SplitHorizontal {domain = 'CurrentPaneDomain'},
     },
     {
       key = 'mapped:\"',
       mods = 'LEADER|SHIFT',
-      action = wezterm.action.SplitHorizontal {domain = 'CurrentPaneDomain'},
+      action = wezterm.action.SplitVertical {domain = 'CurrentPaneDomain'},
     },
     {
       key = 'r',
