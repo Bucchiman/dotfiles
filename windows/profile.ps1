@@ -7,3 +7,7 @@ Set-Alias -Name settings -Value "C:\Users\yk.iwabuchi\AppData\Local\Packages\Mic
 
 # New-Item -Value '(リンク先フォルダ)' -Path '(シンボリックリンクの配置先)' -Name (シンボリックリンク名) -ItemType SymbolicLink
 # New-Item -Value '$HOME\git\dotfiles\windows\profile.ps1' -Path '$HOME\Documents\WindowsPowerShell' -Name profile.ps1 -ItemType SymbolicLink
+
+# $USER_NAME = $env:USERNAME
+$USER_NAME = "ykiwabuchi"
+$WSL_HOME = "Microsoft.PowerShell.Core\FileSystem::\\wsl$\Ubuntu\home\" + $USER_NAME
