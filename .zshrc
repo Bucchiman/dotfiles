@@ -346,4 +346,20 @@ if (which zprof > /dev/null 2>&1) ;then
 fi
 
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+
+function prev() {
+    PREV=$(echo `history | tail -n2 | head -n1` | sed 's/[0-9]* //')
+    sh -c "pet new `printf %q $PREV`"
+}
+
+function pet-select() {
+    BUFFER=$(pet search --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N pet-select
+stty -ixon
+bindkey '^s' pet-select
+
 return

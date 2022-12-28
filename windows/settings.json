@@ -6,6 +6,21 @@
         {
             "command": 
             {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "ctrl+shift+s"
+        },
+        {
+            "command": 
+            {
+                "action": "prevTab"
+            },
+            "keys": "ctrl+left"
+        },
+        {
+            "command": 
+            {
                 "action": "copy",
                 "singleLine": false
             },
@@ -14,6 +29,21 @@
         {
             "command": "find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "newTab",
+                "index": 1
+            },
+            "keys": "ctrl+2"
+        },
+        {
+            "command": 
+            {
+                "action": "nextTab"
+            },
+            "keys": "ctrl+right"
         },
         {
             "command": "unbound",
@@ -29,24 +59,27 @@
             "keys": "ctrl+s"
         },
         {
-            "command": "nextTab",
-            "keys": "ctrl+right"
-        },
-        {
-            "command": "prevTab",
-            "keys": "ctrl+left"
-        },
-        {
-            "command": {
-                "action": "splitPane",
-                "split": "vertical"
+            "command": 
+            {
+                "action": "newTab"
             },
-            "keys": "ctrl+shift+s"
+            "keys": "ctrl+t"
         },
-        {"command": "newTab", "keys": "ctrl+t"},
-        {"command": {"action": "newTab", "index": 0}, "keys": "ctrl+1"},
-        {"command": {"action": "newTab", "index": 1}, "keys": "ctrl+2"},
-        {"command": "closeTab", "keys": "ctrl+backspace"}
+        {
+            "command": 
+            {
+                "action": "newTab",
+                "index": 0
+            },
+            "keys": "ctrl+1"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "ctrl+backspace"
+        }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
@@ -60,8 +93,7 @@
                 "face": "mononoki Nerd Font Mono"
             },
             "opacity": 69,
-            "useAcrylic": false,
-            "colorSheme": "iceberg-dark"
+            "useAcrylic": false
         },
         "list": 
         [
@@ -100,7 +132,6 @@
                 "hidden": false,
                 "name": "Windows PowerShell"
             },
-
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -372,6 +403,6 @@
             "yellow": "#E2A478"
         }
     ],
-    "startOnUserLogin": true,
+    "startOnUserLogin": false,
     "theme": "dark"
 }
