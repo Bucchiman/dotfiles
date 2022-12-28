@@ -362,4 +362,13 @@ zle -N pet-select
 stty -ixon
 bindkey '^s' pet-select
 
+show_snippets() {
+    local snippets=$(cat $HOME/zsh_snippet | fzf | cut -d':' -f2-)
+    LBUFFER="${LBUFFER}${snippets}"
+    zle reset-prompt
+}
+
+zle -N show_snippets
+bindkey '^o' show_snippets
+
 return
