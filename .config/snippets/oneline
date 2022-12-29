@@ -1,0 +1,4 @@
+awk:'{print $1}'
+fzf:--prompt ""
+fzf:--preview
+fzf:--preview-window=down:40%

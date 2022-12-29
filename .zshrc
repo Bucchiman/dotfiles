@@ -363,12 +363,23 @@ stty -ixon
 bindkey '^s' pet-select
 
 show_snippets() {
-    local snippets=$(cat $HOME/zsh_snippet | fzf | cut -d':' -f2-)
+    #local snippets=$(cat $HOME/.zsh/snippets/oneline | fzf | cut -d':' -f2-)
+    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | fzf )
+    sed -i 's/\r//' ${load_file}
+    local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }
 
-zle -N show_snippets
-bindkey '^o' show_snippets
+#zle -N show_snippets
+#bindkey '^o' show_snippets
 
+make_file_from_snippets() {
+    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | fzf )
+    sed -i 's/\r//' ${load_file} 2>/dev/null
+    cp ${load_file} . 2>/dev/null
+    zle reset-prompt
+}
+zle -N make_file_from_snippets
+bindkey '^o' make_file_from_snippets
 return
