@@ -1,6 +1,9 @@
 # ----------------------------------------------------------------------
-export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
-unset -f cd
+if [[ -e $HOME/bin/gulliver ]]
+then
+    export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
+    unset -f cd
+fi
 # ----------------------------------------------------------------------
 
 function _has() {
@@ -42,7 +45,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Ignore whether the charac
 eval `dircolors`
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-source $HOME/.zsh/git_completion/git-prompt.sh
+source $HOME/.zsh/git_completion/git-prompt.sh 2>/dev/null
 zstyle ':completion:*:*:git:*' script $HOME/.zsh/git-completion.bash
 autoload -Uz compinit && compinit
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -187,7 +190,7 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
-alias bat='batcat'
+#alias bat='bat'
 
 #---------------#
 #    setopt     #
@@ -247,46 +250,35 @@ LOGCHECK=20
 
 
 
-
-# dotnet
-switch.net7() {
-    export DOTNET_ROOT=$HOME/.dotnet/dotnet_7.0
-    export PATH=$PATH:$HOME/.dotnet/dotnet_7.0
-}
-switch.net6() {
-    export DOTNET_ROOT=$HOME/.dotnet/dotnet_6.0
-    export PATH=$PATH:$HOME/.dotnet/dotnet_6.0
-}
-
-
-
-
-
 #---------------#
 #   fzf & ag    #
 #---------------#
 # fzf から the_silver_searcher (ag) を呼び出すことで高速化
 # fzf の キーバインド
-if [ -e /opt/local/share/fzf/shell/key-bindings.zsh ]; then
-    source /opt/local/share/fzf/shell/key-bindings.zsh
+#if [ -e /opt/local/share/fzf/shell/key-bindings.zsh ]; then
+#    source /opt/local/share/fzf/shell/key-bindings.zsh
+#fi
+
+if [ -e $HOME/.fzf/shell/completion.zsh ]; then
+    source $HOME/.fzf/shell/completion.zsh
 fi
 
 # fzf の 補完設定
-if [ -e /opt/local/share/fzf/shell/completion.zsh ]; then
-    source /opt/local/share/fzf/shell/completion.zsh
-fi
+#if [ -e /opt/local/share/fzf/shell/completion.zsh ]; then
+#    source /opt/local/share/fzf/shell/completion.zsh
+#fi
 
 if _has fzf && _has ag; then
     export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_COMMON_MYOPTS="--height 40% --layout=reverse --multi"
-    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'batcat --color=always {} --style=plain'"
-    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'batcat --color=always {}'"
+    export FZF_DEFAULT_OPTS="$FZF_COMMON_MYOPTS --preview 'bat --color=always {} --style=plain'"
+    export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'bat --color=always {}'"
 fi
 
-alias f="fzf --preview 'batcat --color=always {}'"
-alias F="fzf --height 100% --preview 'batcat --color=always {}'"
+alias f="fzf --preview 'bat --color=always {}'"
+alias F="fzf --height 100% --preview 'bat --color=always {}'"
 
 #---------------#
 #   ls setting  #
@@ -375,11 +367,14 @@ show_snippets() {
 #bindkey '^o' show_snippets
 
 make_file_from_snippets() {
-    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | fzf )
+    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f )
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
     zle reset-prompt
 }
 zle -N make_file_from_snippets
 bindkey '^o' make_file_from_snippets
+
+#[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
 return

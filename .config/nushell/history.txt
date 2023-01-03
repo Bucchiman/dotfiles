@@ -1,0 +1,25 @@
+ls
+ls | sort-by size | reverse
+ls | where size > 1kb
+ls | where size > 5kb
+ps
+sys
+sys | get host
+ls
+ls -a
+./.config/
+ls
+./nushell/
+ls
+cd
+ls
+./.config/
+ls
+./nushell/
+ls
+nvim env.nu
+ls
+..
+ls
+./2022/
+ls

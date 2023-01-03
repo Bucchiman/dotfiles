@@ -1,18 +1,25 @@
 local wezterm = require 'wezterm'
+local io = require 'io'
+local os = require 'os'
 local launch_menu = {}
 local act = wezterm.action
 
-wezterm.on('update-right-status',
-function(window, pane)
-    local name = window:active_key_table()
-    if name then
-        name = 'TABLE: ' .. name
-    end
-    window:set_right_status(name or '')
-end)
+--wezterm.on(
+--  'update-right-status',
+--  function(window, pane)
+--    local name = window:active_key_table()
+--    if name then
+--        name = 'TABLE: ' .. name
+--    end
+--    window:set_right_status(name or '')
+--  end
+--)
 
-
+-- windows
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  --font_dirs = {
+  --  "$HOME\\git\\dotfiles\\.fonts"
+  --}
   table.insert(launch_menu, {
     label = 'PowerShell',
     args = { 'powershell.exe', '-NoLogo' },
@@ -37,7 +44,58 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
       },
     })
   end
+-- linux
+elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+  default_prog = {"/usr/bin/zsh"}
+  window_background_image = ""
+
+-- mac
+elseif wezterm.target_triple == 'x86_64-apple-darwin' then
+  default_prog = {"nu"}
+  window_background_image = ""
 end
+
+function print_window_size(window)
+  local window_dims = window:get_dimensions()
+  local overrides = window:get_config_overrides() or {}
+  print(window_dims)
+end
+
+wezterm.on(
+  'trigger-vim-with-visible-text',
+  function(window, pane)
+    local viewport_text = pane:get_lines_as_text()
+    local name = os.tmpname()
+    local f = io.open(name, 'w+')
+    f:write(viewport_text)
+    f:flush()
+    f:close()
+    window:perform_action(
+      act.SpawnCommandInNewWindow{
+        args = {'vim', name},
+      },
+      pane)
+    wezterm.sleep_ms(1000)
+    os.remove(name)
+  end
+)
+
+wezterm.on(
+  "plumb-selection",
+  function(window, pane)
+    local sel = window:get_selection_text_for_pane(pane);
+    window:perform_action(
+      wezterm.action{
+        SplitHorizontal = {
+          args = {
+            "nu", "-c", "echo " .. json.encode(sel) .. " | deno run -A c:\\Users\\bucchiman\\.dotfiles\\wezterm\\plumb.ts | fzf "
+          }
+        },
+        pane
+      }
+    )
+  end
+)
 
 
 return {
@@ -57,10 +115,15 @@ return {
   },
   font_size = 18,
   color_scheme = 'iceberg-dark',
-  default_prog = {"wsl.exe"},
+  --default_prog = {"wsl.exe"},
   window_background_opacity = 0.7,
   leader = {key = 'Space', mods = 'SHIFT', timeout_milliseconds = 2000},
   keys = {
+    {
+      key = 'E',
+      mods = 'CTRL',
+      action = act.EmitEvent 'trigger-vim-with-visible-text'
+    },
     {
       key = 'mapped:\'',
       mods = 'LEADER',
