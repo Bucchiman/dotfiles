@@ -4,23 +4,8 @@
     "actions": 
     [
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "ctrl+shift+s"
-        },
-        {
-            "command": 
-            {
-                "action": "prevTab"
-            },
-            "keys": "ctrl+left"
+            "command": "unbound",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -31,23 +16,8 @@
             "keys": "ctrl+c"
         },
         {
-            "command": "unbound",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": 
-            {
-                "action": "nextTab"
-            },
-            "keys": "ctrl+right"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab",
-                "index": 1
-            },
-            "keys": "ctrl+2"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -56,73 +26,61 @@
                 "split": "auto",
                 "splitMode": "duplicate"
             },
-            "keys": "ctrl+s"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab"
-            },
-            "keys": "ctrl+t"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab",
-                "index": 0
-            },
-            "keys": "ctrl+1"
-        },
-        {
-            "command": 
-            {
-                "action": "closeTab"
-            },
-            "keys": "ctrl+backspace"
+            "keys": "alt+shift+d"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+    "experimental.rendering.forceFullRepaint": true,
+    "experimental.rendering.software": true,
+    "launchMode": "maximized",
     "profiles": 
     {
         "defaults": 
         {
+            "backgroundImage": "\\\\wsl.localhost\\Ubuntu\\home\\bucchiman\\.env\\images\\nujabes05-1024x576_gray_processing01.jpg",
+            "backgroundImageOpacity": 0.70000000000000007,
+            "colorScheme": "Tango Dark",
             "font": 
             {
                 "face": "mononoki Nerd Font Mono"
             },
-            "opacity": 69,
+            "opacity": 70,
             "useAcrylic": false
         },
         "list": 
         [
             {
-                "backgroundImage": null,
-                "colorScheme": "iceberg-dark",
                 "font": 
                 {
-                    "face": "mononoki Nerd Font Mono",
-                    "size": 19
+                    "face": "mononoki Nerd Font Mono"
                 },
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "opacity": 69,
-                "source": "Windows.Terminal.Wsl",
-                "useAcrylic": false
-            },
-            {
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell"
             },
             {
-                "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\u30b3\u30de\u30f3\u30c9 \u30d7\u30ed\u30f3\u30d7\u30c8"
+            },
+            {
+                "backgroundImage": "\\\\wsl.localhost\\Ubuntu\\home\\bucchiman\\.env\\images\\nujabes05-1024x576_gray_processing01.jpg",
+                "backgroundImageOpacity": 0.72999999999999998,
+                "colorScheme": "iceberg-dark",
+                "font": 
+                {
+                    "face": "mononoki NF",
+                    "size": 18,
+                    "weight": "normal"
+                },
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "opacity": 12,
+                "source": "Windows.Terminal.Wsl",
+                "useAcrylic": false
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -131,28 +89,36 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
-                "hidden": true,
-                "name": "Ubuntu-18.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{6af3ca36-ff71-596d-bbf5-b42f87eccf3c}",
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
+                "backgroundImage": "\\\\wsl.localhost\\Ubuntu\\home\\bucchiman\\.env\\images\\nujabes05-1024x576_gray_processing01.jpg",
+                "colorScheme": "iceberg-dark",
+                "font": 
+                {
+                    "face": "mononoki Nerd Font",
+                    "weight": "semi-bold"
+                },
                 "guid": "{9e2147f6-53fe-5858-b905-a675f9252c57}",
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
+                "source": "Windows.Terminal.VisualStudio",
+                "startingDirectory": "\\\\wsl.localhost\\Ubuntu\\home\\bucchiman"
             },
             {
-                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
                 "hidden": true,
-                "name": "Visual Studio Debug Console",
-                "source": "VSDebugConsole"
+                "name": "Ubuntu-18.04",
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{924d0061-6e69-5d11-a3a9-c44bfc97ce88}",
@@ -161,10 +127,10 @@
                 "source": "CanonicalGroupLimited.Ubuntu18.04LTS_79rhkp1fndgsc"
             },
             {
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "hidden": true,
+                "name": "Visual Studio Debug Console",
+                "source": "VSDebugConsole"
             }
         ]
     },
