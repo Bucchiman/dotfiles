@@ -19,8 +19,8 @@ hook_add = '''
         \ },
         \ 'component_expand': { 'fugitive': 'LightlineFugitive' },
         \ 'colorscheme': 'wombat',
-        \ 'separator': { 'left': "|", 'right': "|" },
-        \ 'subseparator': { 'left': "|", 'right': "|" }
+        \ 'separator': { 'left': "", 'right': "" },
+        \ 'subseparator': { 'left': "", 'right': "" }
         \}
 
         function! LightlineFugitive()
@@ -223,3 +223,10 @@ repo = 'OmniSharp/omnisharp-vim'
 
 [[plugins]]
 repo = 'tribela/vim-transparent'
+
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'sindrets/diffview.nvim'

@@ -48,7 +48,6 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
   default_prog = {"/usr/bin/zsh"}
   window_background_image = ""
-
 -- mac
 elseif wezterm.target_triple == 'x86_64-apple-darwin' then
   default_prog = {"nu"}
@@ -99,6 +98,8 @@ wezterm.on(
 
 
 return {
+  -- font_dirs = font_dirs,
+  font_size = 18,
   font = wezterm.font_with_fallback {
       {
           family = 'mononoki Nerd Font Mono',
@@ -113,7 +114,7 @@ return {
           weight = 'Bold',
       },
   },
-  font_size = 18,
+  selection_word_boundary = ' \t\n{[}]()"\'',
   color_scheme = 'iceberg-dark',
   --default_prog = {"wsl.exe"},
   window_background_opacity = 0.7,
