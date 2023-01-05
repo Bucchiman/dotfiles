@@ -370,23 +370,25 @@ function pet-select() {
     CURSOR=$#BUFFER
     zle redisplay
 }
-zle -N pet-select
-stty -ixon
-bindkey '^s' pet-select
+#zle -N pet-select
+#stty -ixon
+#bindkey '^s' pet-select
 
-show_snippets() {
-    #local snippets=$(cat $HOME/.zsh/snippets/oneline | fzf | cut -d':' -f2-)
-    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | fzf )
+function show_snippets() {
+    #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
+    #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
+    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f)
     sed -i 's/\r//' ${load_file}
     local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }
 
-#zle -N show_snippets
-#bindkey '^o' show_snippets
+zle -N show_snippets
+stty -ixon
+bindkey '^s' show_snippets
 
-make_file_from_snippets() {
+function make_file_from_snippets() {
     local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f )
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
