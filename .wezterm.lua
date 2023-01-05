@@ -31,7 +31,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- environment command prompts to the menu
   for _, vsvers in
     ipairs(
-      -- wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
+      wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
       wezterm.glob('Microsoft Visual Studio/20*')
     )
   do
@@ -39,8 +39,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     table.insert(launch_menu, {
       label = 'x64 Native Tools VS ' .. year,
       args = {
-        'wsl.exe',
-        -- 'cmd.exe',
+        'cmd.exe',
         '/k',
         'C:/Program Files (x86)/'
           .. vsvers
@@ -48,10 +47,10 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
       },
     })
   end
-  for i=1, #launch_menu
-  do
-    wezterm.log_info(launch_menu[i])
-  end
+  --for i=1, #launch_menu
+  --do
+  --  wezterm.log_info(launch_menu[i])
+  --end
 
 -- linux
 elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
