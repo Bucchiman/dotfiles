@@ -4,6 +4,7 @@ local os = require 'os'
 local launch_menu = {}
 local act = wezterm.action
 
+
 --wezterm.on(
 --  'update-right-status',
 --  function(window, pane)
@@ -20,6 +21,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   --font_dirs = {
   --  "$HOME\\git\\dotfiles\\.fonts"
   --}
+  default_prog = {"wsl.exe"},
   table.insert(launch_menu, {
     label = 'PowerShell',
     args = { 'powershell.exe', '-NoLogo' },
@@ -29,14 +31,16 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- environment command prompts to the menu
   for _, vsvers in
     ipairs(
-      wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
+      -- wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
+      wezterm.glob('Microsoft Visual Studio/20*')
     )
   do
     local year = vsvers:gsub('Microsoft Visual Studio/', '')
     table.insert(launch_menu, {
       label = 'x64 Native Tools VS ' .. year,
       args = {
-        'cmd.exe',
+        'wsl.exe',
+        -- 'cmd.exe',
         '/k',
         'C:/Program Files (x86)/'
           .. vsvers
@@ -44,6 +48,11 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
       },
     })
   end
+  for i=1, #launch_menu
+  do
+    wezterm.log_info(launch_menu[i])
+  end
+
 -- linux
 elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
   default_prog = {"/usr/bin/zsh"}
@@ -116,7 +125,7 @@ return {
   },
   selection_word_boundary = ' \t\n{[}]()"\'',
   color_scheme = 'iceberg-dark',
-  --default_prog = {"wsl.exe"},
+  default_prog = default_prog,
   window_background_opacity = 0.7,
   leader = {key = 'Space', mods = 'SHIFT', timeout_milliseconds = 2000},
   keys = {
