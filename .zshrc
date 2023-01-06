@@ -334,7 +334,7 @@ export EDITOR="$VISUAL"
 #DISPLAY setting#
 #---------------#
 #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export DISPLAY=$(ip route list default | awk '{print $3}'):0
 #export DISPLAY=`hostname`.mshome.net:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 
@@ -400,3 +400,5 @@ bindkey '^o' make_file_from_snippets
 #[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 return
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

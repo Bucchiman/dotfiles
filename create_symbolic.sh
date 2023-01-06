@@ -6,12 +6,12 @@
 #
 
 
-ln -s ./.zshrc $HOME/.zshrc
-ln -s ./.zshenv $HOME/.zshenv
-ln -s ./.config/nvim $HOME/.config/nvim
-ln -s ./.config/dein $HOME/.config/dein
-ln -s ./.config/template $HOME/.config/template
-ln -s ./.config/snippets $HOME/.config/snippets
-ln -s ./.vimrc $HOME/.vimrc
-ln -s ./.wezterm.lua $HOME/.wezterm.lua
+ln -sf $PWD/.zshrc $HOME/.zshrc
+ln -sf $PWD/.zshenv $HOME/.zshenv
+ln -sf $PWD/.config/nvim $HOME/.config/nvim
+ln -sf $PWD/.config/dein $HOME/.config/dein
+ln -sf $PWD/.config/template $HOME/.config/template
+ln -sf $PWD/.config/snippets $HOME/.config/snippets
+ln -sf $PWD/.vimrc $HOME/.vimrc
+ln -sf $PWD/.wezterm.lua $HOME/.wezterm.lua
 return
