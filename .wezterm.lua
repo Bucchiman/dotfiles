@@ -32,7 +32,6 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   for _, vsvers in
     ipairs(
       wezterm.glob('Microsoft Visual Studio/20*', 'C:/Program Files (x86)')
-      wezterm.glob('Microsoft Visual Studio/20*')
     )
   do
     local year = vsvers:gsub('Microsoft Visual Studio/', '')

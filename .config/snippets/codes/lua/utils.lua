@@ -2,7 +2,7 @@
 --
 -- FileName:     utils
 -- CreatedDate:  2023-01-05 23:39:49 +0900
--- LastModified: 2023-01-06 00:14:33 +0900
+-- LastModified: 2023-01-07 13:49:25 +0900
 --
 
 
@@ -31,7 +31,18 @@ for i, line in ipairs(a) do
 end
 
 
-list = nil
-for line in io.lines() do
-  list = {next=list, value=line}
+-- list = nil
+-- for line in io.lines() do
+--   list = {next=list, value=line}
+-- end
+
+
+local launch_menu = {}
+table.insert(launch_menu, {
+  label = "hoge",
+  args = {"hoge"},})
+
+for i=1, #launch_menu do
+  print(launch_menu[i])
 end
+print(#launch_menu)

@@ -210,7 +210,6 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
-#alias bat='bat'
 
 #---------------#
 #    setopt     #
@@ -334,7 +333,7 @@ export EDITOR="$VISUAL"
 #DISPLAY setting#
 #---------------#
 #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export DISPLAY=$(ip route list default | awk '{print $3}'):0
 #export DISPLAY=`hostname`.mshome.net:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 
