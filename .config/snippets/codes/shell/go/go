@@ -1,0 +1,126 @@
+#!/bin/csh -f
+if (-e ~/anaconda3/etc/profile.d/conda.csh) source ~/anaconda3/etc/profile.d/conda.csh >& /dev/null
+
+set DATE  = `date +%Y.%m.%d_%H.%M.%S`
+set HERE = `pwd`
+
+# ----------------------------------------------------------------------
+# GANav: Efficient Terrain Segmentation for Robot Navigation in Unstructured Outdoor Environments (Accepted by RAL/IROS 2022)
+#       code : https://github.com/rayguan97/GANav-offroad
+#       proj : https://gamma.umd.edu/offroad
+#       pdf: https://arxiv.org/abs/2103.04233
+# ----------------------------------------------------------------------
+
+# usage: go [paper | code | setup | conda | data | train | eval | export | run |  rsync | etc...]
+
+# ----------------------------------------------------------------------
+# XXX: CHANGE mE
+# ----------------------------------------------------------------------
+set USE_PYTHON_VERSION = 3.8
+#set conda_env_name = $CONDA_ENV_NAME_CHANGE_ME_XXX
+set conda_env_name = ganav
+# rsync
+set RSYNC_DST =         /tmp/`whoami`/$HERE:t
+set RSYNC_DST = ~/work/projects/omron/$HERE:t
+set RSYNC_DST = jp:~/x.omron/src/xport.yolov4.onnx
+# ----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------
+alias ca "conda deactivate; conda activate \!*; rehash; which pip python"
+ca $conda_env_name
+# ----------------------------------------------------------------------
+
+# command line arguments
+set which = run
+if ($#argv >= 1) set which = $1
+echo ----------------------------------------------------------------------
+echo "--- which : $which ---"
+echo ----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------
+# run
+if ($which == run) then
+endif
+
+# eval
+if ($which == eval) then
+endif
+
+# export
+if ($which == export) then
+endif
+
+# train
+if ($which == train) then
+endif
+
+# data
+if ($which == data) then
+endif
+
+# setup
+if ($which == setup) then
+endif
+
+# code
+if ($which == code) then
+endif
+
+# paper
+if ($which == paper) then
+endif
+
+# ----------------------------------------------------------------------
+# conda
+if ($which == conda) then
+    conda create --name $conda_env_name python=$USE_PYTHON_VERSION -y
+    ca $conda_env_name
+
+    set opts = "cudatoolkit=10.1 -c pytorch"
+    if (`hostname` == jupiter) set opts = "cudatoolkit=11.3 -c pytorch"
+    conda install --yes -n $conda_env_name pytorch=1.6.0 torchvision torchaudio $opts
+    python -c 'import torch; from torch.utils.cpp_extension import CUDA_HOME; print(torch.cuda.is_available(), torch.version.cuda, CUDA_HOME, torch.cuda.device_count(), torch.cuda.get_device_capability())'
+
+#    pip install -U -r requirements.txt
+endif
+
+# conda_install
+if ($which == conda_install) then
+
+    set CONDA_DIR = ${HOME}/anaconda3
+
+    # download / install
+    if ( ! -d $CONDA_DIR ) then
+        mkdir -p /tmp/`whoami`
+                wget -c https://repo.anaconda.com/archive/Miniconda3-latest-Linux-x86_64.sh -O /tmp/`whoami`/Miniconda3-latest-Linux-x86_64.sh
+        bash /tmp/`whoami`/Miniconda3-latest-Linux-x86_64.sh -b -p /home/r.lopez/anaconda3
+    endif
+
+    # init shell
+    source ${CONDA_DIR}/etc/profile.d/conda.csh
+    which conda
+    conda init
+
+    # update / clean
+    conda update --yes -n base -c defaults conda
+    conda update  --yes --all
+    conda clean -pity
+endif
+# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+
+# rsync
+if ($which == rsync) then
+    set dst = $RSYNC_DST
+    rsync -rav $HERE/ $dst/
+endif
+
+
+# ----------------------------------------------------------------------
+# 8ucchiman was here
+# ----------------------------------------------------------------------
+if ($which == clean) then
+endif
+
+if ($which == show) then
+endif
