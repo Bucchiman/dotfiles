@@ -400,3 +400,5 @@ bindkey '^o' make_file_from_snippets
 #[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 return
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
