@@ -386,7 +386,7 @@ function show_snippets() {
 
 zle -N show_snippets
 stty -ixon
-bindkey '^s' show_snippets
+bindkey '^s^s' show_snippets
 
 function make_file_from_snippets() {
     local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f )
@@ -395,10 +395,17 @@ function make_file_from_snippets() {
     zle reset-prompt
 }
 zle -N make_file_from_snippets
-bindkey '^o' make_file_from_snippets
+bindkey '^s^m' make_file_from_snippets
 
-#[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+function show_online_snippets() {
+    local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
+    LBUFFER="${LBUFFER}${snippets}"
+    zle reset-prompt
+}
+zle -N show_online_snippets
+bindkey '^s^o' show_online_snippets
+
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 return
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
