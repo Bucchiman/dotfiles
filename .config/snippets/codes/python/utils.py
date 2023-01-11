@@ -3,12 +3,13 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-01-06 11:06:35 +0900
+# LastModified: 2023-01-10 21:23:05 +0900
 #
 
 
 import os
 import sys
+import argparse
 import logging
 from logging import getLogger, config
 
@@ -25,6 +26,12 @@ def get_logger(log_name):
     logger.addHandler(file_handler)
     logger.info("Log file is %s." % log_file)
     return logger
+
+
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument()
+    args = parser.parse_args()
 
 
 def main():
