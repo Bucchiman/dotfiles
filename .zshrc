@@ -210,6 +210,8 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
+alias pbcopy='xsel -bi'
+alias pbpaste='xsel -bo'
 #alias bat='bat'
 
 #---------------#
@@ -353,9 +355,9 @@ function switch_go() {
 
 source <(kubectl completion zsh)
 
-if (which zprof > /dev/null 2>&1) ;then
-  zprof
-fi
+#if (which zprof > /dev/null 2>&1) ;then
+#  zprof
+#fi
 
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
@@ -374,7 +376,7 @@ function pet-select() {
 #stty -ixon
 #bindkey '^s' pet-select
 
-function show_snippets() {
+function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
     #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
     local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f)
@@ -384,9 +386,9 @@ function show_snippets() {
     zle reset-prompt
 }
 
-zle -N show_snippets
+zle -N paste_snippets
 stty -ixon
-bindkey '^s^s' show_snippets
+bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
     local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f )
@@ -405,7 +407,13 @@ function show_online_snippets() {
 zle -N show_online_snippets
 bindkey '^s^o' show_online_snippets
 
+function edit_snippets() {
+    nvim ${HOME}/.config/snippets
+}
+zle -N edit_snippets
+bindkey '^s^e' edit_snippets
+
+
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 return
-

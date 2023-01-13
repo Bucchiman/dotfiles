@@ -1,8 +1,16 @@
-awk:'{print $1}'
 fzf:--prompt ""
 fzf:--preview
 fzf:--preview-window=down:40%
 make_log:LOG_PATH=./logs/`date "+%Y_%m_%d_%H_%M"`; mkdir -p ${LOG_PATH}
+make_datedir:mkdir `date "+%Y_%m_%d"`
+show_systemd:systemctl list-unit-files --type=service
 
+ffmpeg_image2video:ffmpeg -start_number 0 -i %03d.png -vcodec libx264 -pix_fmt yuv420p out.mp4
+ffmpeg_video2image:ffmpeg -i [].mp4 -r 60 %03d.png
+ffmpeg_video2gif:ffmpeg -i [].mp4 [].gif
 
+record:asciinema rec [].cast
+play_record:asciinema play [].cast
+
+latex:platex [].tex; dvipdfmx [].dvi; rm *.aux *.dvi *.log
 PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
