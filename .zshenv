@@ -18,4 +18,4 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
-zmodload zsh/zprof && zprof
+#zmodload zsh/zprof && zprof
