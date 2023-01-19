@@ -1,10 +1,9 @@
-# ----------------------------------------------------------------------
-if [[ -e $HOME/bin/gulliver ]]
+if [[ -e $HOME/.config/zsh ]]
 then
-    export GBIN=$HOME/bin/gulliver; source $GBIN/dot.bashrc
-    unset -f cd
+    export LOCALZSHRC="$HOME/.config/zsh"
+    source $HOME/.config/zsh/local.zshrc
 fi
-# ----------------------------------------------------------------------
+
 
 function _has() {
     return $( whence $1 &>/dev/null )
