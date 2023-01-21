@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-01-11 20:40:06 +0900
+# LastModified: 2023-01-19 05:50:40 +0900
 #
 
 
@@ -37,7 +37,8 @@ def make_date_log_directory():
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument()
+    #parser.add_argument()
+    parser.add_argument('--strlist', required=True, nargs="*", type=str, help='a list of strings') # --strlist hoge fuga geho
     args = parser.parse_args()
 
 

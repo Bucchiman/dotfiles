@@ -15,3 +15,10 @@ latex:platex [].tex; dvipdfmx [].dvi; rm *.aux *.dvi *.log
 PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
 
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
+
+docker:docker cp [FILE] cheesesan/[CONTAINER]:/root/
+docker:docker commit [CONTAINER] cheesesan/[IMAGE_NAME]:[TAG]
+
+
+dropbox:dbxcli get [FILE]
+dropbox:dbxcli put [FILE]
