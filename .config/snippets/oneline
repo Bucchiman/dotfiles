@@ -27,3 +27,6 @@ rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022
 
 git:git rm --cached [file]
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
+
+
+PATH print:echo $PATH | tr ":" "\n"

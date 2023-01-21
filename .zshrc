@@ -22,17 +22,17 @@ colorlist() {
     done
 }
 
-function open() {
-    if [ $# != 1 ]; then
-        explorer.exe .
-    else
-        if [ -e $1 ]; then
-            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
-        else
-            echo "open: $1 : No such file or directory" 
-        fi
-    fi
-}
+#function open() {
+#    if [ $# != 1 ]; then
+#        explorer.exe .
+#    else
+#        if [ -e $1 ]; then
+#            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
+#        else
+#            echo "open: $1 : No such file or directory" 
+#        fi
+#    fi
+#}
 
 #---------------#
 #  completion   #
@@ -73,9 +73,9 @@ add-zsh-hook precmd vcs_info
 # ローカルで変更を加えた時に通知するかを設定
 zstyle ':vcs_info:git:*' check-for-changes true
 # addされた場合(インデックスに追加)+表示
-zstyle ':vcs_info:git:*' stagedstr " "
+zstyle ':vcs_info:git:*' stagedstr "  "
 # addされていない場合-表示
-zstyle ':vcs_info:git:*' unstagedstr " "
+zstyle ':vcs_info:git:*' unstagedstr "  "
 # フォーマット表示 %b: branch名 %c: stagestr %u: unstagestr
 zstyle ':vcs_info:git:*' formats "%b%c%u"
 # 異常状態(conflict, rebase状態)
@@ -92,21 +92,22 @@ LANG=en_US.UTF-8 vcs_info
 #
 # echo 
 # echo 
-# echo (e0b0)
+# echo  (e0b0)
 # echo 
+# echo 
 
 
 function create_item() {
     if [[ $1 == "litem" ]]
     then
-        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k"
+        echo "%F{$2}%K{$3} %k%f%K{$3}%F{$4}$5%f%k"
     elif [[ $1 == "litem_left" ]]
     then
-        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k"
+        echo "%F{$2}%K{$3} %k%f%K{$3}%F{$4}$5%f%k"
 
     elif [[ $1 == "litem_right" ]]
     then
-        echo "%F{$2}%K{$3}%k%f%K{$3}%F{$4}$5%f%k%F{$3}%f"
+        echo "%F{$2}%K{$3} %k%f%K{$3}%F{$4}$5%f%k%F{$3}%f"
     elif [[ $1 == "ritem" ]]
     then
         echo "%F{$2}%K{$3}%f%k%K{$2}%F{$4}$5%1v%f%k%F{$2}%K{$3}%f%k"
@@ -141,8 +142,8 @@ function lprompt() {
 
     #fi
 
-    path_prompt=`echo "$PWD" | awk -v home_dir=$HOME '{sub(home_dir, "", $0); print $0}'`
-    pwd_prompt=`create_item litem_right 003 012 255 $path_prompt" "`
+    path_prompt=`echo "$PWD" | awk -v home_dir=$HOME '{sub(home_dir, " ", $0); print $0}'`
+    pwd_prompt=`create_item litem_right 003 012 255 $path_prompt"  "`
 
     #pwd_prompt=`create_item litem_right 003 012 255 " "%~`
     echo $machine_prompt$name_prompt$pwd_prompt
@@ -167,9 +168,9 @@ function rprompt() {
     cd $current
 
     if [[ `echo $vcs_info_msg_0_ | grep -c -e "master" -e "main"` > 0 ]]; then
-        branch=""
+        branch=" "
     else
-        branch=""
+        branch=" "
     fi
 
     if [[ $git_check -eq 0 ]]
@@ -209,8 +210,8 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
-alias pbcopy='xsel -bi'
-alias pbpaste='xsel -bo'
+#alias pbcopy='xsel -bi'
+#alias pbpaste='xsel -bo'
 #alias bat='bat'
 
 #---------------#
