@@ -1,19 +1,31 @@
 make_log:LOG_PATH=./logs/`date "+%Y_%m_%d_%H_%M"`; mkdir -p ${LOG_PATH}
-make_datedir:mkdir `date "+%Y_%m_%d"`
+make_datedir:mkdir `date "+%d_%m_%Y"`
 show_systemd:systemctl list-unit-files --type=service
+
+redirect: &>[]
 
 ffmpeg_image2video:ffmpeg -start_number 0 -i %03d.png -vcodec libx264 -pix_fmt yuv420p out.mp4
 ffmpeg_video2image:ffmpeg -i [].mp4 -r 60 %03d.png
 ffmpeg_video2gif:ffmpeg -i [].mp4 [].gif
 
-record:asciinema rec [].cast
+
+gpu_utility:nvidia-smi --query-gpu=timestamp,name,utilization.gpu,utilization.memory,memory.used,memory.free,memory.used --format=csv,noheader
+gpu_process:nvidia-smi --query-compute-apps=pid,gpu_bus_id,process_name,used_memory --format=csv,noheader
+get_bus_id:lshw -C display -businfo
+
+command_record:asciinema rec [].cast
 play_record:asciinema play [].cast
+asciicast2gif:docker run --rm -v $PWD:/data asciinema/asciicast2gif [].cast [].gif
 
 latex:platex [].tex; dvipdfmx [].dvi; rm *.aux *.dvi *.log
 
 
 PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
 
+rsync:rsync -auv dir/ dir/  # 追加分のみをコピー
+rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022/hoge
+
+git:git rm --cached [file]
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
 
 docker:docker cp [FILE] cheesesan/[CONTAINER]:/root/
@@ -22,3 +34,5 @@ docker:docker commit [CONTAINER] cheesesan/[IMAGE_NAME]:[TAG]
 
 dropbox:dbxcli get [FILE]
 dropbox:dbxcli put [FILE]
+
+PATH print:echo $PATH | tr ":" "\n"
