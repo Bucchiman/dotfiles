@@ -1,6 +1,6 @@
 make_log:LOG_PATH=./logs/`date "+%Y_%m_%d_%H_%M"`; mkdir -p ${LOG_PATH}
 make_datedir:mkdir `date "+%d_%m_%Y"`
-show_systemd:systemctl list-unit-files --type=service
+systemd:systemctl list-unit-files --type=service
 
 redirect: &>[]
 
@@ -27,6 +27,7 @@ rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022
 
 git:git rm --cached [file]
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
+homepage:scp -P 8022 -r r9286695@www321.onamae.ne.jp:public_html/8ucchiman.jp .
 
 docker:docker cp [FILE] cheesesan/[CONTAINER]:/root/
 docker:docker commit [CONTAINER] cheesesan/[IMAGE_NAME]:[TAG]
@@ -36,3 +37,14 @@ dropbox:dbxcli get [FILE]
 dropbox:dbxcli put [FILE]
 
 PATH print:echo $PATH | tr ":" "\n"
+ssh:ssh -l bucchiman 192.168.0.0
+ssh:ssh -v 192.168.0.0  # サーバーの認証方式確認
+ssh:ssh-keygen -y -f .ssh/id_rsa    # yオプションで秘密鍵から公開鍵を再作成
+ssh:ssh-keygen -p -f .ssh/id_rsa    # pオプションでパスフレーズ変更
+ssh:ssh-add -K .ssh/id_rsa          # ssh-agentに鍵の登録
+ssh:ssh-add -l                      # ssh-agentの登録鍵確認
+ssh:ssh-add -D                      # 登録されている鍵の削除
+ssh:ssh remotehost "ls > ls.log"    # リモートホスト上でログを残す
+ssh:ssh remotehost ls > ls.log      # クライアントホスト上でログを残す
+
+ps axo pid,ppid,s,stat,pcpu,pmem,time,start,nice,args,comm,tt,uid,user,gid,group # ppid:親PID, s:プロセスの状態, stat: 複数文字プロセス状態, pcpu: CPUの使用率, pmem: メモリの使用率, time: CPUの累積使用時間, start: コマンドが起動した時刻, nice値(プロセスの優先順位), args: コマンド名(引数あり), comm: コマンド名(実行ファイルのみ), tt: 制御端末, 実行ユーザーのID

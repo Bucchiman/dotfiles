@@ -1,4 +1,4 @@
-if [[ -e $HOME/.config/zsh ]]
+if [[ -d $HOME/.config/zsh ]]
 then
     export LOCALZSHRC="$HOME/.config/zsh"
     source $HOME/.config/zsh/local.zshrc
@@ -210,8 +210,6 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
-#alias pbcopy='xsel -bi'
-#alias pbpaste='xsel -bo'
 #alias bat='bat'
 
 #---------------#
