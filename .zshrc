@@ -1,4 +1,4 @@
-if [[ -e $HOME/.config/zsh ]]
+if [[ -d $HOME/.config/zsh ]]
 then
     export LOCALZSHRC="$HOME/.config/zsh"
     source $HOME/.config/zsh/local.zshrc
@@ -210,8 +210,6 @@ precmd () {
 #---------------#
 alias ls='exa --icons'
 alias diff='diff --color'
-#alias pbcopy='xsel -bi'
-#alias pbpaste='xsel -bo'
 #alias bat='bat'
 
 #---------------#
@@ -335,7 +333,7 @@ export EDITOR="$VISUAL"
 #---------------#
 #DISPLAY setting#
 #---------------#
-#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 #export DISPLAY=$(ip route list default | awk '{print $3}'):0
 #export DISPLAY=`hostname`.mshome.net:0.0
 export LIBGL_ALWAYS_INDIRECT=1
