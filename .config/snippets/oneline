@@ -22,6 +22,7 @@ latex:platex [].tex; dvipdfmx [].dvi; rm *.aux *.dvi *.log
 
 PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
 
+
 rsync:rsync -auv dir/ dir/  # 追加分のみをコピー
 rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022/hoge
 
@@ -30,3 +31,8 @@ homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
 
 
 PATH print:echo $PATH | tr ":" "\n"
+
+
+port:sudo port select --set python python39
+port:sudo port select --set python3 python39
+
