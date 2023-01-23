@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-01-21 20:47:16 +0900
+# LastModified: 2023-01-22 23:59:07 +0900
 #
 
 
@@ -45,6 +45,22 @@ def get_args():
     parser.add_argument('--colors', nargs='*', required=True)
     args = parser.parse_args()
     return args
+
+
+def make_barplot():
+    x = np.arange()
+    x_position = np.arange(len(x))
+    y_one = np.array()
+    y_two = np.array()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.bar(x_position, y_one, width=0.2, label="one")
+    ax.bar(x_position+0.2, y_two, width=0.2, label="two")
+    ax.legend()
+    ax.set_xticks(x_position+0.2)
+    ax.set_xticklabels(x)
+    plt.show()
+    fig.savefig("output.png")
 
 
 def main():
