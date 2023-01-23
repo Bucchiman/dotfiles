@@ -1,7 +1,9 @@
 /*
  * FileName:     <+FILENAME+>
+ * Author: 8ucchiman
  * CreatedDate:  <+DATE+>
- * LastModified: 2020-10-09 15:09:42 +0900
+ * LastModified: 2023-01-23 14:09:50 +0900
+ * Reference: 8ucchiman.jp
  */
 
 #include <stdio.h>
