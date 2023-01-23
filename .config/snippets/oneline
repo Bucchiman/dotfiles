@@ -2,7 +2,6 @@ make_log:LOG_PATH=./logs/`date "+%Y_%m_%d_%H_%M"`; mkdir -p ${LOG_PATH}
 make_datedir:mkdir `date "+%d_%m_%Y"`
 systemd:systemctl list-unit-files --type=service
 
-redirect: &>[]
 
 ffmpeg_image2video:ffmpeg -start_number 0 -i %03d.png -vcodec libx264 -pix_fmt yuv420p out.mp4
 ffmpeg_video2image:ffmpeg -i [].mp4 -r 60 %03d.png
@@ -48,3 +47,12 @@ ssh:ssh remotehost "ls > ls.log"    # リモートホスト上でログを残す
 ssh:ssh remotehost ls > ls.log      # クライアントホスト上でログを残す
 
 ps axo pid,ppid,s,stat,pcpu,pmem,time,start,nice,args,comm,tt,uid,user,gid,group # ppid:親PID, s:プロセスの状態, stat: 複数文字プロセス状態, pcpu: CPUの使用率, pmem: メモリの使用率, time: CPUの累積使用時間, start: コマンドが起動した時刻, nice値(プロセスの優先順位), args: コマンド名(引数あり), comm: コマンド名(実行ファイルのみ), tt: 制御端末, 実行ユーザーのID
+
+redirect:stat -c%N /dev/fd/*    # ファイルディスクリプタのリンク先確認
+redirect: 1>/dev/null 2>&1      # stdout/stderrの出力をともに/dev/nullに送る
+redirect: 3>&1 1>&2 2>&3-       # stdout/stderrを逆にする
+redirect: n>&m                  # nのFDにmのFDが複製される
+redirect: &>[]
+
+
+diff:diff <(ls /usr) <(ls /usr/local)   # コマンド実行結果比較

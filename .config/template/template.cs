@@ -1,7 +1,9 @@
 /*
  * FileName:     <+FILENAME+>
+ * Author: 8ucchiman
  * CreatedDate:  <+DATE+>
- * LastModified: 2022-12-22 17:11:51 +0900
+ * LastModified: 2023-01-23 14:19:10 +0900
+ * Reference: 8ucchiman.jp
  */
 
 using System;

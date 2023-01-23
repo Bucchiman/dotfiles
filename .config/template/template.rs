@@ -1,7 +1,9 @@
 /*
  * FileName:     <+FILENAME+>
+ * Author: 8ucchiman
  * CreatedDate:  <+DATE+>
- * LastModified: 2022-06-08 17:11:12 +0900
+ * LastModified: 2023-01-23 14:15:07 +0900
+ * Reference: 8ucchiman.jp
  */
 
 use proconio:: input;
