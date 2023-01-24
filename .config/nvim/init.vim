@@ -200,5 +200,5 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
-
+set clipboard=unnamed
 
