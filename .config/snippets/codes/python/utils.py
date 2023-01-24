@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-01-21 20:47:16 +0900
+# LastModified: 2023-01-24 11:06:53 +0900
 #
 
 
@@ -37,7 +37,9 @@ def make_date_log_directory():
 
 def get_args():
     parser = argparse.ArgumentParser()
-    #parser.add_argument()
+    parser.add_argument('arg1')     # 必須の引数
+    parser.add_argument('-a', 'arg')    # 省略形
+    parser.add_argument('--flag', action='store_true')  # flag
     parser.add_argument('--strlist', required=True, nargs="*", type=str, help='a list of strings') # --strlist hoge fuga geho
     parser.add_argument('--method', type=str)
     parser.add_argument('--fruit', type=str, default='apple', choices=['apple', 'banana'], required=True)
