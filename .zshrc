@@ -416,3 +416,5 @@ bindkey '^s^e' edit_snippets
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 return
+
+source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop

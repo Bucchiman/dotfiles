@@ -21,6 +21,7 @@ latex:platex [].tex; dvipdfmx [].dvi; rm *.aux *.dvi *.log
 
 PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
 
+
 rsync:rsync -auv dir/ dir/  # 追加分のみをコピー
 rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022/hoge
 rsync:rsync -auvz dir/ jupiter:git/dir/         # ローカルのディレクトリをリモートマシンに同期
@@ -38,6 +39,11 @@ dropbox:dbxcli get [FILE]
 dropbox:dbxcli put [FILE]
 
 PATH print:echo $PATH | tr ":" "\n"
+
+
+port:sudo port select --set python python39
+port:sudo port select --set python3 python39
+
 ssh:ssh -l bucchiman 192.168.0.0
 ssh:ssh -v 192.168.0.0  # サーバーの認証方式確認
 ssh:ssh-keygen -y -f .ssh/id_rsa    # yオプションで秘密鍵から公開鍵を再作成
