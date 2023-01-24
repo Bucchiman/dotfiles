@@ -23,6 +23,8 @@ PYTHON/make_time_stopped:lambda _: datetime.now().strftime(r"%Y_%m_%H_%M")
 
 rsync:rsync -auv dir/ dir/  # 追加分のみをコピー
 rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022/hoge
+rsync:rsync -auvz dir/ jupiter:git/dir/         # ローカルのディレクトリをリモートマシンに同期
+rsync:rsync -auvz --chmod=u-w,g-w,o-w --exclude {'dotfiles/.git','dotfiles/.gitignore'} dotfiles jupiter:git/
 
 git:git rm --cached [file]
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
@@ -54,5 +56,5 @@ redirect: 3>&1 1>&2 2>&3-       # stdout/stderrを逆にする
 redirect: n>&m                  # nのFDにmのFDが複製される
 redirect: &>[]
 
-
+unzip:unzip -P xxxx [].zip
 diff:diff <(ls /usr) <(ls /usr/local)   # コマンド実行結果比較
