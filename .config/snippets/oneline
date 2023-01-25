@@ -1,6 +1,5 @@
 make_log:LOG_PATH=./logs/`date "+%Y_%m_%d_%H_%M"`; mkdir -p ${LOG_PATH}
 make_datedir:mkdir `date "+%d_%m_%Y"`
-systemd:systemctl list-unit-files --type=service
 
 
 ffmpeg_image2video:ffmpeg -start_number 0 -i %03d.png -vcodec libx264 -pix_fmt yuv420p out.mp4
@@ -26,6 +25,10 @@ rsync:rsync -auv dir/ dir/  # 追加分のみをコピー
 rsync:rsync -a --exclude-from='exclude_git.txt' ./ /mnt/c/Users/yk.iwabuchi/2022/hoge
 rsync:rsync -auvz dir/ jupiter:git/dir/         # ローカルのディレクトリをリモートマシンに同期
 rsync:rsync -auvz --chmod=u-w,g-w,o-w --exclude {'dotfiles/.git','dotfiles/.gitignore'} dotfiles jupiter:git/
+jupiter:export cur_path=`pwd`; cd /mnt/c/Users/yk.iwabuchi/git/; rsync -auvz --exclude {'dotfiles/.git','dotfiles/.gitignore'} dotfiles jupiter:git/; cd $cur_path;
+voyager:export cur_path=`pwd`; cd /mnt/c/Users/yk.iwabuchi/git/; rsync -auvz --exclude {'dotfiles/.git','dotfiles/.gitignore'} dotfiles voyager:git/; cd $cur_path;
+voyager2jupiter:rsync -auvz projects/ jupiter:projects/
+jupiter2voyager:rsync -auvz projects/ voyager:projects/
 
 git:git rm --cached [file]
 homepage:ssh -p 8022 r9286695@www321.onamae.ne.jp
@@ -64,3 +67,21 @@ redirect: &>[]
 
 unzip:unzip -P xxxx [].zip
 diff:diff <(ls /usr) <(ls /usr/local)   # コマンド実行結果比較
+
+
+
+systemd:systemctl list-unit-files --type=service            # サービス一覧
+systemd:systemctl edit --user --force --full demo@.service  # サービス新規作成
+systemd:systemctl edit --user --force --full demo@schedule.timer    # タイマー作成
+systemd:journalctl --user --unit demo@sample.service        # ログの確認
+systemd:systemctl --user enable demo@schedule.timer         # タイマーの自動起動を有効化
+systemd:systemd-analyze calendar '00,04,08,12,16,20:15:00'  # OnCalendarの値検証
+systemd:systemctl --user start demo@sample.service
+systemd:systemctl --user status demo@sample.service
+systemd:systemctl stop demo@.service
+systemd:systemctl disable demo@.service
+
+
+gulliver:goscholar "paper"
+gulliver:gopaper "paper"
+gulliver:gocode "repository"

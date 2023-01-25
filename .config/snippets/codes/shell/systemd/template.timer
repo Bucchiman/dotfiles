@@ -1,0 +1,11 @@
+# FileName:     <+FILENAME+>
+# Author: 8ucchiman
+# CreatedDate:  <+DATE+>
+# LastModified: 2023-01-25 11:22:44 +0900
+# Reference: https://vlike-vlife.netlify.app/posts/systemd_scheduling
+
+
+[Timer]
+OnCalendar=*-*-* *:00/02:00
+AccuracySec=1m
+Unit=demo.service
