@@ -85,3 +85,13 @@ systemd:systemctl disable demo@.service
 gulliver:goscholar "paper"
 gulliver:gopaper "paper"
 gulliver:gocode "repository"
+
+
+jupiter_docker:export cur_path=`pwd`; cd $HOME/git; rsync -auvz --exclude {'base_docker/.git','base_docker/.gitignore'} base_docker jupiter:git/; cd $cur_path;
+voyager_docker:export cur_path=`pwd`; cd $HOME/git; rsync -auvz --exclude {'base_docker/.git','base_docker/.gitignore'} base_docker voyager:git/; cd $cur_path;
+
+
+powershell|portfowarding:wsl -e hostname -I
+powershell|portfowarding:netsh interface portproxy add v4tov4 listenaddress=* listenport=80 connectaddress=172.25.0.1 connectport=80
+powershell|portfowarding:netsh interface show all
+powershell|portfowarding:netsh interface oprtproxy delete v4tov4 listenport=80 listenaddress=*
