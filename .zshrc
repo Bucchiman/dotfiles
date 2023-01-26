@@ -208,8 +208,9 @@ precmd () {
 #---------------#
 #     alias     #
 #---------------#
-alias ls='exa --icons'
+alias ls='exa --icons 2>/dev/null'
 alias diff='diff --color'
+alias drive='skicka'
 #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
 #alias bat='bat'
 

@@ -95,3 +95,6 @@ powershell|portfowarding:wsl -e hostname -I
 powershell|portfowarding:netsh interface portproxy add v4tov4 listenaddress=* listenport=80 connectaddress=172.25.0.1 connectport=80
 powershell|portfowarding:netsh interface show all
 powershell|portfowarding:netsh interface oprtproxy delete v4tov4 listenport=80 listenaddress=*
+
+kaggle:kaggle competitions download -c spaceship-titanic
+mercury:mercury watch spaceship-titanic-eda-27-different-models.ipynb
