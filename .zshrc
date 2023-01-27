@@ -316,13 +316,13 @@ hash -d w=/mnt/c/Users/bucchiman
 
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent -s`
+    eval `ssh-agent -s` >/dev/null
     expect -c "
         set timeout 1
         spawn ssh-add
         expect \"password:\"
         send \"Cinemashkachikachika.17\n\"
-        interact"
+        interact" >/dev/null
 fi
 
 

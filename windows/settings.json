@@ -4,16 +4,12 @@
     "actions": 
     [
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
             "command": 
             {
-                "action": "splitPane",
-                "split": "right"
+                "action": "copy",
+                "singleLine": false
             },
-            "keys": "ctrl+shift+s"
+            "keys": "ctrl+c"
         },
         {
             "command": 
@@ -25,14 +21,14 @@
         {
             "command": 
             {
-                "action": "copy",
-                "singleLine": false
+                "action": "splitPane",
+                "split": "right"
             },
-            "keys": "ctrl+c"
+            "keys": "ctrl+shift+s"
         },
         {
-            "command": "unbound",
-            "keys": "ctrl+v"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -48,6 +44,10 @@
                 "index": 1
             },
             "keys": "ctrl+2"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -129,54 +129,6 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
-                "hidden": true,
-                "name": "Ubuntu-18.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{6af3ca36-ff71-596d-bbf5-b42f87eccf3c}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{9e2147f6-53fe-5858-b905-a675f9252c57}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
-                "hidden": true,
-                "name": "Visual Studio Debug Console",
-                "source": "VSDebugConsole"
-            },
-            {
-                "guid": "{924d0061-6e69-5d11-a3a9-c44bfc97ce88}",
-                "hidden": false,
-                "name": "Ubuntu 18.04.5 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu18.04LTS_79rhkp1fndgsc"
-            },
-            {
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
-            },
-            {
-                "guid": "{aab79973-318f-43b6-a9bc-b4096493753f}",
-                "hidden": false,
-                "name": "Nushell",
-                "source": "nu"
-            },
-            {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
-                "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
             }
         ]
     },
