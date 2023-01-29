@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# FileName: 	<+FILENAME+>
+# FileName: 	decorator
 # Author: 8ucchiman
-# CreatedDate:  <+DATE+>
-# LastModified: 2023-01-29 15:16:32 +0900
-# Reference: 8ucchiman.jp
+# CreatedDate:  2023-01-29 15:54:38 +0900
+# LastModified: 2023-01-29 15:54:59 +0900
+# Reference: https://qiita.com/macinjoke/items/1be6cf0f1f238b5ba01b
 #
 
 
@@ -19,7 +19,7 @@ import sys
 def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
-    <+CURSOR+>
+    
 
 
 if __name__ == "__main__":
