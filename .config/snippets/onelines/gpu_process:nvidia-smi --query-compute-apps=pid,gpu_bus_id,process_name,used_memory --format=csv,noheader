@@ -1,0 +1,1 @@
+gpu_process:nvidia-smi --query-compute-apps=pid,gpu_bus_id,process_name,used_memory --format=csv,noheader

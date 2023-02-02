@@ -1,0 +1,1 @@
+ffmpeg_video2gif:ffmpeg -i [].mp4 [].gif
