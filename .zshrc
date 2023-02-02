@@ -63,26 +63,26 @@ bindkey "^N" history-beginning-search-forward-end
 #---------------#
 #    prompt     #
 #---------------#
-autoload -Uz add-zsh-hook vcs_info lprompt rprompt
+autoload -Uz add-zsh-hook lprompt rprompt
 autoload -U colors       # Set PROMPT colors
 colors
 setopt prompt_subst   # プロンプトの文字列を変えられる
 
-add-zsh-hook precmd vcs_info
-# :vcs_info:git:*とするとgitの時のみの設定
-# ローカルで変更を加えた時に通知するかを設定
-zstyle ':vcs_info:git:*' check-for-changes true
-# addされた場合(インデックスに追加)+表示
-zstyle ':vcs_info:git:*' stagedstr "  "
-# addされていない場合-表示
-zstyle ':vcs_info:git:*' unstagedstr "  "
-# フォーマット表示 %b: branch名 %c: stagestr %u: unstagestr
-zstyle ':vcs_info:git:*' formats "%b%c%u"
-# 異常状態(conflict, rebase状態)
-zstyle ':vcs_info:git:*' actionformats '%b|%a'
+#add-zsh-hook precmd vcs_info
+## :vcs_info:git:*とするとgitの時のみの設定
+## ローカルで変更を加えた時に通知するかを設定
+#zstyle ':vcs_info:git:*' check-for-changes true
+## addされた場合(インデックスに追加)+表示
+#zstyle ':vcs_info:git:*' stagedstr "  "
+## addされていない場合-表示
+#zstyle ':vcs_info:git:*' unstagedstr "  "
+## フォーマット表示 %b: branch名 %c: stagestr %u: unstagestr
+#zstyle ':vcs_info:git:*' formats "%b%c%u"
+## 異常状態(conflict, rebase状態)
+#zstyle ':vcs_info:git:*' actionformats '%b|%a'
 
 
-LANG=en_US.UTF-8 vcs_info
+#LANG=en_US.UTF-8 vcs_info
 # create_item $1 [kind] 
 #             $2 [foreground color(left triangle)] 
 #             $3 [background color(left triangle+text)]
@@ -199,9 +199,9 @@ function rprompt() {
 # コマンドを打つたびに呼び出される
 precmd () {
     psvar=()
-    [[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
+    #[[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
     PS1=`lprompt`" "
-    RPS1=`rprompt`
+    #RPS1=`rprompt`
 }
 
 
@@ -379,7 +379,7 @@ function pet-select() {
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
     #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
-    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f)
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
     sed -i 's/\r//' ${load_file}
     local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
@@ -391,7 +391,7 @@ stty -ixon
 bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
-    local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | f )
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
     zle reset-prompt
@@ -400,8 +400,9 @@ zle -N make_file_from_snippets
 bindkey '^s^m' make_file_from_snippets
 
 function show_online_snippets() {
-    local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    LBUFFER="${LBUFFER}${snippets}"
+    #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
+    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf | cut -d':' -f2-)
+    LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
 }
 zle -N show_online_snippets
