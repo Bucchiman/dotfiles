@@ -22,17 +22,17 @@ colorlist() {
     done
 }
 
-#function open() {
-#    if [ $# != 1 ]; then
-#        explorer.exe .
-#    else
-#        if [ -e $1 ]; then
-#            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
-#        else
-#            echo "open: $1 : No such file or directory" 
-#        fi
-#    fi
-#}
+function open() {
+    if [ $# != 1 ]; then
+        explorer.exe .
+    else
+        if [ -e $1 ]; then
+            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
+        else
+            echo "open: $1 : No such file or directory" 
+        fi
+    fi
+}
 
 #---------------#
 #  completion   #
@@ -381,7 +381,7 @@ function paste_snippets() {
     #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
     sed -i 's/\r//' ${load_file}
-    local snippets=`cat ${load_file}`
+    local snippets=`cat $HOME/.config/snippets/codes/${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }
@@ -392,8 +392,8 @@ bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
-    sed -i 's/\r//' ${load_file} 2>/dev/null
-    cp ${load_file} . 2>/dev/null
+    sed -i 's/\r//' $HOME/.config/snippets/codes/${load_file} 2>/dev/null
+    cp $HOME/.config/snippets/codes/${load_file} . 2>/dev/null
     zle reset-prompt
 }
 zle -N make_file_from_snippets
