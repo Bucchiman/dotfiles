@@ -353,14 +353,9 @@ function switch_go() {
     fi
 }
 
-source <(kubectl completion zsh)
-
 #if (which zprof > /dev/null 2>&1) ;then
 #  zprof
 #fi
-
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
 
 function prev() {
     PREV=$(echo `history | tail -n2 | head -n1` | sed 's/[0-9]* //')
@@ -380,6 +375,7 @@ function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
     #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
+    load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
     local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
@@ -392,6 +388,7 @@ bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
     zle reset-prompt
