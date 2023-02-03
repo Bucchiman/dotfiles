@@ -406,7 +406,9 @@ zle -N show_online_snippets
 bindkey '^s^o' show_online_snippets
 
 function edit_snippets() {
-    nvim ${HOME}/.config/snippets
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    load_file="${HOME}/.config/snippets/codes/${load_file}"
+    nvim ${load_file}
 }
 zle -N edit_snippets
 bindkey '^s^e' edit_snippets

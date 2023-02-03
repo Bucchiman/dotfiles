@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-02 23:34:44 +0900
+# LastModified: 2023-02-03 12:35:11 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -28,7 +28,7 @@ class EDA(object):
         self.train_df = train_df
         self.test_df = test_df
         self.target_column = target_column
-        self.features_columns = [col for col in self.train_df.columns if col != self.target_column]
+        self.features = [col for col in self.train_df.columns if col != self.target_column]
 
 
     def column_wise_missing(self):
@@ -65,8 +65,35 @@ class EDA(object):
         fig.update_layout(showlegend=False, title_text="Column wise Null Value Distribution", title_x=0.5)
         fig.write_image("fig.png")
 
+    def distribution(self):
+        df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
+        text_features = ["Cabin", "Name"]
+        cat_features = [col for col in self.features if df[col].nunique() < 25 and col not in text_features]
+        cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in text_features]
+        labels = ['Categorical', 'Continuous', 'Text']
+        values = [len(cat_features), len(cont_features), len(text_features)]
+        colors = ['#DE3163', '#58D68D']
 
-
+        fig = go.Figure(data=[go.Pie(
+            labels=labels,
+            values=values, pull=[0.1, 0, 0],
+            marker=dict(colors=colors,
+                        line=dict(color='#000000', width=2)))])
+        fig.write_image("features_cat_cont_text_Pie.png")
+        train_age = self.train_df.copy()
+        test_age = self.test_df.copy()
+        train_age["type"] = "Train"
+        test_age["type"] = "Test"
+        ageDf = pd.concat([train_age, test_age])
+        fig = px.histogram(data_frame=ageDf,
+                           x="Age",
+                           color="type",
+                           color_discrete_sequence=['#58D68D', '#DE3163'],
+                           marginal="box",
+                           nbins=100,
+                           template="plotly_white")
+        fig.update_layout(title="Distribution of Age", title_x=0.5)
+        fig.write_image("age_histogram.png")
 
     def get_logger(self, log_dir, file_name):
         os.makedirs(log_dir, exist_ok=True)
@@ -87,3 +114,4 @@ if __name__ == "__main__":
     eda = EDA(pd.read_csv("./datas/train.csv"), pd.read_csv("./datas/test.csv"), "Transported")
     eda.get_logger(".", "sample.log")
     eda.column_wise_missing()
+    eda.distribution()
