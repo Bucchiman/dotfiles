@@ -22,17 +22,17 @@ colorlist() {
     done
 }
 
-#function open() {
-#    if [ $# != 1 ]; then
-#        explorer.exe .
-#    else
-#        if [ -e $1 ]; then
-#            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
-#        else
-#            echo "open: $1 : No such file or directory" 
-#        fi
-#    fi
-#}
+function open() {
+    if [ $# != 1 ]; then
+        explorer.exe .
+    else
+        if [ -e $1 ]; then
+            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
+        else
+            echo "open: $1 : No such file or directory" 
+        fi
+    fi
+}
 
 #---------------#
 #  completion   #
@@ -377,7 +377,7 @@ function paste_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
-    local snippets=`cat ${load_file}`
+    local snippets=`cat $HOME/.config/snippets/codes/${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }

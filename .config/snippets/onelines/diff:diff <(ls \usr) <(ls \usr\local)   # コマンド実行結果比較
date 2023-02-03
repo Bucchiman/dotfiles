@@ -1,0 +1,1 @@
+diff:diff <(ls /usr) <(ls /usr/local/)  # コマンド実行結果比較
