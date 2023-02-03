@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-03 12:35:11 +0900
+# LastModified: 2023-02-03 20:44:15 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -41,6 +41,7 @@ class EDA(object):
         train_null_df = train_null_df.sort_values(by=0, ascending=False)[:-1]
         test_null_df = pd.DataFrame(self.test_df.isna().sum())
         test_null_df = test_null_df.sort_values(by=0, ascending=False)
+        self.logger.info("train_null_df:\n{}".format(train_null_df.index))
 
         fig = make_subplots(rows=1,
                             cols=2,
@@ -65,13 +66,13 @@ class EDA(object):
         fig.update_layout(showlegend=False, title_text="Column wise Null Value Distribution", title_x=0.5)
         fig.write_image("fig.png")
 
-    def distribution(self):
+    def distribution_of_continuous(self):
         df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
-        text_features = ["Cabin", "Name"]
-        cat_features = [col for col in self.features if df[col].nunique() < 25 and col not in text_features]
-        cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in text_features]
+        self.text_features = ["Cabin", "Name"]
+        self.cat_features = [col for col in self.features if df[col].nunique() < 25 and col not in self.text_features]
+        self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
         labels = ['Categorical', 'Continuous', 'Text']
-        values = [len(cat_features), len(cont_features), len(text_features)]
+        values = [len(self.cat_features), len(self.cont_features), len(self.text_features)]
         colors = ['#DE3163', '#58D68D']
 
         fig = go.Figure(data=[go.Pie(
@@ -95,6 +96,43 @@ class EDA(object):
         fig.update_layout(title="Distribution of Age", title_x=0.5)
         fig.write_image("age_histogram.png")
 
+    def distribution_of_category(self):
+        if len(self.cat_features) == 0:
+            self.logger.info("No categories")
+        else:
+            ncols = 2
+            nrows = 2
+            fig, axes = plt.subplots(nrows, ncols, figsize=(18, 10))
+            for r in range(nrows):
+                for c in range(ncols):
+                    col = self.cat_features[r*ncols+c]
+                    sns.countplot(self.train_df[col],
+                                  ax=axes[r, c],
+                                  palette="viridis",
+                                  label='Train data')
+                    sns.countplot(self.test_df[col],
+                                  ax=axes[r, c],
+                                  palette="magma",
+                                  label='Test data')
+                    axes[r, c].legend()
+                    axes[r, c].set_ylabel('')
+                    axes[r, c].set_xlabel(col, fontsize=20)
+                    axes[r, c].tick_params(labelsize=10, width=0.5)
+                    axes[r, c].xaxis.offsetText.set_fontsize(4)
+                    axes[r, c].yaxis.offsetText.set_fontsize(4)
+            plt.show()
+
+
+    def correlation_matrix(self):
+        fig = px.imshow(self.train_df.corr(),
+                        text_auto=True,
+                        aspect="auto",
+                        color_continuous_scale="viridis")
+        fig.write_image("hoge.png")
+        #fig.show()
+
+
+
     def get_logger(self, log_dir, file_name):
         os.makedirs(log_dir, exist_ok=True)
         log_path = os.path.join(log_dir, file_name)
@@ -114,4 +152,6 @@ if __name__ == "__main__":
     eda = EDA(pd.read_csv("./datas/train.csv"), pd.read_csv("./datas/test.csv"), "Transported")
     eda.get_logger(".", "sample.log")
     eda.column_wise_missing()
-    eda.distribution()
+    eda.distribution_of_continuous()
+    #eda.distribution_of_category()
+    eda.correlation_matrix()
