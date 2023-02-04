@@ -4,7 +4,7 @@
 # FileName: 	main
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 12:21:34 +0900
-# LastModified: 2023-02-04 13:21:42 +0900
+# LastModified: 2023-02-04 14:18:35 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -25,11 +25,11 @@ def main():
     logger = get_logger(args.log_file)
     train_df = pd.read_csv(os.path.join(args.data_path, args.train))
     test_df = pd.read_csv(os.path.join(args.data_path, args.test))
-    eda = EDA(train_df, test_df, args.target, logger, args.result_dir)
+    eda = EDA(train_df, test_df, args.target, logger, args.imshow, args.result_dir)
     eda.column_wise_missing()
-    eda.distribution_of_continuous()
-    eda.correlation_matrix()
-    # train_df = pd.read_csv()
+    eda.row_wise_missing()
+    # eda.distribution_of_continuous()
+    # eda.correlation_matrix()
 
 
 if __name__ == "__main__":

@@ -4,17 +4,15 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-04 13:26:00 +0900
+# LastModified: 2023-02-04 14:29:36 +0900
 # Reference: 8ucchiman.jp
 #
 
 
 import os
-import sys
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -24,40 +22,44 @@ from logging import getLogger, config
 
 
 class EDA(object):
-    def __init__(self, train_df, test_df, target_column, logger, result_dir="results"):
-        self.train_df = train_df
-        self.test_df = test_df
-        self.target_column = target_column
-        self.features = [col for col in self.train_df.columns if col != self.target_column]
+    def __init__(self,
+                 train_df: pd.DataFrame,
+                 test_df: pd.DataFrame,
+                 target: str,
+                 logger: logging.RootLogger,
+                 imshow,
+                 result_dir="results",):
+        self.train_df = train_df.copy()
+        self.test_df = test_df.copy()
+        self.target = target
+        self.train_df.drop(["PassengerId"], axis=1, inplace=True)
+        self.features = [col for col in self.train_df.columns if col != self.target]
         self.result_dir = result_dir
         self.logger = logger
+        self.imshow = imshow
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
         self.logger.info("\n{}".format(self.train_df.isna().sum().sort_values(ascending=False)))
         self.logger.info("-"*5+"test missing value"+"-"*5)
         self.logger.info("\n{}".format(self.test_df.isna().sum().sort_values(ascending=False)))
-        #train_null_df = pd.DataFrame(self.train_df.drop(["PassengerId"], axis=1).isna().sum())
-        train_null_df = pd.DataFrame(self.train_df.isna().sum())
-        train_null_df = train_null_df.sort_values(by=0, ascending=False)[:-1]
-        test_null_df = pd.DataFrame(self.test_df.isna().sum())
-        test_null_df = test_null_df.sort_values(by=0, ascending=False)
-        self.logger.info("train_null_df:\n{}".format(train_null_df.index))
+        missing_train_column = pd.DataFrame(self.train_df.isna().sum().sort_values(by=0, ascending=False)[:-1])
+        missing_test_column = pd.DataFrame(self.test_df.isna().sum().sort_values(by=0, ascending=False))
 
         fig = make_subplots(rows=1,
                             cols=2,
                             column_titles=["Train Data", "Test Data"],
                             x_title="Missing Values")
-        fig.add_trace(go.Bar(x=train_null_df[0],
-                             y=train_null_df.index,
+        fig.add_trace(go.Bar(x=missing_train_column[0],
+                             y=missing_train_column.index,
                              orientation="h",
                              marker=dict(color=[n for n in range(12)],
                                          line_color='rgb(0,0,0)',
                                          line_width=2,
                                          coloraxis="coloraxis")),
                       1, 1)
-        fig.add_trace(go.Bar(x=test_null_df[0],
-                             y=test_null_df.index,
+        fig.add_trace(go.Bar(x=missing_test_column[0],
+                             y=missing_test_column.index,
                              orientation="h",
                              marker=dict(color=[n for n in range(12)],
                                          line_color='rgb(0,0,0)',
@@ -65,7 +67,38 @@ class EDA(object):
                                          coloraxis="coloraxis")),
                       1, 2)
         fig.update_layout(showlegend=False, title_text="Column wise Null Value Distribution", title_x=0.5)
-        fig.write_image(os.path.join(self.result_dir, "fig.png"))
+        if self.imshow:
+            fig.show()
+        fig.write_image(os.path.join(self.result_dir, "column_wise_distribution.png"))
+
+    def row_wise_missing(self):
+        missing_train_row = self.train_df.isna().sum(axis=1)
+        missing_train_row = pd.DataFrame(missing_train_row.value_counts()/missing_train_row.shape[0]).reset_index()
+        missing_test_row = self.test_df.isna().sum(axis=1)
+        missing_test_row = pd.DataFrame(missing_test_row.value_counts()/missing_test_row.shape[0]).reset_index()
+        missing_train_row.columns = ['no', 'count']
+        missing_test_row.columns = ['no', 'count']
+        missing_train_row["count"] = missing_train_row["count"]*100
+        missing_test_row["count"] = missing_test_row["count"]*100
+        fig = make_subplots(rows=1, cols=2, column_titles=["Train Data", "Test Data"], x_title="Missing Values",)
+        fig.add_trace(go.Bar(x=missing_train_row["no"],
+                             y=missing_train_row["count"],
+                             marker=dict(color=[n for n in range(4)],
+                             line_color='rgb(0,0,0)',
+                             line_width=3,
+                             coloraxis="coloraxis")),
+                      1, 1)
+        fig.add_trace(go.Bar(x=missing_test_row["no"],
+                             y=missing_test_row["count"],
+                             marker=dict(color=[n for n in range(4)],
+                             line_color='rgb(0,0,0)',
+                             line_width=3,
+                             coloraxis="coloraxis")),
+                      1, 2)
+        fig.update_layout(showlegend=False, title_text="Row wise Null Value Distribution", title_x=0.5)
+        if self.imshow:
+            fig.show()
+        fig.write_image(os.path.join(self.result_dir, "row_wise_distribution.png"))
 
     def distribution_of_continuous(self):
         df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
