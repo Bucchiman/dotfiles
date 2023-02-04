@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-03 23:36:40 +0900
+# LastModified: 2023-02-04 12:21:28 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -36,17 +36,21 @@ class Preprocessing(object):
     def encoding_category(self):
         label_cols = ["HomePlanet", "CryoSleep",
                       "Cabin", "Destination", "VIP"]
-        train, test = self.label_encoder(self.train_df,
-                                         self.test_df,
-                                         label_cols)
+        self.label_encoder(label_cols)
 
-    def label_encoder(self, train, test, columns):
+    def label_encoder(self, columns):
         for col in columns:
-            train[col] = train[col].astype(str)
-            test[col] = test[col].astype(str)
-            train[col] = LabelEncoder().fit_transform(train[col])
-            test[col] =  LabelEncoder().fit_transform(test[col])
-        return train, test
+            self.train_df[col] = self.train_df[col].astype(str)
+            self.test_df[col] = self.test_df[col].astype(str)
+            self.train_df[col] = LabelEncoder().fit_transform(self.train_df[col])
+            self.test_df[col] = LabelEncoder().fit_transform(self.test_df[col])
+
+    def cross_validation(self):
+        self.train_df.drop(["Name", "Cabin"], axis=1, inplace=True)
+        self.test_df.drop(["Name", "Cabin"], axis=1, inplace=True)
+        X = self.train_df.drop(TARGET, axis =1) 
+        y = self.train_df[TARGET]  X_train , X_test , y_train , y_test = train_test_split(X, y, random_state = 12, test_size =0.33) 
+
 
 
 def main():

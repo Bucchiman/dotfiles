@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-03 20:44:15 +0900
+# LastModified: 2023-02-04 12:53:18 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -29,7 +29,6 @@ class EDA(object):
         self.test_df = test_df
         self.target_column = target_column
         self.features = [col for col in self.train_df.columns if col != self.target_column]
-
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
@@ -122,7 +121,6 @@ class EDA(object):
                     axes[r, c].yaxis.offsetText.set_fontsize(4)
             plt.show()
 
-
     def correlation_matrix(self):
         fig = px.imshow(self.train_df.corr(),
                         text_auto=True,
@@ -130,8 +128,6 @@ class EDA(object):
                         color_continuous_scale="viridis")
         fig.write_image("hoge.png")
         #fig.show()
-
-
 
     def get_logger(self, log_dir, file_name):
         os.makedirs(log_dir, exist_ok=True)
@@ -153,5 +149,5 @@ if __name__ == "__main__":
     eda.get_logger(".", "sample.log")
     eda.column_wise_missing()
     eda.distribution_of_continuous()
-    #eda.distribution_of_category()
+    # eda.distribution_of_category()
     eda.correlation_matrix()

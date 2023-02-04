@@ -14,3 +14,4 @@ datas/
 *.csv
 *.png
 *.log
+logs/

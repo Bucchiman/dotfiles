@@ -104,3 +104,4 @@ vslam:sudo xhost +local:root && docker run --privileged --name orb-3-container -
 mac2docker_anaconda:docker run -i -t -p 8888:8888 --ip='*' -v /Users/8ucchiman/compe:/root continuumio/anaconda3 /bin/bash
 
 macmount:cd /Volumes; ls
+mac:sudo lsof -P -i:80

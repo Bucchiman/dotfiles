@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-01-24 20:57:28 +0900
+# LastModified: 2023-02-04 13:00:00 +0900
 #
 
 
@@ -13,9 +13,12 @@ import argparse
 import logging
 from logging import getLogger, config
 from datetime import datetime
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
-def get_logger(log_dir, file_name):
+def get_logger(file_name, log_dir="logs"):
     os.makedirs(log_dir, exist_ok=True)
     log_path = os.path.join(log_dir, file_name)
 
@@ -37,6 +40,9 @@ def make_date_log_directory():
 
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--log_file', default=make_date_log_directory(), help="log file")
+    parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
+
     parser.add_argument('arg1')     # 必須の引数
     parser.add_argument('-a', 'arg')    # 省略形
     parser.add_argument('--flag', action='store_true')  # flag
@@ -67,7 +73,8 @@ def make_barplot():
 
 def main():
     '''
-    logger = get_logger("./logs", "hoge.log")
+    args = get_args()
+    logger = get_logger(args.log_file)
     logger.info("hello")
     '''
     pass
