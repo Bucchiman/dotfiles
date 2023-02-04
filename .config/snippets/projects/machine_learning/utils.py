@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-04 12:48:59 +0900
+# LastModified: 2023-02-04 13:20:58 +0900
 #
 
 
@@ -44,6 +44,8 @@ def get_args():
     parser.add_argument('--log_file', default=make_date_log_directory(), help="log file")
     parser.add_argument('--train', default="train.csv", type=str, help="csv file about train")
     parser.add_argument('--test', default="test.csv", type=str, help="csv file about test")
+    parser.add_argument('--target', type=str, help="fitting target", required=True)
+    parser.add_argument('--result_dir', default="results", type=str, help="images and model about eda, fitting...")
     args = parser.parse_args()
     return args
 

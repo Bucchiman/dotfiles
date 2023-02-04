@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-04 12:53:18 +0900
+# LastModified: 2023-02-04 13:26:00 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -24,11 +24,13 @@ from logging import getLogger, config
 
 
 class EDA(object):
-    def __init__(self, train_df, test_df, target_column):
+    def __init__(self, train_df, test_df, target_column, logger, result_dir="results"):
         self.train_df = train_df
         self.test_df = test_df
         self.target_column = target_column
         self.features = [col for col in self.train_df.columns if col != self.target_column]
+        self.result_dir = result_dir
+        self.logger = logger
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
@@ -63,7 +65,7 @@ class EDA(object):
                                          coloraxis="coloraxis")),
                       1, 2)
         fig.update_layout(showlegend=False, title_text="Column wise Null Value Distribution", title_x=0.5)
-        fig.write_image("fig.png")
+        fig.write_image(os.path.join(self.result_dir, "fig.png"))
 
     def distribution_of_continuous(self):
         df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
@@ -79,7 +81,7 @@ class EDA(object):
             values=values, pull=[0.1, 0, 0],
             marker=dict(colors=colors,
                         line=dict(color='#000000', width=2)))])
-        fig.write_image("features_cat_cont_text_Pie.png")
+        fig.write_image(os.path.join(self.result_dir, "features_cat_cont_text_Pie.png"))
         train_age = self.train_df.copy()
         test_age = self.test_df.copy()
         train_age["type"] = "Train"
@@ -93,7 +95,7 @@ class EDA(object):
                            nbins=100,
                            template="plotly_white")
         fig.update_layout(title="Distribution of Age", title_x=0.5)
-        fig.write_image("age_histogram.png")
+        fig.write_image(os.path.join(self.result_dir, "age_histogram.png"))
 
     def distribution_of_category(self):
         if len(self.cat_features) == 0:
@@ -119,14 +121,14 @@ class EDA(object):
                     axes[r, c].tick_params(labelsize=10, width=0.5)
                     axes[r, c].xaxis.offsetText.set_fontsize(4)
                     axes[r, c].yaxis.offsetText.set_fontsize(4)
-            plt.show()
+            #plt.show()
 
     def correlation_matrix(self):
         fig = px.imshow(self.train_df.corr(),
                         text_auto=True,
                         aspect="auto",
                         color_continuous_scale="viridis")
-        fig.write_image("hoge.png")
+        fig.write_image(os.path.join(self.result_dir, "hoge.png"))
         #fig.show()
 
     def get_logger(self, log_dir, file_name):

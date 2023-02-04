@@ -4,7 +4,7 @@
 # FileName: 	main
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 12:21:34 +0900
-# LastModified: 2023-02-04 12:57:47 +0900
+# LastModified: 2023-02-04 13:21:42 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -18,18 +18,18 @@ import pandas as pd
 from eda import EDA
 
 
-
 def main():
     args = get_args()
+    method = getattr(utils, "make_date_log_directory")
+    print(method())
     logger = get_logger(args.log_file)
     train_df = pd.read_csv(os.path.join(args.data_path, args.train))
     test_df = pd.read_csv(os.path.join(args.data_path, args.test))
-    #eda = EDA()
-    method = getattr(utils, "make_date_log_directory")
-    print(type(method()))
+    eda = EDA(train_df, test_df, args.target, logger, args.result_dir)
+    eda.column_wise_missing()
+    eda.distribution_of_continuous()
+    eda.correlation_matrix()
     # train_df = pd.read_csv()
-
-
 
 
 if __name__ == "__main__":
