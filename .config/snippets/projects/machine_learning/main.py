@@ -4,8 +4,8 @@
 # FileName: 	main
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 12:21:34 +0900
-# LastModified: 2023-02-04 14:18:35 +0900
-# Reference: 8ucchiman.jp
+# LastModified: 2023-02-05 15:35:51 +0900
+# Reference: https://www.kaggle.com/code/pmarcelino/comprehensive-data-exploration-with-python
 #
 
 
@@ -28,8 +28,9 @@ def main():
     eda = EDA(train_df, test_df, args.target, logger, args.imshow, args.result_dir)
     eda.column_wise_missing()
     eda.row_wise_missing()
-    # eda.distribution_of_continuous()
-    # eda.correlation_matrix()
+    eda.distribution_of_continuous()
+    eda.distribution_of_category()
+    eda.correlation_matrix()
 
 
 if __name__ == "__main__":

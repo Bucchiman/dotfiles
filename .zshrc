@@ -22,18 +22,6 @@ colorlist() {
     done
 }
 
-function open() {
-    if [ $# != 1 ]; then
-        explorer.exe .
-    else
-        if [ -e $1 ]; then
-            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
-        else
-            echo "open: $1 : No such file or directory" 
-        fi
-    fi
-}
-
 #---------------#
 #  completion   #
 #---------------#
@@ -41,7 +29,7 @@ autoload -Uz compinit     # Enable a function of complementation
 compinit -u
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Ignore whether the character is a capital letter or not.
-eval `dircolors`
+#eval `dircolors`
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 source $HOME/.zsh/git_completion/git-prompt.sh 2>/dev/null
@@ -412,6 +400,16 @@ function edit_snippets() {
 }
 zle -N edit_snippets
 bindkey '^s^e' edit_snippets
+
+fnction link_from_snippets() {
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    load_file="${HOME}/.config/snippets/codes/${load_file}"
+    sed -i 's/\r//' ${load_file} 2>/dev/null
+    ln -s ${load_file} . 2>/dev/null
+    zle reset-prompt
+}
+zle -N link_from_snippets
+bindkey '^s^l' link_from_snippets
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

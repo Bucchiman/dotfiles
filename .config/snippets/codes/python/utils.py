@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-04 13:00:00 +0900
+# LastModified: 2023-02-05 20:07:13 +0900
 #
 
 
@@ -40,17 +40,19 @@ def make_date_log_directory():
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_file', default=make_date_log_directory(), help="log file")
-    parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
+    parser.add_argument('--log_dir', type=str, default='../logs', help="log dir")
+    parser.add_argument('--log_file', type=str, default=make_date_log_directory(), help="log file")
+    parser.add_argument('--results_dir', type=str, default='../results', help="result dir")
+    #parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
 
-    parser.add_argument('arg1')     # 必須の引数
-    parser.add_argument('-a', 'arg')    # 省略形
-    parser.add_argument('--flag', action='store_true')  # flag
-    parser.add_argument('--strlist', required=True, nargs="*", type=str, help='a list of strings') # --strlist hoge fuga geho
-    parser.add_argument('--method', type=str)
-    parser.add_argument('--fruit', type=str, default='apple', choices=['apple', 'banana'], required=True)
-    parser.add_argument('--address', type=lambda x: list(map(int, x.split('.'))), help="IP address") # --address 192.168.31.150 --> [192, 168, 31, 150]
-    parser.add_argument('--colors', nargs='*', required=True)
+    # parser.add_argument('arg1')     # 必須の引数
+    # parser.add_argument('-a', 'arg')    # 省略形
+    # parser.add_argument('--flag', action='store_true')  # flag
+    # parser.add_argument('--strlist', required=True, nargs="*", type=str, help='a list of strings') # --strlist hoge fuga geho
+    # parser.add_argument('--method', type=str)
+    # parser.add_argument('--fruit', type=str, default='apple', choices=['apple', 'banana'], required=True)
+    # parser.add_argument('--address', type=lambda x: list(map(int, x.split('.'))), help="IP address") # --address 192.168.31.150 --> [192, 168, 31, 150]
+    # parser.add_argument('--colors', nargs='*', required=True)
     args = parser.parse_args()
     return args
 
@@ -71,14 +73,11 @@ def make_barplot():
     fig.savefig("output.png")
 
 
-def main():
+if __name__ == "__main__":
     '''
     args = get_args()
+    method = getattr(utils, "make_date_log_directory")
+    print(method())
     logger = get_logger(args.log_file)
     logger.info("hello")
     '''
-    pass
-
-
-if __name__ == "__main__":
-    main()
