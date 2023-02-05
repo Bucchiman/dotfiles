@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-05 20:07:13 +0900
+# LastModified: 2023-02-05 21:23:02 +0900
 #
 
 
@@ -40,10 +40,17 @@ def make_date_log_directory():
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--log_dir', type=str, default='../logs', help="log dir")
+    parser.add_argument('--log_dir', type=str, default="../logs")
     parser.add_argument('--log_file', type=str, default=make_date_log_directory(), help="log file")
-    parser.add_argument('--results_dir', type=str, default='../results', help="result dir")
-    #parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
+    parser.add_argument('--results_dir', type=str, default="../results", help="results dir")
+    parser.add_argument('--data_dir', type=str, default="../datas")
+    parser.add_argument('--train_csv', type=str, default="train.csv")
+    parser.add_argument('--test_csv', type=str, default="test.csv")
+    parser.add_argument('--eda', action='store_true')
+    parser.add_argument('--preprocessing', action='store_true')
+    parser.add_argument('--fitting', action='store_true')
+    parser.add_argument('--save_csv_dir', type=str, default="../preprocessing_dir")
+    # parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
 
     # parser.add_argument('arg1')     # 必須の引数
     # parser.add_argument('-a', 'arg')    # 省略形

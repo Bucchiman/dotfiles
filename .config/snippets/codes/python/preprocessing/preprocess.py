@@ -4,13 +4,14 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-05 15:20:24 +0900
+# LastModified: 2023-02-05 21:17:44 +0900
 # Reference: 8ucchiman.jp
 #
 
 
 import os
 import sys
+import logging
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder
@@ -20,13 +21,17 @@ from sklearn.model_selection import StratifiedKFold, train_test_split
 
 class Preprocessing(object):
     def __init__(self,
-                 train_df: pd.DataFrame,
-                 test_df: pd.DataFrame,
-                 target: str):
-        self.train_df = train_df
-        self.test_df = test_df
+                 train_path: str,
+                 test_path: str,
+                 target: str,
+                 logger: logging.RootLogger,
+                 save_csv_dir="../preprocessed"):
+        self.train_df = pd.read_csv(train_path)
+        self.test_df = pd.read_csv(test_path)
         self.STRATEGY = "median"
         self.target = target
+        self.logger = logger
+        self.save_csv_dir = save_csv_dir
 
     def imputer(self):
         imputer_cols = ["Age", "FoodCourt", "ShoppingMall",
@@ -50,25 +55,32 @@ class Preprocessing(object):
             self.train_df[col] = LabelEncoder().fit_transform(self.train_df[col])
             self.test_df[col] = LabelEncoder().fit_transform(self.test_df[col])
 
-    def cross_validation(self):
-        self.train_df.drop(["Name", "Cabin"], axis=1, inplace=True)
-        self.test_df.drop(["Name", "Cabin"], axis=1, inplace=True)
+    def get_cross_validation(self):
         X = self.train_df.drop([self.target], axis=1)
         y = self.train_df[self.target]
-        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=12, test_size=0.33)
-
+        # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=12, test_size=0.33)
+        return train_test_split(X, y, random_state=12, test_size=0.33)
 
     def chomp_outliar(self):
         pass
+
+    def drop_column(self, features):
+        self.train_df.drop(features, axis=1, inplace=True)
+        self.test_df.drop(features, axis=1, inplace=True)
+
+    def save_DataFrame(self):
+        self.train_df.to_csv(os.path.join(self.save_csv_dir, "preprocessing_train.csv"))
+        self.test_df.to_csv(os.path.join(self.save_csv_dir, "preprocessing_test.csv"))
 
 
 def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
-    preprocessing = Preprocessing(pd.read_csv("./datas/train.csv"), pd.read_csv("./datas/test.csv"), "Transported")
-    preprocessing.imputer()
-    preprocessing.encoding_category()
-    preprocessing.cross_validation()
+    # preprocessing = Preprocessing(pd.read_csv("./datas/train.csv"), pd.read_csv("./datas/test.csv"), "Transported")
+    # preprocessing.imputer()
+    # preprocessing.encoding_category()
+    # preprocessing.cross_validation()
+    pass
 
 
 if __name__ == "__main__":

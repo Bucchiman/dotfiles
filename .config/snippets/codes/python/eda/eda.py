@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-05 20:01:51 +0900
+# LastModified: 2023-02-05 20:31:46 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -28,13 +28,13 @@ class EDA(object):
                  target: str,
                  logger: logging.RootLogger,
                  imshow=False,
-                 result_dir="results",):
+                 results_dir="results",):
         self.train_df = pd.read_csv(train_csv)
         self.test_df = pd.read_csv(test_csv)
         self.target = target
         #self.train_df.drop(["PassengerId"], axis=1, inplace=True)
         self.features = [col for col in self.train_df.columns if col != self.target]
-        self.result_dir = result_dir
+        self.results_dir = results_dir
         self.logger = logger
         self.logger.info(self.features)
         self.imshow = imshow
@@ -75,7 +75,7 @@ class EDA(object):
         fig.update_layout(showlegend=False, title_text="Column wise Null Value Distribution", title_x=0.5)
         if self.imshow:
             fig.show()
-        fig.write_image(os.path.join(self.result_dir, "column_wise_distribution.png"))
+        fig.write_image(os.path.join(self.results_dir, "column_wise_distribution.png"))
 
     def row_wise_missing(self):
         missing_train_row = self.train_df.isna().sum(axis=1)
@@ -104,11 +104,11 @@ class EDA(object):
         fig.update_layout(showlegend=False, title_text="Row wise Null Value Distribution", title_x=0.5)
         if self.imshow:
             fig.show()
-        fig.write_image(os.path.join(self.result_dir, "row_wise_distribution.png"))
+        fig.write_image(os.path.join(self.results_dir, "row_wise_distribution.png"))
 
     def single_histogram(self, feature):
         fig = sns.displot(self.train_df[feature])
-        fig.savefig("single_{}_histoplot.png".format(feature))
+        fig.savefig(os.path.join(self.results_dir, "single_{}_histoplot.png".format(feature)))
 
     def scatter_target_feature(self, feature):
         data = pd.concat([self.train_df[self.target], self.train_df[feature]], axis=1)
@@ -130,7 +130,7 @@ class EDA(object):
                                      values=values, pull=[0.1, 0, 0],
                                      marker=dict(colors=colors,
                                                  line=dict(color='#000000', width=2)))])
-        fig.write_image(os.path.join(self.result_dir, "features_cat_cont_text_Pie.png"))
+        fig.write_image(os.path.join(self.results_dir, "features_cat_cont_text_Pie.png"))
         train_age = self.train_df.copy()
         test_age = self.test_df.copy()
         train_age["type"] = "Train"
@@ -144,7 +144,7 @@ class EDA(object):
                            nbins=100,
                            template="plotly_white")
         fig.update_layout(title="Distribution of Age", title_x=0.5)
-        fig.write_image(os.path.join(self.result_dir, "age_histogram.png"))
+        fig.write_image(os.path.join(self.results_dir, "age_histogram.png"))
 
     def distribution_of_category(self):
         if len(self.cat_features) == 0:
@@ -174,7 +174,7 @@ class EDA(object):
                     axes[r, c].yaxis.offsetText.set_fontsize(4)
             if self.imshow:
                 fig.show()
-            fig.savefig(os.path.join(self.result_dir, "category_distribution.png"))
+            fig.savefig(os.path.join(self.results_dir, "category_distribution.png"))
 
     def correlation_matrix(self):
         fig = px.imshow(self.train_df.corr(),
@@ -185,7 +185,7 @@ class EDA(object):
             fig.show()
 
         fig = sns.heatmap(self.train_df.corr())
-        fig.savefig(os.path.join(self.result_dir, "correlation_matrix.png"))
+        fig.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
 
     def scatterplot(self, features):
         sns.set()
@@ -213,14 +213,14 @@ def main():
     args = get_args()
     train_path = os.path.join(args.data_dir, args.train_csv)
     test_path = os.path.join(args.data_dir, args.test_csv)
-    logger = EDA.get_logger(log_dir="../logs", file_name="sample.log")
-    eda = EDA(train_path, test_path, "formation_energy_per_atom", logger, imshow=False, result_dir="../results")
+    logger = EDA.get_logger(log_dir=args.log_dir, file_name=args.log_file)
+    eda = EDA(train_path, test_path, "formation_energy_per_atom", logger, imshow=False, results_dir=args.results_dir)
     # eda.get_logger(".", "sample.log")
     eda.single_histogram('formation_energy_per_atom')
     #eda.scatter_target_feature('GrLivArea')
     #eda.scatterplot(['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt'])
-    eda.column_wise_missing()
-    eda.row_wise_missing()
+    #eda.column_wise_missing()
+    #eda.row_wise_missing()
     #eda.distribution_of_continuous()
     #eda.distribution_of_category()
     #eda.correlation_matrix()
