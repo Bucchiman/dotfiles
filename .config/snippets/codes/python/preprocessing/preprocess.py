@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-05 21:17:44 +0900
+# LastModified: 2023-02-06 13:45:37 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -71,6 +71,9 @@ class Preprocessing(object):
     def save_DataFrame(self):
         self.train_df.to_csv(os.path.join(self.save_csv_dir, "preprocessing_train.csv"))
         self.test_df.to_csv(os.path.join(self.save_csv_dir, "preprocessing_test.csv"))
+
+    def get_preprocess_df(self):
+        return self.train_df, self.test_df
 
 
 def main():
