@@ -2,7 +2,7 @@
 #
 # FileName: 	run
 # CreatedDate:  2023-01-16 14:04:54 +0900
-# LastModified: 2023-02-02 19:30:20 +0900
+# LastModified: 2023-02-07 10:23:53 +0900
 #
 
 
@@ -51,6 +51,7 @@ do
   then
     export CUDA_VISIBLE_DEVICES=$i
     ./${run_file}
+    bus_process[$bp]=$((bus_process[$bp]+1))
   fi
   i=$((i+1))
 done

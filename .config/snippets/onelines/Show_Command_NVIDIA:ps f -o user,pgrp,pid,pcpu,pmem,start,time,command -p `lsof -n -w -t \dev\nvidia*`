@@ -1,0 +1,22 @@
+Command> ps f -o user,pgrp,pid,pcpu,pmem,start,time,command -p `lsof -n -w -t /dev/nvidia*`
+
+
+Description> ps f          階層状態で出力
+           > ps -o         出力フォーマット指定
+           > ps -o user    ユーザー名
+           > ps -o pgrp
+           > ps -o pid     PID
+           > ps -o pcpu    CPU占有率
+           > ps -o pmem    メモリ占有率
+           > ps -o start   スタート時間
+           > ps -o time    経過時間
+           > ps -o command コマンド
+           > ps -p         プロセス指定
+           > lsof          プロセスが開いているファイルを表示
+           > lsof -n       IPアドレスを表示
+           > lsof -p       プロセスIDを指定
+           > lsof -w       書き込みなし
+           > lsof -t       ファイルタイプ指定
+
+Reference> https://eng-entrance.com/linux-command-ps#f-H--forest
+           https://qiita.com/hypermkt/items/905139168b0bc5c28ef2
