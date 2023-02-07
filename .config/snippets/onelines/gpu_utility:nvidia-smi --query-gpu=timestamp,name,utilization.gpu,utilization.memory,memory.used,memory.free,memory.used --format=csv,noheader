@@ -1,0 +1,10 @@
+command> nvidia-smi --query-gpu=timestamp,name,utilization.gpu,utilization.memory,memory.used,memory.free,memory.used --format=csv,noheader
+
+Description> --query-gpu            GPUステータス確認
+           > --query-gpu=index      GPU_id
+           > --query-gpu=name       GPU名
+           > --query-gpu=uuid       uuid(GPU-3ccf36b1-2fc8-55a1-c16c-xxxxxxxxxxxx)
+           > --query-gpu=serial     シリアル名(N/A)
+
+
+Reference> https://qiita.com/miyamotok0105/items/1b34e548f96ef7d40370

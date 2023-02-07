@@ -1,0 +1,7 @@
+>cat /proc/${PID}/cmdline | xargs -0 echo
+>cat /proc/${PID}/cmdline | tr '\000' ' '
+
+PIDのコマンドを表示
+
+
+https://serverfault.com/questions/479460/find-command-from-pid

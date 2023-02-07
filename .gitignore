@@ -18,3 +18,7 @@ logs/
 .cache/
 .conda/
 tmp.*
+target/
+*.lock
+.bashrc
+.bash_history
