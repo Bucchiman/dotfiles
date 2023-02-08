@@ -4,7 +4,7 @@
 # FileName: 	color_setting
 # Author: 8ucchiman
 # CreatedDate:  2023-02-08 14:15:24 +0900
-# LastModified: 2023-02-08 14:56:10 +0900
+# LastModified: 2023-02-08 20:55:33 +0900
 # Reference: https://pythondatascience.plavox.info/matplotlib/%E8%89%B2%E3%81%AE%E5%90%8D%E5%89%8D
 #            https://matplotlib.org/2.0.2/examples/color/colormaps_reference.html
 #            https://shikaku-mafia.com/matplotlib-color/
@@ -38,21 +38,6 @@ def specify_16_bits():
     plt.show()
 
 
-#def specify_rgb():
-#    fig, ax = plt.subplots(1, 1)
-#    fig.patch.set_facecolor('white')
-#
-#    col1 = [0.0, 0.0, 0.0]
-#    col2 = [1.0, 0.0, 0.0]
-#    col3 = [0.0, 1.0, 0.0]
-#    col4 = [0.0, 0.0, 1.0]
-#    colorlist = [col1, col2, col3, col4]
-#
-#    x = np.arange(1, 5)
-#    height = np.arange(1, 5)
-#    ax.bar(x, height, color=colorlist, tick_label=colorlist, align="center")
-#    plt.show()
-
 def specify_gradation():
     fig, ax = plt.subplots(1, 1)
     x = np.arange(1, 6)
@@ -68,8 +53,6 @@ def main():
     # method = getattr(utils, args.method)
     # specify_one_str()
     # specify_16_bits()
-    # specify_rgb()
-    specify_gradation()
 
 
 if __name__ == "__main__":

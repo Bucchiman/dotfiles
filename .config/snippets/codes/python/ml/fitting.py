@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-08 00:08:12 +0900
+# LastModified: 2023-02-08 22:19:06 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -128,25 +128,25 @@ class Fitting(object):
         score = self.rmsle_cv(self.stacked_averaged_models)
         print("Stacking Averaged models score: {:.4f} ({:.4f})".format(score.mean(), score.std()))
 
-    def rmsle(y, y_pred):
+    def rmsle(self, y, y_pred):
         return np.sqrt(mean_squared_error(y, y_pred))
 
     def stackedregressor(self):
         self.stacked_averaged_models.fit(self.X, self.y)
         stacked_train_pred = self.stacked_averaged_models.predict(self.X)
-        stacked_pred = np.expm1(self.stacked_averaged_models.predict(self.X_test))
+        self.stacked_pred = np.expm1(self.stacked_averaged_models.predict(self.X_test))
         print(self.rmsle(self.y, stacked_train_pred))
 
     def xgboost(self):
         self.model_xgb.fit(self.X, self.y)
         xgb_train_pred = self.model_xgb.predict(self.X)
-        xgb_pred = np.expm1(self.model_xgb.predict(self.X_test))
+        self.xgb_pred = np.expm1(self.model_xgb.predict(self.X_test))
         print(self.rmsle(self.y, xgb_train_pred))
 
     def lightgbm(self):
         self.model_lgb.fit(self.X, self.y)
         lgb_train_pred = self.model_lgb.predict(self.X)
-        lgb_pred = np.expm1(self.model_lgb.predict(self.X_test))
+        self.lgb_pred = np.expm1(self.model_lgb.predict(self.X_test))
         print(self.rmsle(self.y, lgb_train_pred))
 
 
