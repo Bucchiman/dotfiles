@@ -9,6 +9,7 @@ edition = "2021"
 getopts = "0.2"
 docopt = "1"
 serde = { version = "1", features = ["derive"] }
+log = "0.4"
 
 [[bin]]
 name = "getopts"
@@ -22,3 +23,8 @@ path = "template/template.rs"
 [[bin]]
 name = "docopt"
 path = "argparse/docopt/docopt.rs"
+
+
+[[bin]]
+name = "log"
+path = "logging/log/log.rs"
