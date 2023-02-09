@@ -4,7 +4,7 @@
 # FileName: 	color_setting
 # Author: 8ucchiman
 # CreatedDate:  2023-02-08 14:15:24 +0900
-# LastModified: 2023-02-08 20:55:33 +0900
+# LastModified: 2023-02-09 16:25:52 +0900
 # Reference: https://pythondatascience.plavox.info/matplotlib/%E8%89%B2%E3%81%AE%E5%90%8D%E5%89%8D
 #            https://matplotlib.org/2.0.2/examples/color/colormaps_reference.html
 #            https://shikaku-mafia.com/matplotlib-color/
@@ -53,6 +53,7 @@ def main():
     # method = getattr(utils, args.method)
     # specify_one_str()
     # specify_16_bits()
+    pass
 
 
 if __name__ == "__main__":

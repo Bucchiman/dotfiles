@@ -4,7 +4,7 @@
 # FileName: 	svm
 # Author: 8ucchiman
 # CreatedDate:  2023-02-07 16:00:02 +0900
-# LastModified: 2023-02-07 16:38:07 +0900
+# LastModified: 2023-02-09 17:21:39 +0900
 # Reference: https://datawokagaku.com/svm/
 #
 
@@ -24,12 +24,6 @@ from sklearn.metrics import accuracy_score
 # from import utils import get_args, get_logger
 # import numpy as np
 # import pandas as pd
-
-
-def scatter_(x, y):
-    fig, ax = plt.subplots(1, 1)
-    ax.scatter(x, y)
-    fig.savefig("hoge.png")
 
 
 def render_support_vector(iris, model, X_train_pca, y_train):
@@ -58,7 +52,8 @@ def render_support_vector(iris, model, X_train_pca, y_train):
                linewidth=1,
                facecolors='none',
                edgecolors='k')
-    fig.savefig("hogehoge.pdf")
+    fig.savefig("svm.pdf")
+    plt.show()
 
 
 def main():
@@ -74,7 +69,6 @@ def main():
     pca = PCA(n_components=2)
     X_train_pca = pca.fit_transform(X_train)
     print(X_train_pca.shape)
-    scatter_(X_train_pca[:, 0], X_train_pca[:, 1])
     model = SVC()
     model.fit(X_train_pca, y_train)
     X_test_pca = pca.transform(X_test)
