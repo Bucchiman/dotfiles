@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-08 22:19:06 +0900
+# LastModified: 2023-02-10 17:51:06 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -33,6 +33,7 @@ class Fitting(object):
         self.test_df = test_df
         self.target = target
         self.logger = logger
+        self.test_id = self.test_df["id"]
         self.X = self.train_df.drop([self.target], axis=1).values
         self.y = self.train_df[self.target].values
         self.X_test = self.test_df.values
@@ -63,29 +64,29 @@ class Fitting(object):
         return rmse
 
     def base_models(self):
-        self.lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
-        self.ENet = make_pipeline(RobustScaler(), ElasticNet(alpha=0.0005, l1_ratio=.9, random_state=3))
-        self.KRR = KernelRidge(alpha=0.6, kernel='polynomial', degree=2, coef0=2.5)
-        self.GBoost = GradientBoostingRegressor(n_estimators=3000,
-                                                learning_rate=0.05,
-                                                max_depth=4,
-                                                max_features='sqrt',
-                                                min_samples_leaf=15,
-                                                min_samples_split=10,
-                                                loss='huber',
-                                                random_state=5)
-        self.model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603,
-                                          gamma=0.0468,
-                                          learning_rate=0.05,
-                                          max_depth=3,
-                                          min_child_weight=1.7817,
-                                          n_estimators=2200,
-                                          reg_alpha=0.4640,
-                                          reg_lambda=0.8571,
-                                          subsample=0.5213,
-                                          silent=1,
-                                          random_state=7,
-                                          nthread=-1)
+        # self.lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
+        # self.ENet = make_pipeline(RobustScaler(), ElasticNet(alpha=0.0005, l1_ratio=.9, random_state=3))
+        # self.KRR = KernelRidge(alpha=0.6, kernel='polynomial', degree=2, coef0=2.5)
+        # self.GBoost = GradientBoostingRegressor(n_estimators=3000,
+        #                                         learning_rate=0.05,
+        #                                         max_depth=4,
+        #                                         max_features='sqrt',
+        #                                         min_samples_leaf=15,
+        #                                         min_samples_split=10,
+        #                                         loss='huber',
+        #                                         random_state=5)
+        # self.model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603,
+        #                                   gamma=0.0468,
+        #                                   learning_rate=0.05,
+        #                                   max_depth=3,
+        #                                   min_child_weight=1.7817,
+        #                                   n_estimators=2200,
+        #                                   reg_alpha=0.4640,
+        #                                   reg_lambda=0.8571,
+        #                                   subsample=0.5213,
+        #                                   silent=1,
+        #                                   random_state=7,
+        #                                   nthread=-1)
         self.model_lgb = lgb.LGBMRegressor(objective='regression',
                                            num_leaves=5,
                                            learning_rate=0.05,
@@ -98,16 +99,16 @@ class Fitting(object):
                                            bagging_seed=9,
                                            min_data_in_leaf=6,
                                            min_sum_hessian_in_leaf=11)
-        score = self.rmsle_cv(self.lasso)
-        print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        score = self.rmsle_cv(self.ENet)
-        print("ElasticNet score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        #score = self.rmsle_cv(self.KRR)
-        #print("Kernel Ridge score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        score = self.rmsle_cv(self.GBoost)
-        print("Gradient Boosting score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        score = self.rmsle_cv(self.model_xgb)
-        print("Xgboost score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        #score = self.rmsle_cv(self.lasso)
+        #print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        #score = self.rmsle_cv(self.ENet)
+        #print("ElasticNet score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        ##score = self.rmsle_cv(self.KRR)
+        ##print("Kernel Ridge score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        #score = self.rmsle_cv(self.GBoost)
+        #print("Gradient Boosting score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        #score = self.rmsle_cv(self.model_xgb)
+        #print("Xgboost score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
         score = self.rmsle_cv(self.model_lgb)
         print("LGBM score: {:.4f} ({:.4f})\n" .format(score.mean(), score.std()))
 
@@ -149,14 +150,16 @@ class Fitting(object):
         self.lgb_pred = np.expm1(self.model_lgb.predict(self.X_test))
         print(self.rmsle(self.y, lgb_train_pred))
 
-
     def ensembling(self):
         self.ensemble = self.stacked_pred*0.70 + self.xgb_pred*0.15 + self.lgb_pred*0.15
 
     def submission(self):
         sub = pd.DataFrame()
         # sub['id'] = self.test_id
-        sub[self.target] = self.ensemble
+        # sub[self.target] = self.ensemble
+
+        sub[self.target] = self.lgb_pred
+        sub = pd.concat([self.test_id, sub[self.target]])
         sub.to_csv("submission.csv", index=False)
 
 
