@@ -4,13 +4,14 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-06 13:45:37 +0900
+# LastModified: 2023-02-11 21:09:07 +0900
 # Reference: 8ucchiman.jp
 #
 
 
 import os
 import sys
+import re
 import logging
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -28,6 +29,8 @@ class Preprocessing(object):
                  save_csv_dir="../preprocessed"):
         self.train_df = pd.read_csv(train_path)
         self.test_df = pd.read_csv(test_path)
+        self.train_df = self.train_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
+        self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         self.STRATEGY = "median"
         self.target = target
         self.logger = logger
@@ -35,7 +38,7 @@ class Preprocessing(object):
 
     def imputer(self):
         imputer_cols = ["Age", "FoodCourt", "ShoppingMall",
-                        "Spa", "VRDeck" ,"RoomService"]
+                        "Spa", "VRDeck", "RoomService"]
         imputer = SimpleImputer(strategy=self.STRATEGY)
         imputer.fit(self.train_df[imputer_cols])
         self.train_df[imputer_cols] = imputer.transform(self.train_df[imputer_cols])

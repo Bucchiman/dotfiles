@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-11 00:08:25 +0900
+# LastModified: 2023-02-11 22:29:15 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -107,11 +107,15 @@ class EDA(object):
             fig.show()
         fig.write_image(os.path.join(self.results_dir, "row_wise_distribution.png"))
 
-    def single_histogram(self, feature):
+    def single_histogram(self, feature: str):
         fig = sns.displot(self.train_df[feature])
         fig.savefig(os.path.join(self.results_dir, "single_{}_histoplot.png".format(feature)))
 
-    def scatter_target_feature(self, feature):
+    def multi_histogram(self, features: list[str]):
+        self.train_df[features].hist(bins=100)
+        plt.savefig(os.path.join(self.results_dir, "multi_histoplot.png"))
+
+    def scatter_target_feature(self, feature: str):
         data = pd.concat([self.train_df[self.target], self.train_df[feature]], axis=1)
         fig = data.plot.scatter(x=feature, y=self.target)
         fig.figure.savefig("scatter_{}_{}.png".format(feature, self.target))
@@ -188,10 +192,10 @@ class EDA(object):
         fig = sns.heatmap(self.train_df.corr())
         fig.figure.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
 
-    def scatterplot(self, features):
+    def scatterplot(self, features: list[str]):
         sns.set()
         fig = sns.pairplot(self.train_df[features], size=2.5)
-        fig.figure.savefig("scatterplot.png")
+        fig.figure.savefig(os.path.join(self.results_dir, "scatterplot.png"))
 
     @classmethod
     def get_logger(self, log_dir, file_name):
