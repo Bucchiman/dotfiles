@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-10 17:51:06 +0900
+# LastModified: 2023-02-11 00:02:18 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -33,12 +33,12 @@ class Fitting(object):
         self.test_df = test_df
         self.target = target
         self.logger = logger
-        self.test_id = self.test_df["id"]
+        # self.test_id = self.test_df["id"]
         self.X = self.train_df.drop([self.target], axis=1).values
         self.y = self.train_df[self.target].values
         self.X_test = self.test_df.values
 
-    def single_cross_validation(self, X_train, X_test, y_train, y_test):
+    def cross_validation(self, X_train, X_test, y_train, y_test):
         self.X_train = X_train
         self.X_test = X_test
         self.y_train = y_train
@@ -87,18 +87,29 @@ class Fitting(object):
         #                                   silent=1,
         #                                   random_state=7,
         #                                   nthread=-1)
-        self.model_lgb = lgb.LGBMRegressor(objective='regression',
-                                           num_leaves=5,
-                                           learning_rate=0.05,
-                                           n_estimators=720,
-                                           max_bin=55,
-                                           bagging_fraction=0.8,
-                                           bagging_freq=5,
-                                           feature_fraction=0.2319,
-                                           feature_fraction_seed=9,
-                                           bagging_seed=9,
-                                           min_data_in_leaf=6,
-                                           min_sum_hessian_in_leaf=11)
+        #self.model_lgb = lgb.LGBMRegressor(objective='regression',
+        #                                   num_leaves=5,
+        #                                   learning_rate=0.05,
+        #                                   n_estimators=720,
+        #                                   max_bin=55,
+        #                                   bagging_fraction=0.8,
+        #                                   bagging_freq=5,
+        #                                   feature_fraction=0.2319,
+        #                                   feature_fraction_seed=9,
+        #                                   bagging_seed=9,
+        #                                   min_data_in_leaf=6,
+        #                                   min_sum_hessian_in_leaf=11)
+        lgbm_params = {
+            "objective": "regression",
+            "learning_rate": 0.2,
+            "reg_alpha": 0.1,
+            "reg_lambda": 0.1,
+            "max_depth": 5,
+            "n_estimators": 1000000, 
+            "colsample_bytree": 0.9,
+        }
+        self.model_lgb = lgb.LGBMRegressor(**lgbm_params)
+
         #score = self.rmsle_cv(self.lasso)
         #print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
         #score = self.rmsle_cv(self.ENet)
@@ -159,7 +170,7 @@ class Fitting(object):
         # sub[self.target] = self.ensemble
 
         sub[self.target] = self.lgb_pred
-        sub = pd.concat([self.test_id, sub[self.target]])
+        #sub = pd.concat([self.test_id, sub[self.target]])
         sub.to_csv("submission.csv", index=False)
 
 

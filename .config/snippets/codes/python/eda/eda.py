@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-05 20:31:46 +0900
+# LastModified: 2023-02-11 00:08:25 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -32,17 +32,18 @@ class EDA(object):
         self.train_df = pd.read_csv(train_csv)
         self.test_df = pd.read_csv(test_csv)
         self.target = target
-        #self.train_df.drop(["PassengerId"], axis=1, inplace=True)
+        # self.train_df.drop(["PassengerId"], axis=1, inplace=True)
         self.features = [col for col in self.train_df.columns if col != self.target]
         self.results_dir = results_dir
         self.logger = logger
         self.logger.info(self.features)
         self.imshow = imshow
-        self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
+        self.total_df = pd.concat([self.train_df[self.features],
+                                   self.test_df[self.features]], axis=0)
         self.logger.info("features info:\n{}".format(self.train_df.info()))
-        #self.text_features = ["Cabin", "Name"]
-        #self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
-        #self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
+        # self.text_features = ["Cabin", "Name"]
+        # self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
+        # self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
@@ -185,12 +186,12 @@ class EDA(object):
             fig.show()
 
         fig = sns.heatmap(self.train_df.corr())
-        fig.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
+        fig.figure.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
 
     def scatterplot(self, features):
         sns.set()
         fig = sns.pairplot(self.train_df[features], size=2.5)
-        fig.savefig("scatterplot.png")
+        fig.figure.savefig("scatterplot.png")
 
     @classmethod
     def get_logger(self, log_dir, file_name):
@@ -217,13 +218,13 @@ def main():
     eda = EDA(train_path, test_path, "formation_energy_per_atom", logger, imshow=False, results_dir=args.results_dir)
     # eda.get_logger(".", "sample.log")
     eda.single_histogram('formation_energy_per_atom')
-    #eda.scatter_target_feature('GrLivArea')
-    #eda.scatterplot(['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt'])
-    #eda.column_wise_missing()
-    #eda.row_wise_missing()
-    #eda.distribution_of_continuous()
-    #eda.distribution_of_category()
-    #eda.correlation_matrix()
+    # eda.scatter_target_feature('GrLivArea')
+    # eda.scatterplot(['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt'])
+    # eda.column_wise_missing()
+    # eda.row_wise_missing()
+    # eda.distribution_of_continuous()
+    # eda.distribution_of_category()
+    # eda.correlation_matrix()
     pass
 
 
