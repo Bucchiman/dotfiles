@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-11 21:12:53 +0900
+# LastModified: 2023-02-13 23:40:09 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -20,22 +20,26 @@ from sklearn.preprocessing import RobustScaler
 from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import KFold, cross_val_score
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, accuracy_score
 import xgboost as xgb
 import pandas as pd
 # import utils
 
 
 class Fitting(object):
-    def __init__(self, train_df, test_df, target, logger):
+    def __init__(self, train_df, test_df, target, logger, problem_type, index: str):
         self.train_df = train_df
         self.test_df = test_df
+        self.test_index = self.test_df[index]
+        self.train_df.drop([index], axis=1, inplace=True)
+        self.test_df.drop([index], axis=1, inplace=True)
         self.target = target
         self.logger = logger
         # self.test_id = self.test_df["id"]
         self.X = self.train_df.drop([self.target], axis=1).values
         self.y = self.train_df[self.target].values
         self.X_test = self.test_df.values
+        self.problem_type = problem_type
 
     def cross_validation(self, X_train, X_valid, y_train, y_valid):
         self.X_train = X_train
@@ -64,7 +68,7 @@ class Fitting(object):
         return rmse
 
     def try_rmse(self, model):
-        return cross_val_score(mode, self.X, self.y, scoring="rmse", cv=self.kf)
+        return cross_val_score(model, self.X, self.y, scoring="rmse", cv=self.kf)
 
     def base_models(self):
         import lightgbm as lgb
@@ -103,16 +107,22 @@ class Fitting(object):
         #                                   bagging_seed=9,
         #                                   min_data_in_leaf=6,
         #                                   min_sum_hessian_in_leaf=11)
-        lgbm_params = {
-            "objective": "regression",
-            "learning_rate": 0.2,
-            "reg_alpha": 0.1,
-            "reg_lambda": 0.1,
-            "max_depth": 5,
-            "n_estimators": 1000000, 
-            "colsample_bytree": 0.9,
-        }
-        self.model_lgb = lgb.LGBMRegressor(**lgbm_params)
+        if self.problem_type == "Regression":
+            lgbm_params = {
+                "objective": "regression",
+                "learning_rate": 0.2,
+                "reg_alpha": 0.1,
+                "reg_lambda": 0.1,
+                "max_depth": 5,
+                "n_estimators": 1000000, 
+                "colsample_bytree": 0.9,
+            }
+            self.model_lgb = lgb.LGBMRegressor(**lgbm_params)
+        else:
+            lgbm_params = {
+                "max_depth": 5
+            }
+            self.model_lgb = lgb.LGBMClassifier(**lgbm_params)
 
         #score = self.rmsle_cv(self.lasso)
         #print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
@@ -175,7 +185,7 @@ class Fitting(object):
         # sub[self.target] = self.ensemble
 
         sub[self.target] = self.lgb_pred
-        #sub = pd.concat([self.test_id, sub[self.target]])
+        sub = pd.concat([self.test_index, sub[self.target]], axis=1)
         sub.to_csv("submission.csv", index=False)
 
 

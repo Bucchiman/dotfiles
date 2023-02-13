@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-12 09:27:38 +0900
+# LastModified: 2023-02-13 23:12:41 +0900
 #
 
 
@@ -49,6 +49,7 @@ def get_args():
     parser.add_argument('--eda', action='store_true')
     parser.add_argument('--preprocessing', action='store_true')
     parser.add_argument('--fitting', action='store_true')
+    parser.add_argument('--problem_type', type=str, required=True, choices=['Regression', 'Classification'])
     parser.add_argument('--save_csv_dir', type=str, default="../preprocessing_dir")
     # parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
 

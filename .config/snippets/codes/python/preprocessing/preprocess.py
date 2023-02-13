@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-11 21:09:07 +0900
+# LastModified: 2023-02-13 22:49:21 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -29,8 +29,8 @@ class Preprocessing(object):
                  save_csv_dir="../preprocessed"):
         self.train_df = pd.read_csv(train_path)
         self.test_df = pd.read_csv(test_path)
-        self.train_df = self.train_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
-        self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
+        # self.train_df = self.train_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
+        # self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         self.STRATEGY = "median"
         self.target = target
         self.logger = logger
@@ -51,8 +51,9 @@ class Preprocessing(object):
                       "Cabin", "Destination", "VIP"]
         self.label_encoder(label_cols)
 
-    def label_encoder(self, columns):
+    def label_encoder(self, columns: list[str]):
         for col in columns:
+            print(col)
             self.train_df[col] = self.train_df[col].astype(str)
             self.test_df[col] = self.test_df[col].astype(str)
             self.train_df[col] = LabelEncoder().fit_transform(self.train_df[col])
@@ -67,7 +68,7 @@ class Preprocessing(object):
     def chomp_outliar(self):
         pass
 
-    def drop_column(self, features):
+    def drop_column(self, features: list[str]):
         self.train_df.drop(features, axis=1, inplace=True)
         self.test_df.drop(features, axis=1, inplace=True)
 
