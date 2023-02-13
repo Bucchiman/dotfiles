@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-11 22:29:15 +0900
+# LastModified: 2023-02-12 09:46:26 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -190,7 +190,7 @@ class EDA(object):
             fig.show()
 
         fig = sns.heatmap(self.train_df.corr())
-        fig.figure.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
+        # fig.figure.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
 
     def scatterplot(self, features: list[str]):
         sns.set()

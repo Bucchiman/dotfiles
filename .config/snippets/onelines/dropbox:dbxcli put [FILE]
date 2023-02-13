@@ -1,1 +1,3 @@
-dropbox:dbxcli put [FILE]
+Command> dropbox:dbxcli put [FILE]
+
+Description> dropbox upload file

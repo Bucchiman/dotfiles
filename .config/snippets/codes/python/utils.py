@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-05 21:23:02 +0900
+# LastModified: 2023-02-12 09:27:38 +0900
 #
 
 
@@ -78,6 +78,9 @@ def make_barplot():
     ax.set_xticklabels(x)
     plt.show()
     fig.savefig("output.png")
+
+def pd_basic(train_path, test_path):
+    pass
 
 
 if __name__ == "__main__":

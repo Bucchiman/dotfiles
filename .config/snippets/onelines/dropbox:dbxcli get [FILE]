@@ -1,1 +1,3 @@
-dropbox:dbxcli get [FILE]
+Command> dropbox:dbxcli get [FILE]
+
+Description> dropbox download file
