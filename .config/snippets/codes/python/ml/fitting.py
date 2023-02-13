@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-10 17:51:06 +0900
+# LastModified: 2023-02-11 21:12:53 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -12,7 +12,7 @@
 import os
 import sys
 import numpy as np
-from lazypredict.Supervised import LazyRegressor
+# from lazypredict.Supervised import LazyRegressor
 from sklearn.linear_model import ElasticNet, Lasso, BayesianRidge, LassoLarsIC
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.kernel_ridge import KernelRidge
@@ -22,7 +22,6 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.metrics import mean_squared_error
 import xgboost as xgb
-import lightgbm as lgb
 import pandas as pd
 # import utils
 
@@ -33,21 +32,22 @@ class Fitting(object):
         self.test_df = test_df
         self.target = target
         self.logger = logger
-        self.test_id = self.test_df["id"]
+        # self.test_id = self.test_df["id"]
         self.X = self.train_df.drop([self.target], axis=1).values
         self.y = self.train_df[self.target].values
         self.X_test = self.test_df.values
 
-    def single_cross_validation(self, X_train, X_test, y_train, y_test):
+    def cross_validation(self, X_train, X_valid, y_train, y_valid):
         self.X_train = X_train
-        self.X_test = X_test
+        self.X_valid = X_valid
         self.y_train = y_train
-        self.y_test = y_test
+        self.y_valid = y_valid
 
     def run(self):
         pass
 
-    def lazypredict(self):
+    def run_lazypredict(self):
+        from lazypredict.Supervised import LazyRegressor
         clf = LazyRegressor(verbose=0,
                             ignore_warnings=True,
                             custom_metric=None,
@@ -63,7 +63,11 @@ class Fitting(object):
         rmse = np.sqrt(-cross_val_score(model, self.X, self.y, scoring="neg_mean_squared_error", cv=self.kf))
         return rmse
 
+    def try_rmse(self, model):
+        return cross_val_score(mode, self.X, self.y, scoring="rmse", cv=self.kf)
+
     def base_models(self):
+        import lightgbm as lgb
         # self.lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
         # self.ENet = make_pipeline(RobustScaler(), ElasticNet(alpha=0.0005, l1_ratio=.9, random_state=3))
         # self.KRR = KernelRidge(alpha=0.6, kernel='polynomial', degree=2, coef0=2.5)
@@ -87,18 +91,29 @@ class Fitting(object):
         #                                   silent=1,
         #                                   random_state=7,
         #                                   nthread=-1)
-        self.model_lgb = lgb.LGBMRegressor(objective='regression',
-                                           num_leaves=5,
-                                           learning_rate=0.05,
-                                           n_estimators=720,
-                                           max_bin=55,
-                                           bagging_fraction=0.8,
-                                           bagging_freq=5,
-                                           feature_fraction=0.2319,
-                                           feature_fraction_seed=9,
-                                           bagging_seed=9,
-                                           min_data_in_leaf=6,
-                                           min_sum_hessian_in_leaf=11)
+        #self.model_lgb = lgb.LGBMRegressor(objective='regression',
+        #                                   num_leaves=5,
+        #                                   learning_rate=0.05,
+        #                                   n_estimators=720,
+        #                                   max_bin=55,
+        #                                   bagging_fraction=0.8,
+        #                                   bagging_freq=5,
+        #                                   feature_fraction=0.2319,
+        #                                   feature_fraction_seed=9,
+        #                                   bagging_seed=9,
+        #                                   min_data_in_leaf=6,
+        #                                   min_sum_hessian_in_leaf=11)
+        lgbm_params = {
+            "objective": "regression",
+            "learning_rate": 0.2,
+            "reg_alpha": 0.1,
+            "reg_lambda": 0.1,
+            "max_depth": 5,
+            "n_estimators": 1000000, 
+            "colsample_bytree": 0.9,
+        }
+        self.model_lgb = lgb.LGBMRegressor(**lgbm_params)
+
         #score = self.rmsle_cv(self.lasso)
         #print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
         #score = self.rmsle_cv(self.ENet)
@@ -109,8 +124,8 @@ class Fitting(object):
         #print("Gradient Boosting score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
         #score = self.rmsle_cv(self.model_xgb)
         #print("Xgboost score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        score = self.rmsle_cv(self.model_lgb)
-        print("LGBM score: {:.4f} ({:.4f})\n" .format(score.mean(), score.std()))
+        #score = self.rmsle_cv(self.model_lgb)
+        #print("LGBM score: {:.4f} ({:.4f})\n" .format(score.mean(), score.std()))
 
     def average_model(self):
         averaged_models = AveragingModels(models=(self.ENet,
@@ -145,9 +160,10 @@ class Fitting(object):
         print(self.rmsle(self.y, xgb_train_pred))
 
     def lightgbm(self):
-        self.model_lgb.fit(self.X, self.y)
+        self.model_lgb.fit(self.X_train, self.y_train, eval_set=[(self.X_valid, self.y_valid)], early_stopping_rounds=20, eval_metric="rmse", verbose=200)
         lgb_train_pred = self.model_lgb.predict(self.X)
-        self.lgb_pred = np.expm1(self.model_lgb.predict(self.X_test))
+        # self.lgb_pred = np.expm1(self.model_lgb.predict(self.X_test))
+        self.lgb_pred = self.model_lgb.predict(self.X_test)
         print(self.rmsle(self.y, lgb_train_pred))
 
     def ensembling(self):
@@ -159,7 +175,7 @@ class Fitting(object):
         # sub[self.target] = self.ensemble
 
         sub[self.target] = self.lgb_pred
-        sub = pd.concat([self.test_id, sub[self.target]])
+        #sub = pd.concat([self.test_id, sub[self.target]])
         sub.to_csv("submission.csv", index=False)
 
 

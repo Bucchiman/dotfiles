@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-13 11:30:24 +0900
+# LastModified: 2023-02-13 17:59:20 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -32,7 +32,7 @@ class EDA(object):
         self.train_df = pd.read_csv(train_csv)
         self.test_df = pd.read_csv(test_csv)
         self.target = target
-        #self.train_df.drop(["PassengerId"], axis=1, inplace=True)
+        # self.train_df.drop(["PassengerId"], axis=1, inplace=True)
         self.features = [col for col in self.train_df.columns if col != self.target]
         self.results_dir = results_dir
         self.logger = logger
@@ -108,11 +108,15 @@ class EDA(object):
             fig.show()
         fig.write_image(os.path.join(self.results_dir, "row_wise_distribution.png"))
 
-    def single_histogram(self, feature):
+    def single_histogram(self, feature: str):
         fig = sns.displot(self.train_df[feature])
         fig.savefig(os.path.join(self.results_dir, "single_{}_histoplot.png".format(feature)))
 
-    def scatter_target_feature(self, feature):
+    def multi_histogram(self, features: list[str]):
+        self.train_df[features].hist(bins=100)
+        plt.savefig(os.path.join(self.results_dir, "multi_histoplot.png"))
+
+    def scatter_target_feature(self, feature: str):
         data = pd.concat([self.train_df[self.target], self.train_df[feature]], axis=1)
         fig = data.plot.scatter(x=feature, y=self.target)
         fig.figure.savefig("scatter_{}_{}.png".format(feature, self.target))
@@ -187,12 +191,12 @@ class EDA(object):
             fig.show()
 
         fig = sns.heatmap(self.train_df.corr())
-        fig.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
+        fig.figure.savefig(os.path.join(self.results_dir, "correlation_matrix.png"))
 
-    def scatterplot(self, features):
+    def scatterplot(self, features: list[str]):
         sns.set()
         fig = sns.pairplot(self.train_df[features], size=2.5)
-        fig.savefig("scatterplot.png")
+        fig.figure.savefig(os.path.join(self.results_dir, "scatterplot.png"))
 
     def groupby_pivoting(self, feature, target=None):
         if not target:
@@ -231,13 +235,13 @@ def main():
     eda = EDA(train_path, test_path, "formation_energy_per_atom", logger, imshow=False, results_dir=args.results_dir)
     # eda.get_logger(".", "sample.log")
     eda.single_histogram('formation_energy_per_atom')
-    #eda.scatter_target_feature('GrLivArea')
-    #eda.scatterplot(['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt'])
-    #eda.column_wise_missing()
-    #eda.row_wise_missing()
-    #eda.distribution_of_continuous()
-    #eda.distribution_of_category()
-    #eda.correlation_matrix()
+    # eda.scatter_target_feature('GrLivArea')
+    # eda.scatterplot(['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt'])
+    # eda.column_wise_missing()
+    # eda.row_wise_missing()
+    # eda.distribution_of_continuous()
+    # eda.distribution_of_category()
+    # eda.correlation_matrix()
     pass
 
 

@@ -1,13 +1,13 @@
+function _has() {
+    return $( whence $1 &>/dev/null )
+}
+
+
 if [[ -d $HOME/.config/zsh ]]
 then
     export LOCALZSHRC="$HOME/.config/zsh"
     source $HOME/.config/zsh/local.zshrc
 fi
-
-
-function _has() {
-    return $( whence $1 &>/dev/null )
-}
 
 colorlist() {
     for color in {000..015}; do
@@ -29,17 +29,11 @@ autoload -Uz compinit     # Enable a function of complementation
 compinit -u
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Ignore whether the character is a capital letter or not.
-#eval `dircolors`
+eval `dircolors`
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 source $HOME/.zsh/git_completion/git-prompt.sh 2>/dev/null
-zstyle ':completion:*:*:git:*' script $HOME/.zsh/git-completion.bash
 autoload -Uz compinit && compinit
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUPSTREAM=auto
-
 
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
