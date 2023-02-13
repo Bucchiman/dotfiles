@@ -101,7 +101,7 @@ function get_machine_icon() {
     search_name=("ubuntu"  "apple" )
     for os in ${(k)search_name}
     do
-        grep -Hi "$os" /etc/*release > /dev/null 2>&1
+        neofetch distro | grep -Hi "$os" > /dev/null 2>&1
         if [ $? = 0 ]
         then
             echo "$search_name[$os]"

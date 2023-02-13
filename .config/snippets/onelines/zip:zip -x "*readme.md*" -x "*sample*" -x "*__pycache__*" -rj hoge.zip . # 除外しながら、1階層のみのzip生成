@@ -1,0 +1,7 @@
+Command> zip -x "*readme.md*" -x "*sample*" -x "*__pycache__*" -rj hoge.zip . # 除外しながら、1階層のみのzip生成
+
+Description> -x exclude
+           > -r reccusive
+           > -j ディレクトリ構造を無視(ディレクトリ内のファイルを1階層ディレクトリ内にぶっこんんでzip生成)
+
+Reference> https://blog.nekonium.com/zip/

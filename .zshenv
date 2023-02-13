@@ -18,4 +18,7 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
+
+export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$PYTHONPATH"
+
 #zmodload zsh/zprof && zprof
