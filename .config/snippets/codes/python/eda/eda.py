@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-05 20:31:46 +0900
+# LastModified: 2023-02-13 11:30:24 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -38,11 +38,13 @@ class EDA(object):
         self.logger = logger
         self.logger.info(self.features)
         self.imshow = imshow
-        self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
+        #self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
         self.logger.info("features info:\n{}".format(self.train_df.info()))
         #self.text_features = ["Cabin", "Name"]
         #self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
         #self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
+        self.logger.info("describe/numerical\n{}".format(self.train_df.describe()))
+        self.logger.info("describe/categorical\n{}".format(self.train_df.describe(include='O')))
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
@@ -191,6 +193,18 @@ class EDA(object):
         sns.set()
         fig = sns.pairplot(self.train_df[features], size=2.5)
         fig.savefig("scatterplot.png")
+
+    def groupby_pivoting(self, feature, target=None):
+        if not target:
+            target = self.target
+        self.logger.info("{}/{} groupby\n{}".format(feature, target, self.train_df[[feature, target]].groupby([feature], as_index=False).mean().sort_values(target)))
+
+    def facetgrid(self, feature, target=None, **kwargs):
+        if not target:
+            target = self.target
+        grid = sns.FacetGrid(self.train_df, row=feature, col=target)
+        grid.map(getattr(sns, kwargs.method))
+        pass
 
     @classmethod
     def get_logger(self, log_dir, file_name):
