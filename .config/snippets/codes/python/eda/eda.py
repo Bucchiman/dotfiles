@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-14 13:09:21 +0900
+# LastModified: 2023-02-14 22:20:12 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -38,15 +38,20 @@ class EDA(object):
         self.features = [col for col in self.train_df.columns if col != self.target]
         self.results_dir = results_dir
         self.logger = logger
-        self.logger.info(self.features)
         self.imshow = imshow
-        #self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
+        # self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
+        # self.text_features = ["Cabin", "Name"]
+        # self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
+        # self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
+        self.basic_infomation()
+
+    def basic_infomation(self):
+        self.logger.info(self.features)
         self.logger.info("features info:\n{}".format(self.train_df.info()))
-        #self.text_features = ["Cabin", "Name"]
-        #self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
-        #self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
         self.logger.info("describe/numerical\n{}".format(self.train_df.describe()))
         self.logger.info("describe/categorical\n{}".format(self.train_df.describe(include='O')))
+        for col in self.features:
+            self.logger.info("value_counts\n{}".format(self.train_df[[col]].value_counts(normalize=True)))
 
     def column_wise_missing(self):
         self.logger.info("-"*5+"train missing value"+"-"*5)
@@ -209,8 +214,8 @@ class EDA(object):
         if not target:
             target = self.target
         grid = sns.FacetGrid(self.train_df, row=feature, col=target)
-        grid.map(getattr(sns, kwargs.method))
-        pass
+        grid.map(getattr(plt, kwargs["method"]), kwargs["x"])
+        plt.savefig("hoge.png")
 
     @classmethod
     def get_logger(self, log_dir, file_name):

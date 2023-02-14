@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-14 13:00:04 +0900
+# LastModified: 2023-02-14 20:43:31 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -80,6 +80,11 @@ class Preprocessing(object):
 
     def get_preprocess_df(self):
         return self.train_df, self.test_df
+
+    def replace(self, operation: dict[str: dict[any: any]]):
+        self.train_df.replace(operation, inplace=True)
+        self.test_df.replace(operation, inplace=True)
+
 
 
 def main():
