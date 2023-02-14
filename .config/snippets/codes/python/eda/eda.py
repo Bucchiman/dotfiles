@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-13 20:45:02 +0900
+# LastModified: 2023-02-14 13:09:21 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -26,12 +26,14 @@ class EDA(object):
                  train_csv: str,
                  test_csv: str,
                  target: str,
+                 index_col: str,
                  logger: logging.RootLogger,
                  imshow=False,
                  results_dir="results",):
         self.train_df = pd.read_csv(train_csv)
         self.test_df = pd.read_csv(test_csv)
         self.target = target
+        self.index_col = index_col
         # self.train_df.drop(["PassengerId"], axis=1, inplace=True)
         self.features = [col for col in self.train_df.columns if col != self.target]
         self.results_dir = results_dir

@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-13 23:40:09 +0900
+# LastModified: 2023-02-14 14:07:37 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -22,17 +22,29 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.metrics import mean_squared_error, accuracy_score
 import xgboost as xgb
+import logging
 import pandas as pd
 # import utils
 
 
 class Fitting(object):
-    def __init__(self, train_df, test_df, target, logger, problem_type, index: str):
+    def __init__(self,
+                 train_df: pd.DataFrame,
+                 test_df: pd.DataFrame,
+                 target: str,
+                 index: str,
+                 logger: logging.RootLogger,
+                 problem_type: str,
+                 index_df: pd.DataFrame = None):
         self.train_df = train_df
         self.test_df = test_df
-        self.test_index = self.test_df[index]
-        self.train_df.drop([index], axis=1, inplace=True)
-        self.test_df.drop([index], axis=1, inplace=True)
+        print(self.train_df.head())
+        if index_df is None:
+            self.test_index = self.test_df[index]
+            self.train_df.drop([index], axis=1, inplace=True)
+            self.test_df.drop([index], axis=1, inplace=True)
+        else:
+            self.test_index = index_df
         self.target = target
         self.logger = logger
         # self.test_id = self.test_df["id"]

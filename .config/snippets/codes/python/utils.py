@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-13 23:12:41 +0900
+# LastModified: 2023-02-14 13:07:50 +0900
 #
 
 
@@ -46,6 +46,8 @@ def get_args():
     parser.add_argument('--data_dir', type=str, default="../datas")
     parser.add_argument('--train_csv', type=str, default="train.csv")
     parser.add_argument('--test_csv', type=str, default="test.csv")
+    parser.add_argument('--target_col', type=str, required=True)
+    parser.add_argument('--index_col', type=str, required=True)
     parser.add_argument('--eda', action='store_true')
     parser.add_argument('--preprocessing', action='store_true')
     parser.add_argument('--fitting', action='store_true')
