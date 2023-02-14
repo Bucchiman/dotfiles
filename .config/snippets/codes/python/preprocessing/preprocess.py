@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-13 22:49:21 +0900
+# LastModified: 2023-02-14 13:00:04 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -25,6 +25,7 @@ class Preprocessing(object):
                  train_path: str,
                  test_path: str,
                  target: str,
+                 index: str,
                  logger: logging.RootLogger,
                  save_csv_dir="../preprocessed"):
         self.train_df = pd.read_csv(train_path)
@@ -33,6 +34,7 @@ class Preprocessing(object):
         # self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         self.STRATEGY = "median"
         self.target = target
+        self.index = index
         self.logger = logger
         self.save_csv_dir = save_csv_dir
 
@@ -60,7 +62,7 @@ class Preprocessing(object):
             self.test_df[col] = LabelEncoder().fit_transform(self.test_df[col])
 
     def get_cross_validation(self):
-        X = self.train_df.drop([self.target], axis=1)
+        X = self.train_df.drop([self.index, self.target], axis=1)
         y = self.train_df[self.target]
         # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=12, test_size=0.33)
         return train_test_split(X, y, random_state=12, test_size=0.33)
