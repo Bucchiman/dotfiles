@@ -1,0 +1,5 @@
+Command> git diff --cached HEAD
+
+Description> HEADとインデックスの差分を確認
+
+Reference> https://www-creators.com/archives/1282

@@ -1,0 +1,24 @@
+Command> git reflog
+
+Description> HEADのトラッキングが可能
+           > 出力結果の確認
+           > 7419493 (HEAD -> master, origin/master, origin/HEAD) HEAD@{0}: commit: machine icon print with neofetch
+           > 0e7b55f HEAD@{1}: commit (amend): conflict fixed
+           > 865b5a9 HEAD@{2}: commit (merge): conflict added
+           > 7a1d65c HEAD@{3}: commit: unzip zip onelines added
+           > 54267b4 HEAD@{4}: commit: snippets code python added
+           > 478b26d HEAD@{5}: commit: add lightgbm
+           > 3d2638a HEAD@{6}: commit: sklearn matplotlib added
+           > ddd07fb HEAD@{7}: merge origin/master: Merge made by the 'ort' strategy.
+           > 19490c9 HEAD@{8}: commit: rust logging added
+           > bb44010 HEAD@{9}: commit: python added
+           > 4879ffe HEAD@{10}: merge origin/master: Fast-forward
+           >
+           > git log    # コミットの履歴を見る
+           >
+           > * reflogはHEADのトラッキングだけできる
+           > -> addしただけでcommitしていない状態でreset --hardをするとcommitされていないので
+           >    reflogで確認することはできない
+
+
+Reference> https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe
