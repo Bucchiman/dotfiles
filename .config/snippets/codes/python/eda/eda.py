@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-14 22:20:12 +0900
+# LastModified: 2023-02-14 23:26:23 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -215,7 +215,8 @@ class EDA(object):
             target = self.target
         grid = sns.FacetGrid(self.train_df, row=feature, col=target)
         grid.map(getattr(plt, kwargs["method"]), kwargs["x"])
-        plt.savefig("hoge.png")
+        grid.set_xticklabels(rotation=45)
+        grid.savefig(os.path.join(self.results_dir, "facet_key_{}_{}_map_{}_{}.png".format(feature, target, kwargs["method"], kwargs["x"])))
 
     @classmethod
     def get_logger(self, log_dir, file_name):

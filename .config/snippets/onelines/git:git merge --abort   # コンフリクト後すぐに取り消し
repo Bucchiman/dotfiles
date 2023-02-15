@@ -1,0 +1,5 @@
+Command> git merge --abort
+
+Description> コンフリクト編集していない時
+
+Reference> https://qiita.com/chihiro/items/5dd671aa6f1c332986a7
