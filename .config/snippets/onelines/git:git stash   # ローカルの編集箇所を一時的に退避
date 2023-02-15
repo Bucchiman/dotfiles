@@ -1,0 +1,10 @@
+Command> git stash
+
+Description> ローカルの変更内容を一時的に退避
+           > 通常以下のように使う
+           > $ git stash
+           > $ git checkout -b [branch name]
+           > $ git stash pop
+           >
+
+Reference> https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe

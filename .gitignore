@@ -11,3 +11,5 @@ submission/
 tmp/
 .cache/
 .conda/
+.bashrc
+.bash_history

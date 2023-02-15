@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-13 22:49:21 +0900
+# LastModified: 2023-02-15 15:07:40 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -25,6 +25,7 @@ class Preprocessing(object):
                  train_path: str,
                  test_path: str,
                  target: str,
+                 index: str,
                  logger: logging.RootLogger,
                  save_csv_dir="../preprocessed"):
         self.train_df = pd.read_csv(train_path)
@@ -33,6 +34,7 @@ class Preprocessing(object):
         # self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         self.STRATEGY = "median"
         self.target = target
+        self.index = index
         self.logger = logger
         self.save_csv_dir = save_csv_dir
 
@@ -46,21 +48,19 @@ class Preprocessing(object):
         self.train_df["HomePlanet"].fillna('Z', inplace=True)
         self.test_df["HomePlanet"].fillna('Z', inplace=True)
 
-    def encoding_category(self):
-        label_cols = ["HomePlanet", "CryoSleep",
-                      "Cabin", "Destination", "VIP"]
-        self.label_encoder(label_cols)
-
     def label_encoder(self, columns: list[str]):
+        '''
+            カテゴリカラムについての自動的ラベルづけ
+            columns: カテゴリカラム
+        '''
         for col in columns:
-            print(col)
             self.train_df[col] = self.train_df[col].astype(str)
             self.test_df[col] = self.test_df[col].astype(str)
             self.train_df[col] = LabelEncoder().fit_transform(self.train_df[col])
             self.test_df[col] = LabelEncoder().fit_transform(self.test_df[col])
 
     def get_cross_validation(self):
-        X = self.train_df.drop([self.target], axis=1)
+        X = self.train_df.drop([self.index, self.target], axis=1)
         y = self.train_df[self.target]
         # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=12, test_size=0.33)
         return train_test_split(X, y, random_state=12, test_size=0.33)
@@ -78,6 +78,26 @@ class Preprocessing(object):
 
     def get_preprocess_df(self):
         return self.train_df, self.test_df
+
+    def replace(self, operation: dict[str: dict[any: any]]):
+        self.train_df.replace(operation, inplace=True)
+        self.test_df.replace(operation, inplace=True)
+
+    def completing_category(self, feature: str, method: str = "mode"):
+        '''
+            欠損値補完
+            method = mode
+                最頻値
+        '''
+        if method == "mode":
+            freq_value = self.train_df[feature].dropna().mode()[0]
+            self.train_df[feature] = self.train_df[feature].fillna(freq_value)
+            self.test_df[feature] = self.test_df[feature].fillna(freq_value)
+
+    def completing_continuous(self):
+        pass
+
+
 
 
 def main():
