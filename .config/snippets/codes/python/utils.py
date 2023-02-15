@@ -3,12 +3,14 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-14 16:50:24 +0900
+# LastModified: 2023-02-15 18:29:02 +0900
 #
 
 
 import os
 import sys
+from pathlib import Path
+from pprint import pprint
 import argparse
 import logging
 from logging import getLogger, config
@@ -16,6 +18,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from hydra import compose, initialize_config_dir
 
 
 def get_logger(file_name, log_dir="logs"):
@@ -53,6 +56,7 @@ def get_args():
     parser.add_argument('-f', '--fitting', action='store_true', help="fitting flag")
     parser.add_argument('--problem_type', type=str, required=True, choices=['Regression', 'Classification'], help="problem type[Regression, Classification]")
     parser.add_argument('--save_csv_dir', type=str, default="../preprocessing_dir", help="save dir specify")
+    parser.add_argument('--imshow', action='store_true')
     # parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
 
     # parser.add_argument('arg1')     # 必須の引数
@@ -82,8 +86,21 @@ def make_barplot():
     plt.show()
     fig.savefig("output.png")
 
-def pd_basic(train_path, test_path):
-    pass
+
+class Config(object):
+    '''
+        Config yaml
+    '''
+    @staticmethod
+    def get_cnf(params_dir: str):
+        '''
+        @return
+            cnf: OmegaDict
+        '''
+        with initialize_config_dir(version_base=None, config_dir=Path(params_dir).resolve()._str):
+            cnf = compose(config_name="config.yaml")
+            return cnf
+
 
 
 if __name__ == "__main__":
@@ -94,3 +111,5 @@ if __name__ == "__main__":
     logger = get_logger(args.log_file)
     logger.info("hello")
     '''
+    params = Config.get_cnf("../params")
+    pprint(params, width=4)

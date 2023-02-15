@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-14 20:43:31 +0900
+# LastModified: 2023-02-15 15:07:40 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -48,14 +48,12 @@ class Preprocessing(object):
         self.train_df["HomePlanet"].fillna('Z', inplace=True)
         self.test_df["HomePlanet"].fillna('Z', inplace=True)
 
-    def encoding_category(self):
-        label_cols = ["HomePlanet", "CryoSleep",
-                      "Cabin", "Destination", "VIP"]
-        self.label_encoder(label_cols)
-
     def label_encoder(self, columns: list[str]):
+        '''
+            カテゴリカラムについての自動的ラベルづけ
+            columns: カテゴリカラム
+        '''
         for col in columns:
-            print(col)
             self.train_df[col] = self.train_df[col].astype(str)
             self.test_df[col] = self.test_df[col].astype(str)
             self.train_df[col] = LabelEncoder().fit_transform(self.train_df[col])
@@ -84,6 +82,21 @@ class Preprocessing(object):
     def replace(self, operation: dict[str: dict[any: any]]):
         self.train_df.replace(operation, inplace=True)
         self.test_df.replace(operation, inplace=True)
+
+    def completing_category(self, feature: str, method: str = "mode"):
+        '''
+            欠損値補完
+            method = mode
+                最頻値
+        '''
+        if method == "mode":
+            freq_value = self.train_df[feature].dropna().mode()[0]
+            self.train_df[feature] = self.train_df[feature].fillna(freq_value)
+            self.test_df[feature] = self.test_df[feature].fillna(freq_value)
+
+    def completing_continuous(self):
+        pass
+
 
 
 

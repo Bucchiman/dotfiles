@@ -4,13 +4,14 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-14 14:07:37 +0900
+# LastModified: 2023-02-15 17:13:03 +0900
 # Reference: 8ucchiman.jp
 #
 
 
 import os
 import sys
+import argparse
 import numpy as np
 # from lazypredict.Supervised import LazyRegressor
 from sklearn.linear_model import ElasticNet, Lasso, BayesianRidge, LassoLarsIC
@@ -35,10 +36,9 @@ class Fitting(object):
                  index: str,
                  logger: logging.RootLogger,
                  problem_type: str,
-                 index_df: pd.DataFrame = None):
+                 index_df: pd.DataFrame = None, seed=43):
         self.train_df = train_df
         self.test_df = test_df
-        print(self.train_df.head())
         if index_df is None:
             self.test_index = self.test_df[index]
             self.train_df.drop([index], axis=1, inplace=True)
@@ -46,12 +46,16 @@ class Fitting(object):
         else:
             self.test_index = index_df
         self.target = target
-        self.logger = logger
         # self.test_id = self.test_df["id"]
         self.X = self.train_df.drop([self.target], axis=1).values
         self.y = self.train_df[self.target].values
         self.X_test = self.test_df.values
         self.problem_type = problem_type
+        self.seed = seed
+        if logger is None:
+            self.logger = self.get_logger(".", "LOG.log")
+        else:
+            self.logger = logger
 
     def cross_validation(self, X_train, X_valid, y_train, y_valid):
         self.X_train = X_train
@@ -67,20 +71,21 @@ class Fitting(object):
         clf = LazyRegressor(verbose=0,
                             ignore_warnings=True,
                             custom_metric=None,
-                            random_state=12,)
+                            random_state=self.seed,)
 
         models, predictions = clf.fit(self.X_train, self.X_test, self.y_train, self.y_test)
 
     def kfold_cross_validation(self):
-        self.kf = KFold(n_splits=5, shuffle=True, random_state=42).get_n_splits(self.train_df.values)
+        self.kf = KFold(n_splits=5, shuffle=True, random_state=self.seed)
+        self.nkf = KFold(n_splits=5, shuffle=True, random_state=self.seed).get_n_splits(self.train_df.values)
         self.logger.info("{}".format(self.kf))
 
     def rmsle_cv(self, model):
-        rmse = np.sqrt(-cross_val_score(model, self.X, self.y, scoring="neg_mean_squared_error", cv=self.kf))
+        rmse = np.sqrt(-cross_val_score(model, self.X, self.y, scoring="neg_mean_squared_error", cv=self.nkf))
         return rmse
 
-    def try_rmse(self, model):
-        return cross_val_score(model, self.X, self.y, scoring="rmse", cv=self.kf)
+    # def try_rmse(self, model):
+    #     return cross_val_score(model, self.X, self.y, scoring="rmse", cv=self.nkf)
 
     def base_models(self):
         import lightgbm as lgb
@@ -136,18 +141,18 @@ class Fitting(object):
             }
             self.model_lgb = lgb.LGBMClassifier(**lgbm_params)
 
-        #score = self.rmsle_cv(self.lasso)
-        #print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        #score = self.rmsle_cv(self.ENet)
-        #print("ElasticNet score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        ##score = self.rmsle_cv(self.KRR)
-        ##print("Kernel Ridge score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        #score = self.rmsle_cv(self.GBoost)
-        #print("Gradient Boosting score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        #score = self.rmsle_cv(self.model_xgb)
-        #print("Xgboost score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
-        #score = self.rmsle_cv(self.model_lgb)
-        #print("LGBM score: {:.4f} ({:.4f})\n" .format(score.mean(), score.std()))
+        # score = self.rmsle_cv(self.lasso)
+        # print("\nLasso score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        # score = self.rmsle_cv(self.ENet)
+        # print("ElasticNet score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        # #score = self.rmsle_cv(self.KRR)
+        # #print("Kernel Ridge score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        # score = self.rmsle_cv(self.GBoost)
+        # print("Gradient Boosting score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        # score = self.rmsle_cv(self.model_xgb)
+        # print("Xgboost score: {:.4f} ({:.4f})\n".format(score.mean(), score.std()))
+        # score = self.rmsle_cv(self.model_lgb)
+        # print("LGBM score: {:.4f} ({:.4f})\n" .format(score.mean(), score.std()))
 
     def average_model(self):
         averaged_models = AveragingModels(models=(self.ENet,
@@ -193,12 +198,26 @@ class Fitting(object):
 
     def submission(self):
         sub = pd.DataFrame()
-        # sub['id'] = self.test_id
-        # sub[self.target] = self.ensemble
 
         sub[self.target] = self.lgb_pred
         sub = pd.concat([self.test_index, sub[self.target]], axis=1)
         sub.to_csv("submission.csv", index=False)
+
+    def get_logger(self, log_dir, file_name):
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, file_name)
+
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        file_handler = logging.FileHandler(log_path)
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        logger.info("Log file is %s." % log_path)
+        return logger
+
 
 
 class AveragingModels(BaseEstimator, RegressorMixin, TransformerMixin):
@@ -259,10 +278,49 @@ class StackingAveragedModels(BaseEstimator, RegressorMixin, TransformerMixin):
         return self.meta_model_.predict(meta_features)
 
 
+class SklearnHelper(object):
+    def __init__(self, clf, seed=0, params=None):
+        params['random_state'] = seed
+        self.clf = clf(**params)
+
+    def train(self, x_train, y_train):
+        self.clf.fit(x_train, y_train)
+
+    def predict(self, x):
+        return self.clf.predict(x)
+
+    def fit(self, x, y):
+        return self.clf.fit(x, y)
+
+    def feature_importances(self, x, y):
+        print(self.clf.fit(x, y).feature_importances_)
+
+
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--results_dir', type=str, default="../results", help="results dir specify")
+    parser.add_argument('--data_dir', type=str, default="./datas", help="data directory specify")
+    parser.add_argument('--train_csv', type=str, default="train.csv", help="train.csv specify")
+    parser.add_argument('--test_csv', type=str, default="test.csv", help="test.csv specify")
+    parser.add_argument('--target_col', type=str, required=True, help="target to predict")
+    parser.add_argument('--index_col', type=str, required=True, help="sample id")
+    parser.add_argument('--problem_type', type=str, required=True, choices=['Regression', 'Classification'], help="problem type[Regression, Classification]")
+    # parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
+
+    args = parser.parse_args()
+    return args
+
+
 def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
-    pass
+    args = get_args()
+    train_path = os.path.join(args.data_dir, args.train_csv)
+    test_path = os.path.join(args.data_dir, args.test_csv)
+    train_df = pd.read_csv(train_path)
+    test_df = pd.read_csv(test_path)
+    fitting = Fitting(train_df, test_df, args.target_col, args.index_col, logger=None, problem_type=args.problem_type)
+    fitting.kfold_cross_validation()
 
 
 if __name__ == "__main__":
