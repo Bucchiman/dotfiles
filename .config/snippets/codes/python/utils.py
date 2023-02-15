@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-15 18:29:02 +0900
+# LastModified: 2023-02-15 21:53:28 +0900
 #
 
 
@@ -45,6 +45,8 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--log_dir', type=str, default="../logs", help="log directory specify")
     parser.add_argument('--log_file', type=str, default=make_date_log_directory(), help="log file specify")
+    parser.add_argument('--config_dir', type=str, default="../params")
+    parser.add_argument('--config_file', type=str, default="config.yaml")
     parser.add_argument('--results_dir', type=str, default="../results", help="results dir specify")
     parser.add_argument('--data_dir', type=str, default="../datas", help="data directory specify")
     parser.add_argument('--train_csv', type=str, default="train.csv", help="train.csv specify")
@@ -92,15 +94,14 @@ class Config(object):
         Config yaml
     '''
     @staticmethod
-    def get_cnf(params_dir: str):
+    def get_cnf(params_dir: str, config_file: str):
         '''
         @return
             cnf: OmegaDict
         '''
         with initialize_config_dir(version_base=None, config_dir=Path(params_dir).resolve()._str):
-            cnf = compose(config_name="config.yaml")
+            cnf = compose(config_name=config_file)
             return cnf
-
 
 
 if __name__ == "__main__":

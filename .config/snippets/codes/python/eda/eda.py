@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-15 16:58:26 +0900
+# LastModified: 2023-02-15 20:43:12 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -282,6 +282,7 @@ class EDA(object):
         logger.info("Log file is %s." % log_path)
         return logger
 
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--log_dir', type=str, default='.')
@@ -306,7 +307,6 @@ def get_args():
     # parser.add_argument('--colors', nargs='*', required=True)
     args = parser.parse_args()
     return args
-
 
 
 def main():

@@ -4,7 +4,7 @@
 # FileName: 	/home/ykiwabuchi/.config/snippets/codes/python/ml/pandas
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 16:44:18 +0900
-# LastModified: 2023-02-13 15:05:58 +0900
+# LastModified: 2023-02-15 23:45:40 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -17,6 +17,20 @@ from typing import Any
 
 
 class MyPandas(object):
+    @staticmethod
+    def make_DataFrame(**kwargs):
+        '''
+            kwargs
+                apple = [1, 2, 3]
+                banana = [3.0, 2.0, 1.2]
+                ->
+                    apple      banana
+                0     1         3.0
+                1     2         2.0
+                2     3         1.2
+        '''
+        return pd.DataFrame(kwargs)
+
     @staticmethod
     def extract_from_df(df: pd.DataFrame, operation: str):
         '''
@@ -74,6 +88,7 @@ class MyPandas(object):
 def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
+    print(MyPandas.make_DataFrame(hoge= [1, 0], kan= [0.1, 0.56]))
     train_df = pd.read_csv("train.csv")
     print(train_df.head())
     MyPandas.contains(df=train_df, target_col="PassengerId", target_str="20")
