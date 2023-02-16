@@ -4,7 +4,7 @@
 # FileName: 	/home/ykiwabuchi/.config/snippets/codes/python/ml/pandas
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 16:44:18 +0900
-# LastModified: 2023-02-15 23:45:40 +0900
+# LastModified: 2023-02-16 13:04:04 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -83,6 +83,7 @@ class MyPandas(object):
     @staticmethod
     def groupby_aggregate_lambda(df: pd.DataFrame, key_col: str):
         print(df.groupby(key_col).product_cd.apply(lambda x: x.mode()))
+
 
 
 def main():

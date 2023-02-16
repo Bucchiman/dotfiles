@@ -226,3 +226,16 @@ repo = 'tribela/vim-transparent'
 
 [[plugins]]
 repo = 'sindrets/diffview.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/popup.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope-media-files.nvim'
+

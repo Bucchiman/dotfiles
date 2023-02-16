@@ -4,7 +4,7 @@
 # FileName: 	learn
 # Author: 8ucchiman
 # CreatedDate:  2023-02-04 11:35:39 +0900
-# LastModified: 2023-02-15 22:53:19 +0900
+# LastModified: 2023-02-16 13:30:58 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -17,8 +17,9 @@ from typing import Type
 from sklearn.linear_model import ElasticNet, Lasso, BayesianRidge, LassoLarsIC
 from sklearn import ensemble
 from sklearn import svm
+from sklearn import gaussian_process
+from sklearn import neighbors
 from sklearn.kernel_ridge import KernelRidge
-from sklearn.preprocessing import RobustScaler
 from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import KFold, cross_val_score
@@ -62,9 +63,30 @@ class Fitting(object):
         else:
             self.logger = logger
 
-        self.ensemble_algorithm = ["RandomForestClassifier", "AdaBoostClassifier", "GradientBoostingClassifier", "ExtraTreesClassifier"]
-        self.svm_algorithm = ["SVC"]
-        self.lightgbm_algorithm = ["LGBMClassifier"]
+        self.ensemble_algorithm = ["RandomForestClassifier",
+                                   "BaggingClassifier",
+                                   "AdaBoostClassifier",
+                                   "GradientBoostingClassifier",
+                                   "ExtraTreesClassifier",
+                                   "RandomForestRegressor",
+                                   "GradientBoostingRegressor"]
+        self.gaussian_process_algorithm = ["GaussianProcessClassifier"]
+        self.linear_model_algorithm = ["LogisticRegressionCV",
+                                       "PassiveAggressiveClassifier",
+                                       "RidgeClassifierCV",
+                                       "SGDClassifier",
+                                       "Perceptron",
+                                       "ElasticNet",
+                                       "Lasso",
+                                       "BayesianRidge",
+                                       "LassoLarsIC"]
+        self.kernel_ridge = ["KernelRidge"]
+        self.naive_bayes = ["BernoulliNB", "GaussianNB"]
+        self.neighbors = ["KNeighborsClassifier"]
+        self.svm_algorithm = ["SVC", "NuSVC", "LinearSVC"]
+        self.tree_algorithm = ["DecisionTreeClassifier", "ExtraTreeClassifier"]
+        self.xgboost = ["XGBClassifier", "XGBRegressor"]
+        self.lightgbm_algorithm = ["LGBMClassifier", "LGBMRegressor"]
         self.pred_test = None
         self.results_dict = {}
 

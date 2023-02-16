@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-15 20:43:12 +0900
+# LastModified: 2023-02-16 13:08:21 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -40,10 +40,15 @@ class EDA(object):
         self.logger = logger
         self.imshow = imshow
         # self.total_df = pd.concat([self.train_df[self.features], self.test_df[self.features]], axis=0)
-        # self.text_features = ["Cabin", "Name"]
-        # self.cat_features = [col for col in self.features if self.total_df[col].nunique() < 25 and col not in self.text_features]
-        # self.cont_features = [col for col in self.features if df[col].nunique() >= 25 and col not in self.text_features]
         self.basic_infomation()
+
+    def distinguish_features(self, continuous_features: list[str], category_features: list[str], text_features: list[str]):
+        '''
+            連続値(実数等), カテゴリー, テキストとしてカラムを区別する
+        '''
+        self.continuous_features = continuous_features
+        self.category_features = category_features
+        self.text_features = text_features
 
     def basic_infomation(self):
         self.logger.info(self.features)
