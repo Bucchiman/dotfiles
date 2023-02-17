@@ -397,9 +397,13 @@ bindkey '^s^e' edit_snippets
 
 fnction link_from_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    load_file=$load_file[3,-1]
     load_file="${HOME}/.config/snippets/codes/${load_file}"
-    sed -i 's/\r//' ${load_file} 2>/dev/null
-    ln -s ${load_file} . 2>/dev/null
+    if [[ ${load_file} = ${HOME}/.config/snippets/codes/ ]]
+    then
+    else
+        ln -s ${load_file} . 2>/dev/null
+    fi
     zle reset-prompt
 }
 zle -N link_from_snippets

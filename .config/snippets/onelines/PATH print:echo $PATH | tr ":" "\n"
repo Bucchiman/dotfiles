@@ -1,0 +1,3 @@
+Command> echo $PATH | tr ":" "\n"
+
+Description> $PATHを改行して表示
