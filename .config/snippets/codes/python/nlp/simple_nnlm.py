@@ -4,7 +4,7 @@
 # FileName: 	simple_nnlm
 # Author: 8ucchiman
 # CreatedDate:  2023-02-16 11:07:11 +0900
-# LastModified: 2023-02-16 12:02:01 +0900
+# LastModified: 2023-02-17 11:39:04 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -24,6 +24,11 @@ def make_batch(sentences, word_dict):
     '''
         make problem
         文章の一番最後の単語を予測
+        input_batch: 全てのsentence
+                     [[1, 2, ],
+                      [3, 1, ],
+                      [3, 0, ]]
+        target_batch: 全てのsentenceに関するmask単語
     '''
     input_batch = []
     target_batch = []
@@ -35,6 +40,7 @@ def make_batch(sentences, word_dict):
 
         input_batch.append(input)
         target_batch.append(target)
+
     return input_batch, target_batch
 
 
@@ -53,9 +59,11 @@ class NNLM(nn.Module):
         self.W = nn.Linear(self.n_step*self.m, self.n_class, bias=False)
         self.b = nn.Parameter(torch.ones(self.n_class))
 
-    def forward(self, X):
+    def forward(self, X: torch.LongTensor):
+        print("input size:{}".format(X.size()))     # [3, 2]
         X = self.C(X)
-        print(X)
+        print("C:{}".format(self.C.weight.size()))  # [7, 2]
+        print("embedded size:{}".format(X.size()))
         X = X.view(-1, self.n_step*self.m)
         tanh = torch.tanh(self.d + self.H(X))
         output = self.b + self.W(X) + self.U(tanh)
@@ -85,7 +93,7 @@ def main():
     target_batch = torch.LongTensor(target_batch)
 
     # Training
-    for epoch in range(5000):
+    for epoch in range(5):
         optimizer.zero_grad()
         output = model(input_batch)
 

@@ -4,7 +4,7 @@
 # FileName: 	<+FILENAME+>
 # Author: 8ucchiman
 # CreatedDate:  <+DATE+>
-# LastModified: 2023-02-04 12:51:21 +0900
+# LastModified: 2023-02-17 13:37:37 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -21,6 +21,7 @@ def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
     <+CURSOR+>
+    pass
 
 
 if __name__ == "__main__":

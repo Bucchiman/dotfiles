@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-15 21:53:28 +0900
+# LastModified: 2023-02-17 14:58:54 +0900
 #
 
 
@@ -41,24 +41,14 @@ def make_date_log_directory():
     return datetime.now().strftime(r"%Y_%m_%d_%H_%M")
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--log_dir', type=str, default="../logs", help="log directory specify")
-    parser.add_argument('--log_file', type=str, default=make_date_log_directory(), help="log file specify")
-    parser.add_argument('--config_dir', type=str, default="../params")
-    parser.add_argument('--config_file', type=str, default="config.yaml")
-    parser.add_argument('--results_dir', type=str, default="../results", help="results dir specify")
-    parser.add_argument('--data_dir', type=str, default="../datas", help="data directory specify")
-    parser.add_argument('--train_csv', type=str, default="train.csv", help="train.csv specify")
-    parser.add_argument('--test_csv', type=str, default="test.csv", help="test.csv specify")
-    parser.add_argument('--target_col', type=str, required=True, help="target to predict")
-    parser.add_argument('--index_col', type=str, required=True, help="sample id")
-    parser.add_argument('-e', '--eda', action='store_true', help="eda flag")
-    parser.add_argument('-p', '--preprocessing', action='store_true', help="preprocessing flag")
-    parser.add_argument('-f', '--fitting', action='store_true', help="fitting flag")
-    parser.add_argument('--problem_type', type=str, required=True, choices=['Regression', 'Classification'], help="problem type[Regression, Classification]")
-    parser.add_argument('--save_csv_dir', type=str, default="../preprocessing_dir", help="save dir specify")
-    parser.add_argument('--imshow', action='store_true')
+def get_base_parser():
+    base_parser = argparse.ArgumentParser(add_help=False)
+    base_parser.add_argument('--log_dir', type=str, default="../logs", help="log directory specify")
+    base_parser.add_argument('--log_file', type=str, default=make_date_log_directory(), help="log file specify")
+    base_parser.add_argument('--config_dir', type=str, default="../params")
+    base_parser.add_argument('--config_file', type=str, default="config.yaml")
+    base_parser.add_argument('--results_dir', type=str, default="../results", help="results dir specify")
+    base_parser.add_argument('--data_dir', type=str, default="../datas", help="data directory specify")
     # parser.add_argument('--method_name', type="str", default="make_date_log_directory", help="method name here in utils.py")
 
     # parser.add_argument('arg1')     # 必須の引数
@@ -69,7 +59,34 @@ def get_args():
     # parser.add_argument('--fruit', type=str, default='apple', choices=['apple', 'banana'], required=True)
     # parser.add_argument('--address', type=lambda x: list(map(int, x.split('.'))), help="IP address") # --address 192.168.31.150 --> [192, 168, 31, 150]
     # parser.add_argument('--colors', nargs='*', required=True)
-    args = parser.parse_args()
+
+    return base_parser
+
+
+def get_ml_args():
+    ml_parser = argparse.ArgumentParser(parents=[get_base_parser()])
+    ml_parser.add_argument('--train_csv', type=str, default="train.csv", help="train.csv specify")
+    ml_parser.add_argument('--test_csv', type=str, default="test.csv", help="test.csv specify")
+    ml_parser.add_argument('--target_col', type=str, required=True, help="target to predict")
+    ml_parser.add_argument('--index_col', type=str, required=True, help="sample id")
+    ml_parser.add_argument('-e', '--eda', action='store_true', help="eda flag")
+    ml_parser.add_argument('-p', '--preprocessing', action='store_true', help="preprocessing flag")
+    ml_parser.add_argument('-f', '--fitting', action='store_true', help="fitting flag")
+    ml_parser.add_argument('--problem_type', type=str, required=True, choices=['Regression', 'Classification'], help="problem type[Regression, Classification]")
+    ml_parser.add_argument('--save_csv_dir', type=str, default="../preprocessing_dir", help="save dir specify")
+    ml_parser.add_argument('--imshow', action='store_true')
+    args = ml_parser.parse_args()
+    return args
+
+
+def get_dl_args():
+    dl_parser = argparse.ArgumentParser(parents=[get_base_parser()])
+    dl_parser.add_argument('--train_img_dir', type=str, required=True)
+    dl_parser.add_argument('--test_img_dir', type=str, required=True)
+    dl_parser.add_argument('--train_label_file', type=str, required=True)
+    dl_parser.add_argument('--batch_size', type=int, default=5)
+    dl_parser.add_argument('--model_name', type=str, default='resnet18')
+    args = dl_parser.parse_args()
     return args
 
 
