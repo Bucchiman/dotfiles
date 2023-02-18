@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-17 14:58:54 +0900
+# LastModified: 2023-02-18 12:49:07 +0900
 #
 
 
@@ -104,6 +104,11 @@ def make_barplot():
     ax.set_xticklabels(x)
     plt.show()
     fig.savefig("output.png")
+
+def cos_similarity(x: np.array, y: np.array, eps=1e-8):
+    nx = x / np.sqrt(np.sum(x**2)+eps)
+    ny = y / np.sqrt(np.sum(y**2)+eps)
+    return np.dot(nx, ny)
 
 
 class Config(object):
