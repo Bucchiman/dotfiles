@@ -4,7 +4,7 @@
 # FileName: 	eda
 # Author: 8ucchiman
 # CreatedDate:  2023-02-02 22:18:03 +0900
-# LastModified: 2023-02-16 13:08:21 +0900
+# LastModified: 2023-02-18 22:27:25 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -55,13 +55,13 @@ class EDA(object):
         self.logger.info("*"*20)
         self.logger.info("features info:\n{}".format(self.train_df.info()))
         self.logger.info("describe/numerical\n{}".format(self.train_df.describe()))
-        self.logger.info("describe/categorical\n{}".format(self.train_df.describe(include='O')))
+        # self.logger.info("describe/categorical\n{}".format(self.train_df.describe(include='O')))
         for col in self.features:
             self.logger.info("value_counts\n{}".format(self.train_df[[col]].value_counts(normalize=True)))
         self.logger.info("*"*20)
         self.logger.info("features info:\n{}".format(self.test_df.info()))
         self.logger.info("describe/numerical\n{}".format(self.test_df.describe()))
-        self.logger.info("describe/categorical\n{}".format(self.test_df.describe(include='O')))
+        # self.logger.info("describe/categorical\n{}".format(self.test_df.describe(include='O')))
         for col in self.features:
             self.logger.info("value_counts\n{}".format(self.test_df[[col]].value_counts(normalize=True)))
         self.logger.info("*"*20)
