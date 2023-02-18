@@ -1,0 +1,8 @@
+*.png
+logs/
+datas/
+__pycache__/
+__init__/
+datas
+results/
+.ipynb_checkpoints/
