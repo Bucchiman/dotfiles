@@ -382,7 +382,7 @@ function edit_snippets() {
 zle -N edit_snippets
 bindkey '^s^e' edit_snippets
 
-fnction link_from_snippets() {
+function link_from_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     load_file=$load_file[3,-1]
     load_file="${HOME}/.config/snippets/codes/${load_file}"
@@ -395,6 +395,15 @@ fnction link_from_snippets() {
 }
 zle -N link_from_snippets
 bindkey '^s^l' link_from_snippets
+
+function make_projects() {
+    local load_project=$(cat $HOME/.config/snippets/projects_list | fzf )
+    LBUFFER="${LBUFFER}rsync -auv ${load_project} ."
+    zle reset-prompt
+}
+zle -N make_projects
+bindkey '^m^p' make_projects
+
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
