@@ -295,19 +295,6 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 #LS_COLORS=$LS_COLORS:'di=5;97' ; export LS_COLORS
 hash -d w=/mnt/c/Users/bucchiman
 
-
-
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent -s` >/dev/null
-    expect -c "
-        set timeout 1
-        spawn ssh-add
-        expect \"password:\"
-        send \"Cinemashkachikachika.17\n\"
-        interact" >/dev/null
-fi
-
-
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
