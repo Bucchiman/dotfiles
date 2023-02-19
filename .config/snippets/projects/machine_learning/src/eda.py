@@ -1,1 +1,1 @@
-/home/bucchiman/.config/snippets/codes/python/eda/eda.py
+/Users/8ucchiman/.config/snippets/codes/python/eda/eda.py
