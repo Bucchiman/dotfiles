@@ -4,7 +4,7 @@
 # FileName: 	make_co_occurence_matrix
 # Author: 8ucchiman
 # CreatedDate:  2023-02-18 12:06:39 +0900
-# LastModified: 2023-02-18 13:55:14 +0900
+# LastModified: 2023-02-19 15:40:29 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -23,14 +23,14 @@ def make_co_occurence_matrix(corpus: np.array, vocab_size: int, window_size: int
     # method = getattr(utils, args.method)
     num_words = corpus.shape[0]
     co_occurence_matrix = np.zeros((vocab_size, vocab_size), dtype=np.int8)
-    for target_idx, idx_word in enumerate(corpus):
+    for idx, word_idx in enumerate(corpus):
         for ws in range(1, window_size+1):
-            left_idx = target_idx - ws
-            right_idx = target_idx + ws
-            if left_idx >= 0:
-                co_occurence_matrix[idx_word][corpus[left_idx]] += 1
-            if right_idx < num_words:
-                co_occurence_matrix[idx_word][corpus[right_idx]] += 1
+            lidx = idx - ws
+            ridx = idx + ws
+            if lidx >= 0:
+                co_occurence_matrix[word_idx][corpus[lidx]] += 1
+            if ridx < num_words:
+                co_occurence_matrix[word_idx][corpus[ridx]] += 1
     return co_occurence_matrix
 
 
