@@ -1,0 +1,21 @@
+Command> jq 'operation' [json file]
+
+Description> 
+           > - 値の抽出
+           > "operation": e.g. '.total_count' # キーの指定
+           >                   '.items[].id'  # items配列のidキー指定(配列内のキー全て出力)
+           >                   '.items[0].id' # items配列idx=0のidキーの値を出力
+           >
+           >                   '[.items[]] | length' # items配列の出力数
+           >                   '.items[] | .result = (.id|tostring) + " " + .name'
+           >
+           > - ダブルクォートを取り除く
+           > $ jq -r '.items[].name' [json file]
+           >
+           > - e.g.
+           > jq -r '.items[] | .result = (.id|tostring) + " " + .name' sample/sample04.json
+           >
+
+
+Reference> https://orebibou.com/ja/home/201605/20160510_001/
+         > https://www.wakuwakubank.com/posts/676-linux-jq/
