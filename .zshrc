@@ -342,11 +342,10 @@ function pet-select() {
 
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
-    local snippets=`cat $HOME/.config/snippets/codes/${load_file}`
+    local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }

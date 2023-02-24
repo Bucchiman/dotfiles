@@ -1,0 +1,8 @@
+Command> jq . [json file]
+
+
+Description> 読みやすいように整形
+           > jq -c . [json file]
+
+
+Reference> https://orebibou.com/ja/home/201605/20160510_001/
