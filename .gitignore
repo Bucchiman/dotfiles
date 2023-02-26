@@ -13,3 +13,4 @@ tmp/
 .conda/
 .bashrc
 .bash_history
+.DS_Store
