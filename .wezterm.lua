@@ -107,7 +107,7 @@ wezterm.on(
 
 return {
   -- font_dirs = font_dirs,
-  font_size = 18,
+  font_size = 8,
   font = wezterm.font_with_fallback {
       {
           family = 'mononoki Nerd Font Mono',

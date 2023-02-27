@@ -2,16 +2,13 @@
  * FileName:     <+FILENAME+>
  * Author: 8ucchiman
  * CreatedDate:  <+DATE+>
- * LastModified: 2023-02-26 13:30:39 +0900
+ * LastModified: 2023-02-25 00:05:40 +0900
  * Reference: 8ucchiman.jp
  */
 
-#include <stdio.h>
-#define MACRO
+#include <iostream>
 
-#ifdef MACRO
-int main(int argc, char* argv[]){
+int main(void){
     <+CURSOR+>
     return 0;
 }
-#endif
