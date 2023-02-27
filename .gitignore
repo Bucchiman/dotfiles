@@ -16,4 +16,5 @@ tmp/
 *.qdrep
 *.sqlite
 *.nsys-rep
+.DS_Store
 a.out
