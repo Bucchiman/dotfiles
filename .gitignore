@@ -13,5 +13,8 @@ tmp/
 .conda/
 .bashrc
 .bash_history
+*.qdrep
+*.sqlite
+*.nsys-rep
 .DS_Store
 a.out

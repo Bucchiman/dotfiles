@@ -4,7 +4,7 @@
 # FileName: 	main
 # Author: 8ucchiman
 # CreatedDate:  2023-02-17 11:59:33 +0900
-# LastModified: 2023-02-17 15:21:27 +0900
+# LastModified: 2023-02-22 18:02:47 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -18,11 +18,13 @@ from datasets import ImageDataset
 from models import TimmModel
 from train import Train
 from torch.utils.data import DataLoader
+import nvidia_dlprof_pytorch_nvtx as nvtx
 # import numpy as np
 import pandas as pd
 
 
 def main():
+    nvtx.init(enable_function_stack=True)
     args = get_dl_args()
     logger = get_logger(args.log_file, args.log_dir)
     # method = getattr(utils, args.method)
@@ -36,7 +38,8 @@ def main():
     model = TimmModel(args.model_name, num_classes=8)
 
     train = Train(dataloader, model())
-    train.running()
+    with torch.autograd.profiler.emit_nvtx():
+        train.running()
 
 
 if __name__ == "__main__":
