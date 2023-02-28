@@ -1,1 +1,1 @@
-/Users/8ucchiman/.config/snippets/codes/c/Makefile
+/home/bucchiman/.config/snippets/codes/c/Makefile
