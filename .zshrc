@@ -403,6 +403,12 @@ function make_projects() {
 zle -N make_projects
 bindkey '^m^p' make_projects
 
+function lcds() {
+    # 25:cpp
+    local no_problem=`echo $1 | awk -F ":" '{print $1}'`
+    local lang=`echo $1 | awk -F ":" '{print $2}'`
+    lcd show ${no_problem} -g -l ${lang}
+}
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
