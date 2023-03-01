@@ -2,14 +2,14 @@
  * FileName:     mystrcpy
  * Author: 8ucchiman
  * CreatedDate:  2023-03-01 00:42:54 +0900
- * LastModified: 2023-03-01 00:53:48 +0900
+ * LastModified: 2023-03-01 23:28:00 +0900
  * Reference: 8ucchiman.jp
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../mylib.h"
-#define MACRO
+//#define MACRO
 
 char* mystrcpy(char* s1, const char* s2) {
     for (int i=0; i<mystrlen(s2); i++) {

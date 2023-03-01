@@ -2,7 +2,7 @@
  * FileName:     pointer
  * Author: 8ucchiman
  * CreatedDate:  2023-02-26 12:47:08 +0900
- * LastModified: 2023-02-27 09:39:18 +0900
+ * LastModified: 2023-03-01 23:02:16 +0900
  * Reference: 8ucchiman.jp
  */
 
@@ -14,6 +14,8 @@
  *
  * int* p: int*型の変数pを宣言(int[4Byte]/int*[8Byte])
  * *p: ポインタ変数pが指し示すアドレスの中身
+ * e.g. int* p;
+ *      p = &i;
  *
  * ポインタのポインタ
  *

@@ -2,7 +2,7 @@
  * FileName:     mutex
  * Author: 8ucchiman
  * CreatedDate:  2023-02-22 15:23:13 +0900
- * LastModified: 2023-02-22 15:36:37 +0900
+ * LastModified: 2023-03-01 00:15:30 +0900
  * Reference: 8ucchiman.jp
  */
 
@@ -57,6 +57,8 @@ int main(int argc, char* argv[]) {
 
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
+
+    pthread_mutex_destroy(&lock);
 
     return 0;
 }
