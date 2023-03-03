@@ -1,12 +1,12 @@
 <!-- FileName: readme
  Author: 8ucchiman
  CreatedDate: 2023-02-26 20:41:00 +0900
- LastModified: 2023-02-27 12:24:18 +0900
+ LastModified: 2023-02-28 13:55:42 +0900
  Reference: 8ucchiman.jp
 -->
 
 
-* 関数の修飾子
+# 関数の修飾子
 
 関数の宣言に修飾子をつけてkernel関数(deviceで実行される関数)とhost関数を区別する
 
@@ -26,7 +26,7 @@ deviceから呼び出されてdeviceで実行
 
 hostから呼び出されてhostで実行
 
-** __global__
+## __global__
 修飾子省略可
 ```cuda
     mykernel <<<Dg, Db>>> (arguments); # <<<Dg, Db>>>はthread数の指定
@@ -34,7 +34,7 @@ hostから呼び出されてhostで実行
 
 各スレッドは、kernel関数内の同じ命令を実行するが、扱うデータが異なる(SIMD: Single Instruction Multiple Data)
 
-** threadの定義
+## threadの定義
 kernel関数はスレッド単位で並列に実行される
 ```cuda
     <<<Dg, Db>>> grid, thread
@@ -71,8 +71,8 @@ kernel関数はスレッド単位で並列に実行される
     # /: thread
 ```
 
-* CPU/GPU間のデータ転送
-** デバイスメモリの確保
+# CPU/GPU間のデータ転送
+# デバイスメモリの確保
 ```cuda
     cudaError_t cudaMalloc(void** devptr, size_t count)
     // devptr: デバイスメモリのアドレスのポインタ
@@ -84,7 +84,7 @@ kernel関数はスレッド単位で並列に実行される
     cudaMalloc((void**)&dev, sizeof(double)*512)
 ```
 
-** データ転送
+## データ転送
 ```cuda
     cudaError_t cudaMemcpy(void* dat, const void* src, size_t count, enum cudaMemcpyKind kind)
     // dat: 転送先のアドレス
@@ -100,7 +100,7 @@ kernel関数はスレッド単位で並列に実行される
     cudaMemcpy(dev, host, sizeof(double)*512, cudaMemcpyHostToDevice);
 ```
 
-** デバイスメモリ解放
+## デバイスメモリ解放
 ```cuda
     cudaError_t cudaFree(void* devptr)
     // devptr: デバイスメモリのアドレスのポインタ
@@ -108,7 +108,7 @@ kernel関数はスレッド単位で並列に実行される
 
 
 
-* thread index
+# thread index
 
 ```cuda
     # grid内のblockのDim定義
@@ -172,7 +172,7 @@ kernel関数はスレッド単位で並列に実行される
 ```
 
 
-* the basis of the programming in CUDA
+# the basis of the programming in CUDA
 
 ```cuda
     __global__ void mykernel() {
@@ -208,7 +208,7 @@ kernel関数はスレッド単位で並列に実行される
     }
 ```
 
-* バリア同期関数
+# バリア同期関数
  - __syncthreads()
 
     block単位で同期をとる。kernel関数上で実行
@@ -217,7 +217,7 @@ kernel関数はスレッド単位で並列に実行される
     全スレッドに対し同期をとる。host関数上で実行
 
 
-* GPU Architecture
+# GPU Architecture
 
 ```
     *---------------------------*
@@ -246,7 +246,7 @@ kernel関数はスレッド単位で並列に実行される
 
 ```
 
-* CUDA memory model
+# CUDA memory model
 ```
                         size     access speed
     レジスタメモリ       ^             v
@@ -279,7 +279,7 @@ kernel関数はスレッド単位で並列に実行される
 
 ```
 
-** global memory
+## global memory
 cudaMallocではグローバルメモリに確保される
 ```cuda
     #include <stdio.h>
@@ -292,7 +292,7 @@ cudaMallocではグローバルメモリに確保される
     }
 ```
 
-** shared memory
+## shared memory
 ブロック内で共有できるメモリ
 ```cuda
     #include <stdio.h>
@@ -308,7 +308,7 @@ cudaMallocではグローバルメモリに確保される
 ```
 
 
-* Warp Divergent
+# Warp Divergent
 GPUでは複数のthreadがwarpという一つの単位で動く
 通常は1warp=32threads固定である
 
@@ -316,7 +316,7 @@ warp divergent: 条件分岐によりwarp内で異なる処理が行われた場
 
 warp内の分岐を極力減らす
 
-* Coalescing
+# Coalescing
 global memoryにアクセスするときhalf warp(16threads)でアクセスする。
 これをcoalescingと呼ぶ。
 coalescing accessによって高速化できる。
@@ -335,7 +335,7 @@ coalescing accessによって高速化できる。
                   | / / / / / / d |
                   *---------------*
 ```
-** coalescingが働く条件
+## coalescingが働く条件
 - 16threadsのアクセスするアドレスが隣接している
 - 先頭アドレスが64 or 128 byte境界に位置する
 
@@ -377,7 +377,7 @@ coalescing accessによって高速化できる。
 ```
 
 
-* cuda profiler
+# cuda profiler
 
  |       項目      |                       Description                            |
  |-----------------|--------------------------------------------------------------|
