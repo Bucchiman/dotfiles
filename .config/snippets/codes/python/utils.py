@@ -3,7 +3,7 @@
 #
 # FileName: 	utils
 # CreatedDate:  2023-01-06 11:00:12 +0900
-# LastModified: 2023-02-18 12:49:07 +0900
+# LastModified: 2023-02-24 15:35:26 +0900
 #
 
 
@@ -18,6 +18,9 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import torch
+from torch import distributed as dist
+from torch import multiprocessing as mp
 from hydra import compose, initialize_config_dir
 
 
@@ -86,6 +89,7 @@ def get_dl_args():
     dl_parser.add_argument('--train_label_file', type=str, required=True)
     dl_parser.add_argument('--batch_size', type=int, default=5)
     dl_parser.add_argument('--model_name', type=str, default='resnet18')
+    dl_parser.add_argument('--gpus', type=str, default="all", choices=['all', 'cuda:0'])
     args = dl_parser.parse_args()
     return args
 
@@ -124,6 +128,32 @@ class Config(object):
         with initialize_config_dir(version_base=None, config_dir=Path(params_dir).resolve()._str):
             cnf = compose(config_name=config_file)
             return cnf
+
+
+class DDPSetUp(object):
+    def __init__(self):
+        pass
+
+    @classmethod
+    def setup(rank, world_size=torch.cuda.device_count()):
+        '''
+            Sets up the process group and configuration for PyTorch Distributed Data Parallelism
+        '''
+        os.environ['MASTER_ADDR'] = 'localhost'
+        os.environ['MASTER_PORT'] = '12355'
+
+        dist.init_process_group("gloo", rank=rank, world_size=world_size)
+
+    @classmethod
+    def cleanup():
+        '''
+            Cleans up the distributed environment
+        '''
+        dist.destroy_process_group()
+
+    @classmethod
+    def run_mp(function, world_size):
+        mp.spawn(function, args=(world_size,), nprocs=world_size, join=True)
 
 
 if __name__ == "__main__":

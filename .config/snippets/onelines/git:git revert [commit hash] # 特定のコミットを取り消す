@@ -1,0 +1,28 @@
+Command> git revert [comit hash]
+
+Description> 緊急で一部のコミットのみ削除する時、使用する
+           > 0. prerequisite
+           >                     
+           > ---- a3jcs231 -------- bc22155 --------------- 9892lsl
+           >      |                 |                       |
+           >      touch demo.file  "initial content"        "second content"
+           >                       >> demo.file---------+   >> demo.file---------+
+           >                          | initial commit  |      | initial content |
+           >                          |                 |      | second content  |
+           >                          |                 |      |                 |
+           >                          +-----------------+      +-----------------+
+           > 1. before
+           >                                              + ------- +
+           > ---- a3jcs231 -------- bc22155 --------------| 9892lsl |
+           >                                              + ------- +
+           >                                             不要のコミット
+           > 2. after
+           >                                              + ------- +
+           > ---- a3jcs231 -------- bc22155 --------------| 9892lsl |---- cplx3xx2
+           >                                              + ------- +
+           >                                      コミットは残しつつ      >> demo.file---------+
+           >                                      新たなコミットが追加       | initial content |
+           >                                                                 |                 |
+           >                                                                 |                 |
+           >                                                                 +-----------------+
+           >

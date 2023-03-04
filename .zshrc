@@ -98,7 +98,7 @@ function create_item() {
 
 function get_machine_icon() {
     typeset -A search_name
-    search_name=("ubuntu"  "apple" )
+    search_name=("ubuntu"  "mac" )
     for os in ${(k)search_name}
     do
         neofetch distro | grep -Hi "$os" > /dev/null 2>&1
@@ -342,11 +342,10 @@ function pet-select() {
 
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    #local load_file=$(/usr/bin/find $HOME/.config/snippets/codes -type f | peco)
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
-    local snippets=`cat $HOME/.config/snippets/codes/${load_file}`
+    local snippets=`cat ${load_file}`
     LBUFFER="${LBUFFER}${snippets}"
     zle reset-prompt
 }
@@ -404,6 +403,12 @@ function make_projects() {
 zle -N make_projects
 bindkey '^m^p' make_projects
 
+function lcds() {
+    # 25:cpp
+    local no_problem=`echo $1 | awk -F ":" '{print $1}'`
+    local lang=`echo $1 | awk -F ":" '{print $2}'`
+    lcd show ${no_problem} -g -l ${lang}
+}
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

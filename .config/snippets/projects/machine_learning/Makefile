@@ -1,7 +1,7 @@
 # FileName:     Makefile
 # Author: 8ucchiman
 # CreatedDate:  2023-02-13 20:47:09 +0900
-# LastModified: 2023-02-18 20:59:01 +0900
+# LastModified: 2023-02-19 13:33:57 +0900
 # Reference: 8ucchiman.jp
 
 
@@ -57,3 +57,6 @@ clean:
 
 help:
 	cd src; python ${MAIN} --help
+
+other_dataset:
+	ln -sf ${HOME}/datas 
