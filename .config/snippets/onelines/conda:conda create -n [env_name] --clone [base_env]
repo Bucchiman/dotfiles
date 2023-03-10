@@ -1,0 +1,1 @@
+Command> conda create -n [env_name] --clone [base_env]    # ベース環境を複製する

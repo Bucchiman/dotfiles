@@ -1,1 +1,2 @@
-command_record:asciinema rec [].cast
+Command> asciinema rec [].cast  # コマンドのログを録画する
+
