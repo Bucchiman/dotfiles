@@ -1,7 +1,7 @@
 <!-- FileName: readme
  Author: 8ucchiman
  CreatedDate: 2023-02-26 20:41:00 +0900
- LastModified: 2023-02-28 13:55:42 +0900
+ LastModified: 2023-03-08 19:24:49 +0900
  Reference: 8ucchiman.jp
 -->
 
@@ -409,3 +409,6 @@ coalescing accessによって高速化できる。
  |instruction      | 実行した命令数
  |warp serializatio|
  |cta launcher     |
+
+
+# 

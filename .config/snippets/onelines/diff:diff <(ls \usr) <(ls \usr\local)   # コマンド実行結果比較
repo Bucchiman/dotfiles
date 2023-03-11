@@ -1,1 +1,8 @@
-diff:diff <(ls /usr) <(ls /usr/local/)  # コマンド実行結果比較
+Command> diff <(ls /usr) <(ls /usr/local/)  # コマンド実行結果比較
+
+
+Description>
+
+
+
+Referecne> https://qiita.com/wingedtw/items/2f05c5d0c37d71f209f4
