@@ -415,3 +415,5 @@ function lcds() {
 
 return
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
