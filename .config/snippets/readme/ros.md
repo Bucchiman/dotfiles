@@ -1,7 +1,7 @@
 <!-- FileName: ros
  Author: 8ucchiman
  CreatedDate: 2023-03-09 14:31:21 +0900
- LastModified: 2023-03-09 14:56:17 +0900
+ LastModified: 2023-03-16 15:51:41 +0900
  Reference: 8ucchiman.jp
 -->
 
@@ -84,3 +84,17 @@ Rとして表現される
 /* 内部: カメラ単体のキャリブレーションで推定可能なパラメータ
 /* 外部: 外部パラメータを表す。他のカメラや取付位置との相対位置関係で決まる値
 
+
+# understanding nodes
+
+## ros2 run
+```
+    ros2 run <package_name> <executable_name>
+```
+
+```
+    ros2 run turtulesim turtlesim_node
+```
+
+## ros2 node list
+```
