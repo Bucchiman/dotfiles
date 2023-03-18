@@ -1,1 +1,15 @@
-get_bus_id:lshw -C display -businfo
+Command> get_bus_id:lshw -C display -businfo
+
+
+Description> GPUのIDを調べるために打った
+           >
+           > WARNING: you should run this program as super-user.
+           > Bus info          Device        Class          Description
+           > ==========================================================
+           > pci@0000:17:00.0                display        NVIDIA Corporation
+           > pci@0000:65:00.0                display        NVIDIA Corporation
+           > WARNING: output may be incomplete or inaccurate, you should run this program as super-user.
+           >
+
+
+Reference>

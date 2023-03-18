@@ -215,7 +215,7 @@ setopt AUTO_MENU
 setopt AUTO_NAME_DIRS   # 変数をディレクトリパスとして利用する 
 setopt LIST_PACKED # 補完候補を詰めて表示
 setopt LIST_ROWS_FIRST # 補完候補をそーとかして表示
-setopt CDABLE_VARS
+#setopt CDABLE_VARS
 setopt AUTO_PUSHD   # cdコマンドで自動的にpushd
 #setopt PUSHD_TO_HOME
 setopt PUSHD_IGNORE_DUPS

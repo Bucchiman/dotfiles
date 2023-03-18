@@ -4,7 +4,7 @@
 # FileName: 	preprocess
 # Author: 8ucchiman
 # CreatedDate:  2023-02-03 21:29:24 +0900
-# LastModified: 2023-02-22 17:46:03 +0900
+# LastModified: 2023-03-10 09:16:37 +0900
 # Reference: 8ucchiman.jp
 #
 
@@ -32,7 +32,7 @@ class Preprocessing(object):
                  save_csv_dir="../preprocessed"):
         self.train_df = pd.read_csv(train_path)
         self.test_df = pd.read_csv(test_path)
-        self.all_df = pd.concat_csv([self.train_df, self.test_df])
+        self.all_df = pd.concat([self.train_df, self.test_df])
         # self.train_df = self.train_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         # self.test_df = self.test_df.rename(columns=lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
         self.STRATEGY = "median"
