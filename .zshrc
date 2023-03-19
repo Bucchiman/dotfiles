@@ -395,7 +395,7 @@ function edit_snippets() {
 zle -N edit_snippets
 bindkey '^s^e' edit_snippets
 
-fnction link_from_snippets() {
+function link_from_snippets() {
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     load_file=$load_file[3,-1]
     load_file="${HOME}/.config/snippets/codes/${load_file}"
@@ -408,6 +408,20 @@ fnction link_from_snippets() {
 }
 zle -N link_from_snippets
 bindkey '^s^l' link_from_snippets
+
+function make_docker() {
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
+    cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+}
+zle -N make_docker
+bindkey '^d^m' make_docker
+
+function link_docker() {
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
+    ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+}
+zle -N link_docker
+bindkey '^d^l' link_docker
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
