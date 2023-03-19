@@ -2,7 +2,7 @@
  * FileName:     pointer
  * Author: 8ucchiman
  * CreatedDate:  2023-02-26 12:47:08 +0900
- * LastModified: 2023-03-01 23:02:16 +0900
+ * LastModified: 2023-03-18 20:54:33 +0900
  * Reference: 8ucchiman.jp
  */
 
@@ -33,6 +33,19 @@
  * variable  a   -------+    b   -------+    x   |
  *           |       *a              *b          |
  *           +-----------------------------------+  *(*a)
+ *
+ * char型のポインタ
+ * char name[] = "bucchiman";
+ * printf("name = %p\n", name);                 // name = 0xbff5391b
+ * printf("&name[0] = %p\n", &name[0]);         // &name[0] = 0xbff5391b
+ * printf("name printed as %%s is %s\n", name); // name printed as %s is bucchiman
+ * printf("*name = %c\n", *name);               // *name = b
+ * printf("name[0] = %c\n", name[0]);           // name[0] = b
+ * -> nameはポインタ, nameの値はname[0]のアドレス
+ *
+ * char* name[];
+ * -> name[0]はポインタ, name[0]の値はname[0][0]のアドレス
+ *
  */
 
 int main(int argc, char* argv[]){

@@ -410,24 +410,9 @@ function lcds() {
     lcd show ${no_problem} -g -l ${lang}
 }
 
-function make_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
-    cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
-}
-zle -N make_docker
-bindkey '^d^m' make_docker
-
-function link_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
-    ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
-}
-zle -N link_docker
-bindkey '^d^l' link_docker
-
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+
 return
-
-

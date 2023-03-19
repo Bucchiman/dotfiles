@@ -1,5 +1,4 @@
-Command> asciicast2gif:docker run --rm -v $PWD:/data/ asciinema/asciicast2gif [].cast [].gif
+Command> docker run --rm -v $PWD:/data/ asciinema/asciicast2gif [].cast [].gif
 
-Description> 
+Description> castをgifに変換する
 
-Reference> 

@@ -1,1 +1,4 @@
-ffmpeg_video2gif:ffmpeg -i [].mp4 [].gif
+Command> ffmpeg -i [].mp4 [].gif
+
+
+Description> ffmpegでvideoからgifに変換

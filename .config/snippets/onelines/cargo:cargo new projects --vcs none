@@ -1,5 +1,7 @@
-Command: cargo new projects --vcs none
+Command> cargo new projects --vcs none   # gitリポジトリなしでプロジェクト作成
 
-Description: gitリポジトリなしでプロジェクト作成
 
-Reference: https://qiita.com/nobushi95/items/2ce37f6761938efaf339
+Description> gitリポジトリなしでプロジェクト作成
+
+
+Reference> https://qiita.com/nobushi95/items/2ce37f6761938efaf339
