@@ -412,14 +412,22 @@ function lcds() {
 
 function make_docker() {
     local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
-    cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+    if [[ -n $load_docker ]]
+    then
+        cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+    fi
+    zle reset-prompt
 }
 zle -N make_docker
 bindkey '^d^m' make_docker
 
 function link_docker() {
     local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf )
-    ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+    if [[ -n $load_docker ]]
+    then
+        ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+    fi
+    zle reset-prompt
 }
 zle -N link_docker
 bindkey '^d^l' link_docker
