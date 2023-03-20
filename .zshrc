@@ -432,6 +432,13 @@ function link_docker() {
 zle -N link_docker
 bindkey '^d^l' link_docker
 
+function show_readme() {
+    local load_readme=$(cd $HOME/.config/snippets/readme; /usr/bin/find . -type f | fzf --height 100% | mdcat)
+    zle reset-prompt
+}
+zle -N show_readme
+bindkey '^s^r' show_readme
+
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
