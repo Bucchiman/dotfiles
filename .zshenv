@@ -22,5 +22,7 @@ export PATH="/usr/local/bin:$PATH"
 
 
 export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$PYTHONPATH"
+export LD_LIBRARY_PATH="/usr/include/opencv4:$LD_LIBRARY_PATH"
+export PATH="/usr/include/opencv4:$PATH"
 
 #zmodload zsh/zprof && zprof

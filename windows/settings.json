@@ -52,15 +52,6 @@
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "ctrl+s"
-        },
-        {
-            "command": 
-            {
                 "action": "newTab"
             },
             "keys": "ctrl+t"
@@ -92,7 +83,7 @@
             {
                 "face": "mononoki Nerd Font Mono"
             },
-            "opacity": 69,
+            "opacity": 80,
             "useAcrylic": false
         },
         "list": 
@@ -103,12 +94,12 @@
                 "font": 
                 {
                     "face": "mononoki Nerd Font Mono",
-                    "size": 19
+                    "size": 11
                 },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "opacity": 69,
+                "opacity": 80,
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": false
             },
