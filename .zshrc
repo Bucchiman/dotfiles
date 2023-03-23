@@ -433,7 +433,8 @@ zle -N link_docker
 bindkey '^d^l' link_docker
 
 function show_readme() {
-    local load_readme=$(cd $HOME/.config/snippets/readme; /usr/bin/find . -type f | fzf --height 100% | mdcat)
+    local load_readme=$(cd $HOME/.config/snippets/readme; /usr/bin/find . -type f | fzf --height 100% )
+    mdcat $HOME/.config/snippets/readme/$load_readme
     zle reset-prompt
 }
 zle -N show_readme
