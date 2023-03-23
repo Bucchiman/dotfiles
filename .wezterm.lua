@@ -125,7 +125,7 @@ return {
   selection_word_boundary = ' \t\n{[}]()"\'',
   color_scheme = 'iceberg-dark',
   default_prog = default_prog,
-  window_background_opacity = 0.9,
+  window_background_opacity = 0.8,
   leader = {key = 'Space', mods = 'SHIFT', timeout_milliseconds = 2000},
   keys = {
     {

@@ -1,8 +1,13 @@
 # Snippets
 You need the following packages to run snippets.
 
+- neofetch
 - fzf
 - bat
+- exa
+
+
+## neofetch
 
 ## fzf
 ```zsh
@@ -28,3 +33,6 @@ You need the following packages to run snippets.
     # From Source
     $ cargo install --locked bat
 ```
+
+
+## exa
