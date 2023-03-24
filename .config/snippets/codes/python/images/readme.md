@@ -1,7 +1,7 @@
 <!-- FileName: readme
  Author: 8ucchiman
  CreatedDate: 2023-03-02 11:21:50 +0900
- LastModified: 2023-03-02 11:57:10 +0900
+ LastModified: 2023-03-15 15:00:52 +0900
  Reference: 8ucchiman.jp
 -->
 
@@ -90,4 +90,13 @@
                                                          |         |       |         |
                                                          +---------+       +---------+
 ```
+
+
+# Harrisのコーナー検出
+## 定義式
+```
+    E(u, v) = sum(w(x, y)[I(x+u, y+v) - I(x, y)]**2)
+```
+
+## テイラー展開
 

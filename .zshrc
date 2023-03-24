@@ -411,10 +411,12 @@ function lcds() {
 }
 
 function make_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf --height 100% )
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100%)
     if [[ -n $load_docker ]]
     then
         cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+        cp -p ${HOME}/git/base_docker/build_image.sh ${PWD}/build_image.sh
+        cp -p ${HOME}/git/base_docker/make_container.sh ${PWD}/make_container.sh
     fi
     zle reset-prompt
 }
@@ -422,10 +424,12 @@ zle -N make_docker
 bindkey '^d^m' make_docker
 
 function link_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f | fzf --height 100% )
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100% )
     if [[ -n $load_docker ]]
     then
         ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
+        cp -p ${HOME}/git/base_docker/build_image.sh ${PWD}/build_image.sh
+        cp -p ${HOME}/git/base_docker/make_container.sh ${PWD}/make_container.sh
     fi
     zle reset-prompt
 }
@@ -445,5 +449,3 @@ bindkey '^s^r' show_readme
 
 source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
 return
-
-
