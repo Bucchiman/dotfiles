@@ -1,0 +1,8 @@
+Command> docker exec -it [container_name] zsh   # コンテナを別のターミナルで開く
+
+
+Discription> ROSを動かすとき
+
+
+
+Reference> 
