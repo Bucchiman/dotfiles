@@ -1,7 +1,7 @@
 <!-- FileName: parallel_programming
  Author: 8ucchiman
  CreatedDate: 2023-03-19 12:53:07 +0900
- LastModified: 2023-03-19 15:34:33 +0900
+ LastModified: 2023-03-25 16:46:12 +0900
  Reference: 8ucchiman.jp
 -->
 
@@ -236,7 +236,7 @@ MUTual EXclusion (mutex)、排他実行という同期処理の方法。
     }
     // クリティカルセクション
 
-    // pthread_mutex_unlock関数にmutへんおポインタを渡してロック解放
+    // pthread_mutex_unlock関数にmutへのポインタを渡してロック解放
     if (pthread_mutex_unlock(&mut) != 0) {
       perror("pthread_mutex_unlock");
       exit(-1);
@@ -534,6 +534,8 @@ e.g. 小学校の遠足
 ```
 
 ## Readers-Writerロック
+そもそも、レースコンディションが発生する原因は書き込みを行うからである。
+そこで書き込みのみ排他的に行えば良い。
   - Reader 読み込みのみを行うプロセス
   - Writer 読み込みと書き込みのみ行うプロセス
 
@@ -544,6 +546,11 @@ e.g. 小学校の遠足
 
 ### スピンロックベースのRWロック
 ```c
+  /*
+   * readerの数をあらわすrcnt
+   * writerの数を表すwcnt
+   * writerのlock変数lock
+   */
   // Reader用ロック獲得関数
   void rwlock_read_acquire(int *rcnt, volatile int* wcnt) { 
     for (;;) {
