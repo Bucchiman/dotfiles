@@ -342,7 +342,7 @@ function pet-select() {
 
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f)
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
     local snippets=`cat ${load_file}`
@@ -355,7 +355,7 @@ stty -ixon
 bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
@@ -366,7 +366,7 @@ bindkey '^s^m' make_file_from_snippets
 
 function show_online_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf | cut -d':' -f2-)
+    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf --height 100% | cut -d':' -f2-)
     LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
 }
@@ -382,7 +382,7 @@ zle -N edit_snippets
 bindkey '^s^e' edit_snippets
 
 function link_from_snippets() {
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
     load_file=$load_file[3,-1]
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     if [[ ${load_file} = ${HOME}/.config/snippets/codes/ ]]
@@ -396,7 +396,7 @@ zle -N link_from_snippets
 bindkey '^s^l' link_from_snippets
 
 function make_projects() {
-    local load_project=$(cat $HOME/.config/snippets/projects_list | fzf )
+    local load_project=$(cat $HOME/.config/snippets/projects_list | fzf --height 100% )
     LBUFFER="${LBUFFER}rsync -auv ${load_project} ."
     zle reset-prompt
 }
@@ -411,7 +411,7 @@ function lcds() {
 }
 
 function make_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf )
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100%)
     if [[ -n $load_docker ]]
     then
         cp -p ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
@@ -424,7 +424,7 @@ zle -N make_docker
 bindkey '^d^m' make_docker
 
 function link_docker() {
-    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf )
+    local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100% )
     if [[ -n $load_docker ]]
     then
         ln -sf ${HOME}/git/base_docker/${load_docker} ${PWD}/Dockerfile
@@ -435,6 +435,14 @@ function link_docker() {
 }
 zle -N link_docker
 bindkey '^d^l' link_docker
+
+function show_readme() {
+    local load_readme=$(cd $HOME/.config/snippets/readme; /usr/bin/find . -type f | fzf --height 100% )
+    mdcat $HOME/.config/snippets/readme/$load_readme
+    zle reset-prompt
+}
+zle -N show_readme
+bindkey '^s^r' show_readme
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
