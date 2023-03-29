@@ -21,3 +21,5 @@ a.out
 *.o
 *.a
 build/
+bin/
+obj/
