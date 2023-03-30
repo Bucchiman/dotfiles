@@ -8,6 +8,10 @@
 --
 
 
-vim.api.nvim_command('set runtimepath^=/home/bucchiman/.config/snippets/codes/lua/nvim')
+--vim.api.nvim_command('set runtimepath^=/home/bucchiman/.config/snippets/codes/lua/nvim')
+local home_dir = os.getenv('HOME')
+local cfg_dir = home_dir..'/.config/snippets/codes/lua/nvim'
+--print(cfg_dir)
+vim.api.nvim_command('set runtimepath^='..cfg_dir)
 
 --require("")
