@@ -1,0 +1,8 @@
+Command> dotnet new console   # プロジェクト作成
+
+Description> プロジェクト作成
+           > テンプレート一覧を表示
+           > dotnet new list
+
+
+Reference> https://learn.microsoft.com/ja-jp/dotnet/core/tools/dotnet
