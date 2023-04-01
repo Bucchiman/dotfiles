@@ -27,4 +27,8 @@ export PATH="/usr/include/opencv4:$PATH"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
 
+export PATH="/usr/local/cuda/bin:$PATH"
+
+export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
+
 #zmodload zsh/zprof && zprof

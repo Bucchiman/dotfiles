@@ -1,0 +1,21 @@
+Command> dynamic library: gcc -shared func.o -io libfunc.so   # オブジェクトファイルから動的ライブラリの作り方
+
+Description> 動的ライブラリはリンク時にリンクに必要な情報のみを実行ファイルに結合し、実際のリンクは実行時に結合されるライブラリ
+           > 共有ライブラリとも呼ぶ
+           > 動的ライブラリは実行時に結合されるので、サイズファイルとしては静的ライブラリのリンク時実行ファイルと比べると小さくなる。
+           > 
+           > 共有ライブラリの作成方法
+           >    - gcc main.c libfunc.so -o main
+           >    - gcc main.o libfunc.so -o main
+           >    - gcc main.c -lfunc -L . -o main
+           >
+           > shared libraryのメリット
+           >    - easy edit codes
+           >         動的ライブラリかライブラリ使用側で編集したとしてもリンクしなおす必要がない
+           >         
+           >    - exectable file size
+           >         動的ライブラリの場合はリンク時のライブラリそのを結合しない
+
+
+Reference> https://qiita.com/shohirose/items/45fb49c6b429e8b204ac
+         > https://daeudaeu.com/library/
