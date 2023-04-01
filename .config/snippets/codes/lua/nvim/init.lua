@@ -3,8 +3,8 @@
 -- FileName:     init
 -- Author: 8ucchiman
 -- CreatedDate:  2023-03-26 11:40:26 +0900
--- LastModified: 2023-03-26 13:59:00 +0900
--- Reference: 8ucchiman.jp
+-- LastModified: 2023-03-31 21:41:28 +0900
+-- Reference: https://zenn.dev/hisasann/articles/neovim-settings-to-lua
 --
 
 
@@ -15,3 +15,7 @@ local cfg_dir = home_dir..'/.config/snippets/codes/lua/nvim'
 vim.api.nvim_command('set runtimepath^='..cfg_dir)
 
 --require("")
+
+
+require("options")
+require("keymaps")
