@@ -18,11 +18,14 @@ if [[ ! -d $HOME/.config ]]
 then
   mkdir $HOME/.config
 fi
+git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 ln -sf $PWD/.zshrc $HOME/.zshrc
 ln -sf $PWD/.zshenv $HOME/.zshenv
-ln -sf $PWD/.config/nvim $HOME/.config/nvim
-ln -sf $PWD/.config/dein $HOME/.config/dein
+mkdir -p $HOME/.config/nvim
+ln -sf $PWD/.config/nvim/init.lua $HOME/.config/nvim/init.lua
+ln -sf $PWD/.config/nvim/lua $HOME/.config/nvim/lua
+#ln -sf $PWD/.config/dein $HOME/.config/dein
 ln -sf $PWD/.config/template $HOME/.config/template
 ln -sf $PWD/.config/snippets $HOME/.config/snippets
 ln -sf $PWD/.vimrc $HOME/.vimrc

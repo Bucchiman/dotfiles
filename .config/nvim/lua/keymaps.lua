@@ -28,8 +28,8 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<ESC><ESC>", ":nohlsearch<CR>", opts)
---keymap("n", "sh", ":split<Retern><C-w>w", opts)
---keymap("n", "sv", ":vsplit<Retern><C-w>w", opts)
+keymap("n", "sh", ":split<Return><C-w>w", opts)
+keymap("n", "sv", ":vsplit<Return><C-w>w", opts)
 -- S-v Shift-v
 keymap("n", "<C-a>", "gg<S-v>G", opts)
 -- Do not yank with x

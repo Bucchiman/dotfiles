@@ -18,4 +18,4 @@ vim.api.nvim_create_autocmd(
     }
 )
 
-vim.opt.formatopptions:append { 'r' }
+vim.opt.formatoptions:append { 'r' }
