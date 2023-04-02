@@ -19,3 +19,4 @@ vim.api.nvim_command('set runtimepath^='..cfg_dir)
 
 require("options")
 require("keymaps")
+require("plugins")

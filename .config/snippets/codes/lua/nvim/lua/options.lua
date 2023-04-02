@@ -8,6 +8,8 @@
 --
 
 
+--
+-- shell:        ![Command]でシェル実行できる
 
 
 local options = {
@@ -15,6 +17,7 @@ local options = {
     backup = false,
     virtualedit = "onemore",
     hidden = true,
+    autoindent = true,
     wrapscan = true,
     encoding = "utf-8",
     fileencoding = "utf-8",
@@ -38,7 +41,7 @@ local options = {
     undofile = true,
     updatetime = 300,
     writebackup = false,
-    shell = "fish",
+    shell = "zsh",
     expandtab = true,
     shiftwidth = 4,
     tabstop = 8,
@@ -56,6 +59,7 @@ local options = {
     guifont = "monospace:h17",
     splitbelow = false, -- オンのとき、ウィンドウを横分割すると新しいウィンドウはカレントウィンドウの下に開かれる
     splitright = false, -- オンのとき、ウィンドウを縦分割すると新しいウィンドウはカレントウィンドウの右に開かれる
+    inccommand = "split"
 }
 
 vim.opt.shortmess:append("c")
