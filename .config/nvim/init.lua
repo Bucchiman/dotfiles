@@ -19,5 +19,21 @@ local home_dir = os.getenv('HOME')
 
 require("base")
 require("options")
+--require("plugins.packer")
+require("plugins.lazy")
+require("plugins.lspconfig")
 require("keymaps")
-require("plugins")
+
+-- Insert timestamp after 'LastModified: '
+--function! LastModified()
+--    if &modified
+--	let save_cursor = getpos(".")
+--	let n = min([40, line("$")])
+--	keepjumps exe '1,' . n . 's#^\(.\{,10}LastModified: \).*#\1' .
+--		    \ strftime('%Y-%m-%d %H:%M:%S %z') . '#e'
+--	call histdel('search', -1)
+--	call setpos('.', save_cursor)
+--    endif
+--endfun
+--autocmd BufWritePre * call LastModified()
+

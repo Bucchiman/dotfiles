@@ -112,6 +112,7 @@ packer.startup(function(use)
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
+  use { 'catppuccin/nvim', as = "catppuccin" }
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
@@ -151,5 +152,7 @@ packer.startup(function(use)
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
+  use({"ellisonleao/glow.nvim", config = function() require("glow").setup() end,})
 end)
 
+vim.cmd.colorscheme "catppuccin"

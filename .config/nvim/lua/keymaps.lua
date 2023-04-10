@@ -66,14 +66,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 
-
-
-
-
-
-
 -- Visual --
-
 
 
 --" 履歴コマンドのフィルタリング適応
@@ -105,4 +98,6 @@ vim.g.maplocalleader = " "
 --
 --" ターミナルモード
 --tnoremap <silent> <ESC> <C-\><C-n>
---
+
+
+
