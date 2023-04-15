@@ -1,9 +1,0 @@
-#!/bin/csh -f
-
-set xlogs = x.logs
-mkdir -p $xlogs
-
-./go conda |& tee $xlogs/go.conda.log
-./go setup |& tee $xlogs/go.setup.log
-./go data  |& tee $xlogs/go.data.log
-./go run   |& tee $xlogs/go.run.log

@@ -1,7 +1,0 @@
-*.png
-logs/
-datas/
-__pycache__/
-__init__/
-.ipynb_checkpoints/
-.DS_Store

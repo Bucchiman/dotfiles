@@ -1,1 +1,0 @@
-/home/bucchiman/.config/snippets/codes/c/Makefile
