@@ -1,0 +1,30 @@
+[submodule ".config/snippets/codes/python"]
+	path = .config/snippets/codes/python
+	url = git@github.com:Bucchiman/py.git
+[submodule ".config/snippets/codes/c"]
+	path = .config/snippets/codes/c
+	url = git@github.com:Bucchiman/c.git
+[submodule ".config/snippets/codes/c#"]
+	path = ".config/snippets/codes/c#"
+	url = git@github.com:Bucchiman/cs.git
+[submodule ".config/snippets/codes/c++"]
+	path = .config/snippets/codes/c++
+	url = git@github.com:Bucchiman/cpp.git
+[submodule ".config/snippets/codes/rust"]
+	path = .config/snippets/codes/rust
+	url = git@github.com:Bucchiman/rs.git
+[submodule ".config/snippets/codes/Makefile"]
+	path = .config/snippets/codes/Makefile
+	url = git@github.com:Bucchiman/Makefile.git
+[submodule ".config/snippets/codes/latex"]
+	path = .config/snippets/codes/latex
+	url = git@github.com:Bucchiman/latex.git
+[submodule ".config/snippets/codes/lua"]
+	path = .config/snippets/codes/lua
+	url = git@github.com:Bucchiman/lua
+[submodule ".config/snippets/codes/shell"]
+	path = .config/snippets/codes/shell
+	url = git@github.com:Bucchiman/sh
+[submodule ".config/snippets/codes/cuda"]
+	path = .config/snippets/codes/cuda
+	url = git@github.com:Bucchiman/cu.git
