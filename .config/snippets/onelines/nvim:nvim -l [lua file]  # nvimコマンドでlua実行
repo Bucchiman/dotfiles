@@ -1,5 +1,0 @@
-Command> nvim -l [lua file]  # nvimコマンドでlua実行
-
-Description>
-
-Reference> https://neovim.io/doc/user/lua.html

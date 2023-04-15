@@ -1,5 +1,0 @@
-Code> sample_list[1::2]  # 奇数のみ取り出す
-
-Description> [buffers for i, buffers in enumerate(args.array) if i%2==1]
-
-Reference> https://mebee.info/2023/01/23/post-90169/

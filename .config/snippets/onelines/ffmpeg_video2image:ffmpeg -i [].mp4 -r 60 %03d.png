@@ -1,5 +1,0 @@
-Command> ffmpeg -i [].mp4 -r 60 %03d.png
-
-
-
-Description> ffmpegでvideoから画像に変換

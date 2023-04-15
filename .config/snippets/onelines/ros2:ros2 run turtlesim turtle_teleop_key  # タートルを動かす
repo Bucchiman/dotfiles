@@ -1,8 +1,0 @@
-Command> ros2 run turtlesim turtle_teleop_key
-
-Description> タートルシミュレータのタートルを動かす
-           > 
-           > # 別の端末で起動
-           > ros2 run turtlesim turtle_node
-
-Reference> https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html

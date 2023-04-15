@@ -1,9 +1,0 @@
-Command> ros2 run turtlesim turtlesim_node
-
-Description> タートルシミュレータ起動
-           > - intall turtlesim
-           >    sudo apt install ros-humble-turtlesim
-           > - check the package
-           >    ros2 pkg executables turtlesim
-
-Reference> https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html

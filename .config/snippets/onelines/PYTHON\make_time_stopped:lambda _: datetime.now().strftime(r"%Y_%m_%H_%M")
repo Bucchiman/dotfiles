@@ -1,6 +1,0 @@
-Command> datetime.now().strftime(r"%Y_%m_%H_%M")
-
-Description> 
-
-
-Reference> 

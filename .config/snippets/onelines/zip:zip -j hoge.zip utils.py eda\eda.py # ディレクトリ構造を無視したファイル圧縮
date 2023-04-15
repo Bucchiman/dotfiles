@@ -1,6 +1,0 @@
-Command> zip -j hoge.zip utils.py eda\eda.py    # ディレクトリ構造を無視したファイル圧縮
-
-Description> 
-
-
-Reference> 

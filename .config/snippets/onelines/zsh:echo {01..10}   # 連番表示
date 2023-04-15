@@ -1,8 +1,0 @@
-Command> echo {01..10}  # 連番表示
-
-Description> 
-           > {1..10}
-           > {a..z}
-
-
-Reference> https://wknar.hatenablog.com/entry/diff-bash-zsh-order

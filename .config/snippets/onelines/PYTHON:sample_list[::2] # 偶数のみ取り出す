@@ -1,6 +1,0 @@
-Code> sample_list[::2]
-
-Description> [sl for i, sl in enumerate(sample_list) if i%2==0]
-
-
-Reference> https://mebee.info/2023/01/23/post-90169/

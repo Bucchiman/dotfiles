@@ -1,6 +1,0 @@
-Command> docker cp [FILE] bucchiman/[CONTAINER]:/root/
-
-Description> ローカルマシンからコンテナ内にファイルをコピー
-
-
-Reference>

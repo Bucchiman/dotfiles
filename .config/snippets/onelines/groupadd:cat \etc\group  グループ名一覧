@@ -1,5 +1,0 @@
-Command> cat /etc/group  # グループ名の表示
-
-Description> グループ名の表示
-
-Reference> https://eng-entrance.com/linux-command-groupadd

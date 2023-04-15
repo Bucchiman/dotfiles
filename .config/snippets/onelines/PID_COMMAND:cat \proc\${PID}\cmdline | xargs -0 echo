@@ -1,7 +1,0 @@
-Command> cat /proc/${PID}/cmdline | xargs -0 echo
-Command> cat /proc/${PID}/cmdline | tr '\000' ' '
-
-Description> PIDのコマンドを表示
-
-
-Reference> https://serverfault.com/questions/479460/find-command-from-pid
