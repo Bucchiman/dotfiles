@@ -28,3 +28,6 @@
 [submodule ".config/snippets/codes/cuda"]
 	path = .config/snippets/codes/cuda
 	url = git@github.com:Bucchiman/cu.git
+[submodule ".config/snippets/onelines"]
+	path = .config/snippets/onelines
+	url = git@github.com:Bucchiman/onelines.git
