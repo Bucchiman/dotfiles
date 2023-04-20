@@ -60,3 +60,9 @@
 - https://github.com/TixiaoShan/LIO-SAM
 - https://www.jstage.jst.go.jp/article/jacc/54/0/54_0_358/_pdf
 - http://opendata.enri.go.jp/~fks442/K_MUSEN/
+
+
+- https://dc.tsinghuajournals.com/cgi/viewcontent.cgi?article=1250&context=tsinghua-science-and-technology
+- https://dynamic-positioning.com/proceedings/dp2017/Sensors-%20Russell%20-%20presentation.pdf
+- https://rpg.ifi.uzh.ch/docs/IROS20_Cioffi.pdf
+- http://web.stanford.edu/group/scpnt/gpslab/pubs/papers/Alban_IONNTM_2003.pdf
