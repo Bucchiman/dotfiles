@@ -31,11 +31,10 @@ require("lazy").setup(
             'Template','TemProject'
         }, 
         config = function()
-            require('template').setup({
-                temp_dir = "/tmp/template",
-                author = "8ucchiman",
-                email = "8ucchiman@gmail.com",
-            })
+            local temp = require('template')
+            temp.temp_dir = "~/.config/template"
+            temp.author = "8ucchiman"
+            temp.email = "8ucchiman@gmail.com"
         end
     },
     {
@@ -107,6 +106,9 @@ require("lazy").setup(
 	    build = "make install_jsregexp"
     }
 })
+
+
+require("telescope").load_extension('find_template')
 
 require("catppuccin").setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha

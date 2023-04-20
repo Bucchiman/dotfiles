@@ -57,6 +57,8 @@ keymap("v", "v", "$h", opts)
 -- 0番レジスタを使いやすくした
 keymap("v", "<C-p>", '"0p', opts)
 
+keymap("t", "<Esc>", '<C-\\><C-n>', opts)
+
 
 --local 
 
