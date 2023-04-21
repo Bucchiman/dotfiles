@@ -54,7 +54,7 @@
 - https://www.researchgate.net/publication/355164217_GNSSINS_Integration_Kalman_Filter-Loose_Coupling_Master%27s_degree_course_in_Mobile_Mapping_and_Navigation_Systems_Polytechnic_University_Warsaw
 - https://pdfs.semanticscholar.org/139c/f2241ec9a3a4f41eca798385d3612b40432f.pdf?_gl=1*1sckten*_ga*MTIyNDE5ODY5MS4xNjgxMzYxOTkw*_ga_H7P4ZT52H5*MTY4MTM2MTk4OS4xLjAuMTY4MTM2MTk5MS4wLjAuMA..
 - https://dc.tsinghuajournals.com/cgi/viewcontent.cgi?article=1250&context=tsinghua-science-and-technology
-- https://comm.ee.tut.ac.jp/~takeuchi/lecture/communication/C7.pdf
+- https://comm.ee.tut.ac.jp/~takeuchi/lecture/communication/.pdf
 - https://smartech.gatech.edu/bitstream/handle/1853/45226/Factor Graphs and GTSAM A Hands-on Introduction GT-RIM-CP%26R-2012-002.pdf?sequence=1&isAllowed=y
 - https://dellaert.github.io/files/Indelman13ras.pdf
 - https://github.com/TixiaoShan/LIO-SAM
@@ -66,3 +66,12 @@
 - https://dynamic-positioning.com/proceedings/dp2017/Sensors-%20Russell%20-%20presentation.pdf
 - https://rpg.ifi.uzh.ch/docs/IROS20_Cioffi.pdf
 - http://web.stanford.edu/group/scpnt/gpslab/pubs/papers/Alban_IONNTM_2003.pdf
+
+
+- https://github.com/neufieldrobotics/simple_vslam.git
+- https://github.com/neufieldrobotics/simple_vslam/blob/master/docs/tutorial.md
+- https://navi.ion.org/content/navi/68/2/315.full.pdf
+- https://www.youtube.com/watch?v=f5bIh96SRsk
+- https://www.mdpi.com/1424-8220/22/23/9297
+- https://gtsam.org/tutorials/intro.html
+- https://github.com/borglab/gtsam
