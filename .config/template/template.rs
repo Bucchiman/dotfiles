@@ -1,9 +1,9 @@
 /*
- * FileName:     <+FILENAME+>
- * Author: 8ucchiman
- * CreatedDate:  <+DATE+>
- * LastModified: 2023-01-23 14:15:07 +0900
- * Reference: 8ucchiman.jp
+ * FileName:        {{_file_name_}}
+ * Author:          {{_author_}}
+ * CreatedDate:     {{_date_}}
+ * LastModified:    2023-01-23 14:15:07 +0900
+ * Reference:       8ucchiman.jp
  */
 
-use proconio:: input;
+
