@@ -9,7 +9,7 @@ then
     source $HOME/.config/zsh/local.zshrc
 fi
 
-colorlist() {
+function colorlist() {
     for color in {000..015}; do
         print -nP "%F{$color}$color %f"
     done
