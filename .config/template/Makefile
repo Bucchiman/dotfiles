@@ -11,6 +11,15 @@
 {{_cursor_}}
 
 
+# 静的ライブラリ作成
+static: *.o
+	ar rvs libhoge.a geho.o
+
+# 共有ライブラリ作成
+dynamic: *.o
+	g++ -shared hoge.o -o libhoge.so
+
+
 .PHONY: clean
 clean:
 	rm *.png *.pdf *.jpg *.aux *.dvi *.log
