@@ -6,6 +6,7 @@
  CreateDate:    {{_date_}}
  LastModified:  2023-01-23 14:16:22 +0900
  Reference:     8ucchiman.jp
+ Description:   ---
 =end
 
 $KCODE='u'
