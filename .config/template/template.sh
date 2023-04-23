@@ -8,6 +8,22 @@
 #
 
 
+
+function _usage() {
+}
+
+
+while getopts :i:c:g OPT
+do
+    case $OPT in
+        i) image_name=$OPTARG;;
+        g) gpu_flag=true;;
+        c) container_name=$OPTARG;;
+        :|\?) _usage;;
+    esac
+done
+
+
 {{_cursor_}}
 
 

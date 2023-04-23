@@ -1,8 +1,8 @@
 #!/bin/zsh
 #
-# FileName:     {{_file_name_}}
-# Author:       {{_author_}}
-# CreatedDate:  {{_date_}}
+# FileName:     Docker
+# Author:       8ucchiman
+# CreatedDate:  2023-04-23 13:36:26
 # LastModified: 2023-01-23 14:11:45 +0900
 # Reference:    8ucchiman.jp
 #
@@ -24,6 +24,7 @@ done
 
 
 
-{{_cursor_}}
+
 
 return
+
