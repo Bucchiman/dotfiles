@@ -6,18 +6,18 @@
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "ctrl+shift+s"
-        },
-        {
-            "command": 
-            {
                 "action": "copy",
                 "singleLine": false
             },
             "keys": "ctrl+c"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "ctrl+shift+s"
         },
         {
             "command": 
@@ -59,17 +59,17 @@
         {
             "command": 
             {
-                "action": "closeTab"
-            },
-            "keys": "ctrl+backspace"
-        },
-        {
-            "command": 
-            {
                 "action": "newTab",
                 "index": 0
             },
             "keys": "ctrl+1"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "ctrl+backspace"
         }
     ],
     "copyFormatting": "none",
@@ -126,6 +126,12 @@
                 "hidden": false,
                 "name": "PowerShell 7",
                 "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{24a0533e-913b-5f8c-a5cb-6be85a4c9e70}",
+                "hidden": false,
+                "name": "Ubuntu 18.04.6 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu18.04LTS_79rhkp1fndgsc"
             }
         ]
     },
