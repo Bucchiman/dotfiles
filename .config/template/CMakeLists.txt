@@ -4,6 +4,7 @@
 # CreatedDate:  {{_date_}}
 # LastModified: 2023-03-29 18:30:18 +0900
 # Reference:    https://qiita.com/shohirose/items/45fb49c6b429e8b204ac
+#               https://cmake.org/cmake/help/git-master/prop_gbl/CMAKE_CXX_KNOWN_FEATURES.html#prop_gbl:CMAKE_CXX_KNOWN_FEATURES
 # Description:  ---
 #
 
@@ -58,3 +59,63 @@ endif()
 ####################
 add_subdirectory(src)
 add_subdirectory(test)
+
+####################
+# コンパイルオプション設定
+####################
+# 最適化・警告などのオプション
+target_compile_options(a.out PUBLIC -O2 -Wall)
+
+# C++の標準規格の指定
+target_compile_features(a.out PUBLIC cxx_std_17)
+
+# マクロ
+target_compile_definitions(a.out PUBLIC MY_ORIGINAL_MACRO_CONST=1)
+
+
+####################
+# ビルドタイプの指定
+####################
+# $ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+# $ cmake --build build
+
+####################
+# ジェネレーター式
+# コンパイラによってコンパイルオプションが異なる。
+# e.g. gcc,           -Wall
+#      visual studio, /W4
+####################
+cmake_minimum_required(VERSION 3.13)
+project(cmake_example CXX)
+
+add_executable(a.out main.cpp)
+target_compile_options(a.out PUBLIC
+  # ビルドタイプによって変更する
+  $<$<CONFIG:Release>: ...>          # Release
+  $<$<CONFIG:Debug>: ...>            # Debug
+  $<$<CONFIG:RelWithDebgInfo>: ...>  # RelWithDebInfo
+
+  # OSに応じて変更する
+  $<$<PLATFORM_ID:Darwin>: ...>   # Mac
+  $<$<PLATFORM_ID:Linux>: ...>    # Linux
+  $<$<PLATFORM_ID:Windows>: ...>  # Windows
+
+  # コンパイラによって変更する
+  $<$<CXX_COMPILER_ID:MSVC>: ...>      # MSVC
+  $<$<CXX_COMPILER_ID:GNU>: ...>       # GCC
+  $<$<CXX_COMPILER_ID:Clang>: ...>     # LLVM Clang
+  $<$<CXX_COMPILER_ID:Intel>: ...>     # Intel classic
+  $<$<CXX_COMPILER_ID:IntelLLVM>: ...> # Intel one-API
+  )
+target_compile_definitions(a.out PUBLIC
+  $<$<NOT:$<CONFIG:Debug>>: ...>     # Debugビルド以外
+  )
+
+
+####################
+# ライブラリのリンク
+####################
+# $ g++ -o target main.cpp -lhoge
+#
+# -> 
+target_link_libraries(target PUBLIC -lhoge)
