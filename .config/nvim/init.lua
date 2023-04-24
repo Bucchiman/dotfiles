@@ -24,6 +24,9 @@ require("plugins.lazy")
 require("plugins.lspconfig")
 require("keymaps")
 
+
+require("temp")
+
 -- Insert timestamp after 'LastModified: '
 --function! LastModified()
 --    if &modified

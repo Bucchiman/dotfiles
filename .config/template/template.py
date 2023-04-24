@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# FileName: 	<+FILENAME+>
-# Author: 8ucchiman
-# CreatedDate:  <+DATE+>
+# FileName:     {{_file_name_}}
+# Author:       {{_author_}}
+# CreatedDate:  {{_date_}}
 # LastModified: 2023-02-18 14:28:37 +0900
-# Reference: 8ucchiman.jp
+# Reference:    8ucchiman.jp
+# Description:  ---
 #
 
 
@@ -20,7 +21,7 @@ import sys
 def main():
     # args = utils.get_args()
     # method = getattr(utils, args.method)
-    <+CURSOR+>
+    {{_cursor_}}
     pass
 
 
