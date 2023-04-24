@@ -20,7 +20,7 @@
 # 静的ライブラリ作成
 ####################
 cmake_minimum_required(VERSION 3.13)
-project(test_cmake CXX)
+project(test_cmake CXX)     # test_cmakeプロジェクトをc++で作成
 # hello.cppとgood_morning.cppをコンパイルして静的ライブラリlibgreetings.aを作成
 add_library(greetings STATIC hello.cpp good_morning.cpp)
 # a.outという実行ファイルをmain.cppから作成
