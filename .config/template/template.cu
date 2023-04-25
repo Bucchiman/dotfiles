@@ -14,7 +14,7 @@
 
 #ifdef MACRO
 int main(int argc, char* argv[]){
-    <+CURSOR+>
+    {{_cursor_}}
     return 0;
 }
 #endif
