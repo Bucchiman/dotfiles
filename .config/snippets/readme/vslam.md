@@ -34,9 +34,19 @@
    K = | 0   fv cv |
        | 0   0  1  |
 ```
+$
+    K = \begin{pmatrix} f_u & 0   & c_u \\
+                        0   & f_v & c_v \\
+                        0   & 0   & 1 \end{pmatrix}
+$
+
 
 Kの第3行をのぞいた行列をK'とする。
-カメラ座標系の3D点χc=[Xc, Yc, Zc]Tは以下の式で画像平面上の点z=[u, v]Tに投影される。
+カメラ座標系の3D点
+$χc=\begin{pmatrix}X_c & Y_c & Z_c\end{pmatrix}^T$
+は以下の式で画像平面上の点
+$z=\begin{pmatrix}u & v\end{pmatrix}^T$
+に投影される。
 ```
     z = 1 / Zc K'χc
 ```
