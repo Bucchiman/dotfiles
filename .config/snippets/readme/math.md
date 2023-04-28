@@ -20,3 +20,6 @@ $A = \begin{pmatrix} a & h \\ h & b\end{pmatrix}$
 $F(x, y) = u^\top Au$
 
 と書ける。
+
+
+
