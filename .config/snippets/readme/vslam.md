@@ -34,9 +34,19 @@
    K = | 0   fv cv |
        | 0   0  1  |
 ```
+$
+    K = \begin{pmatrix} f_u & 0   & c_u \\
+                        0   & f_v & c_v \\
+                        0   & 0   & 1 \end{pmatrix}
+$
+
 
 Kの第3行をのぞいた行列をK'とする。
-カメラ座標系の3D点χc=[Xc, Yc, Zc]Tは以下の式で画像平面上の点z=[u, v]Tに投影される。
+カメラ座標系の3D点
+$χc=\begin{pmatrix}X_c & Y_c & Z_c\end{pmatrix}^T$
+は以下の式で画像平面上の点
+$z=\begin{pmatrix}u & v\end{pmatrix}^T$
+に投影される。
 ```
     z = 1 / Zc K'χc
 ```
@@ -63,13 +73,29 @@ Kの第3行をのぞいた行列をK'とする。
 
 ## 基礎行列
 基礎行列Fは3x3行列,カメラの内部パラメータKと2つのカメラの外部パラメータ[R|t]の両方の情報を含む。
-これはエピポーラ拘束と呼ばれ、一方のz1が決まればもういっおぷの画像上の対応店z2に関する制約を与えることができる。
-
+これはエピポーラ拘束と呼ばれ、一方のz1が決まればもう一方の画像上の対応店z2に関する制約を与えることができる。
+カメラ1$\begin{pmatrix} u_1 & v_1\end{pmatrix}$とカメラ2$\begin{pmatrix} u_2 & v_2 \end{pmatrix}$の制約が決まる。
 ```
             | f11 f12 f13 ||u1|
    (u2 v2 1)| f21 f22 f23 ||v1| = z2TFz1 = 0
             | f31 f32 f33 ||1 |
 ```
+$ \begin{pmatrix}
+    u_2 & v_2 & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    f_{11} & f_{12} & f_{13} \\
+    f_{21} & f_{22} & f_{23} \\
+    f_{31} & f_{32} & f_{33}
+  \end{pmatrix}
+  \begin{pmatrix}
+    u_1 \\
+    v_1 \\
+    1
+  \end{pmatrix}
+  = z_{2}^{T}Fz_{1} = 0
+$
+
 
 画像I1上の点z1に対応する画像I2上のエピポーラ線はI2=Fz1であらわされる。
 
