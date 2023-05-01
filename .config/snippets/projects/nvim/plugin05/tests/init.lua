@@ -16,8 +16,13 @@ if is_not_a_directory then
     vim.fn.system({"git", "clone", "https://github.com/nvim-lua/plenary.nvim"})
 end
 
+-- local current_dir = os.getnev("PWD")
 vim.opt.rtp:append(".")
 vim.opt.rtp:append(plenary_dir)
+
+-- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
+-- print(vim.fs.normalize('.'))
+-- print(os.getenv("PWD"))
 
 vim.cmd("runtime plugin/plenary.vim")
 require("plenary.busted")

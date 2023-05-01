@@ -3,9 +3,10 @@ $HOME/.config/snippets/projects/c++_projects
 $HOME/.config/snippets/projects/c_project
 $HOME/.config/snippets/projects/deep_learning_image
 $HOME/.config/snippets/projects/deep_learning_image_with_ddp
-$HOME/.config/snippets/projects/example_plugin
 $HOME/.config/snippets/projects/mac_x11
 $HOME/.config/snippets/projects/machine_learning
-$HOME/.config/snippets/projects/nvim_plugins
-$HOME/.config/snippets/projects/simple_nvim_plugin
-$HOME/.config/snippets/projects/vim_plugins
+$HOME/.config/snippets/projects/nvim/plugin01
+$HOME/.config/snippets/projects/nvim/plugin02
+$HOME/.config/snippets/projects/nvim/plugin03
+$HOME/.config/snippets/projects/nvim/plugin04
+$HOME/.config/snippets/projects/nvim/plugin05

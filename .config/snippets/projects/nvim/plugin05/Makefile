@@ -8,14 +8,21 @@
 #
 
 
-TESTS_INIT=tests/minimal_init.lua
+TESTS_INIT=tests/init.lua
 TEST_DIR=tests/
 
 
-.PHONY: test
+.PHONY: test rename
 
 test:
 	@nvim --headless \
 		  --noplugin \
 		  -u ${TESTS_INIT} \
 		  -c "PlenaryBustedDirectory ${TEST_DIR} {minimal_init = '${TESTS_INIT}'}"
+
+
+rename:
+	find -type f * | xargs sed -i".org" 's/_plugin_name/bucchiman/g'
+
+redo:
+	
