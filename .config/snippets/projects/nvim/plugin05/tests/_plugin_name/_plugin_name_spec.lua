@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 --
--- FileName:     plugin_name
+-- FileName:     _plugin_name_spec
 -- Author:       8ucchiman
 -- Email:        8ucchiman@gmail.com
 -- CreatedDate:  2023-05-01 16:29:40
