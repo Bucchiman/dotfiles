@@ -53,3 +53,24 @@ $x_{k+1} = x_k + \alpha d_k$
 $\nabla^2f(x_k)d = -\nabla f(x_k)$
 の解$d_k$を求める。
 3.$x_{k+1} = x_k + d_k$として、更新
+
+
+
+
+# ラグランジュの未定乗数
+`制約付き最適化問題`
+```
+    min f(x)
+    subject to g_i(x) < 0
+```
+
+## KKT条件
+- $\nabla f(x) + \sum\lambda\nabla g(x) = 0$
+- $\lambda g(x) = 0$
+
+
+## e.g.
+```
+    min f(x_1, x_2) = -x_1-2x_2
+    subject to g(x_1, x_2) = x^2_1 + x^2_2-6t < 0
+```
