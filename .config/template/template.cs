@@ -12,7 +12,7 @@ using System;
 
 
 namespace HOGE{
-    class Main{
+    class GEHO{
         static void Main(string[] argv){
             {{_cursor_}}
         }

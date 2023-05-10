@@ -25,6 +25,10 @@ done
 
 
 
-{{_cursor_}}
+function main() {
+    {{_cursor_}}
+}
+
+main
 
 return

@@ -20,7 +20,7 @@ $Cov(X, Y) = E(XY)-\mu_x\mu_y$
 
 
 # スチューデントのt検定
-`2つのデータ間に対応無し`
+`2つのデータ間に対応無し` `テストの点数が2集団の間で差があるかどうかの検定` `被験者に対してある薬を投与する前後で血圧がどう変化したかの検定`
 [概要](https://data-science.gr.jp/theory/tst_student_t_test.html)
 データx及びデータyの2つのデータ間の平均値に差があるかどうかを検定する手法。
 スチューデントのt検定は特に、2つのデータ間に対応がなく、かつ2つのデータの分散に等分散性が仮定できるときに用いられる手法。
@@ -71,3 +71,42 @@ $
 `平均xの標本分布において母集団の標準偏差$\sigma$の代わりに標本標準偏差sを用いた場合の標準化後の平均xが従う確率分布`
 
 
+# 帰無仮説
+`ある仮説が正しいかどうかの判断のために立てられる仮説` `たいてい否定されることを期待して立てられる`
+
+# 有意水準α
+
+
+# 母集団と標本
+[概要](https://mochablog.org/sampling-mean/)
+## 標本平均の期待値と母集団の期待値は等しい
+`$E(barX)=\mu$ (barX: 標本平均, $\mu$: 母平均)`
+
+- 証明
+
+$E(barX) = E(\frac{1}{n}(X_1+\cdots+X_n))$
+$E(barX) = \frac{1}{n}E((X_1+\cdots+X_n))$
+$E(barX) = \frac{1}{n}(E(X_1)+\cdots+E(X_n))$
+$E(barX) = \frac{1}{n}(\mu+\cdots+\mu)$
+$E(barX) = \frac{1}{n}(n\mu)$
+$E(barX) = \mu$
+
+
+
+
+## 標本分散の期待値は母集団の分散とは異なる
+`$E(s^2)=\frac{n-1}{n}\sigma^2$ ($s^2$: 標本分散, $\sigma^2$: 母分散, n: サンプル数)`
+
+
+
+
+
+
+# 
+[ビショップ](sidekick-extension://bomfdkbfpdhijjbeoicnfhjbdhncfhig/view-dm.html?mp=xl6ptXNh)
+
+- $p(x) = \sum_{y}p(x, y)$
+- $p(x, y) = p(y|x)p(x)$
+
+- $E(f) = \sum_{x}p(x)f(x)$  # $f(x)$となっているのはエントロピーなども想定しているから, よくみる期待値は$f(x)=x$である
+- $var[f] = E(f^2)-E(f)^2$
