@@ -101,3 +101,4 @@
 - LOAD data local infile '/root/sheet.csv' into table edb.ecomponents fields terminated by ',';  # csvファイルをインポート
 - SET GLOBAL local_infile=1; # https://stackoverflow.com/questions/59993844/error-loading-local-data-is-disabled-this-must-be-enabled-on-both-the-client
 - \! ls
+- SELECT * FROM ETB INTO OUTFILE '/var/lib/mysql-files/hoge.csv' FIELDS ENCLOSED BY '"' TERMINATED BY ';' ESCAPED BY '"' LINES TERMINATED BY '\r\n'; # https://stackoverflow.com/questions/32737478/how-should-i-resolve-secure-file-priv-in-mysql https://www.mysqltutorial.org/mysql-export-table-to-csv/
