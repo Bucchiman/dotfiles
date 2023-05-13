@@ -95,3 +95,9 @@
 - SELECT AGE+1 AS AGE FROM USERS WHERE NAME = '佐藤'   # 演算
 - SELECT NAME||'('||GENDER||')' AS NAME, AGE FROM USERS WHERE NAME='佐藤'    # 佐藤 -> 佐藤(Man)
 - INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country) VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');          # INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+
+
+- CREATE DATABASE [database_name]
+- LOAD data local infile '/root/sheet.csv' into table edb.ecomponents fields terminated by ',';  # csvファイルをインポート
+- SET GLOBAL local_infile=1; # https://stackoverflow.com/questions/59993844/error-loading-local-data-is-disabled-this-must-be-enabled-on-both-the-client
+- \! ls
