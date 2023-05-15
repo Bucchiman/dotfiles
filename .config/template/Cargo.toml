@@ -1,0 +1,37 @@
+#
+# FileName:     {{_file_name_}}
+# Author:       {{_author_}}
+# CreatedDate:  {{_date_}}
+# LastModified: {{_date_}}
+# Reference:    8ucchiman.jp
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# Description:  ---
+#
+
+
+[workspace]
+#members = ["Source/Rust/generic", "Source/Rust/apple", "Source/Rust/java"]
+
+
+[package]
+name = "hoge"
+version = "0.1.0"
+edition = "2023"
+authors = ["Yuki Iwabuchi 8ucchiman@gmail.com"]
+
+[lib]
+#name = "example"
+#path = "Source/Rust/universal/lib.rs"
+#crate-type = ["staticlib", "cdylib", "rlib"]
+
+[features]
+#apple = ["example-apple"]
+#java = ["example-java"]
+
+[profile.release]
+#debug = true
+
+[dependencies]
+#example-generic = { path = "Source/Rust/generic" }
+#example-apple = { path = "Source/Rust/apple", optional = true }
+#example-java = { path = "Source/Rust/java", optional = true }
