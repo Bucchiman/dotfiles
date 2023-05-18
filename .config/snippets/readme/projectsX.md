@@ -75,3 +75,31 @@
 - https://www.mdpi.com/1424-8220/22/23/9297
 - https://gtsam.org/tutorials/intro.html
 - https://github.com/borglab/gtsam
+
+
+
+
+
+
+# Camera, LiDARをヒュージョンさせた速度推定手法の調査
+## Detection+Tracking
+- EagerMOT
+- DeepFusionMOT
+- PolarMOT
+- JRMOT
+- TransFusion
+
+## Detection
+- BEVFusion
+- MVX-Net
+- BSH-Det3D
+- 3D Dual-Fusion
+
+## Tracking
+- SORT/DeepSORT
+- StrongSORT
+- EagerMOT
+
+
+# Camera
+
