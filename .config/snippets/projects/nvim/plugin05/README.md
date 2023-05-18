@@ -3,7 +3,7 @@
  Author:        8ucchiman
  CreatedDate:   2023-05-01 16:01:22
  LastModified:  2023-01-25 10:56:12 +0900
- Reference:     8ucchiman.jp
+ Reference:     https://github.com/ellisonleao/nvim-plugin-template.git
  Description:   ---
 -->
 
@@ -30,3 +30,10 @@
 - startpoint
 - makefileから呼び出される
 - `runtime .`により`tests`ディレクトリ
+
+
+# 使い方
+```bash
+    $ make test
+    $ make rename ARG=nujabes
+```
