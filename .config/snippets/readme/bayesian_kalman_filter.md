@@ -1,1 +1,0 @@
-../codes/python/bayesian_kalman_filter/readme.md
