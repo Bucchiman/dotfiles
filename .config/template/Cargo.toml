@@ -16,7 +16,7 @@
 [package]
 name = "hoge"
 version = "0.1.0"
-edition = "2023"
+edition = "2021"
 authors = ["Yuki Iwabuchi 8ucchiman@gmail.com"]
 
 [lib]

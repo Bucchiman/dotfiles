@@ -8,3 +8,6 @@
  */
 
 
+fn main() -> Result<(), Box<dyn Error>> {
+    {{_cursor_}}
+}
