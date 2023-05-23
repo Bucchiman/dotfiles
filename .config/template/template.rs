@@ -8,6 +8,9 @@
  */
 
 
+use std::error::Error;
+
+
 /// Spawns a new thread, returning a [`JoinHandle`] for it.
 ///
 /// The join handle provides a [`join`] method that can be used to join the spawned
@@ -114,4 +117,5 @@ pub fn hoge() {
 
 fn main() -> Result<(), Box<dyn Error>> {
     {{_cursor_}}
+    Ok(())
 }

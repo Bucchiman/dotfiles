@@ -9,7 +9,7 @@
 #
 
 
-[workspace]
+#[workspace]
 #members = ["Source/Rust/generic", "Source/Rust/apple", "Source/Rust/java"]
 
 
@@ -19,7 +19,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Yuki Iwabuchi 8ucchiman@gmail.com"]
 
-[lib]
+#[lib]
 #name = "example"
 #path = "Source/Rust/universal/lib.rs"
 #crate-type = ["staticlib", "cdylib", "rlib"]
