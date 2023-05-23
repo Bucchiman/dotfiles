@@ -31,3 +31,6 @@
 [submodule ".config/snippets/onelines"]
 	path = .config/snippets/onelines
 	url = git@github.com:Bucchiman/onelines.git
+[submodule ".config/readme"]
+	path = .config/readme
+	url = git@github.com:Bucchiman/readme.git

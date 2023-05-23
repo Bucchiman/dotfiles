@@ -99,7 +99,7 @@ function create_item() {
 
 function get_machine_icon() {
     typeset -A search_name
-    search_name=("ubuntu"  "mac" )
+    search_name=("ubuntu"  "mac"  "raspbian" )
     for os in ${(k)search_name}
     do
         neofetch distro | grep -Hi "$os" > /dev/null 2>&1
