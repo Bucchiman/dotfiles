@@ -366,7 +366,7 @@ zle -N make_file_from_snippets
 bindkey '^s^m' make_file_from_snippets
 
 function show_online_snippets() {
-    #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
+    #local snippets=$(cat $HOME/.config/snippets/onelines | fzf | cut -d':' -f2-)
     local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf --height 100% | cut -d':' -f2-)
     LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
