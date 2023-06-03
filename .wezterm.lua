@@ -104,7 +104,6 @@ wezterm.on(
   end
 )
 
-
 return {
   -- font_dirs = font_dirs,
   font_size = 8,
