@@ -99,13 +99,13 @@ function create_item() {
 
 function get_machine_icon() {
     typeset -A search_name
-    search_name=("ubuntu"  "mac"  "raspbian" )
+    search_name=("ubuntu"  "mac"  "raspbian"  )
     for os in ${(k)search_name}
     do
         neofetch distro | grep -Hi "$os" > /dev/null 2>&1
         if [ $? = 0 ]
         then
-            echo "$search_name[$os]"
+            echo "$search_name[$os] "
         fi
     done
 }
@@ -366,7 +366,7 @@ zle -N make_file_from_snippets
 bindkey '^s^m' make_file_from_snippets
 
 function show_online_snippets() {
-    #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
+    #local snippets=$(cat $HOME/.config/snippets/onelines | fzf | cut -d':' -f2-)
     local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf --height 100% | cut -d':' -f2-)
     LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
