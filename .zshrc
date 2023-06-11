@@ -343,7 +343,7 @@ function pet-select() {
 
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | F )
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
     local snippets=`cat ${load_file}`
@@ -356,7 +356,7 @@ stty -ixon
 bindkey '^s^p' paste_snippets
 
 function make_file_from_snippets() {
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
+    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | F )
     load_file="${HOME}/.config/snippets/codes/${load_file}"
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
@@ -367,7 +367,7 @@ bindkey '^s^m' make_file_from_snippets
 
 function show_online_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf --height 100% | cut -d':' -f2-)
+    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | F | cut -d':' -f2-)
     LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
 }
