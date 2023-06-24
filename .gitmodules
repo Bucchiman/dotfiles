@@ -34,3 +34,5 @@
 [submodule ".config/readme"]
 	path = .config/readme
 	url = git@github.com:Bucchiman/readme.git
+[submodule "submodule-repo"]
+	ignore = dirty
