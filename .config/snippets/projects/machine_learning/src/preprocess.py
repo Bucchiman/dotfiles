@@ -1,1 +1,0 @@
-/Users/8ucchiman/.config/snippets/codes/python/preprocessing/preprocess.py
