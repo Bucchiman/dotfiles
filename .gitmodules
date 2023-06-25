@@ -46,3 +46,7 @@
 	path = .config/readme
 	url = git@github.com:Bucchiman/readme.git
 	ignore = untracked
+[submodule ".config/snippets/projects_temp"]
+	path = .config/snippets/projects_temp
+	url = git@github.com:Bucchiman/projects_temp.git
+	ignore = untracked
