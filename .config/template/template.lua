@@ -10,4 +10,7 @@
 --
 
 
+vim.api.nvim_command('set runtimepath^=.')
+
 {{_cursor_}}
+
