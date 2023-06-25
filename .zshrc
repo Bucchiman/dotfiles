@@ -399,8 +399,8 @@ zle -N link_from_snippets
 bindkey '^s^l' link_from_snippets
 
 function make_projects() {
-    local load_project=$(cat $HOME/.config/snippets/projects_list | fzf --height 100% )
-    LBUFFER="${LBUFFER}rsync -auv ${load_project} ."
+    local load_project=$(/bin/ls $HOME/.config/snippets/projects_temp | fzf --height 100% )
+    LBUFFER="${LBUFFER}rsync -auv $HOME/.config/snippets/projects_temp/${load_project} ."
     zle reset-prompt
 }
 zle -N make_projects
