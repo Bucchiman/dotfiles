@@ -1,48 +1,48 @@
 [submodule ".config/snippets/codes/python"]
 	path = .config/snippets/codes/python
     url = git@github.com:Bucchiman/py.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/c"]
 	path = .config/snippets/codes/c
 	url = git@github.com:Bucchiman/c.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/c#"]
 	path = ".config/snippets/codes/c#"
 	url = git@github.com:Bucchiman/cs.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/c++"]
 	path = .config/snippets/codes/c++
 	url = git@github.com:Bucchiman/cpp.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/rust"]
 	path = .config/snippets/codes/rust
 	url = git@github.com:Bucchiman/rs.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/Makefile"]
 	path = .config/snippets/codes/Makefile
 	url = git@github.com:Bucchiman/Makefile.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/latex"]
 	path = .config/snippets/codes/latex
 	url = git@github.com:Bucchiman/latex.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/lua"]
 	path = .config/snippets/codes/lua
 	url = git@github.com:Bucchiman/lua
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/shell"]
 	path = .config/snippets/codes/shell
 	url = git@github.com:Bucchiman/sh
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/codes/cuda"]
 	path = .config/snippets/codes/cuda
 	url = git@github.com:Bucchiman/cu.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/snippets/onelines"]
 	path = .config/snippets/onelines
 	url = git@github.com:Bucchiman/onelines.git
-	ignore = dirty
+	ignore = all
 [submodule ".config/readme"]
 	path = .config/readme
 	url = git@github.com:Bucchiman/readme.git
-	ignore = dirty
+	ignore = all
