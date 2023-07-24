@@ -341,6 +341,12 @@ function pet-select() {
 #stty -ixon
 #bindkey '^s' pet-select
 
+function open_nvim () {
+    nvim .
+}
+zle -N open_nvim
+bindkey '^_' open_nvim
+
 function paste_snippets() {
     #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
     local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | F )
