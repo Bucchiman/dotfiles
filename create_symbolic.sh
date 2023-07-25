@@ -18,7 +18,7 @@ if [[ ! -d $HOME/.config ]]
 then
   mkdir $HOME/.config
 fi
-git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+#git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 ln -sf $PWD/.zshrc $HOME/.zshrc
 ln -sf $PWD/.zshenv $HOME/.zshenv
