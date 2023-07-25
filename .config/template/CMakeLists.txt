@@ -9,6 +9,9 @@
 #
 
 
+cmake_minimum_required(VERSION 3.13)
+project(8ucchiman_project CXX)   # 8ucchiman_projectをc++で作成
+
 {{_cursor_}}
 
 
