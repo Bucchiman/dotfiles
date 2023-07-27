@@ -125,7 +125,7 @@ return {
   color_scheme = 'iceberg-dark',
   default_prog = default_prog,
   window_background_opacity = 0.8,
-  leader = {key = 'SHIFT', mods = 'CTRL', timeout_milliseconds = 2000},
+  leader = {key = "Space", mods = 'CTRL|SHIFT', timeout_milliseconds = 2000},
   keys = {
     {
       key = 'E',
