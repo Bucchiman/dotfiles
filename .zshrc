@@ -347,35 +347,35 @@ function open_nvim () {
 zle -N open_nvim
 bindkey '^_' open_nvim
 
-function paste_snippets() {
-    #local snippets=$(cat $HOME/.config/snippets/oneline | fzf | cut -d':' -f2-)
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | F )
-    load_file="${HOME}/.config/snippets/codes/${load_file}"
+function paste_module() {
+    #local load_file=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
+    local load_file=$(cd $HOME/.config/lib/codes; /usr/bin/find . -type f | F )
+    load_file="${HOME}/.config/lib/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
-    local snippets=`cat ${load_file}`
-    LBUFFER="${LBUFFER}${snippets}"
+    local module=`cat ${load_file}`
+    LBUFFER="${LBUFFER}${module}"
     zle reset-prompt
 }
 
-zle -N paste_snippets
+zle -N paste_module
 stty -ixon
-bindkey '^s^p' paste_snippets
+bindkey '^s^p' paste_module
 
-function make_file_from_snippets() {
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | F )
-    load_file="${HOME}/.config/snippets/codes/${load_file}"
+function make_file_from_library() {
+    local load_file=$(cd $HOME/.config/lib/codes; /usr/bin/find . -type f | F )
+    load_file="${HOME}/.config/lib/codes/${load_file}"
     sed -i 's/\r//' ${load_file} 2>/dev/null
     cp ${load_file} . 2>/dev/null
     zle reset-prompt
 }
-zle -N make_file_from_snippets
-bindkey '^s^m' make_file_from_snippets
+zle -N make_file_from_library
+bindkey '^s^m' make_file_from_library
 
 function show_online_snippets() {
-    #local snippets=$(cat $HOME/.config/snippets/onelines | fzf | cut -d':' -f2-)
-    #local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | fzf --height 100%)
-    local snippets=$(cd $HOME/.config/snippets/onelines; /usr/bin/find . -type f | F )
-    local command=$(cat $HOME/.config/snippets/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
+    #local snippets=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
+    #local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | fzf --height 100%)
+    local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | F )
+    local command=$(cat $HOME/.config/lib/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
     LBUFFER="${LBUFFER}${command}"
     #LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
@@ -383,31 +383,31 @@ function show_online_snippets() {
 zle -N show_online_snippets
 bindkey '^s^o' show_online_snippets
 
-function edit_snippets() {
+function edit_library() {
     #local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     #load_file="${HOME}/.config/snippets/codes/${load_file}"
-    nvim $HOME/.config/snippets
+    nvim $HOME/.config/lib
 }
-zle -N edit_snippets
-bindkey '^s^e' edit_snippets
+zle -N edit_library
+bindkey '^s^e' edit_library
 
-function link_from_snippets() {
-    local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | fzf --height 100% )
+function link_from_library() {
+    local load_file=$(cd $HOME/.config/lib/codes; /usr/bin/find . -type f | fzf --height 100% )
     load_file=$load_file[3,-1]
-    load_file="${HOME}/.config/snippets/codes/${load_file}"
-    if [[ ${load_file} = ${HOME}/.config/snippets/codes/ ]]
+    load_file="${HOME}/.config/lib/codes/${load_file}"
+    if [[ ${load_file} = ${HOME}/.config/lib/codes/ ]]
     then
     else
         ln -s ${load_file} . 2>/dev/null
     fi
     zle reset-prompt
 }
-zle -N link_from_snippets
-bindkey '^s^l' link_from_snippets
+zle -N link_from_library
+bindkey '^s^l' link_from_library
 
 function make_projects() {
-    local load_project=$(/bin/ls $HOME/.config/snippets/projects_temp | fzf --height 100% )
-    LBUFFER="${LBUFFER}rsync -auv $HOME/.config/snippets/projects_temp/${load_project} ."
+    local load_project=$(/bin/ls $HOME/.config/lib/projects_temp | fzf --height 100% )
+    LBUFFER="${LBUFFER}rsync -auv $HOME/.config/lib/projects_temp/${load_project} ."
     zle reset-prompt
 }
 zle -N make_projects
@@ -447,8 +447,8 @@ zle -N link_docker
 bindkey '^d^l' link_docker
 
 function show_readme() {
-    local load_readme=$(cd $HOME/.config/snippets/readme; /usr/bin/find . -type f | fzf --height 100% )
-    mdcat $HOME/.config/snippets/readme/$load_readme
+    local load_readme=$(cd $HOME/.config/lib/readme; /usr/bin/find . -type f | fzf --height 100% )
+    mdcat $HOME/.config/lib/readme/$load_readme
     zle reset-prompt
 }
 zle -N show_readme
