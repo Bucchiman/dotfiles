@@ -22,12 +22,13 @@ fi
 
 ln -sf $PWD/.zshrc $HOME/.zshrc
 ln -sf $PWD/.zshenv $HOME/.zshenv
-mkdir -p $HOME/.config/nvim
-ln -sf $PWD/.config/nvim/init.lua $HOME/.config/nvim/init.lua
-ln -sf $PWD/.config/nvim/lua $HOME/.config/nvim/lua
+ln -sf $PWD/.config/nvim $HOME/.config/nvim
 #ln -sf $PWD/.config/dein $HOME/.config/dein
+ln -sf $PWD/.config/lib/codes/lua/nvim/lua/plugins/config/template $PWD/.config
+ln -sf $PWD/.config/lib/codes/lua/nvim/lua/plugins/config/snippets $PWD/.config
 ln -sf $PWD/.config/template $HOME/.config/template
 ln -sf $PWD/.config/snippets $HOME/.config/snippets
 ln -sf $PWD/.vimrc $HOME/.vimrc
 ln -sf $PWD/.wezterm.lua $HOME/.wezterm.lua
+ln -sf $PWD/.config/lib $HOME/.config/lib
 return
