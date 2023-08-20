@@ -23,6 +23,21 @@ function colorlist() {
     done
 }
 
+
+function colorhex() {
+    # https://askubuntu.com/questions/1405822/printf-statement-with-background-and-foreground-colours
+    # printf '\033[41;32m%s\033[0m\n' foobar
+    for color in {016..255}; do
+        hex_color=`printf "%04x" $color`
+        print -nP "%F{$color}$hex_color %f"
+        if [ $(($((color-16))%6)) -eq 5 ]; then
+            printf "\n"
+        fi
+    done
+
+}
+
+
 #---------------#
 #  completion   #
 #---------------#
