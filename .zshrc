@@ -473,4 +473,7 @@ bindkey '^s^r' show_readme
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+# https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
+eval "$(luarocks path)"
 return
