@@ -25,7 +25,7 @@ export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$PYTHONPATH"
 export LD_LIBRARY_PATH="/usr/include/opencv4:$LD_LIBRARY_PATH"
 export PATH="/usr/include/opencv4:$PATH"
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
 
 export PATH="/usr/local/cuda/bin:$PATH"
 
