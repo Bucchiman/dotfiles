@@ -23,6 +23,21 @@ function colorlist() {
     done
 }
 
+
+function colorhex() {
+    # https://askubuntu.com/questions/1405822/printf-statement-with-background-and-foreground-colours
+    # printf '\033[41;32m%s\033[0m\n' foobar
+    for color in {000..255}; do
+        hex_color=`printf "%04x" $color`
+        print -nP "%F{$color}$hex_color %f"
+        if [ $(($((color-16))%6)) -eq 5 ]; then
+            printf "\n"
+        fi
+    done
+
+}
+
+
 #---------------#
 #  completion   #
 #---------------#
@@ -194,6 +209,7 @@ precmd () {
 alias ls='exa --icons 2>/dev/null'
 alias diff='diff --color'
 alias drive='skicka'
+alias 8g='git clone git@github.com:Bucchiman/test.git'
 #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
 #alias bat='bat'
 
@@ -458,4 +474,7 @@ bindkey '^s^r' show_readme
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+# https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
+eval "$(luarocks path)"
 return
