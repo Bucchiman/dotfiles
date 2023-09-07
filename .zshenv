@@ -32,3 +32,6 @@ export PATH="/usr/local/cuda/bin:$PATH"
 export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.luarocks/bin"
 #zmodload zsh/zprof && zprof
+
+
+
