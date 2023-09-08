@@ -94,6 +94,20 @@ function xero_aliases () {
     alias gx="git reset --hard @"
 }
 
+function 8ucchiman_aliases () {
+    alias a="alias"
+    alias gba="git branch -a"
+    alias gfom="git fetch origin master"
+    alias gfod="git fetch origin dev"
+    alias gmom="git merge origin/master"
+    alias gmod="git merge origin/dev"
+    alias gpom="git push origin master"
+    alias gpod="git push origin dev"
+    alias ghil="gh issue list"
+    alias ghic="gh issue create"
+    # alias ghrc="gh repo create [repo name] --private"
+}
+
 
 
 function default () {
