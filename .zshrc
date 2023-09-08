@@ -477,4 +477,7 @@ source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 eval "$(luarocks path)"
+
+source $HOME/.config/zsh/aliases.zsh
+xero_aliases
 return
