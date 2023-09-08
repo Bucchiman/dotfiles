@@ -59,3 +59,6 @@
 [submodule ".config/lib/codes/IoT"]
 	path = .config/lib/codes/IoT
 	url = git@github.com:Bucchiman/IoT
+[submodule ".config/lldb/lldbinit"]
+	path = .config/lldb/lldbinit
+	url = https://github.com/gdbinit/lldbinit.git
