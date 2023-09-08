@@ -111,18 +111,18 @@ function default () {
 
 
 #######################################
-function main01 () {
-    set_variables
-    if [[ $@ == "" ]]; then
-        default
-    else
-        eval $@
-    fi
-
-}
-
-ME=$0
-main01 $@
+#function main01 () {
+#    set_variables
+#    if [[ $@ == "" ]]; then
+#        default
+#    else
+#        eval $@
+#    fi
+#
+#}
+#
+#ME=$0
+#main01 $@
 #######################################
 
 
