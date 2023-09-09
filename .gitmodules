@@ -6,8 +6,8 @@
 	path = .config/lib/codes/c
 	url = git@github.com:Bucchiman/c.git
 	ignore = untracked
-[submodule ".config/snippets/codes/c#"]
-	path = ".config/lib/codes/c#"
+[submodule ".config/snippets/codes/csharp"]
+	path = ".config/lib/codes/csharp"
 	url = git@github.com:Bucchiman/cs.git
 	ignore = untracked
 [submodule ".config/snippets/codes/c++"]
@@ -50,3 +50,6 @@
 	path = .config/lib/projects_temp
 	url = git@github.com:Bucchiman/projects_temp.git
 	ignore = untracked
+[submodule ".config/lib/codes/assembler"]
+	path = .config/lib/codes/assembler
+	url = git@github.com:Bucchiman/assembler.git
