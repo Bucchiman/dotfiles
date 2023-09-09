@@ -203,15 +203,6 @@ precmd () {
 }
 
 
-#---------------#
-#     alias     #
-#---------------#
-alias ls='exa --icons 2>/dev/null'
-alias diff='diff --color'
-alias drive='skicka'
-alias 8gt='git clone git@github.com:Bucchiman/test.git'
-#alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
-#alias bat='bat'
 
 #---------------#
 #    setopt     #
@@ -298,8 +289,6 @@ if _has fzf && _has ag; then
     export FZF_CTRL_T_OPTS="$FZF_COMMON_MYOPTS --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --border --preview 'bat --color=always {}'"
 fi
 
-alias f="fzf --preview 'bat --color=always {}'"
-alias F="fzf --height 100% --preview 'bat --color=always {}'"
 
 #---------------#
 #   ls setting  #
