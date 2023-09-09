@@ -480,4 +480,5 @@ eval "$(luarocks path)"
 
 source $HOME/.config/zsh/aliases.zsh
 xero_aliases
+8ucchiman_aliases
 return

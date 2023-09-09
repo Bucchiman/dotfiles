@@ -106,6 +106,11 @@ function 8ucchiman_aliases () {
     alias ghil="gh issue list"
     alias ghic="gh issue create"
     # alias ghrc="gh repo create [repo name] --private"
+    alias 8n="nvim ."
+    alias n="nvim"
+    alias 8d="$HOME/git/dotfiles"
+    alias 8dl="$HOME/git/dotfiles/.config/lib"
+
 }
 
 
