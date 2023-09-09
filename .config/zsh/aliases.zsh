@@ -97,6 +97,8 @@ function xero_aliases () {
 function 8ucchiman_aliases () {
     alias a="alias"
     alias gba="git branch -a"
+    alias gbd="git branch -d"
+    # alias gbD="git branch -D"
     alias gfom="git fetch origin master"
     alias gfod="git fetch origin dev"
     alias gmom="git merge origin/master"
@@ -105,11 +107,12 @@ function 8ucchiman_aliases () {
     alias gpod="git push origin dev"
     alias ghil="gh issue list"
     alias ghic="gh issue create"
+    alias ghiv="gh issue view"
     # alias ghrc="gh repo create [repo name] --private"
     alias 8n="nvim ."
     alias n="nvim"
-    alias 8d="$HOME/git/dotfiles"
-    alias 8dl="$HOME/git/dotfiles/.config/lib"
+    alias 8d="(cd $HOME/git/dotfiles; nvim .)"
+    alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
 
 }
 
