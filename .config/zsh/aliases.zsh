@@ -96,6 +96,7 @@ function xero_aliases () {
 
 function 8ucchiman_aliases () {
     alias a="alias"
+    alias l="l"
     alias gba="git branch -a"
     alias gbd="git branch -d"
     # alias gbD="git branch -D"
@@ -108,11 +109,21 @@ function 8ucchiman_aliases () {
     alias ghil="gh issue list"
     alias ghic="gh issue create"
     alias ghiv="gh issue view"
+    alias ghie="gh issue edit"
     # alias ghrc="gh repo create [repo name] --private"
     alias 8n="nvim ."
     alias n="nvim"
     alias 8d="(cd $HOME/git/dotfiles; nvim .)"
     alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
+
+    alias f="fzf --preview 'bat --color=always {}'"
+    alias F="fzf --height 100% --preview 'bat --color=always {}'"
+    alias ls='exa --icons 2>/dev/null'
+    alias diff='diff --color'
+    alias drive='skicka'
+    alias 8gt='git clone git@github.com:Bucchiman/test.git'
+    #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
+    #alias bat='bat'
 
 }
 
