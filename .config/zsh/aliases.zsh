@@ -106,6 +106,10 @@ function 8ucchiman_aliases () {
     alias ghil="gh issue list"
     alias ghic="gh issue create"
     # alias ghrc="gh repo create [repo name] --private"
+
+    alias ghicl="gh issue close"
+    alias ghis="gh issue status"
+    alias h="hostname"
 }
 
 
