@@ -209,7 +209,7 @@ precmd () {
 alias ls='exa --icons 2>/dev/null'
 alias diff='diff --color'
 alias drive='skicka'
-alias 8g='git clone git@github.com:Bucchiman/test.git'
+alias 8gt='git clone git@github.com:Bucchiman/test.git'
 #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
 #alias bat='bat'
 
@@ -477,4 +477,7 @@ source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 eval "$(luarocks path)"
+
+source $HOME/.config/zsh/aliases.zsh
+xero_aliases
 return

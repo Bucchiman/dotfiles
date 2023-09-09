@@ -23,3 +23,18 @@ ls
 ls
 ./2022/
 ls
+hostanme
+hostname
+ls
+exa
+ls
+exa
+nvim
+ls
+cd .config/
+ls
+source /home/yk.iwabuchi/general_venv/bin/activate
+exitg
+exit
+ls
+exit

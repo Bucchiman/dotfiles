@@ -50,3 +50,15 @@
 	path = .config/lib/projects_temp
 	url = git@github.com:Bucchiman/projects_temp.git
 	ignore = untracked
+[submodule ".config/lib/codes/assembler"]
+	path = .config/lib/codes/assembler
+	url = git@github.com:Bucchiman/assembler
+[submodule ".config/lib/codes/compiler"]
+	path = .config/lib/codes/compiler
+	url = git@github.com:Bucchiman/compiler
+[submodule ".config/lib/codes/IoT"]
+	path = .config/lib/codes/IoT
+	url = git@github.com:Bucchiman/IoT
+[submodule ".config/lldb/lldbinit"]
+	path = .config/lldb/lldbinit
+	url = https://github.com/gdbinit/lldbinit.git
