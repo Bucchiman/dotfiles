@@ -102,6 +102,9 @@ function 8ucchiman_aliases () {
     # alias gbD="git branch -D"
     alias gfom="git fetch origin master"
     alias gfod="git fetch origin dev"
+    alias gcod="git checkout dev"
+    alias gcom="git checkout master"
+    alias gmd="git merge dev"
     alias gmom="git merge origin/master"
     alias gmod="git merge origin/dev"
     alias gpom="git push origin master"
@@ -122,6 +125,8 @@ function 8ucchiman_aliases () {
     alias diff='diff --color'
     alias drive='skicka'
     alias 8gt='git clone git@github.com:Bucchiman/test.git'
+    alias 8g='git clone git@github.com:Bucchiman'
+    alias 8gd='git clone --recursive git@github.com:Bucchiman/dotfiles'
     #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
     #alias bat='bat'
 
