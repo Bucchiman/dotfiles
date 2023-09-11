@@ -132,6 +132,33 @@ function 8ucchiman_aliases () {
     alias 8gd='git clone --recursive git@github.com:Bucchiman/dotfiles'
     #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
     #alias bat='bat'
+    # https://dev.to/bogicevic7/my-docker-aliases-cheat-sheet-4bo9
+    alias dl='docker login --username=8ucchiman'
+    alias dimg='docker images'
+    alias dip='docker image prune -f'
+    alias dcl='docker ps'
+    alias dcla='docker ps -a'
+    alias dcp='docker container prune -f'
+    alias dcs='docker start'
+    alias dcd='docker down'
+    alias dcr='docker restart'
+
+    alias dnl='docker network ls'
+    alias dni='docker network inspect'
+    alias dnrm='docker network rm'
+    alias dnp='docker network prune -f'
+
+    alias dvc='docker volume create'
+    alias dvl='docker volume ls'
+    alias dvrm='docker volume rm'
+    alias dvp='docker volume prune -f'
+    alias dvi='docker volume inspect'
+
+    alias dcv='docker-compose -v'
+    alias dcu='docker-compose up'
+    alias dcd='docker-compose down'
+    alias dcb='docker-compose build --no-cache'
+    alias dcc='docker-compose config'
 }
 
 
