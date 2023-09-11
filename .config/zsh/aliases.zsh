@@ -110,10 +110,13 @@ function 8ucchiman_aliases () {
     alias gpom="git push origin master"
     alias gpod="git push origin dev"
     alias ghil="gh issue list"
-    alias ghic="gh issue create"
+    alias ghicr="gh issue create"
     alias ghiv="gh issue view"
     alias ghie="gh issue edit"
     # alias ghrc="gh repo create [repo name] --private"
+    alias ghicl="gh issue close"
+    alias ghis="gh issue status"
+    alias h="hostname"
     alias 8n="nvim ."
     alias n="nvim"
     alias 8d="(cd $HOME/git/dotfiles; nvim .)"
@@ -129,7 +132,6 @@ function 8ucchiman_aliases () {
     alias 8gd='git clone --recursive git@github.com:Bucchiman/dotfiles'
     #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
     #alias bat='bat'
-
 }
 
 
