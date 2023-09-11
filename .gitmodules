@@ -62,3 +62,6 @@
 [submodule ".config/lldb/lldbinit"]
 	path = .config/lldb/lldbinit
 	url = https://github.com/gdbinit/lldbinit.git
+[submodule ".config/lib/readme"]
+	path = .config/lib/readme
+	url = git@github.com:Bucchiman/readme.git
