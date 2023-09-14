@@ -1,0 +1,16 @@
+#!/bin/zsh
+#
+# FileName:     gsubrm
+# Author:       8ucchiman
+# CreatedDate:  2023-09-14 10:43:34
+# LastModified: 2023-01-23 14:11:45 +0900
+# Reference:    8ucchiman.jp
+# Description:  ---
+#
+
+
+function gsubrm () {
+    git submodule deinit -f $1
+    git rm -f $1
+    rm -rf .git/modules/$1
+}
