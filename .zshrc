@@ -391,6 +391,7 @@ bindkey '^s^o' show_online_snippets
 function edit_library() {
     local edit_path=( \
         $HOME/.config/lib/codes/lua \
+        $HOME/.config/lib/codes/rust \
         $HOME/.config/lib/codes/csharp \
         $HOME/.config/lib/codes/cuda \
         $HOME/.config/lib/codes/c \
@@ -405,14 +406,19 @@ function edit_library() {
         $HOME/.config/lib/readme \
         $HOME/.config/lib/projects_temp
         $HOME/.config/template
-        $HOME/.config/snippets
+        $HOME/.config/snippets \
+        $HOME/.zshrc \
+        $HOME/.config/zsh
         #$HOME/.config/lib/codes/CMakeList
     )
     local load_lib=$(printf "%s\n" $edit_path[@]| fzf --height 100%)
     #local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     #load_file="${HOME}/.config/snippets/codes/${load_file}"
-    (cd $load_lib; nvim $load_lib)
-    zle reset-prompt
+    # https://ex1.m-yabe.com/archives/4548
+    if [[ -n $load_lib ]]; then
+        (cd $load_lib; nvim $load_lib)
+        zle reset-prompt
+    fi
 }
 zle -N edit_library
 bindkey '^s^e' edit_library
