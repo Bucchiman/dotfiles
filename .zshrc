@@ -446,6 +446,13 @@ function lcds() {
     lcd show ${no_problem} -g -l ${lang}
 }
 
+function docker_lazy () {
+    lazydocker
+    zle reset-prompt
+}
+zle -N docker_lazy
+bindkey '^d^d' docker_lazy
+
 function make_docker() {
     local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100%)
     if [[ -n $load_docker ]]
@@ -477,7 +484,7 @@ function git_lazy () {
     zle reset-prompt
 }
 zle -N git_lazy
-bindkey '^g' git_lazy
+bindkey '^g^g' git_lazy
 
 # function git_diff () {
 #     git diff
