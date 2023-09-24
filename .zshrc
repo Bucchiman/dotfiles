@@ -389,9 +389,36 @@ zle -N show_online_snippets
 bindkey '^s^o' show_online_snippets
 
 function edit_library() {
+    local edit_path=( \
+        $HOME/.config/lib/codes/lua \
+        $HOME/.config/lib/codes/rust \
+        $HOME/.config/lib/codes/csharp \
+        $HOME/.config/lib/codes/cuda \
+        $HOME/.config/lib/codes/c \
+        $HOME/.config/lib/codes/c++ \
+        $HOME/.config/lib/codes/python \
+        $HOME/.config/lib/codes/assembler \
+        $HOME/.config/lib/codes/compiler \
+        $HOME/.config/lib/codes/IoT \
+        $HOME/.config/lib/codes/shell \
+        $HOME/.config/lib/codes/Makefile \
+        $HOME/.config/lib/onelines \
+        $HOME/.config/lib/readme \
+        $HOME/.config/lib/projects_temp
+        $HOME/.config/template
+        $HOME/.config/snippets \
+        $HOME/.zshrc \
+        $HOME/.config/zsh
+        #$HOME/.config/lib/codes/CMakeList
+    )
+    local load_lib=$(printf "%s\n" $edit_path[@]| fzf --height 100%)
     #local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     #load_file="${HOME}/.config/snippets/codes/${load_file}"
-    nvim $HOME/.config/lib
+    # https://ex1.m-yabe.com/archives/4548
+    if [[ -n $load_lib ]]; then
+        (cd $load_lib; nvim $load_lib)
+        zle reset-prompt
+    fi
 }
 zle -N edit_library
 bindkey '^s^e' edit_library
@@ -425,6 +452,13 @@ function lcds() {
     lcd show ${no_problem} -g -l ${lang}
 }
 
+function docker_lazy () {
+    lazydocker
+    zle reset-prompt
+}
+zle -N docker_lazy
+bindkey '^d^d' docker_lazy
+
 function make_docker() {
     local load_docker=$(cd $HOME/git/base_docker; /usr/bin/find . -path "./.git" -prune -o -type f -name "*.Dockerfile" | fzf --height 100%)
     if [[ -n $load_docker ]]
@@ -451,6 +485,68 @@ function link_docker() {
 zle -N link_docker
 bindkey '^d^l' link_docker
 
+function git_lazy () {
+    lazygit
+    zle reset-prompt
+}
+zle -N git_lazy
+bindkey '^g^g' git_lazy
+
+# function git_diff () {
+#     git diff
+#     zle reset-prompt
+# }
+# zle -N git_diff
+# bindkey '^g^d' git_diff
+# 
+# function git_add () {
+#     git add .
+#     zle reset-prompt
+# }
+# zle -N git_add
+# bindkey '^g^a' git_add
+# 
+# function git_fetch () {
+#     git fetch
+#     zle reset-prompt
+# }
+# zle -N git_fetch
+# bindkey '^g^f' git_fetch
+# 
+# function github_issue_list () {
+#     gh issue list
+#     zle reset-prompt
+# }
+# zle -N github_issue_list
+# bindkey '^g^i^l' github_issue_list
+# 
+# function github_issue_create () {
+#     gh issue create
+#     zle reset-prompt
+# }
+# zle -N github_issue_create
+# bindkey '^g^i^c' github_issue_create
+# 
+# function git_status () {
+#     git status -sb
+#     zle reset-prompt
+# }
+# zle -N git_status
+# bindkey '^g^s' git_status
+# 
+# function git_reset () {
+#     git reset
+#     zle reset-prompt
+# }
+# zle -N git-reset
+# bindkey '^g^r' git-reset
+# 
+# function github_pull_request_create () {
+#     zle reset-prompt
+# }
+# zle -N github_pull_request_create
+# bindkey '^g^p^c' github_pull_request_create
+
 function show_readme() {
     local load_readme=$(cd $HOME/.config/lib/readme; /usr/bin/find . -type f | fzf --height 100% )
     mdcat $HOME/.config/lib/readme/$load_readme
@@ -458,6 +554,12 @@ function show_readme() {
 }
 zle -N show_readme
 bindkey '^s^r' show_readme
+
+# function move_dotfiles () {
+#     (cd $HOME/git/dotfiles; nvim .)
+# }
+# zle -N move_dotfiles
+# bindkey '^8' move_dotfiles
 
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
