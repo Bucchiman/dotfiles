@@ -404,8 +404,9 @@ function edit_library() {
         $HOME/.config/lib/codes/Makefile \
         $HOME/.config/lib/onelines \
         $HOME/.config/lib/readme \
-        $HOME/.config/lib/projects_temp
-        $HOME/.config/template
+        $HOME/git/base_docker \
+        $HOME/.config/lib/projects_temp \
+        $HOME/.config/template \
         $HOME/.config/snippets \
         $HOME/.zshrc \
         $HOME/.config/zsh
@@ -491,6 +492,7 @@ function git_lazy () {
 }
 zle -N git_lazy
 bindkey '^g^g' git_lazy
+
 
 # function git_diff () {
 #     git diff
