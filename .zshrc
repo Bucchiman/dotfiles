@@ -564,9 +564,14 @@ bindkey '^s^r' show_readme
 # bindkey '^8' move_dotfiles
 
 
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+#[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+
+function prepare_byobu () {
+    byobu new -s interactive
+}
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 eval "$(luarocks path)"
