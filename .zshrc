@@ -6,7 +6,7 @@ function _has() {
 if [[ -d $HOME/.config/zsh ]]
 then
     export LOCALZSHRC="$HOME/.config/zsh"
-    source $HOME/.config/zsh/local.zshrc
+    source $HOME/.config/zsh/local.zsh
 fi
 
 function colorlist() {
