@@ -416,9 +416,16 @@ function edit_library() {
     #local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     #load_file="${HOME}/.config/snippets/codes/${load_file}"
     # https://ex1.m-yabe.com/archives/4548
-    if [[ -n $load_lib ]]; then
+    if [[ $load_lib == "$HOME/.config/snippets" || $load_lib == "$HOME/.config/template" ]]; then
+        local load_file=$(/bin/ls $load_lib | fzf --height 100%)
+        if [[ -n $load_file ]]; then
+            nvim $load_lib/$load_file
+        fi
+        zle reset-prompt
+    elif [[ -n $load_lib ]]; then
         (cd $load_lib; nvim $load_lib)
         zle reset-prompt
+    else
     fi
 }
 zle -N edit_library
@@ -492,6 +499,20 @@ function git_lazy () {
 }
 zle -N git_lazy
 bindkey '^g^g' git_lazy
+
+function hotproject () {
+    local load_project=$(cat $HOME/.config/zsh/hotstation | fzf --height 100% )
+    if [[ -n $load_project ]]; then
+        nvim $load_project
+    fi
+    zle reset-prompt
+}
+zle -N hotproject
+bindkey '^s^h' hotproject
+
+# function rm_hotproject () {
+#     local 
+# }
 
 
 # function git_diff () {
