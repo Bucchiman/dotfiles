@@ -1,0 +1,12 @@
+Command> print [expression]
+
+
+TL;DR> 式の値を表示
+
+Example01> print /x $rax     # assemblerのコードでは、%raxだったが、debugでは$rax
+Example02> print 45 * 4
+
+Abbr> p
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html
+
