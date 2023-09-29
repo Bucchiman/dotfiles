@@ -423,7 +423,7 @@ function edit_library() {
         fi
         zle reset-prompt
     elif [[ -n $load_lib ]]; then
-        (cd $load_lib; nvim $load_lib)
+        cd $load_lib; nvim $load_lib
         zle reset-prompt
     else
     fi
@@ -587,15 +587,18 @@ bindkey '^s^r' show_readme
 
 #[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
-
+if false; then
+    source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+fi
 
 function prepare_byobu () {
     byobu new -s interactive
 }
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
-eval "$(luarocks path)"
+if type luarocks > /dev/null; then
+    eval "$(luarocks path)"
+fi
 
 source $HOME/.config/zsh/aliases.zsh
 xero_aliases
