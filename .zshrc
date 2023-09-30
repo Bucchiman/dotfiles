@@ -2,7 +2,6 @@ function _has() {
     return $( whence $1 &>/dev/null )
 }
 
-
 if [[ -d $HOME/.config/zsh ]]
 then
     export LOCALZSHRC="$HOME/.config/zsh"
@@ -594,6 +593,17 @@ fi
 function prepare_byobu () {
     byobu new -s interactive
 }
+
+function samples () {
+    local sample_dir=$( cd $HOME/.config/sample; /usr/bin/find . -type d | fzf --height 100% )
+    if [[ -n $sample_dir ]]; then
+        local sample_file=$( /bin/ls $HOME/.config/sample/$sample_dir | fzf --height 100% )
+        cp $HOME/.config/sample/$sample_dir/$sample_file .
+    fi
+    zle reset-prompt
+}
+zle -N samples
+bindkey '^[S' samples
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 if type luarocks > /dev/null; then
