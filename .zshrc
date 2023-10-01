@@ -5,8 +5,8 @@ function _has() {
 
 if [[ -d $HOME/.config/zsh ]]
 then
-    export LOCALZSHRC="$HOME/.config/zsh"
-    source $HOME/.config/zsh/local.zsh
+    export LOCALZSHRC="$HOME/.config/local"
+    source $HOME/.config/local/local.zsh
 fi
 
 function colorlist() {
@@ -409,7 +409,8 @@ function edit_library() {
         $HOME/.config/template \
         $HOME/.config/snippets \
         $HOME/.zshrc \
-        $HOME/.config/zsh
+        $HOME/.config/zsh \
+        $HOME/.config/local
         #$HOME/.config/lib/codes/CMakeList
     )
     local load_lib=$(printf "%s\n" $edit_path[@]| fzf --height 100%)
@@ -514,6 +515,10 @@ bindkey '^s^h' hotproject
 #     local 
 # }
 
+#function add_hotproject () {
+#    zle reset-prompt
+#}
+#zle -N add_hotproject
 
 # function git_diff () {
 #     git diff
