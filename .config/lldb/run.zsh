@@ -74,6 +74,7 @@ function default () {
     echo "you can run this function without no arguments."
     cp lldbinit.py $HOME
     echo "command script import ~lldbinit.py" >>$HOME/.lldbinit
+    wget -P ~ https://git.io/.gdbinit
 }
 
 
