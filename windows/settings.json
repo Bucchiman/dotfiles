@@ -6,18 +6,18 @@
         {
             "command": 
             {
-                "action": "copy",
-                "singleLine": false
-            },
-            "keys": "ctrl+c"
-        },
-        {
-            "command": 
-            {
                 "action": "splitPane",
                 "split": "right"
             },
             "keys": "ctrl+shift+s"
+        },
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
         },
         {
             "command": 
@@ -59,17 +59,17 @@
         {
             "command": 
             {
-                "action": "newTab",
-                "index": 0
+                "action": "closeTab"
             },
-            "keys": "ctrl+1"
+            "keys": "ctrl+backspace"
         },
         {
             "command": 
             {
-                "action": "closeTab"
+                "action": "newTab",
+                "index": 0
             },
-            "keys": "ctrl+backspace"
+            "keys": "ctrl+1"
         }
     ],
     "copyFormatting": "none",
@@ -128,16 +128,10 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{5fb123f1-af88-5b5c-8953-d14a8def1978}",
+                "guid": "{aab79973-318f-43b6-a9bc-b4096493753f}",
                 "hidden": false,
-                "name": "PowerShell 7",
-                "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "guid": "{24a0533e-913b-5f8c-a5cb-6be85a4c9e70}",
-                "hidden": false,
-                "name": "Ubuntu 18.04.6 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu18.04LTS_79rhkp1fndgsc"
+                "name": "Nushell",
+                "source": "nu"
             }
         ]
     },
