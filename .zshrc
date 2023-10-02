@@ -524,9 +524,10 @@ bindkey '^s^h^r' rm_hotstation
 function add_hotstation () {
     target_project=$PWD
     local hotstation=($(cat $HOME/.config/local/hotstation))
-    if printf '%s\n' "${array[@]}" | grep -qx $target_project; then
-
+    if (( ${hotstation[(I)$target_project]} )); then
+        echo This project is contained in hotstation.
     else
+        echo Add this project in hotstation...
         echo $target_project >> $HOME/.config/local/hotstation
     fi
     zle reset-prompt
