@@ -1,0 +1,5 @@
+Command> p /x $rax
+
+TL;DR> rax registerの中身表示
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html

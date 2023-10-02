@@ -2,11 +2,10 @@ function _has() {
     return $( whence $1 &>/dev/null )
 }
 
-
 if [[ -d $HOME/.config/zsh ]]
 then
-    export LOCALZSHRC="$HOME/.config/zsh"
-    source $HOME/.config/zsh/local.zshrc
+    export LOCALZSHRC="$HOME/.config/local"
+    source $HOME/.config/local/local.zsh
 fi
 
 function colorlist() {
@@ -409,16 +408,24 @@ function edit_library() {
         $HOME/.config/template \
         $HOME/.config/snippets \
         $HOME/.zshrc \
-        $HOME/.config/zsh
+        $HOME/.config/zsh \
+        $HOME/.config/local
         #$HOME/.config/lib/codes/CMakeList
     )
     local load_lib=$(printf "%s\n" $edit_path[@]| fzf --height 100%)
     #local load_file=$(cd $HOME/.config/snippets/codes; /usr/bin/find . -type f | f )
     #load_file="${HOME}/.config/snippets/codes/${load_file}"
     # https://ex1.m-yabe.com/archives/4548
-    if [[ -n $load_lib ]]; then
-        (cd $load_lib; nvim $load_lib)
+    if [[ $load_lib == "$HOME/.config/snippets" || $load_lib == "$HOME/.config/template" ]]; then
+        local load_file=$(/bin/ls $load_lib | fzf --height 100%)
+        if [[ -n $load_file ]]; then
+            nvim $load_lib/$load_file
+        fi
         zle reset-prompt
+    elif [[ -n $load_lib ]]; then
+        cd $load_lib; nvim $load_lib
+        zle reset-prompt
+    else
     fi
 }
 zle -N edit_library
@@ -493,6 +500,24 @@ function git_lazy () {
 zle -N git_lazy
 bindkey '^g^g' git_lazy
 
+function hotproject () {
+    local load_project=$(cat $HOME/.config/zsh/hotstation | fzf --height 100% )
+    if [[ -n $load_project ]]; then
+        nvim $load_project
+    fi
+    zle reset-prompt
+}
+zle -N hotproject
+bindkey '^s^h' hotproject
+
+# function rm_hotproject () {
+#     local 
+# }
+
+#function add_hotproject () {
+#    zle reset-prompt
+#}
+#zle -N add_hotproject
 
 # function git_diff () {
 #     git diff
@@ -564,12 +589,31 @@ bindkey '^s^r' show_readme
 # bindkey '^8' move_dotfiles
 
 
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+#[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+if false; then
+    source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+fi
+
+function prepare_byobu () {
+    byobu new -s interactive
+}
+
+function samples () {
+    local sample_dir=$( cd $HOME/.config/sample; /usr/bin/find . -type d | fzf --height 100% )
+    if [[ -n $sample_dir ]]; then
+        local sample_file=$( /bin/ls $HOME/.config/sample/$sample_dir | fzf --height 100% )
+        cp $HOME/.config/sample/$sample_dir/$sample_file .
+    fi
+    zle reset-prompt
+}
+zle -N samples
+bindkey '^[S' samples
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
-eval "$(luarocks path)"
+if type luarocks > /dev/null; then
+    eval "$(luarocks path)"
+fi
 
 source $HOME/.config/zsh/aliases.zsh
 xero_aliases

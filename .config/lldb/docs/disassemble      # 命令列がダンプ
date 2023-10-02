@@ -1,0 +1,18 @@
+Command> disassemble
+
+
+TL;DR> 命令列がダンプ
+
+Description>
+           > (gdb) disassemble
+           > Dump of assembler code for function main:
+           > => 0x00000000004004d6 <+0>:	add    $0x1,%rax
+           >    0x00000000004004da <+4>:	retq   
+           >    0x00000000004004db <+5>:	nopl   0x0(%rax,%rax,1)
+           > End of assembler dump.
+           >
+           > - => で現在プログラムが停止している位置
+           >
+
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html

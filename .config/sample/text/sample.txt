@@ -1,0 +1,8 @@
+#例：sample.txt
+1.bucchiman bucchiman
+2.bucchiman
+
+#   上記のsample.txtのファイルに対して、
+#   1行目の2つ目の「bucchiman」は変換され
+1.bucchiman bucchiman
+2.bucchiman

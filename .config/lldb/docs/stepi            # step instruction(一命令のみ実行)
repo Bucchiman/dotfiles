@@ -1,0 +1,7 @@
+Command> stepi
+
+
+TL;DR> step instruction (一命令のみ実行)
+
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html

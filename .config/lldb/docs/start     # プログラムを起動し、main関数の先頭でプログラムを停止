@@ -1,0 +1,6 @@
+Command> start
+
+TL;DR> プログラムを起動し、main関数の先頭でプログラム停止
+
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html
