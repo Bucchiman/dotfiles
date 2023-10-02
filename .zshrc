@@ -500,24 +500,39 @@ function git_lazy () {
 zle -N git_lazy
 bindkey '^g^g' git_lazy
 
-function hotproject () {
-    local load_project=$(cat $HOME/.config/zsh/hotstation | fzf --height 100% )
+function show_hotstation () {
+    local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
     if [[ -n $load_project ]]; then
         nvim $load_project
     fi
     zle reset-prompt
 }
-zle -N hotproject
-bindkey '^s^h' hotproject
+zle -N show_hotstation
+bindkey '^s^h' show_hotstation
 
-# function rm_hotproject () {
-#     local 
-# }
+function rm_hotstation () {
+    local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
+    local target_load_project=$(echo $load_project | sed -e 's/\//\\\//g')
+    if [[ -n $load_project ]]; then
+        sed -i -e "/$target_load_project/d" $HOME/.config/local/hotstation
+    fi
+    zle reset-prompt
+}
+zle -N rm_hotstation
+bindkey '^s^h^r' rm_hotstation
 
-#function add_hotproject () {
-#    zle reset-prompt
-#}
-#zle -N add_hotproject
+function add_hotstation () {
+    target_project=$PWD
+    local hotstation=($(cat $HOME/.config/local/hotstation))
+    if printf '%s\n' "${array[@]}" | grep -qx $target_project; then
+
+    else
+        echo $target_project >> $HOME/.config/local/hotstation
+    fi
+    zle reset-prompt
+}
+zle -N add_hotstation
+bindkey '^s^h^a' add_hotstation
 
 # function git_diff () {
 #     git diff
