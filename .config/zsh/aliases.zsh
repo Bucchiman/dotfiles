@@ -65,7 +65,7 @@ function xero_aliases () {
     # https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
     #
     alias g="git"
-    alias e="$EDITOR"
+    #alias e="$EDITOR"
     alias ec='nvim --cmd ":lua vim.g.noplugins=1" '
     alias g="git"
     alias y="yank"
