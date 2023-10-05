@@ -2,7 +2,7 @@ function _has() {
     return $( whence $1 &>/dev/null )
 }
 
-if [[ -d $HOME/.config/zsh ]]
+if [[ -d $HOME/.config/local ]]
 then
     export LOCALZSHRC="$HOME/.config/local"
     source $HOME/.config/local/local.zsh
@@ -606,9 +606,6 @@ bindkey '^s^r' show_readme
 
 #[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-if false; then
-    source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
-fi
 
 function prepare_byobu () {
     byobu new -s interactive
