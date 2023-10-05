@@ -625,6 +625,7 @@ function samples () {
 }
 zle -N samples
 bindkey '^[S' samples
+bindkey '^s^w' samples
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 if type luarocks > /dev/null; then
