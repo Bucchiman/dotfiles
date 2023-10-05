@@ -4,6 +4,7 @@ vsync = true
 maximized = false
 srgb = false
 idle = true
-neovim_bin = "/opt/local/bin/nvim"
+#neovim_bin = "/opt/local/bin/nvim"
+neovim_bin = "/home/yk.iwabuchi/bin/nvim"
 frame = "Full"
 
