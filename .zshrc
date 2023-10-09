@@ -2,7 +2,7 @@ function _has() {
     return $( whence $1 &>/dev/null )
 }
 
-if [[ -d $HOME/.config/zsh ]]
+if [[ -d $HOME/.config/local ]]
 then
     export LOCALZSHRC="$HOME/.config/local"
     source $HOME/.config/local/local.zsh
@@ -625,6 +625,7 @@ function samples () {
 }
 zle -N samples
 bindkey '^[S' samples
+bindkey '^s^w' samples
 
 # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
 if type luarocks > /dev/null; then
