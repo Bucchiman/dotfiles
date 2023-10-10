@@ -8,6 +8,10 @@ then
     source $HOME/.config/local/local.zsh
 fi
 
+if [[ -d $HOME/source/fzf-tab ]]; then
+    source $HOME/source/fzf-tab/fzf-tab.plugin.zsh
+fi
+
 function colorlist() {
     for color in {000..015}; do
         print -nP "%F{$color}$color %f"
