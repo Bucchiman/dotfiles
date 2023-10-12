@@ -8,6 +8,10 @@ then
     source $HOME/.config/local/local.zsh
 fi
 
+if [[ -d $HOME/source/fzf-tab ]]; then
+    source $HOME/source/fzf-tab/fzf-tab.plugin.zsh
+fi
+
 function colorlist() {
     for color in {000..015}; do
         print -nP "%F{$color}$color %f"
@@ -240,7 +244,7 @@ setopt EXTENDED_GLOB    # ^(否定表現), ~(条件絞り)などの特殊文字�
 #    特殊変数   #
 #---------------#
 cdpath=(${HOME} /mnt/c/Users/bucchiman /mnt/d)  # auto_cd move directory with cdpath
-fpath=(${HOME}/.zsh/func $HOME/.zsh/completion $fpath)
+fpath=($HOME/.config/zsh/functions ${HOME}/.zsh/func $HOME/.zsh/completion $fpath)
 #manpath
 #DIRSTACKSIZE=20
 #fignore
@@ -629,7 +633,15 @@ if type luarocks > /dev/null; then
     eval "$(luarocks path)"
 fi
 
+
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 source $HOME/.config/zsh/aliases.zsh
 xero_aliases
 8ucchiman_aliases
+
+neovim_autocd() {
+    [[ $NVIM_LISTEN_ADDRESS ]] && python $HOME/neovim_autocd.py
+}
+chpwd_functions+=( neovim_autocd )
+
 return

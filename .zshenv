@@ -35,3 +35,6 @@ export PATH="$PATH:$HOME/.luarocks/bin"
 
 
 
+
+# Codon compiler path (added by install script)
+export PATH=/home/yk.iwabuchi/.codon/bin:$PATH
