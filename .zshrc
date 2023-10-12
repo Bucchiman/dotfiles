@@ -195,9 +195,9 @@ function rprompt() {
 
 # コマンドを打つたびに呼び出される
 precmd () {
-    psvar=()
+    #psvar=()
     #[[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
-    PS1=`lprompt`" "
+    #PS1=`lprompt`" "
     #RPS1=`rprompt`
 }
 
@@ -503,7 +503,7 @@ bindkey '^g^g' git_lazy
 function show_hotstation () {
     local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
     if [[ -n $load_project ]]; then
-        nvim $load_project
+        cd $load_project; nvim $load_project
     fi
     zle reset-prompt
 }
