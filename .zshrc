@@ -199,9 +199,9 @@ function rprompt() {
 
 # コマンドを打つたびに呼び出される
 precmd () {
-    psvar=()
+    #psvar=()
     #[[ -n "${vcs_info_msg_0_}" ]] && psvar[1]="${vcs_info_msg_0_}"
-    PS1=`lprompt`" "
+    #PS1=`lprompt`" "
     #RPS1=`rprompt`
 }
 
@@ -244,7 +244,7 @@ setopt EXTENDED_GLOB    # ^(否定表現), ~(条件絞り)などの特殊文字�
 #    特殊変数   #
 #---------------#
 cdpath=(${HOME} /mnt/c/Users/bucchiman /mnt/d)  # auto_cd move directory with cdpath
-fpath=(${HOME}/.zsh/func $HOME/.zsh/completion $fpath)
+fpath=($HOME/.config/zsh/functions ${HOME}/.zsh/func $HOME/.zsh/completion $fpath)
 #manpath
 #DIRSTACKSIZE=20
 #fignore
@@ -507,7 +507,7 @@ bindkey '^g^g' git_lazy
 function show_hotstation () {
     local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
     if [[ -n $load_project ]]; then
-        nvim $load_project
+        cd $load_project; nvim $load_project
     fi
     zle reset-prompt
 }
@@ -636,7 +636,15 @@ if type luarocks > /dev/null; then
     eval "$(luarocks path)"
 fi
 
+
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 source $HOME/.config/zsh/aliases.zsh
 xero_aliases
 8ucchiman_aliases
+
+neovim_autocd() {
+    [[ $NVIM_LISTEN_ADDRESS ]] && python $HOME/neovim_autocd.py
+}
+chpwd_functions+=( neovim_autocd )
+
 return
