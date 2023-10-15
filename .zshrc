@@ -643,10 +643,10 @@ source $HOME/.config/zsh/aliases.zsh
 xero_aliases
 8ucchiman_aliases
 
-neovim_autocd() {
-    [[ $NVIM_LISTEN_ADDRESS ]] && python $HOME/neovim-autocd.py
-}
-chpwd_functions+=( neovim_autocd )
+#neovim_autocd() {
+#    [[ $NVIM_LISTEN_ADDRESS ]] && python $HOME/neovim-autocd.py
+#}
+#chpwd_functions+=( neovim_autocd )
 
 
 # $VIM_TERMINAL 変数は、Vim が :terminal でシェルを開いた時に設定する環境変数です。
