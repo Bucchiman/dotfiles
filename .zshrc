@@ -394,6 +394,7 @@ function show_online_snippets() {
 }
 zle -N show_online_snippets
 bindkey '^s^o' show_online_snippets
+bindkey '^[o' show_online_snippets
 
 function edit_library() {
     local edit_path=( \
@@ -675,3 +676,5 @@ base
 fuzzy_settings
 
 return
+
+
