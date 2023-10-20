@@ -95,6 +95,7 @@ function xero_aliases () {
 }
 
 function 8ucchiman_aliases () {
+    alias ,,="source $HOME/.zshrc"
     alias a="alias"
     alias l="l"
     alias gba="git branch -a"
