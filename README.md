@@ -34,5 +34,4 @@ You need the following packages to run snippets.
     $ cargo install --locked bat
 ```
 
-
 ## exa
