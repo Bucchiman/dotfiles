@@ -21,7 +21,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 
-export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$HOME/.config/pockets/python:$PYTHONPATH"
+export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$HOME/.config/pockets/python:$HOME/.config/pockets/python:$PYTHONPATH"
 export LD_LIBRARY_PATH="/usr/include/opencv4:$LD_LIBRARY_PATH"
 export PATH="/usr/include/opencv4:$PATH"
 
@@ -36,7 +36,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export LUA_PATH="$HOME/.config/pockets/lua/?.lua;$LUA_PATH"
 
 
-
+export FPATH="$FPATH:$HOME/.config/pockets/shell"
 
 # Codon compiler path (added by install script)
 export PATH=/home/yk.iwabuchi/.codon/bin:$PATH

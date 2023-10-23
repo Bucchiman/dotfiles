@@ -670,8 +670,59 @@ xero_aliases
 	}
 #fi
 
+####################################################################
+# https://qiita.com/mollifier/items/b72a108daab16a18d34a
+function zreload() {
+    if [[ "${#}" -le 0 ]]; then
+        echo "Usage: $0 FILE..."
+        echo 'Reload specified files as an autoloading function'
+        return 1
+    fi
+
+    local file function_path function_name
+    for file in "$@"; do
+        if [[ -z "$file" ]]; then
+            continue
+        fi
+
+        function_path="${file:h}"
+        function_name="${file:t}"
+
+        if (( $+functions[$function_name] )) ; then
+            # "function_name" is defined
+            unfunction "$function_name"
+            FPATH="$function_path" autoload -Uz +X "$function_name"
+        fi
+    done
+}
+
+# この行は .zshrc の他の箇所で書いている場合は改めて書かなくて良い
+autoload -Uz add-zsh-hook
+
+function _auto_reload_hook {
+    # reload functions in current directory automatically
+    [[ -n "$AUTO_RELOAD_TARGET_DIRECTORY" ]] \
+    && [[ "$AUTO_RELOAD_TARGET_DIRECTORY" == "$PWD" ]] \
+    && zreload $PWD/*(N.,@)
+}
+add-zsh-hook preexec _auto_reload_hook
+
+function enable_auto_reload {
+    AUTO_RELOAD_TARGET_DIRECTORY=$PWD
+}
+
+function disable_auto_reload {
+    AUTO_RELOAD_TARGET_DIRECTORY=""
+}
+####################################################################
+
 base
 fuzzy_settings
 eval "$(starship init zsh)"
+
+
+autoload -Uz 8modules
+
+enable_auto_reload
 
 return
