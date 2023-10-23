@@ -26,7 +26,6 @@ function colorlist() {
     done
 }
 
-
 function colorhex() {
     # https://askubuntu.com/questions/1405822/printf-statement-with-background-and-foreground-colours
     # printf '\033[41;32m%s\033[0m\n' foobar
@@ -649,7 +648,6 @@ xero_aliases
 #}
 #chpwd_functions+=( neovim_autocd )
 
-
 # $VIM_TERMINAL 変数は、Vim が :terminal でシェルを開いた時に設定する環境変数です。
 # synccwd コマンドは :terminal 上にいる時のみ定義したいので、この環境変数をチェッ
 # クして、空でない時のみ synccwd コマンドを定義するようにします。
@@ -674,7 +672,6 @@ xero_aliases
 
 base
 fuzzy_settings
+eval "$(starship init zsh)"
 
 return
-
-

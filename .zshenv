@@ -21,7 +21,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 
-export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$PYTHONPATH"
+export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$HOME/.config/pockets/python:$PYTHONPATH"
 export LD_LIBRARY_PATH="/usr/include/opencv4:$LD_LIBRARY_PATH"
 export PATH="/usr/include/opencv4:$PATH"
 
@@ -33,9 +33,12 @@ export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.luarocks/bin"
 export PATH="$PATH:$HOME/.local/bin"
 #zmodload zsh/zprof && zprof
+export LUA_PATH="$HOME/.config/pockets/lua/?.lua;$LUA_PATH"
 
 
 
 
 # Codon compiler path (added by install script)
 export PATH=/home/yk.iwabuchi/.codon/bin:$PATH
+
+if [ -e /home/bucchiman/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bucchiman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
