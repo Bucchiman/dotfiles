@@ -721,7 +721,7 @@ fuzzy_settings
 eval "$(starship init zsh)"
 
 
-autoload -Uz 8modules
+autoload -Uz Bmods
 
 enable_auto_reload
 

@@ -1,5 +1,0 @@
-set runtimepath+=.
-set packpath?
-
-lua print("hello")   -- コメント
-
