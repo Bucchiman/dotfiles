@@ -41,4 +41,7 @@ export FPATH="$FPATH:$HOME/.config/pockets/shell"
 # Codon compiler path (added by install script)
 export PATH=/home/yk.iwabuchi/.codon/bin:$PATH
 
+export PATH=$HOME/bin:$PATH
+export PATH=/snap/bin:$PATH
+
 if [ -e /home/bucchiman/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bucchiman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

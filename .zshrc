@@ -720,9 +720,15 @@ base
 fuzzy_settings
 eval "$(starship init zsh)"
 
+if _has fnm ; then
+    eval "$(fnm env --use-on-cd)"
+fi
+
 
 autoload -Uz Bmods Bmain
 
 enable_auto_reload
 
 return
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
