@@ -1,54 +1,51 @@
-[submodule ".config/snippets/codes/python"]
+[submodule ".config/lib/codes/python"]
 	path = .config/lib/codes/python
     url = git@github.com:Bucchiman/py.git
 	ignore = untracked
-[submodule ".config/snippets/codes/c"]
+[submodule ".config/lib/codes/c"]
 	path = .config/lib/codes/c
 	url = git@github.com:Bucchiman/c.git
 	ignore = untracked
-[submodule ".config/snippets/codes/csharp"]
+[submodule ".config/lib/codes/csharp"]
 	path = ".config/lib/codes/csharp"
 	url = git@github.com:Bucchiman/cs.git
 	ignore = untracked
-[submodule ".config/snippets/codes/c++"]
+[submodule ".config/lib/codes/c++"]
 	path = .config/lib/codes/c++
 	url = git@github.com:Bucchiman/cpp.git
 	ignore = untracked
-[submodule ".config/snippets/codes/rust"]
+[submodule ".config/lib/codes/rust"]
 	path = .config/lib/codes/rust
 	url = git@github.com:Bucchiman/rs.git
 	ignore = untracked
-[submodule ".config/snippets/codes/Makefile"]
+[submodule ".config/lib/codes/Makefile"]
 	path = .config/lib/codes/Makefile
 	url = git@github.com:Bucchiman/Makefile.git
 	ignore = untracked
-[submodule ".config/snippets/codes/latex"]
+[submodule ".config/lib/codes/latex"]
 	path = .config/lib/codes/latex
 	url = git@github.com:Bucchiman/latex.git
 	ignore = untracked
-[submodule ".config/snippets/codes/lua"]
+[submodule ".config/lib/codes/lua"]
 	path = .config/lib/codes/lua
 	url = git@github.com:Bucchiman/lua
 	ignore = untracked
-[submodule ".config/snippets/codes/shell"]
+[submodule ".config/lib/codes/shell"]
 	path = .config/lib/codes/shell
 	url = git@github.com:Bucchiman/sh
 	ignore = untracked
-[submodule ".config/snippets/codes/cuda"]
+[submodule ".config/lib/codes/cuda"]
 	path = .config/lib/codes/cuda
 	url = git@github.com:Bucchiman/cu.git
 	ignore = untracked
-[submodule ".config/snippets/onelines"]
+[submodule ".config/lib/onelines"]
 	path = .config/lib/onelines
 	url = git@github.com:Bucchiman/onelines.git
 	ignore = untracked
-[submodule ".config/snippets/projects_temp"]
+[submodule ".config/lib/projects_temp"]
 	path = .config/lib/projects_temp
 	url = git@github.com:Bucchiman/projects_temp.git
 	ignore = untracked
-[submodule ".config/lib/codes/assembler"]
-	path = .config/lib/codes/assembler
-	url = git@github.com:Bucchiman/assembler
 [submodule ".config/lib/codes/compiler"]
 	path = .config/lib/codes/compiler
 	url = git@github.com:Bucchiman/compiler
