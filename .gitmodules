@@ -42,10 +42,6 @@
 	path = .config/lib/onelines
 	url = git@github.com:Bucchiman/onelines.git
 	ignore = untracked
-[submodule ".config/readme"]
-	path = .config/readme
-	url = git@github.com:Bucchiman/readme.git
-	ignore = untracked
 [submodule ".config/snippets/projects_temp"]
 	path = .config/lib/projects_temp
 	url = git@github.com:Bucchiman/projects_temp.git
