@@ -58,3 +58,6 @@
 [submodule ".config/lib/readme"]
 	path = .config/lib/readme
 	url = git@github.com:Bucchiman/readme.git
+[submodule ".config/lib/codes/assembler"]
+	path = .config/lib/codes/assembler
+	url = git@github.com:Bucchiman/assembler.git
