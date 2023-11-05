@@ -43,5 +43,7 @@ export PATH=/home/yk.iwabuchi/.codon/bin:$PATH
 
 export PATH=$HOME/bin:$PATH
 export PATH=/snap/bin:$PATH
+export PATH=/opt/local/share/dotnet:$PATH
+export DOTNET_ROOT=/usr/local/share/dotnet/shared
 
 if [ -e /home/bucchiman/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bucchiman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -732,3 +732,5 @@ enable_auto_reload
 return
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
