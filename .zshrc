@@ -705,6 +705,10 @@ autoload -Uz Bmods Bmain
 
 enable_auto_reload
 
+if [[ -d $HOME/bin/.nix ]]; then
+    nix-user-chroot $HOME/bin/.nix zsh 
+fi
+
 return
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
