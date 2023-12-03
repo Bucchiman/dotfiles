@@ -1,3 +1,4 @@
+# set -ex 
 function _has() {
     return $( whence $1 &>/dev/null )
 }
@@ -12,32 +13,8 @@ if [[ -d $HOME/source/fzf-tab ]]; then
     source $HOME/source/fzf-tab/fzf-tab.plugin.zsh
 fi
 
-function colorlist() {
-    for color in {000..015}; do
-        print -nP "%F{$color}$color %f"
-        print -nP "%K{$color}$color %k"
-    done
-    printf "\n"
-    for color in {016..255}; do
-        print -nP "%F{$color}$color %f"
-        if [ $(($((color-16))%6)) -eq 5 ]; then
-            printf "\n"
-        fi
-    done
-}
 
-function colorhex() {
-    # https://askubuntu.com/questions/1405822/printf-statement-with-background-and-foreground-colours
-    # printf '\033[41;32m%s\033[0m\n' foobar
-    for color in {000..255}; do
-        hex_color=`printf "%04x" $color`
-        print -nP "%F{$color}$hex_color %f"
-        if [ $(($((color-16))%6)) -eq 5 ]; then
-            printf "\n"
-        fi
-    done
 
-}
 
 
 function base () {
@@ -60,6 +37,7 @@ function base () {
     bindkey -e
     bindkey "^P" history-beginning-search-backward-end
     bindkey "^N" history-beginning-search-forward-end
+    typeset -U path PATH
     
     #---------------#
     #    prompt     #
@@ -386,6 +364,7 @@ function show_online_snippets() {
     #local snippets=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
     #local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | fzf --height 100%)
     local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | F )
+    # echo $snippets
     local command=$(cat $HOME/.config/lib/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
     LBUFFER="${LBUFFER}${command}"
     #LBUFFER="${LBUFFER}${snippets//\\//}"
@@ -528,6 +507,12 @@ function rm_hotstation () {
 }
 zle -N rm_hotstation
 bindkey '^s^h^r' rm_hotstation
+
+# function say_hello () {
+#     echo "8ucchiman was here"
+# }
+# zle -N say_hello
+# bindkey '^s^o' say_hello
 
 function add_hotstation () {
     target_project=$PWD
@@ -725,12 +710,14 @@ if _has fnm ; then
 fi
 
 
+
 autoload -Uz Bmods Bmain
 
 enable_auto_reload
 
+# if [[ -d $HOME/bin/.nix ]]; then
+#     nix-user-chroot $HOME/bin/.nix zsh 
+# fi
+unalias ls
 return
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop

@@ -43,7 +43,7 @@ function func_lst () {
 # }
 ########################################
 
-typset -A SUBMODULES
+typeset -A SUBMODULES
 function set_variables () {
     #
     #
@@ -72,15 +72,15 @@ function default () {
     echo "******************************"
     echo "this is default setting"
     echo "you can run this function without no arguments."
-    cp lldbinit.py $HOME
-    echo "command script import ~lldbinit.py" >>$HOME/.lldbinit
+    ln -fs $PWD/lldbinit.py $HOME
+    echo "command script import ~lldbinit.py" >$HOME/.lldbinit
     wget -P ~ https://git.io/.gdbinit
 }
 
 
 #######################################
 function main01 () {
-    set_viriables
+    set_variables
     if [[ $@ == "" ]]; then
         default
     else
