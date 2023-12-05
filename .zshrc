@@ -718,6 +718,6 @@ enable_auto_reload
 # if [[ -d $HOME/bin/.nix ]]; then
 #     nix-user-chroot $HOME/bin/.nix zsh 
 # fi
-unalias ls
+# unalias ls
 return
 
