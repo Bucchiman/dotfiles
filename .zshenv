@@ -22,10 +22,10 @@ export PATH="/usr/local/bin:$PATH"
 
 
 export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$HOME/.config/lib/python:$HOME/.config/pockets/python:$HOME/.config/pockets/python:$PYTHONPATH"
-export LD_LIBRARY_PATH="/usr/include/opencv4:$HOME/.config/pockets/c/lib:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/include/opencv4:$HOME/.config/pockets/c/lib:$LD_LIBRARY_PATH"
 export PATH="/usr/include/opencv4:$PATH"
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
 
 export PATH="/usr/local/cuda/bin:$PATH"
 
@@ -47,3 +47,8 @@ export PATH=/opt/local/share/dotnet:$PATH
 export DOTNET_ROOT=/usr/local/share/dotnet/shared
 
 if [ -e /home/bucchiman/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bucchiman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+if [ -e /home/yk.iwabuchi/.nix-profile/etc/profile.d/nix.sh ]; then . /home/yk.iwabuchi/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
