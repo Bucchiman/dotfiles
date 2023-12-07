@@ -1,0 +1,15 @@
+[Unit]
+Description=Demo service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/cron/hello.sh %i
+
+[Install]
+WantedBy=multi-user.target
+
+
+# [Timer]
+# OnCalendar=*-*-* *:00/10:00
+# AccuracySec=1m
+# #Unit=demo@sample.service

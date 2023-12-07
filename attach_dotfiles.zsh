@@ -56,4 +56,12 @@ fi
 if [[ ! -L $HOME/.config/zsh ]]; then
     ln -sf $PWD/.config/zsh $HOME/.config/
 fi
+
+if [[ ! -L $HOME/.config/systemd ]]; then
+    ln -sf $PWD/.config/systemd $HOME/.config/
+fi
+
+if [[ ! -L $HOME/.config/cron ]]; then
+    ln -sf $PWD/.config/cron $HOME/.config
+fi
 return
