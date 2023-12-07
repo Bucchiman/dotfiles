@@ -25,9 +25,6 @@ fi
 if [[ ! -L $HOME/.config/nvim ]]; then
     ln -sf $PWD/.config/nvim $HOME/.config
 fi
-#ln -sf $PWD/.config/dein $HOME/.config/dein
-#ln -sf $PWD/.config/lib/codes/lua/nvim/lua/plugins/config/template $PWD/.config
-#ln -sf $PWD/.config/lib/codes/lua/nvim/lua/plugins/config/snippets $PWD/.config
 
 if [[ ! -L $HOME/.config/template ]]; then
     ln -sf $PWD/.config/template $HOME/.config/

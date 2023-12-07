@@ -703,7 +703,9 @@ function disable_auto_reload {
 
 base
 fuzzy_settings
+
 eval "$(starship init zsh)"
+
 
 if _has fnm ; then
     eval "$(fnm env --use-on-cd)"
@@ -715,9 +717,5 @@ autoload -Uz Bmods Bmain
 
 enable_auto_reload
 
-# if [[ -d $HOME/bin/.nix ]]; then
-#     nix-user-chroot $HOME/bin/.nix zsh 
-# fi
-# unalias ls
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 return
-
