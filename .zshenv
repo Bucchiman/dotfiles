@@ -22,10 +22,10 @@ export PATH="/usr/local/bin:$PATH"
 
 
 export PYTHONPATH="$HOME/bin/8ucchiman/python/8ucchiman.zip:$HOME/.config/lib/python:$HOME/.config/pockets/python:$HOME/.config/pockets/python:$PYTHONPATH"
-export LD_LIBRARY_PATH="/usr/include/opencv4:$HOME/.config/pockets/c/lib:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/include/opencv4:$HOME/.config/pockets/c/lib:$LD_LIBRARY_PATH"
 export PATH="/usr/include/opencv4:$PATH"
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/local/cuda-12/targets/x86_64-linux/lib/:/usr/local/cuda-11.7
 
 export PATH="/usr/local/cuda/bin:$PATH"
 
@@ -52,3 +52,6 @@ if [ -e /home/yk.iwabuchi/.nix-profile/etc/profile.d/nix.sh ]; then . /home/yk.i
 
 # Reference: https://bakkyalo.hatenablog.jp/entry/2023/06/14/015223
 export PKG_CONFIG_PATH="/opt/local/lib/opencv4/pkgconfig"
+
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"

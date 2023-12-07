@@ -1,3 +1,4 @@
+# set -ex 
 function _has() {
     return $( whence $1 &>/dev/null )
 }
@@ -36,6 +37,7 @@ function base () {
     bindkey -e
     bindkey "^P" history-beginning-search-backward-end
     bindkey "^N" history-beginning-search-forward-end
+    typeset -U path PATH
     
     #---------------#
     #    prompt     #
@@ -362,6 +364,7 @@ function show_online_snippets() {
     #local snippets=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
     #local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | fzf --height 100%)
     local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | F )
+    # echo $snippets
     local command=$(cat $HOME/.config/lib/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
     LBUFFER="${LBUFFER}${command}"
     #LBUFFER="${LBUFFER}${snippets//\\//}"
@@ -504,6 +507,12 @@ function rm_hotstation () {
 }
 zle -N rm_hotstation
 bindkey '^s^h^r' rm_hotstation
+
+# function say_hello () {
+#     echo "8ucchiman was here"
+# }
+# zle -N say_hello
+# bindkey '^s^o' say_hello
 
 function add_hotstation () {
     target_project=$PWD
@@ -694,19 +703,19 @@ function disable_auto_reload {
 
 base
 fuzzy_settings
+
 eval "$(starship init zsh)"
+
 
 if _has fnm ; then
     eval "$(fnm env --use-on-cd)"
 fi
 
 
+
 autoload -Uz Bmods Bmain
 
 enable_auto_reload
 
-return
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
+return
