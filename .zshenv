@@ -49,6 +49,9 @@ export DOTNET_ROOT=/usr/local/share/dotnet/shared
 if [ -e /home/bucchiman/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bucchiman/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 if [ -e /home/yk.iwabuchi/.nix-profile/etc/profile.d/nix.sh ]; then . /home/yk.iwabuchi/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Reference: https://bakkyalo.hatenablog.jp/entry/2023/06/14/015223
+export PKG_CONFIG_PATH="/opt/local/lib/opencv4/pkgconfig"
+
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-
