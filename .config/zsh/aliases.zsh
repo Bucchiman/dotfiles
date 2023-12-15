@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-15 12:08:30
+# LastModified: 2023-12-15 12:17:01
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -20,7 +20,14 @@ function qiita_aliases () {
     # @Reference    https://qiita.com/reireias/items/d906ab086c3bc4c22147
     #
 
-    
+    alias ls='ls -alF --color=auto'
+    alias l='clear && ls'
+    alias agi='sudo apt install'
+    alias agy='sudo apt install -y'
+    alias agr='sudo apt remove'
+    alias agu='sudo apt update'
+
+
 }
 
 
@@ -84,8 +91,8 @@ function 8ucchiman_aliases () {
     alias h="hostname"
     alias 8n="nvim ."
     alias n="nvim"
-    alias 8d="(cd $HOME/git/dotfiles; nvim .)"
-    alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
+    #alias 8d="(cd $HOME/git/dotfiles; nvim .)"
+    #alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
 
     #alias ls='exa --icons 2>/dev/null'
     function ls () { if exa --icons $1 2>/dev/null; then else ls --color=auto $1; fi }
