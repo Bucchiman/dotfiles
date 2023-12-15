@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-13 11:10:36
+# LastModified: 2023-12-15 12:08:30
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -11,54 +11,18 @@
 
 #set -ex        # 途中のエラーで実行中断
 
-function func_lst () {
-    echo "***********************************"
-    echo "The following function is prepared."
-    echo "***********************************"
-    cat $0 | awk '/^function/ {printf "| %s\n", $2}'
-    echo "***********************************"
+
+function qiita_aliases () {
+    #
+    # @Description  
+    # @params       
+    # @Example      qiita_aliases
+    # @Reference    https://qiita.com/reireias/items/d906ab086c3bc4c22147
+    #
+
+    
 }
 
-
-########################################
-# while getopts :i:c:g OPT
-# do
-#     case $OPT in
-#         i) image_name=$OPTARG;;
-#         g) gpu_flag=true;;
-#         c) container_name=$OPTARG;;
-#         :|\?) _usage;;
-#     esac
-# done
-# function _usage () {
-#     echo 
-# }
-# function help () {
-# 
-# }
-# 
-# 
-# function main02 () {
-#     
-# }
-########################################
-
-typeset -A SUBMODULES
-function set_variables () {
-    #
-    #
-    #
-    #
-    echo "******************************"
-    echo "* set_variables              *"
-    echo "******************************"
-    BASE_DIR=$PWD
-    SUBMODULES=(yolostereo3D https://github.com/Owen-Liuyuxuan/visualDet3D.git)
-}
-
-
-function setup_environment () {
-}
 
 function xero_aliases () {
     #
@@ -139,36 +103,6 @@ function 8ucchiman_aliases () {
     #alias bat='bat'
 }
 
-
-
-function default () {
-    #
-    # this is default setting
-    # you can run this function without no arguments.
-    #
-    echo "******************************"
-    echo "* default                    *"
-    echo "******************************"
-    echo "this is default setting"
-    echo "you can run this function without no arguments."
-
-}
-
-
-#######################################
-#function main01 () {
-#    set_variables
-#    if [[ $@ == "" ]]; then
-#        default
-#    else
-#        eval $@
-#    fi
-#
-#}
-#
-#ME=$0
-#main01 $@
-#######################################
 
 
 return
