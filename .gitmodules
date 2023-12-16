@@ -58,6 +58,3 @@
 [submodule ".config/lib/codes/assembler"]
 	path = .config/lib/codes/assembler
 	url = git@github.com:Bucchiman/assembler.git
-[submodule ".config/lldb/lldbinit"]
-	path = .config/lldb/lldbinit
-	url = git@gitlab.com:Bucchiman/lldbinit.git

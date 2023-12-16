@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-16 23:53:39
+# LastModified: 2023-12-16 23:56:07
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -11,12 +11,23 @@
 
 #set -ex        # 途中のエラーで実行中断
 
-function func_lst () {
-    echo "***********************************"
-    echo "The following function is prepared."
-    echo "***********************************"
-    cat $0 | awk '/^function/ {printf "| %s\n", $2}'
-    echo "***********************************"
+
+function qiita_aliases () {
+    #
+    # @Description  
+    # @params       
+    # @Example      qiita_aliases
+    # @Reference    https://qiita.com/reireias/items/d906ab086c3bc4c22147
+    #
+
+    alias ls='ls -alF --color=auto'
+    alias l='clear && ls'
+    alias agi='sudo apt install'
+    alias agy='sudo apt install -y'
+    alias agr='sudo apt remove'
+    alias agu='sudo apt update'
+
+
 }
 
 
@@ -371,12 +382,16 @@ function 8ucchiman_aliases () {
     alias h="hostname"
     alias 8n="nvim ."
     alias n="nvim"
-    alias 8d="(cd $HOME/git/dotfiles; nvim .)"
-    alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
+    #alias 8d="(cd $HOME/git/dotfiles; nvim .)"
+    #alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
 
-    alias f="fzf --preview 'bat --color=always {}'"
-    alias F="fzf --height 100% --preview 'bat --color=always {}'"
-    alias ls='exa --icons 2>/dev/null'
+    #alias ls='exa --icons 2>/dev/null'
+    function ls () { if exa --icons $1 2>/dev/null; then else ls --color=auto $1; fi }
+    function cat () { if bat --color=always $1 2>/dev/null; then else cat $1; fi }
+    #alias cat='bat --color=always {} 2>/dev/null || cat {}'
+
+    alias f="fzf --preview 'cat {}'"
+    alias F="fzf --height 100% --preview 'cat {}'"
     alias diff='diff --color'
     alias drive='skicka'
     alias 8gt='git clone git@github.com:Bucchiman/test.git'
@@ -388,36 +403,6 @@ function 8ucchiman_aliases () {
     #alias bat='bat'
 }
 
-
-
-function default () {
-    #
-    # this is default setting
-    # you can run this function without no arguments.
-    #
-    echo "******************************"
-    echo "* default                    *"
-    echo "******************************"
-    echo "this is default setting"
-    echo "you can run this function without no arguments."
-
-}
-
-
-#######################################
-#function main01 () {
-#    set_variables
-#    if [[ $@ == "" ]]; then
-#        default
-#    else
-#        eval $@
-#    fi
-#
-#}
-#
-#ME=$0
-#main01 $@
-#######################################
 
 
 return
