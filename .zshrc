@@ -9,13 +9,6 @@ then
     source $HOME/.config/local/local.zsh
 fi
 
-if [[ -d $HOME/source/fzf-tab ]]; then
-    source $HOME/source/fzf-tab/fzf-tab.plugin.zsh
-fi
-
-
-
-
 
 function base () {
     #---------------#
@@ -719,3 +712,5 @@ enable_auto_reload
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 return
+
+source /home/bucchiman/.config/broot/launcher/bash/br

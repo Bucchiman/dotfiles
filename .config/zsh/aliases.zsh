@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-13 11:10:36
+# LastModified: 2023-12-13 22:40:58
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -124,8 +124,10 @@ function 8ucchiman_aliases () {
     alias 8dl="(cd $HOME/git/dotfiles/.config/lib; nvim .)"
 
     #alias ls='exa --icons 2>/dev/null'
-    function ls () { if exa --icons $1 2>/dev/null; then else ls --color=auto $1; fi }
-    function cat () { if bat --color=always $1 2>/dev/null; then else cat $1; fi }
+    if _has bat; then alias cat='bat --color=always'; fi
+    if _has ls; then alias ls='exa --icons'; fi
+    #function ls () { if exa --icons $1 2>/dev/null; then else ls --color=auto $1; fi }
+    #function cat () { if _has bat; then echo `bat --color=always` $1; else echo `cat $1`; fi }
     #alias cat='bat --color=always {} 2>/dev/null || cat {}'
 
     alias f="fzf --preview 'cat {}'"
