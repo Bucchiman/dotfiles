@@ -1,0 +1,8 @@
+Command> (Get-Item $file_path ).Basename        ## Bmods
+
+TL;DR> get basename
+
+Keywords> BASENAME
+
+
+Reference> https://stackoverflow.com/questions/12503871/removing-path-and-extension-from-filename-in-powershell
