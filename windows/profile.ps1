@@ -11,3 +11,9 @@ Set-Alias -Name settings -Value "C:\Users\yk.iwabuchi\AppData\Local\Packages\Mic
 $USER_NAME = $env:USERNAME
 # $USER_NAME = "ykiwabuchi"
 $WSL_HOME = "Microsoft.PowerShell.Core\FileSystem::\\wsl$\Ubuntu\home\" + $USER_NAME
+
+Set-Item Env:Path "$HOME\AppData\Local\Microsoft\WinGet\Packages\junegunn.fzf_Microsoft.Winget.Source_8wekyb3d8bbwe;$ENV:Path"
+
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
+oh-my-posh init pwsh | Invoke-Expression
