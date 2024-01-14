@@ -9,7 +9,6 @@
 #
 
 
-
 function __init () {
     #
     # @Description  initialize Bmods et al
@@ -18,7 +17,20 @@ function __init () {
     # @Reference    
     #
 
-    New-Item -Value $HOME/dotfiles/windows/Bmods.ps1 -Path $HOME -Name Bmods.ps1 -ItemType SymbolicLink
+    gsudo New-Item -Value $HOME/dotfiles/windows/profile.ps1 -Path $PSHOME -Name profile.ps1 -ItemType SymbolicLink
+    gsudo New-Item -Value $HOME/dotfiles/windows/Bmods.ps1 -Path $HOME -Name Bmods.ps1 -ItemType SymbolicLink
+    Remove-Item $HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
+    #gsudo New-Item -Value $HOME/dotfiles/windows/settings.json -Path $HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState -Name settings.json -ItemType SymbolicLink
+    Copy-Item $HOME/dotfiles/windows/settings.json $HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
+    # mkdir C:\Users\bucchiman\AppData\Local\nvim
+    # gsudo New-Item -Value "B:\dotfiles\.config\lib\codes\lua\nvim\lua" -Path "C:\Users\bucchiman\AppData\Local\nvim" -Name lua -ItemType SymbolicLink
+    # gsudo New-Item -Value "B:\dotfiles\.config\lib\codes\lua\nvim\init.lua" -Path "C:\Users\bucchiman\AppData\Local\nvim" -Name init.lua -ItemType SymbolicLink
+
+    # gsudo New-Item -Value "B:\dotfiles" -Path "C:\Users\bucchiman" -Name dotfiles -ItemType SymbolicLink
+}
+
+function install_sudo () {
+    winget install -e --id gerardog.gsudo
 }
 
 function __hello () {
@@ -27,7 +39,7 @@ function __hello () {
 
 function install_fzf () {
     Install-Module -Name PSFzf -scope currentUser
-    Install-Module -Nmae ZLocation -scope currentUser
+    Install-Module -Name ZLocation -scope currentUser
 }
 
 function import_fzf () {
