@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-18 00:50:44
+# LastModified: 2024-01-14 11:56:14
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -320,6 +320,11 @@ function zsh_docker_aliases () {
     alias mgcU='mutagen compose up -d'
     alias mgcv='mutagen compose version'
     alias mgcx='mutagen compose stop'
+
+    alias rsync='rsync -arul -vhtp --progress'
+    alias rsyncn='rsync -n'
+    alias rsum='rsync -c'
+    alias rsumn='rsyncn -c'
 }
 
 function xero_aliases () {

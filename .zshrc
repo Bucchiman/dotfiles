@@ -713,4 +713,4 @@ enable_auto_reload
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 return
 
-source /home/bucchiman/.config/broot/launcher/bash/br
+source /Users/8ucchiman/.docker/init-zsh.sh || true # Added by Docker Desktop
