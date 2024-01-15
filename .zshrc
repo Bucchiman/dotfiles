@@ -1,4 +1,7 @@
-# set -ex 
+#!/bin/zsh
+
+# set -ex  # debug
+
 function _has() {
     return $( whence $1 &>/dev/null )
 }
@@ -617,10 +620,10 @@ zle -N samples
 bindkey '^[S' samples
 bindkey '^s^w' samples
 
-# https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
-if type luarocks > /dev/null; then
-    eval "$(luarocks path)"
-fi
+# # https://stackoverflow.com/questions/47004243/module-installed-by-luarocks-not-found
+# if type luarocks > /dev/null; then
+#     eval "$(luarocks path)"
+# fi
 
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
