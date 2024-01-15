@@ -12,13 +12,6 @@ then
     source $HOME/.config/local/local.zsh
 fi
 
-if [[ -d $HOME/source/fzf-tab ]]; then
-    source $HOME/source/fzf-tab/fzf-tab.plugin.zsh
-fi
-
-
-
-
 
 function base () {
     #---------------#
@@ -124,7 +117,7 @@ function base () {
     #---------------#
     #DISPLAY setting#
     #---------------#
-    #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+    #export DISPLAY=$(/bin/cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
     #export DISPLAY=$(ip route list default | awk '{print $3}'):0
     #export DISPLAY=`hostname`.mshome.net:0.0
     export LIBGL_ALWAYS_INDIRECT=1
@@ -340,11 +333,11 @@ zle -N open_nvim
 bindkey '^_' open_nvim
 
 function paste_module() {
-    #local load_file=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
+    #local load_file=$(/bin/cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
     local load_file=$(cd $HOME/.config/lib/codes; /usr/bin/find . -type f | F )
     load_file="${HOME}/.config/lib/codes/${load_file}"
     sed -i 's/\r//' ${load_file}
-    local module=`cat ${load_file}`
+    local module=`/bin/cat ${load_file}`
     LBUFFER="${LBUFFER}${module}"
     zle reset-prompt
 }
@@ -364,11 +357,11 @@ zle -N make_file_from_library
 bindkey '^s^m' make_file_from_library
 
 function show_online_snippets() {
-    #local snippets=$(cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
+    #local snippets=$(/bin/cat $HOME/.config/lib/onelines | fzf | cut -d':' -f2-)
     #local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | fzf --height 100%)
     local snippets=$(cd $HOME/.config/lib/onelines; /usr/bin/find . -type f | F )
     # echo $snippets
-    local command=$(cat $HOME/.config/lib/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
+    local command=$(/bin/cat $HOME/.config/lib/onelines/$snippets | awk '/Command/{print}' | cut -d'>' -f2-)
     LBUFFER="${LBUFFER}${command}"
     #LBUFFER="${LBUFFER}${snippets//\\//}"
     zle reset-prompt
@@ -491,7 +484,7 @@ zle -N git_lazy
 bindkey '^g^g' git_lazy
 
 function show_hotstation () {
-    local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
+    local load_project=$(/bin/cat $HOME/.config/local/hotstation | fzf --height 100% )
     if [[ -n $load_project ]]; then
         cd $load_project; nvim $load_project
     fi
@@ -501,7 +494,7 @@ zle -N show_hotstation
 bindkey '^s^h' show_hotstation
 
 function rm_hotstation () {
-    local load_project=$(cat $HOME/.config/local/hotstation | fzf --height 100% )
+    local load_project=$(/bin/cat $HOME/.config/local/hotstation | fzf --height 100% )
     local target_load_project=$(echo $load_project | sed -e 's/\//\\\//g')
     if [[ -n $load_project ]]; then
         sed -i -e "/$target_load_project/d" $HOME/.config/local/hotstation
@@ -519,7 +512,7 @@ bindkey '^s^h^r' rm_hotstation
 
 function add_hotstation () {
     target_project=$PWD
-    local hotstation=($(cat $HOME/.config/local/hotstation))
+    local hotstation=($(/bin/cat $HOME/.config/local/hotstation))
     if (( ${hotstation[(I)$target_project]} )); then
         echo This project is contained in hotstation.
     else
@@ -722,3 +715,5 @@ enable_auto_reload
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 return
+
+source /home/bucchiman/.config/broot/launcher/bash/br

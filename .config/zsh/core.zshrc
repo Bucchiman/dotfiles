@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 function _has() {
     return $( whence $1 &>/dev/null )
 }
