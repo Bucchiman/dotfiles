@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2024-01-14 11:56:14
+# LastModified: 2024-01-15 12:32:53
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -321,10 +321,6 @@ function zsh_docker_aliases () {
     alias mgcv='mutagen compose version'
     alias mgcx='mutagen compose stop'
 
-    alias rsync='rsync -arul -vhtp --progress'
-    alias rsyncn='rsync -n'
-    alias rsum='rsync -c'
-    alias rsumn='rsyncn -c'
 }
 
 function xero_aliases () {
@@ -408,6 +404,14 @@ function 8ucchiman_aliases () {
     alias a='alias | fzf --height 100%'
     #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
     #alias bat='bat'
+
+    alias rsync='rsync -arul -vhtp --progress'
+    alias rsyncn='rsync -n'
+    alias rsum='rsync -c'
+    alias rsumn='rsyncn -c'
+
+    alias get_idf='. $HOME/source/esp/esp-idf/export.sh'
+
 }
 
 
