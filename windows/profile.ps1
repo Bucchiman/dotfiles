@@ -3,7 +3,7 @@
 # FileName:     profile
 # Author:       8ucchiman
 # CreatedDate:  2023-01-15 09:49:00
-# LastModified: 2024-01-15 09:49:29
+# LastModified: 2024-01-19 12:33:21
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -52,7 +52,7 @@ Import-Module ZLocation
 
 
 Set-PSReadLineKeyHandler -Key "Ctrl+f" -BriefDescription "fzf" -LongDescription "cmdlet-search-by-fzf" -ScriptBlock {
-    $command = Write-Output "Hello world from 8ucchiman"
+    $command = Write-Output "cd $HOME/dotfiles/windows/onelines; fzf"
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
 }
 
