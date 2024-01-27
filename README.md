@@ -8,7 +8,7 @@ The minimum environmet is provided.
 
 ```bash
     $ 
-    $ git clone https://github.com/Bucchiman/dotfiles.git
+    $ git clone -b dev --recursive https://github.com/Bucchiman/dotfiles.git
     $ cd dotfiles
     $ ./Bmain __init
 ```
@@ -17,5 +17,5 @@ The minimum environmet is provided.
 # for docker container
 ```bash
     $ cd /share/dotfiles
-    $ ./Bmain __minimum_init
+    $ ./Bmain __minimum_packages
 ```
