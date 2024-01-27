@@ -23,10 +23,14 @@ function __init () {
     #gsudo New-Item -Value $HOME/dotfiles/windows/settings.json -Path $HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState -Name settings.json -ItemType SymbolicLink
     Copy-Item $HOME/dotfiles/windows/settings.json $HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
     # mkdir C:\Users\bucchiman\AppData\Local\nvim
+    gsudo New-Item -Value $HOME/dotfiles/.config/lib/codes/lua/nvim -Path $HOME/AppData/Local -Name nvim -ItemType SymbolicLink
+
     # gsudo New-Item -Value "B:\dotfiles\.config\lib\codes\lua\nvim\lua" -Path "C:\Users\bucchiman\AppData\Local\nvim" -Name lua -ItemType SymbolicLink
     # gsudo New-Item -Value "B:\dotfiles\.config\lib\codes\lua\nvim\init.lua" -Path "C:\Users\bucchiman\AppData\Local\nvim" -Name init.lua -ItemType SymbolicLink
 
     # gsudo New-Item -Value "B:\dotfiles" -Path "C:\Users\bucchiman" -Name dotfiles -ItemType SymbolicLink
+
+    #gsudo New-Item -Value $HOME/dotfiles/.config/pockets -Path $HOME/.config -Name pockets -ItemType SymbolicLink
 }
 
 function install_sudo () {
