@@ -3,7 +3,7 @@
 # FileName:     dev
 # Author:       8ucchiman
 # CreatedDate:  2024-01-20 16:43:15
-# LastModified: 2024-01-20 21:42:53
+# LastModified: 2024-01-21 09:31:33
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -124,6 +124,10 @@ fi
 
 if _has fnm ; then
     eval "$(fnm env --use-on-cd)"
+fi
+
+if [[ -e /opt/ros/humble/setup.zsh ]]; then
+    source /opt/ros/humble/setup.zsh
 fi
 
 return
