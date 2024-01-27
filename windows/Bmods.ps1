@@ -3,7 +3,7 @@
 # FileName:     Bmods
 # Author:       8ucchiman
 # CreatedDate:  2024-01-13 14:48:33
-# LastModified: 2024-01-13 16:22:54
+# LastModified: 2024-01-19 09:32:08
 # Reference:    https://www.ipentec.com/document/powershell-create-function
 # Description:  powershell用のBmods
 #
@@ -71,6 +71,15 @@ function ln ($from_file, $to_path) {
 
 }
 
+function mail () {
+    #
+    # @Description  send mail
+    # @params       
+    # @Example      mail
+    # @Reference    
+    #
+}
+
 function what_file_is_this ($file_path) {
     #
     # @Description  file infomation
@@ -88,7 +97,6 @@ function what_file_is_this ($file_path) {
 
     #$ConfigINI = (Get-Item $PSCommandPath ).DirectoryName+"\"+(Get-Item $PSCommandPath ).BaseName+".ini"
 }
-
 
 
 # onelines_fzf

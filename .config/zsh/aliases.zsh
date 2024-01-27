@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2023-12-18 00:50:44
+# LastModified: 2024-01-20 18:51:36
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -11,6 +11,9 @@
 
 #set -ex        # 途中のエラーで実行中断
 
+function _has() {
+    return $( whence $1 &>/dev/null )
+}
 
 function qiita_aliases () {
     #
@@ -320,6 +323,7 @@ function zsh_docker_aliases () {
     alias mgcU='mutagen compose up -d'
     alias mgcv='mutagen compose version'
     alias mgcx='mutagen compose stop'
+
 }
 
 function xero_aliases () {
@@ -360,6 +364,8 @@ function 8ucchiman_aliases () {
     alias ,,="source $HOME/.zshrc"
     alias a="alias"
     alias l="l"
+    alias grep="grep --color=auto"
+    alias ls="ls --color=auto"
     alias gba="git branch -a"
     alias gbd="git branch -d"
     # alias gbD="git branch -D"
@@ -387,7 +393,7 @@ function 8ucchiman_aliases () {
 
     #alias ls='exa --icons 2>/dev/null'
     if _has bat; then alias cat='bat --color=always'; fi
-    if _has ls; then alias ls='exa --icons'; fi
+    if _has exa; then alias ls='exa --icons'; fi
     #function ls () { if exa --icons $1 2>/dev/null; then else ls --color=auto $1; fi }
     #function cat () { if _has bat; then echo `bat --color=always` $1; else echo `cat $1`; fi }
     #alias cat='bat --color=always {} 2>/dev/null || cat {}'
@@ -403,9 +409,16 @@ function 8ucchiman_aliases () {
     alias a='alias | fzf --height 100%'
     #alias go8u='rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/; rsync -auvz --exclude {'.git','.gitignore'} /mnt/c/Users/yk.iwabuchi/git/dotfiles voyager:git/;'
     #alias bat='bat'
+
+    alias rsync='rsync -arul -vhtp --progress'
+    alias rsyncn='rsync -n'
+    alias rsum='rsync -c'
+    alias rsumn='rsyncn -c'
+
+    alias get_idf='. $HOME/source/esp/esp-idf/export.sh'
+
 }
 
 
 
 return
-
