@@ -50,6 +50,10 @@ function install_rust () {
     winget install -e --id Rustlang.Rust.GNU
 }
 
+function install_nuget () {
+    winget install -e --id Microsoft.NuGet
+}
+
 function import_fzf () {
     Import-Module PSFzf
     Enable-PsFzfAliases
@@ -112,5 +116,7 @@ function what_file_is_this ($file_path) {
 
 # Reference: https://devblogs.microsoft.com/scripting/powertip-list-all-parameters-for-a-cmdlet/
 # (GET-Command GET-Childitem).parameters
+
+
 
 Invoke-Expression $Args[0]
