@@ -3,7 +3,7 @@
 # FileName:     Bmods
 # Author:       8ucchiman
 # CreatedDate:  2024-01-13 14:48:33
-# LastModified: 2024-01-19 09:32:08
+# LastModified: 2024-02-05 15:23:10
 # Reference:    https://www.ipentec.com/document/powershell-create-function
 # Description:  powershell用のBmods
 #
@@ -37,9 +37,17 @@ function __hello () {
     Write-Output "hello world"      # echo
 }
 
+function install_ripgrep () {
+    inget install BurntSushi.ripgrep.MSVC
+}
+
 function install_fzf () {
     Install-Module -Name PSFzf -scope currentUser
     Install-Module -Name ZLocation -scope currentUser
+}
+
+function install_rust () {
+    winget install -e --id Rustlang.Rust.GNU
 }
 
 function import_fzf () {
