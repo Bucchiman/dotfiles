@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2024-01-20 18:51:36
+# LastModified: 2024-02-09 23:52:04
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -416,7 +416,7 @@ function 8ucchiman_aliases () {
     alias rsumn='rsyncn -c'
 
     alias get_idf='. $HOME/source/esp/esp-idf/export.sh'
-
+    alias arduino='arduino-cli'
 }
 
 
