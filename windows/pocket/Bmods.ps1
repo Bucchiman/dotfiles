@@ -3,7 +3,7 @@
 # FileName:     Bmods
 # Author:       8ucchiman
 # CreatedDate:  2024-01-13 14:48:33
-# LastModified: 2024-01-19 09:32:08
+# LastModified: 2024-02-05 17:42:23
 # Reference:    https://www.ipentec.com/document/powershell-create-function
 # Description:  powershell用のBmods
 #
@@ -37,9 +37,21 @@ function __hello () {
     Write-Output "hello world"      # echo
 }
 
+function install_ripgrep () {
+    inget install BurntSushi.ripgrep.MSVC
+}
+
 function install_fzf () {
     Install-Module -Name PSFzf -scope currentUser
     Install-Module -Name ZLocation -scope currentUser
+}
+
+function install_rust () {
+    winget install -e --id Rustlang.Rust.GNU
+}
+
+function install_nuget () {
+    winget install -e --id Microsoft.NuGet
 }
 
 function import_fzf () {
@@ -94,6 +106,24 @@ function what_file_is_this ($file_path) {
     #$ConfigINI = (Get-Item $PSCommandPath ).DirectoryName+"\"+(Get-Item $PSCommandPath ).BaseName+".ini"
 }
 
+function install_ros2 () {
+    #
+    # @Description  
+    # @params       : command a
+    #               : command b
+    # @Example      
+    # @Reference    https://docs.ros.org/en/iron/Installation/Windows-Install-Binary.html
+    #
+
+    winget install -e --id Python.Python.3.11
+    winget install -e --id ShiningLight.OpenSSL
+    setx /m OPENSSL_CONF "C:\Program Files\OpenSSL-Win64\bin\openssl.cfg"
+    wget https://github.com/ros2/ros2/releases/download/opencv-archives/opencv-3.4.6-vc16.VS2019.zip
+    setx /m OpenCV_DIR C:\opencv
+    winget install -e --id Kitware.CMake
+    # winget install asio cunit eigen tinyxml-usestl tinyxml2 bullet
+}
+
 
 # onelines_fzf
 # ln /tmp/hello.ps1 $HOME
@@ -104,5 +134,7 @@ function what_file_is_this ($file_path) {
 
 # Reference: https://devblogs.microsoft.com/scripting/powertip-list-all-parameters-for-a-cmdlet/
 # (GET-Command GET-Childitem).parameters
+
+
 
 Invoke-Expression $Args[0]
