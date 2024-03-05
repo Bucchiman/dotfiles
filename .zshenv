@@ -1,5 +1,4 @@
-if [[ ! -d $HOME/.cargo/ ]]
-then
+if [[ -d $HOME/.cargo/ ]]; then
   . "$HOME/.cargo/env"
 fi
 

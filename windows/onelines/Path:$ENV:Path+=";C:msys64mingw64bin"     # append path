@@ -1,8 +1,0 @@
-Command> $ENV:Path+=";$1"
-
-Arguments> $1: path
-
-TL;DR> append path
-
-
-Keywords> Path
