@@ -3,7 +3,7 @@
 # FileName:     Bmods
 # Author:       8ucchiman
 # CreatedDate:  2024-01-13 14:48:33
-# LastModified: 2024-02-05 15:23:10
+# LastModified: 2024-03-05 16:56:46
 # Reference:    https://www.ipentec.com/document/powershell-create-function
 # Description:  powershell用のBmods
 #
@@ -27,6 +27,16 @@ function __init () {
     # gsudo New-Item -Value "B:\dotfiles\.config\lib\codes\lua\nvim\init.lua" -Path "C:\Users\bucchiman\AppData\Local\nvim" -Name init.lua -ItemType SymbolicLink
 
     # gsudo New-Item -Value "B:\dotfiles" -Path "C:\Users\bucchiman" -Name dotfiles -ItemType SymbolicLink
+}
+
+function install_usbipd () {
+    #
+    # @Description  install usb driver kit
+    # @params       
+    # @Example      install_usbipd
+    # @Reference    https://github.com/dorssel/usbipd-win
+    #
+    winget install usbipd
 }
 
 function install_sudo () {
