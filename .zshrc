@@ -1,1 +1,1 @@
-.zshrc
+./.config/zsh/minimum.zshrc

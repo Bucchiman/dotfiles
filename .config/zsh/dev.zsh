@@ -126,8 +126,16 @@ if _has fnm ; then
     eval "$(fnm env --use-on-cd)"
 fi
 
+<<<<<<< HEAD
 if ! _has ros2; then
+=======
+if [[ -e /opt/ros/humble/setup.zsh ]]; then
+>>>>>>> origin/dev
     source /opt/ros/humble/setup.zsh
 fi
+
+#if _has ros2; then
+#    source /opt/ros/humble/setup.zsh
+#fi
 
 return
