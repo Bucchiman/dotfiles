@@ -3,7 +3,7 @@
 # FileName:     dev
 # Author:       8ucchiman
 # CreatedDate:  2024-01-20 16:43:15
-# LastModified: 2024-01-28 10:09:16
+# LastModified: 2024-02-26 11:42:18
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -114,6 +114,23 @@ function fuzzy_settings () {
     fi
 
 }
+
+function 8bin_setup () {
+    #
+    # @Description  8bin for others
+    # @params       
+    #               : command b
+    # @Example
+    # @Reference    https://qiita.com/egawa_kun/items/714394609eef6be8e0bf
+    #
+
+    
+    mkdir -p $HOME/bin/8bin/
+    /bin/rsync -rav --delete /tmp/8bin/ $HOME/bin/8bin/
+
+}
+
+
 if _has fzf; then
     fuzzy_settings
 fi
