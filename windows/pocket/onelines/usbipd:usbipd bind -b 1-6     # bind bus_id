@@ -1,0 +1,12 @@
+Command> usbipd bind -b $1
+
+Arguments> $1: bus id
+
+
+TL;DR> bind bus_id
+
+
+Keywords> usbipd
+
+
+Reference> https://zenn.dev/pinto0309/articles/e1432253d29e30

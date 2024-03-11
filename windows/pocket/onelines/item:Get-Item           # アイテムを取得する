@@ -1,0 +1,7 @@
+Command> Get-Item
+
+TL;DR> アイテムを取得する
+
+Keywords> item
+
+Alias> gi

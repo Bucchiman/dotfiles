@@ -1,7 +1,0 @@
-Command> $ENV:Path="C:\msys64\mingw64\bin;"+$ENV:Path
-
-TL;DR> insert path
-
-Keywords> Path
-
-Reference> https://qiita.com/gx3n-inue/items/00ee48996e973050a440
