@@ -1,0 +1,7 @@
+Command> usbipd list
+
+Keywords> device
+
+TL;DR> detect usb device
+
+Reference> https://zenn.dev/pinto0309/articles/e1432253d29e30
