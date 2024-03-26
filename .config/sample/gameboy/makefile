@@ -2,8 +2,9 @@
 # FileName:     makefile
 # Author:       8ucchiman
 # CreatedDate:  2024-03-12 16:03:14
-# LastModified: 2024-03-12 16:05:05
-# Reference:    https://qiita.com/chibi929/items/b8c5f36434d5d3fbfa4a
+# LastModified: 2024-03-15 09:19:12
+# Reference:    
+#				https://github.com/ITAYC0HEN/A-journey-into-Radare2/blob/master/Generic/Reversing%20Gameboy%20ROM/simple.gb
 # Description:	---
 #
 
