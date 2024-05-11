@@ -1,0 +1,7 @@
+# https://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/
+
+100  Thomas  Manager    Sales       $5,000
+200  Jason   Developer  Technology  $5,500
+300  Raj     Sysadmin   Technology  $7,000
+400  Nisha   Manager    Marketing   $9,500
+500  Randy   Manager    Sales       $6,000
