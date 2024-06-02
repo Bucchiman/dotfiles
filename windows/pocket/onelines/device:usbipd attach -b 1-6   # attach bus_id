@@ -1,0 +1,9 @@
+Command> usbipd attach -b $1
+
+Arguments> $1: bus id
+
+TL;DR> attach bus_id
+
+Keywords> device
+
+Reference> https://zenn.dev/pinto0309/articles/e1432253d29e30

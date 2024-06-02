@@ -1,5 +1,4 @@
-if [[ ! -d $HOME/.cargo/ ]]
-then
+if [[ -d $HOME/.cargo/ ]]; then
   . "$HOME/.cargo/env"
 fi
 
@@ -55,3 +54,5 @@ export PKG_CONFIG_PATH="/opt/local/lib/opencv4/pkgconfig"
 
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+export PICO_SDK_PATH=$HOME/source/pico-sdk

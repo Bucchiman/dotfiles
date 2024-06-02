@@ -9,7 +9,7 @@
 #
 
 
-Write-Output 8ucchiman
+# Write-Output 8ucchiman
 Import-Module PSReadLine
 Set-PSReadlineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Ctrl+d -Function DeleteChar
@@ -25,7 +25,6 @@ $WSL_HOME = "Microsoft.PowerShell.Core\FileSystem::\\wsl$\Ubuntu\home\" + $USER_
 
 Set-Item Env:Path "$HOME/bin;$HOME\AppData\Local\Microsoft\WinGet\Packages\junegunn.fzf_Microsoft.Winget.Source_8wekyb3d8bbwe;$ENV:Path"
 
-fnm env --use-on-cd | Out-String | Invoke-Expression
 
 # oh-my-posh init pwsh | Invoke-Expression
 
@@ -61,10 +60,14 @@ function ln {
 }
 
 
+$ENV:Path="C:\msys64\mingw64\bin;"+$ENV:Path
+$ENV:Path="$HOME\.cargo\bin;"+$ENV:Path
 
-Set-PSReadLineKeyHandler -Key "Ctrl+f" -BriefDescription "fzf" -LongDescription "cmdlet-search-by-fzf" -ScriptBlock {
-    $command = Write-Output "cd $HOME/dotfiles/windows/onelines; fzf"
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
-}
+fnm.exe env --use-on-cd | Out-String | Invoke-Expression
+
+# Set-PSReadLineKeyHandler -Key "Ctrl+f" -BriefDescription "fzf" -LongDescription "cmdlet-search-by-fzf" -ScriptBlock {
+#     $command = Write-Output "cd $HOME/dotfiles/windows/onelines; fzf"
+#     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
+# }
 
 
