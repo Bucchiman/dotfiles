@@ -40,7 +40,7 @@ export FPATH="$FPATH:$HOME/.config/pockets/shell"
 # Codon compiler path (added by install script)
 export PATH=/home/yk.iwabuchi/.codon/bin:$PATH
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/bin/8ucchiman/:$PATH
 export PATH=/snap/bin:$PATH
 export PATH=/opt/local/share/dotnet:$PATH
 export DOTNET_ROOT=/usr/local/share/dotnet/shared
