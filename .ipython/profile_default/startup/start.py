@@ -4,7 +4,7 @@
 # FileName:     start
 # Author:       8ucchiman
 # CreatedDate:  2023-11-29 11:48:50
-# LastModified: 2024-05-10 14:54:20
+# LastModified: 2024-11-04 10:23:26
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -26,8 +26,11 @@ ipython = get_ipython()
 # If in ipython, load autoreload extension
 if 'ipython' in globals():
     print('\nWelcome to IPython!')
-    ipython.magic('load_ext autoreload')
-    ipython.magic('autoreload 2')
+#    TOO OLD
+#    ipython.magic('load_ext autoreload')
+#    ipython.magic('autoreload 2')
+    get_ipython().run_line_magic("load_ext", "autoreload")
+    get_ipython().run_line_magic("autoreload", "2")
 
 # Display all cell outputs in notebook
 from IPython.core.interactiveshell import InteractiveShell
