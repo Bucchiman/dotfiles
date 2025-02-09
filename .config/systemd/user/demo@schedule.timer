@@ -1,4 +1,0 @@
-[Timer]
-OnCalendar=*-*-* *:00/01:00
-AccuracySec=1m
-#Unit=demo@sample.service

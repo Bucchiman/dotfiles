@@ -1,4 +1,0 @@
-[Timer]
-OnCalendar=*-*-* *:00/03:00
-AccuracySec=1m
-
