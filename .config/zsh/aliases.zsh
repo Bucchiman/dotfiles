@@ -3,7 +3,7 @@
 # FileName:     aliases
 # Author:       8ucchiman
 # CreatedDate:  2023-09-08 00:40:43
-# LastModified: 2024-02-17 22:59:36
+# LastModified: 2025-02-09 16:25:27
 # Reference:    https://github.com/xero/dotfiles/blob/main/zsh/.config/zsh/06-aliases.zsh
 # Description:  ---
 #
@@ -417,6 +417,7 @@ function 8ucchiman_aliases () {
 
     alias get_idf='. $HOME/source/esp/esp-idf/export.sh'
     alias arduino='arduino-cli'
+    alias 8tmp='ln -sf $HOME/dotfiles/.config/lib/codes/shell/pocket/Brun ./; cp $HOME/dotfiles/.config/lib/codes/shell/pocket/local ./;'
     alias raspi='ssh -Y raspi'
     alias jetson='ssh -Y jetson22are'
 }
