@@ -3,7 +3,7 @@
 # FileName:     dev
 # Author:       8ucchiman
 # CreatedDate:  2024-01-20 16:43:15
-# LastModified: 2024-03-10 15:02:53
+# LastModified: 2024-06-05 23:43:16
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -114,6 +114,55 @@ function fuzzy_settings () {
     fi
 
 }
+
+function 8bin_setup () {
+    #
+    # @Description  8bin for others
+    # @params       
+    #               : command b
+    # @Example
+    # @Reference    https://qiita.com/egawa_kun/items/714394609eef6be8e0bf
+    #
+
+    
+    mkdir -p $HOME/bin/8bin/
+    /bin/rsync -rav --delete /tmp/8bin/ $HOME/bin/8bin/
+
+}
+
+function server_or_client () {
+    #
+    # @Description  
+    # @params       
+    # @Example
+    # @Reference    https://qiita.com/egawa_kun/items/714394609eef6be8e0bf
+    #
+
+    
+    # Check for running services
+    services=$(ps aux | grep -E 'apache|nginx|mysqld|postgresql|ftpd|sshd')
+
+    # Check uptime
+    uptime=$(uptime -p)
+
+    # Check hardware
+    cpu=$(lscpu | grep "^CPU(s):")
+    memory=$(free -h | grep "Mem:")
+
+    # Check network configuration
+    ip_address=$(ip addr show | grep "inet ")
+
+    # Check server-specific files
+    config_files=$(ls /etc | grep -E 'apache2|nginx|my.cnf|postgresql')
+
+    if [[ -n $services || -n $config_files ]]; then
+        echo "This system appears to be a server."
+    else
+        echo "This system appears to be a client."
+    fi
+}
+
+
 if _has fzf; then
     fuzzy_settings
 fi
@@ -129,6 +178,7 @@ fi
 if [[ -e /opt/ros/humble/setup.zsh ]]; then
     source /opt/ros/humble/setup.zsh
 fi
+
 
 #if _has ros2; then
 #    source /opt/ros/humble/setup.zsh

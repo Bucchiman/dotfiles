@@ -4,7 +4,7 @@
 # FileName:     start
 # Author:       8ucchiman
 # CreatedDate:  2023-11-29 11:48:50
-# LastModified: 2023-02-18 14:28:37 +0900
+# LastModified: 2024-05-10 14:54:20
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -14,6 +14,7 @@
 
 import pandas as pd
 import numpy as np
+
 
 # Pandas options
 pd.options.display.max_columns = 30
@@ -42,4 +43,21 @@ InteractiveShell.ast_node_interactivity = 'all'
 # cf.set_config_file(theme='pearl')
 # 
 # print('Your favorite libraries have been loaded.')
+
 import matplotlib.pyplot as plt
+import cv2 as cv
+
+from IPython.core.magic import register_line_magic
+import subprocess
+
+@register_line_magic
+def run(cmd):
+    """
+        Can use commands without bang"!" syntax
+    """
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, error = process.communicate()
+    if error:
+        print(error.decode())
+    else:
+        print(output.decode())

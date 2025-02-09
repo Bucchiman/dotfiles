@@ -1,6 +1,6 @@
 Command> usbipd list
 
-Keywords> usbipd
+Keywords> device
 
 TL;DR> detect usb device
 
