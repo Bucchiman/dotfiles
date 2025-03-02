@@ -1,3 +1,0 @@
-Command> Invoke-Expression $[env name]
-
-Keywords> env

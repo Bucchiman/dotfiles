@@ -1,7 +1,0 @@
-Command> $ENV:PATH
-
-TL;DR> show path
-
-Related> $ENV:Path.Split(";")
-
-Keywords> Var
