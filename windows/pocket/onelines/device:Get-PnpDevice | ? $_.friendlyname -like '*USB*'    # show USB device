@@ -1,0 +1,7 @@
+Command> Get-PnpDevice | ? $_.friendlyname -like '*USB*'
+
+TL;DR> detect usb device
+
+Keywords> device
+
+Reference> https://pmp-style.hatenablog.com/entry/PowerShell_DeviceManage

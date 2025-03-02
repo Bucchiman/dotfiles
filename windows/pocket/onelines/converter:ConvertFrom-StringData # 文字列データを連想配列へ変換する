@@ -1,0 +1,5 @@
+Command> ConvertFrom-StringData
+
+TL;DR> 文字列データを連想配列へ変換する
+
+Keyords> converter

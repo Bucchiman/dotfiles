@@ -1,0 +1,5 @@
+Command> New-Item -Value /tmp/hoge.ps1 -Path $HOME -Name hoge.ps1 -ItemType SymbolicLink
+
+Keywords> ln
+
+Reference> https://qiita.com/tokky_se/items/128a04e861b2863e2c99
