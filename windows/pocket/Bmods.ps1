@@ -9,6 +9,11 @@
 #
 
 
+function pass {
+    echo pass
+}
+
+
 function __init () {
     #
     # @Description  initialize Bmods et al
