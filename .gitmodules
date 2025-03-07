@@ -28,11 +28,11 @@
 	ignore = untracked
 [submodule ".config/snippets/codes/lua"]
 	path = .config/lib/codes/lua
-	url = git@github.com:Bucchiman/lua
+	url = git@github.com:Bucchiman/lua.git
 	ignore = untracked
 [submodule ".config/snippets/codes/shell"]
 	path = .config/lib/codes/shell
-	url = git@github.com:Bucchiman/sh
+	url = git@github.com:Bucchiman/sh.git
 	ignore = untracked
 [submodule ".config/snippets/codes/cuda"]
 	path = .config/lib/codes/cuda
@@ -41,10 +41,6 @@
 [submodule ".config/snippets/onelines"]
 	path = .config/lib/onelines
 	url = git@github.com:Bucchiman/onelines.git
-	ignore = untracked
-[submodule ".config/readme"]
-	path = .config/readme
-	url = git@github.com:Bucchiman/readme.git
 	ignore = untracked
 [submodule ".config/snippets/projects_temp"]
 	path = .config/lib/projects_temp
