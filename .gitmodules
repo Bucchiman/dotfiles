@@ -38,10 +38,6 @@
 	path = .config/lib/codes/cuda
 	url = git@github.com:Bucchiman/cu.git
 	ignore = untracked
-[submodule ".config/snippets/onelines"]
-	path = .config/lib/onelines
-	url = git@github.com:Bucchiman/onelines.git
-	ignore = untracked
 [submodule ".config/snippets/projects_temp"]
 	path = .config/lib/projects_temp
 	url = git@github.com:Bucchiman/projects_temp.git
