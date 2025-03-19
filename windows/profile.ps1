@@ -1,3 +1,5 @@
+
+
 echo 8ucchiman
 Import-Module PSReadLine
 Set-PSReadlineOption -EditMode Emacs
@@ -21,4 +23,50 @@ Set-PSReadLineKeyHandler -Chord Ctrl+o -ScriptBlock {
         [System.Windows.Forms.SendKeys]::SendWait("$selected ")
     }
 }
+
+
+$env:Path = "C:\Users\8ucch\.local\bin;$env:Path"
+
+
+function gs() {
+    git status -s
+}
+
+function gco() {
+    git checkout $args
+}
+
+function gcob() {
+    git checkout -b $args
+}
+
+function gf() {
+    git fetch
+}
+
+function gm() {
+    git merge
+}
+
+function gfom() {
+    git fetch origin main
+}
+
+function gfod() {
+    git fetch origin dev
+}
+
+function gmom() {
+    git merge origin/main
+}
+
+function gmod() {
+    git merge origin/dev
+}
+
+
+function gba() {
+    git branch -a
+}
+
 
