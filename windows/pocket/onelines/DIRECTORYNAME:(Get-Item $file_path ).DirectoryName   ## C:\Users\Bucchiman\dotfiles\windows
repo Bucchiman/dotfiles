@@ -1,5 +1,0 @@
-Command> (Get-Item $file_path ).DirectoryName   ## C:\Users\Bucchiman\dotfiles\windows
-
-Keywords> DIRECTORYNAME
-
-Reference> https://stackoverflow.com/questions/12503871/removing-path-and-extension-from-filename-in-powershell

@@ -1,7 +1,0 @@
-Command> Get-ChildItem
-
-TL;DR> アイテムの子アイテムを取得する
-
-Keywords> item
-
-Alias> gci
