@@ -1,0 +1,5 @@
+Command> x/g 0x800000
+
+TL;DR> アドレスに格納されたデータ表示
+
+Reference> https://tanakamura.github.io/pllp/docs/asm_language.html
