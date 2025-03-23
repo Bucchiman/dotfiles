@@ -1,0 +1,13 @@
+command script import ~/lldbinit.py
+
+# .lldbinit ファイル内
+
+# Pythonスクリプトをインポート
+command script import ~/dotfiles/.config/lldb/lldb_fzf.py
+
+# コマンドを登録
+command script add -f lldb_fzf.fzf_select_file fzf_select
+
+# エイリアスとキーバインドの設定
+command alias -h "FZF file selector" -- fzfs fzf_select
+command key binding add -k control+f -o command -n fzfs
