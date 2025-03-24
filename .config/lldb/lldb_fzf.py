@@ -37,5 +37,3 @@ def fzf_select_file_from_dir(debugger, command, result, internal_dict):
                 result.AppendMessage(f"Error reading file: {e}")
         else:
             result.AppendMessage(f"Failed to run fzf: {error.decode('utf-8')}")
-    except Exception as e:
-        result.AppendMessage(f"Error: {str(e)}")
