@@ -15,21 +15,26 @@ import subprocess
 
 def fzf_select_file(debugger, command, result, internal_dict):
     """
-    fzfを使ってファイルを選択し、LLDBで開きます。
+    fzfを使ってファイルを選択し、その内容をLLDBで表示します。
     使用法: fzf_select
     """
-    # 現在のディレクトリからfzfを実行
-    fzf_process = subprocess.Popen('find . -type f | fzf', 
-                                  shell=True, 
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE)
+    # fzfでファイル選択
+    fzf_process = subprocess.Popen('cd ~/dotfiles/.config/lldb/docs; find . -type f | fzf --height 100% --preview \'cat {}\'', 
+                                   shell=True, 
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
     output, error = fzf_process.communicate()
     
     if fzf_process.returncode == 0:
         selected_file = output.decode('utf-8').strip()
         if selected_file:
-            debugger.HandleCommand(f'command source -s "{selected_file}"')
-            result.AppendMessage(f"Loaded file: {selected_file}")
+            file_path = os.path.expanduser(f"~/dotfiles/.config/lldb/docs/{selected_file}")
+            try:
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    content = file.read()
+                result.AppendMessage(f"Loaded file: {selected_file}\n{content}")
+            except Exception as e:
+                result.AppendMessage(f"Error reading file: {e}")
         else:
             result.AppendMessage("No file selected")
     else:

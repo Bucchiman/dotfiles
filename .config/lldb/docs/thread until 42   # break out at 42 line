@@ -1,0 +1,5 @@
+Command> thread until 42
+
+TL;DR> break out at 42 line
+
+Reference> https://zenn.dev/hosu/articles/df1698424d780b

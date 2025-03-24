@@ -1,0 +1,6 @@
+Command> watch set var global_var
+
+TL;DR> time the global variables change
+
+
+Reference> https://zenn.dev/hosu/articles/df1698424d780b

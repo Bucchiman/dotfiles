@@ -1,0 +1,5 @@
+Command> call
+
+TL;DR> evaluate expression with the current thread
+
+Reference> https://zenn.dev/hosu/articles/df1698424d780b
