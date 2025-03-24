@@ -6,7 +6,7 @@ command script import ~/lldbinit.py
 command script import ~/dotfiles/.config/lldb/lldb_fzf.py
 
 # コマンドを登録
-command script add -f lldb_fzf.fzf_select_file fzf_select
+command script add -f lldb_fzf.fzf_select_file_from_dir fzf_dir_select
 
 # エイリアスとキーバインドの設定
 command alias -h "FZF file selector" -- ff fzf_select
