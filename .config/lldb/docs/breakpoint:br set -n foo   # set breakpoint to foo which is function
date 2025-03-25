@@ -1,0 +1,6 @@
+Command> br set -n foo
+
+
+TL;DR> set breakpoint to foo which is function
+
+Reference> https://qiita.com/theefool/items/8b985ce71dcdccf26abc
