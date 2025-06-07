@@ -2380,3 +2380,14 @@ python Dashboard.start()
 # Local Variables:
 # mode: python
 # End:
+
+python
+import sys
+sys.path.insert(0, os.path.expanduser('~/dotfiles/.config/lldb'))
+import gdb_fzf
+end
+
+# エイリアスの設定
+define ff
+fzf_select
+end
