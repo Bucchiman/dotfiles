@@ -1,0 +1,7 @@
+Command> target remote localhost:3333
+
+Keywords> target
+
+TL;DR> raspberry pi pico debug
+
+Reference> https://claude.ai/chat/b1b4382a-96e3-4233-ae98-ec8ca8852ee1
